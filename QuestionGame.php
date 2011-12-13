@@ -27,7 +27,7 @@ $wgExtensionCredits['specialpage'][] = array(
 	'version' => '2.0',
 	'author' => array( 'Aaron Wright', 'Ashish Datta', 'David Pean', 'Jack Phoenix' ),
 	'description' => '[[Special:QuizGameHome|Interactive question game that uses AJAX]]',
-	'url' => 'http://www.mediawiki.org/wiki/Extension:QuizGame',
+	'url' => 'https://www.mediawiki.org/wiki/Extension:QuizGame',
 );
 
 // ResourceLoader support for MediaWiki 1.17+
