@@ -65,7 +65,7 @@ define( 'QUIZGAME_FLAG_PROTECT', 2 );
 // Set up the new special pages
 $dir = dirname( __FILE__ ) . '/';
 $wgExtensionMessagesFiles['QuizGame'] = $dir . 'QuestionGame.i18n.php';
-$wgExtensionAliasesFiles['QuizGame'] = $dir . 'QuestionGame.alias.php';
+$wgExtensionMessagesFiles['QuizGameAlias'] = $dir . 'QuestionGame.alias.php';
 $wgAutoloadClasses['QuizGameHome'] = $dir . 'QuestionGameHome.body.php';
 $wgAutoloadClasses['SpecialQuestionGameUpload'] = $dir . 'QuestionGameUpload.php';
 $wgAutoloadClasses['QuestionGameUploadForm'] = $dir . 'QuestionGameUpload.php';
