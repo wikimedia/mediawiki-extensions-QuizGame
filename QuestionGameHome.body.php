@@ -314,7 +314,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 				// You know why this check is here, just grep for the function
 				// name (I'm too lazy to copypaste it here for the third time).
 				if ( is_object( $image ) ) {
-					$thumb = $image->getThumbnail( 80, 0, true );
+					$thumb = $image->transform( array( 'width' => 80, 'height' => 0 ) );
 					$thumbnail = $thumb->toHtml();
 				}
 			}
@@ -568,7 +568,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 			// independently deleted from the quiz game, poor users will
 			// stumble upon nasty fatals without this check here.
 			if ( is_object( $image ) ) {
-				$thumb = $image->getThumbnail( 80 );
+				$thumb = $image->transform( array( 'width' => 80 ) );
 				$thumbtag = $thumb->toHtml();
 			}
 

@@ -296,7 +296,7 @@ class SpecialQuestionGameUpload extends SpecialUpload {
 		$img = $this->mLocalFile;
 
 		if ( !$img ) {
-			// This should NOT be happening...the getThumbnail() call below
+			// This should NOT be happening...the transform() call below
 			// will cause a fatal error if $img is not an object
 			error_log(
 				'QuizGame/MiniAjaxUpload FATAL! $this->mUpload is: ' .
@@ -304,7 +304,7 @@ class SpecialQuestionGameUpload extends SpecialUpload {
 			);
 		}
 
-		$thumb = $img->getThumbnail( $thumbWidth );
+		$thumb = $img->transform( array( 'width' => $thumbWidth ) );
 		$img_tag = $thumb->toHtml();
 		$slashedImgTag = addslashes( $img_tag );
 
