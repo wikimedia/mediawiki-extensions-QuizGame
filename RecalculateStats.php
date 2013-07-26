@@ -15,23 +15,24 @@ class QuizRecalcStats extends UnlistedSpecialPage {
 	 * @param $par Mixed: parameter passed to the page or null
 	 */
 	public function execute( $par ) {
-		global $wgOut, $wgUser;
+		$out = $this->getOutput();
+		$user = $this->getUser();
 
 		// Only Quiz Administrators should be allowed to access this page
-		if( !$wgUser->isAllowed( 'quizadmin' ) ) {
-			throw new ErrorPageError( 'error', 'noaccess' );
+		if( !$user->isAllowed( 'quizadmin' ) ) {
+			throw new ErrorPageError( 'error', 'badaccess-group0' );
 			return '';
 		}
 
 		// Show a message if the database is in read-only mode
 		if( wfReadOnly() ) {
-			$wgOut->readOnlyPage();
+			$out->readOnlyPage();
 			return;
 		}
 
 		// If user is blocked, s/he doesn't need to access this page
-		if( $wgUser->isBlocked() ) {
-			$wgOut->blockedPage();
+		if( $user->isBlocked() ) {
+			$out->blockedPage();
 			return;
 		}
 
@@ -42,7 +43,10 @@ class QuizRecalcStats extends UnlistedSpecialPage {
 			array( 'stats_quiz_questions_correct >= stats_quiz_questions_answered' ),
 			__METHOD__
 		);
+
 		$count = 0;
+
+		// @todo FIXME: SELECT SUM(a_points) ... query below *can* return NULL
 		foreach ( $res as $row ) {
 			$sql = "UPDATE {$dbw->tableName( 'user_stats' )} SET stats_quiz_points = (
 				SELECT SUM(a_points) FROM {$dbw->tableName( 'quizgame_answers' )}
@@ -120,6 +124,6 @@ class QuizRecalcStats extends UnlistedSpecialPage {
 			);
 			$count++;
 		}
-		$wgOut->addHTML( "Updated {$count} users" );
+		$out->addHTML( "Updated {$count} users" );
 	}
 }

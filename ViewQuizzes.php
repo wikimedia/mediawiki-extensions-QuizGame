@@ -15,18 +15,17 @@ class ViewQuizzes extends UnlistedSpecialPage {
 	 * @param $par Mixed: parameter passed to the page or null
 	 */
 	public function execute( $par ) {
-		global $wgRequest, $wgOut, $wgUploadPath, $wgScriptPath;
+		global $wgUploadPath;
+
+		$out = $this->getOutput();
+		$request = $this->getRequest();
+		$title = $this->getTitle();
 
 		// Add CSS & JS
-		if ( defined( 'MW_SUPPORTS_RESOURCE_MODULES' ) ) {
-			$wgOut->addModules( 'ext.quizGame' );
-		} else {
-			$wgOut->addExtensionStyle( $wgScriptPath . '/extensions/QuizGame/questiongame.css' );
-			$wgOut->addScriptFile( $wgScriptPath . '/extensions/QuizGame/js/QuizGame.js' );
-		}
+		$out->addModules( 'ext.quizGame' );
 
 		// Page either most or newest for everyone
-		$type = $wgRequest->getVal( 'type' );
+		$type = $request->getVal( 'type' );
 		if( !$type ) {
 			$type = 'newest';
 		}
@@ -39,7 +38,7 @@ class ViewQuizzes extends UnlistedSpecialPage {
 
 		// Pagination
 		$per_page = 20;
-		$page = $wgRequest->getInt( 'page', 1 );
+		$page = $request->getInt( 'page', 1 );
 
 		$limit = $per_page;
 		$limitvalue = 0; // OFFSET for SQL queries
@@ -49,16 +48,23 @@ class ViewQuizzes extends UnlistedSpecialPage {
 		}
 
 		$quizGameHome = SpecialPage::getTitleFor( 'QuizGameHome' );
-		$output = '<div class="view-quizzes-top-links">
-			<a href="' . $quizGameHome->escapeFullURL( 'questionGameAction=launchGame' ) .
-				'">' . wfMsg( 'quiz-playneverending' ) . '</a> - 
-			<a href="' . $quizGameHome->escapeFullURL( 'questionGameAction=createForm' ) .
-				'">' . wfMsg( 'quiz-viewquizzes-create' ) . '</a>
-			<br /><br />
+		$output = '<div class="view-quizzes-top-links">' .
+			Linker::link(
+				$quizGameHome,
+				$this->msg( 'quiz-playneverending' )->text(),
+				array(),
+				array( 'questionGameAction' => 'launchGame' )
+			) . ' - ' .
+			Linker::link(
+				$quizGameHome,
+				$this->msg( 'quiz-viewquizzes-create' )->text(),
+				array(),
+				array( 'questionGameAction' => 'createForm' )
+			) . '<br /><br />
 		</div>
 
 		<div class="view-quizzes-navigation">
-			<h2>' . wfMsg( 'quiz-leaderboard-order-menu' ) . '</h2>';
+			<h2>' . $this->msg( 'quiz-leaderboard-order-menu' )->text() . '</h2>';
 
 		$dbr = wfGetDB( DB_MASTER );
 
@@ -66,29 +72,39 @@ class ViewQuizzes extends UnlistedSpecialPage {
 		$where[] = 'q_flag <> ' . QUIZGAME_FLAG_FLAGGED;
 
 		// Display only a user's most or newest
-		$user = $wgRequest->getVal( 'user' );
-		$user_link = '';
+		$user = $request->getVal( 'user' );
+		$linkQueryParameters = array();
 		if ( $user ) {
 			$where['q_user_name'] = $user;
-			$user_link = '&user=' . urlencode( $user );
+			$linkQueryParameters['user'] = $user;
 		}
 
 		if( $type == 'newest' ) {
-			$output .= '<p><b>' . wfMsg( 'quiz-newest' ) . '</b></p>
-				<p><a href="' . $wgScriptPath . "/index.php?title=Special:ViewQuizzes&type=most{$user_link}\">" .
-					wfMsg( 'quiz-popular' ) . '</a></p>';
+			$linkQueryParameters['type'] = 'most';
+			$output .= '<p><b>' . $this->msg( 'quiz-newest' )->text() . '</b></p>
+				<p>' . Linker::link(
+					$title,
+					$this->msg( 'quiz-popular' )->text(),
+					array(),
+					$linkQueryParameters
+				) . '</p>';
 		} else {
-			$output .= '<p><a href="' . $wgScriptPath . "/index.php?title=Special:ViewQuizzes&type=newest{$user_link}\">" .
-				wfMsg( 'quiz-newest' ) . '</a></p>
-				<p><b>' . wfMsg( 'quiz-popular' ) . '</b></p>';
+			$linkQueryParameters['type'] = 'newest';
+			$output .= '<p>' . Linker::link(
+				$title,
+				$this->msg( 'quiz-newest' )->text(),
+				array(),
+				$linkQueryParameters
+			) . '</p>
+				<p><b>' . $this->msg( 'quiz-popular' )->text() . '</b></p>';
 		}
 
 		$output .= '</div>';
 
 		if ( $user ) {
-			$wgOut->setPageTitle( wfMsg( 'quiz-viewquizzes-title-by-user', $user ) );
+			$out->setPageTitle( $this->msg( 'quiz-viewquizzes-title-by-user', $user )->parse() );
 		} else {
-			$wgOut->setPageTitle( wfMsg( 'quiz-viewquizzes-title' ) );
+			$out->setPageTitle( $this->msg( 'quiz-viewquizzes-title' )->text() );
 		}
 
 		$res = $dbr->select(
@@ -118,7 +134,7 @@ class ViewQuizzes extends UnlistedSpecialPage {
 
 		$output .= '<div class="view-quizzes">';
 
-		$x = ( ( $page - 1 ) * $per_page ) + 1; 
+		$x = ( ( $page - 1 ) * $per_page ) + 1;
 
 		foreach ( $res as $row ) {
 			$user_create = $row->q_user_name;
@@ -134,23 +150,22 @@ class ViewQuizzes extends UnlistedSpecialPage {
 				'questionGameAction' => 'renderPermalink',
 				'permalinkID' => $quiz_id
 			) );
-			$startHover = "QuizGame.doHover('{$row_id}')";
-			$endHover = "QuizGame.endHover('{$row_id}')";
+			// Hover support is done in /js/QuizGame.js
 			if ( ( $x < $total ) && ( $x % $per_page != 0 ) ) {
-				$output .= "<div class=\"view-quizzes-row\" id=\"{$row_id}\" onmouseover=\"{$startHover}\" onmouseout=\"{$endHover}\" onclick=\"window.location='" . $url . '\'">';
+				$output .= "<div class=\"view-quizzes-row\" id=\"{$row_id}\" onclick=\"window.location='" . $url . '\'">';
 			} else {
-				$output .= "<div class=\"view-quizzes-row-bottom\" id=\"{$row_id}\" onmouseover=\"{$startHover}\" onmouseout=\"{$endHover}\" onclick=\"window.location='" . $url . '\'">';
+				$output .= "<div class=\"view-quizzes-row-bottom\" id=\"{$row_id}\" onclick=\"window.location='" . $url . '\'">';
 			}
 
 			$output .= "<div class=\"view-quizzes-number\">{$x}.</div>
-				<div class=\"view-quizzes-user-image\"><img src=\"{$wgUploadPath}/avatars/{$avatar->getAvatarImage()}\" alt=\"\" /></div>
+				<div class=\"view-quizzes-user-image\">{$avatar->getAvatarURL()}</div>
 				<div class=\"view-quizzes-user-name\">{$user_create}</div>
 				<div class=\"view-quizzes-text\">
 					<p><b><u>{$quiz_title}</u></b></p>
 					<p class=\"view-quizzes-num-answers\">" .
-						wfMsgExt( 'quiz-answered', 'parsemag', $quiz_answers ) . '</p>
+						$this->msg( 'quiz-answered', $quiz_answers )->parse() . '</p>
 					<p class="view-quizzes-time">(' .
-						wfMsg( 'quiz-ago', self::getTimeAgo( $quiz_date ) ) .
+						$this->msg( 'quiz-time-ago', self::getTimeAgo( $quiz_date ) )->parse() .
 					')</p>
 				</div>
 				<div class="cleared"></div>
@@ -167,8 +182,14 @@ class ViewQuizzes extends UnlistedSpecialPage {
 		if( $numofpages > 1 ) {
 			$output .= '<div class="view-quizzes-page-nav">';
 			if( $page > 1 ) {
-				$output .= '<a href="' . $wgScriptPath . "/index.php?title=Special:ViewQuizzes&type=most{$user_link}&page=" . ( $page - 1 ) . '">' .
-					wfMsg( 'quiz-prev' ) . '</a> ';
+				$linkQueryParameters['type'] = 'most';
+				$linkQueryParameters['page'] = ( $page - 1 );
+				$output .= Linker::link(
+					$title,
+					$this->msg( 'quiz-prev' )->text(),
+					array(),
+					$linkQueryParameters
+				) . $this->msg( 'word-separator' )->text();
 			}
 
 			if( ( $total % $per_page ) != 0 ) {
@@ -185,18 +206,32 @@ class ViewQuizzes extends UnlistedSpecialPage {
 				if( $i == $page ) {
 					$output .= ( $i . ' ' );
 				} else {
-					$output .= '<a href="' . $wgScriptPath . "/index.php?title=Special:ViewQuizzes&type=most{$user_link}&page=$i\">$i</a> ";
+					$linkQueryParameters['type'] = 'most';
+					$linkQueryParameters['page'] = $i;
+					$output .= Linker::link(
+						$title,
+						$i,
+						array(),
+						$linkQueryParameters
+					) . $this->msg( 'word-separator' )->text();
 				}
 			}
 
 			if( ( $total - ( $per_page * $page ) ) > 0 ) {
-				$output .= ' <a href="' . $wgScriptPath . "/index.php?title=Special:ViewQuizzes&type=most{$user_link}&page=" . ( $page + 1 ) . '">' .
-					wfMsg( 'quiz-nav-next' ) . '</a>';
+				$linkQueryParameters['type'] = 'most';
+				$linkQueryParameters['page'] = ( $page + 1 );
+				$output .= $this->msg( 'word-separator' )->text() .
+					Linker::link(
+						$title,
+						$this->msg( 'quiz-nav-next' )->text(),
+						array(),
+						$linkQueryParameters
+					);
 			}
 			$output .= '</div>';
 		}
 
-		$wgOut->addHTML( $output );
+		$out->addHTML( $output );
 	}
 
 	/**
@@ -220,7 +255,7 @@ class ViewQuizzes extends UnlistedSpecialPage {
 	static function getTimeOffset( $time, $timeabrv, $timename ) {
 		$timeStr = '';
 		if( $time[$timeabrv] > 0 ) {
-			$timeStr = wfMsgExt( "quiz-time-{$timename}", 'parsemag', $time[$timeabrv] );
+			$timeStr = wfMessage( "quiz-time-{$timename}", $time[$timeabrv] )->parse();
 		}
 		if( $timeStr ) {
 			$timeStr .= ' ';
@@ -244,7 +279,7 @@ class ViewQuizzes extends UnlistedSpecialPage {
 			}
 		}
 		if( !$timeStr ) {
-			$timeStr = wfMsgExt( 'quiz-time-seconds', 'parsemag', 1 );
+			$timeStr = wfMessage( 'quiz-time-seconds', 1 )->parse();
 		}
 		return $timeStr;
 	}

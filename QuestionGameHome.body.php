@@ -21,65 +21,67 @@ class QuizGameHome extends UnlistedSpecialPage {
 	 * @param $permalink Mixed: parameter passed to the page or null
 	 */
 	public function execute( $permalink ) {
-		global $wgRequest, $wgUser, $wgOut, $wgSupressPageTitle, $wgScriptPath;
+		global $wgSupressPageTitle;
+
+		$out = $this->getOutput();
+		$user = $this->getUser();
+		$request = $this->getRequest();
 
 		// Is the database locked? If so, we can't do much since answering a
 		// question changes database state...and so does creating a new
 		// question
 		if( wfReadOnly() ) {
-			$wgOut->readOnlyPage();
+			$out->readOnlyPage();
 			return false;
 		}
 
 		// Blocked through Special:Block? No access for you either!
-		if( $wgUser->isBlocked() ) {
-			$wgOut->blockedPage( false );
+		if( $user->isBlocked() ) {
+			$out->blockedPage( false );
 			return false;
 		}
 
 		// If a parameter was passed to the special page, assume that it's the
 		// permalink ID and forward the user to the question with that ID
 		if( $permalink ) {
-			$wgOut->redirect(
+			$out->redirect(
 				$this->getTitle()->getFullURL(
 					"questionGameAction=renderPermalink&permalinkID={$permalink}"
 				)
 			);
 		}
 
+		// Suppress the page title on certain skins of Wikia origin, such as
+		// Nimbus. Yes, the variable name is misspelled but it's all over the
+		// place, so I can't change its name just yet.
 		$wgSupressPageTitle = true;
 
 		// Add CSS & JS
-		if ( defined( 'MW_SUPPORTS_RESOURCE_MODULES' ) ) {
-			$wgOut->addModules( 'ext.quizGame' );
-		} else {
-			$wgOut->addExtensionStyle( $wgScriptPath . '/extensions/QuizGame/questiongame.css' );
-			$wgOut->addScriptFile( $wgScriptPath . '/extensions/QuizGame/js/QuizGame.js' );
-		}
+		$out->addModules( 'ext.quizGame' );
 
 		// salt at will
 		$this->SALT = 'SALT';
 
 		// What we should do depends on the given action parameter
-		$action = $wgRequest->getVal( 'questionGameAction' );
+		$action = $request->getVal( 'questionGameAction' );
 
 		switch( $action ) {
 			case 'adminPanel':
-				if( $wgUser->isLoggedIn() && $wgUser->isAllowed( 'quizadmin' ) ) {
+				if( $user->isLoggedIn() && $user->isAllowed( 'quizadmin' ) ) {
 					$this->adminPanel();
 				} else {
 					$this->renderWelcomePage();
 				}
 				break;
 			case 'completeEdit':
-				if( $wgUser->isLoggedIn() && $wgUser->isAllowed( 'quizadmin' ) ) {
+				if( $user->isLoggedIn() && $user->isAllowed( 'quizadmin' ) ) {
 					$this->completeEdit();
 				} else {
 					$this->renderWelcomePage();
 				}
 				break;
 			case 'createForm':
-				if( !$wgUser->isLoggedIn() ) {
+				if( !$user->isLoggedIn() ) {
 					$this->renderLoginPage();
 					return;
 				}
@@ -89,7 +91,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 				$this->createQuizGame();
 				break;
 			case 'editItem':
-				if( $wgUser->isLoggedIn() && $wgUser->isAllowed( 'quizadmin' ) ) {
+				if( $user->isLoggedIn() && $user->isAllowed( 'quizadmin' ) ) {
 					$this->editItem();
 				} else {
 					$this->renderWelcomePage();
@@ -145,31 +147,40 @@ class QuizGameHome extends UnlistedSpecialPage {
 		return false;
 	}
 
+	/**
+	 * Get the ID of the next unanswered question for the current user.
+	 *
+	 * @return Integer: ID of the next unanswered question (or 0)
+	 */
 	public function getNextQuestion() {
-		global $wgUser;
 		$dbr = wfGetDB( DB_SLAVE );
 		$use_index = $dbr->useIndexClause( 'q_random' );
 		$randstr = wfRandom();
+		$userName = $this->getUser()->getName();
+		$userId = $this->getUser()->getId();
 
 		$q_id = 0;
 		$sql = "SELECT q_id FROM {$dbr->tableName( 'quizgame_questions' )} {$use_index} WHERE q_id NOT IN
-				(SELECT a_q_id FROM {$dbr->tableName( 'quizgame_answers' )} WHERE a_user_name = '" . $dbr->strencode( $wgUser->getName() ) . "')
-				AND q_flag != " . QUIZGAME_FLAG_FLAGGED . " AND q_user_id <> " . $wgUser->getID() . " AND q_random>$randstr ORDER by q_random LIMIT 1";
+				(SELECT a_q_id FROM {$dbr->tableName( 'quizgame_answers' )} WHERE a_user_name = '" . $dbr->strencode( $userName ) . "')
+				AND q_flag != " . QUIZGAME_FLAG_FLAGGED . " AND q_user_id <> {$userId} AND q_random > $randstr ORDER by q_random LIMIT 1";
 		$res = $dbr->query( $sql, __METHOD__ );
 		$row = $dbr->fetchObject( $res );
+
 		if( $row ) {
 			$q_id = $row->q_id;
 		}
+
 		if( $q_id == 0 ) {
 			$sql = "SELECT q_id FROM {$dbr->tableName( 'quizgame_questions' )} {$use_index} WHERE q_id NOT IN
-					(SELECT a_q_id FROM {$dbr->tableName( 'quizgame_answers' )} WHERE a_user_name = '" . $dbr->strencode( $wgUser->getName() ) . "')
-					AND q_flag != " . QUIZGAME_FLAG_FLAGGED . " AND q_user_id <> " . $wgUser->getID() . " AND q_random<$randstr ORDER by q_random LIMIT 1";
+					(SELECT a_q_id FROM {$dbr->tableName( 'quizgame_answers' )} WHERE a_user_name = '" . $dbr->strencode( $userName ) . "')
+					AND q_flag != " . QUIZGAME_FLAG_FLAGGED . " AND q_user_id <> {$userId} AND q_random < $randstr ORDER by q_random LIMIT 1";
 			$res = $dbr->query( $sql, __METHOD__ );
 			$row = $dbr->fetchObject( $res );
 			if( $row ) {
 				$q_id = $row->q_id;
 			}
 		}
+
 		return $q_id;
 	}
 
@@ -182,8 +193,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 	 * @return Array
 	 */
 	public function getQuestion( $questionId, $skipId = 0 ) {
-		global $wgUser;
-
+		$userName = $this->getUser()->getName();
 		$dbr = wfGetDB( DB_SLAVE );
 		$where = array();
 		$where['q_id'] = intval( $questionId );
@@ -201,8 +211,10 @@ class QuizGameHome extends UnlistedSpecialPage {
 			__METHOD__,
 			array( 'LIMIT' => 1 )
 		);
+
 		$row = $dbr->fetchObject( $res );
 		$quiz = array();
+
 		if( $row ) {
 			$quiz['text'] = $row->q_text;
 			$quiz['image'] = $row->q_picture;
@@ -217,20 +229,24 @@ class QuizGameHome extends UnlistedSpecialPage {
 			} else {
 				$correct_percent = 0;
 			}
+
 			$quiz['correct_percent'] = $correct_percent;
-			$quiz['user_answer'] = $this->userAnswered( $wgUser->getName(), $row->q_id );
+			$quiz['user_answer'] = $this->userAnswered( $userName, $row->q_id );
 
 			if( $quiz['user_answer'] ) {
-				$quiz['points'] = $this->getAnswerPoints( $wgUser->getName(), $questionId );
+				$quiz['points'] = $this->getAnswerPoints( $userName, $questionId );
 			}
+
 			$choices = $this->getQuestionChoices( $questionId, $row->q_answer_count );
 			foreach( $choices as $choice ) {
 				if( $choice['is_correct'] ) {
 					$quiz['correct_answer'] = $choice['id'];
 				}
 			}
+
 			$quiz['choices'] = $choices;
 		}
+
 		return $quiz;
 	}
 
@@ -276,8 +292,6 @@ class QuizGameHome extends UnlistedSpecialPage {
 	}
 
 	function adminPanel() {
-		global $wgOut;
-
 		$dbr = wfGetDB( DB_SLAVE );
 
 		$res = $dbr->select(
@@ -303,7 +317,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 			$choices = $this->getQuestionChoices( $row->q_id );
 			foreach( $choices as $choice ) {
 				$options .= '<li>' . $choice['text'] . ' ' .
-					( ( $choice['is_correct'] == 1 ) ? ' — ' . wfMsg( 'quiz-correct-answer' ) : '' ) .
+					( ( $choice['is_correct'] == 1 ) ? ' — ' . $this->msg( 'quiz-correct-answer' )->text() : '' ) .
 					'</li>';
 			}
 			$options .= '</ul>';
@@ -320,26 +334,34 @@ class QuizGameHome extends UnlistedSpecialPage {
 			}
 
 			$key = md5( $this->SALT . $row->q_id );
-			$buttons = '<a href="' . $this->getTitle()->escapeFullURL( "questionGameAction=editItem&quizGameId={$row->q_id}&quizGameKey={$key}" ) .
-				"\">" . wfMsg( 'quiz-edit' ) . "</a> -
-					<a href=\"javascript:QuizGame.deleteById('{$row->q_id}', '{$key}')\">" .
-					wfMsg( 'quiz-delete' ) . '</a> - ';
+			$buttons = Linker::link(
+				$this->getTitle(),
+				$this->msg( 'quiz-edit' )->text(),
+				array(),
+				array(
+					'questionGameAction' => 'editItem',
+					'quizGameId' => $row->q_id,
+					'quizGameKey' => $key
+				)
+			) . " -
+					<a class=\"delete-by-id\" href=\"#\" data-quiz-id=\"{$row->q_id}\" data-key=\"{$key}\">" .
+					$this->msg( 'quiz-delete' )->text() . '</a> - ';
 
 			if ( $row->q_flag == QUIZGAME_FLAG_FLAGGED ) {
-				$buttons .= "<a href=\"javascript:QuizGame.protectById('{$row->q_id}', '{$key}')\">" .
-					wfMsg( 'quiz-protect' ) . "</a>
-						 - <a href=\"javascript:QuizGame.unflagById('{$row->q_id}', '{$key}')\">" .
-						 wfMsg( 'quiz-reinstate' ) . "</a>";
+				$buttons .= "<a class=\"protect-by-id\" href=\"#\" data-quiz-id=\"{$row->q_id}\" data-key=\"{$key}\">" .
+					$this->msg( 'quiz-protect' )->text() . "</a>
+						 - <a class=\"unflag-by-id\" href=\"#\" data-quiz-id=\"{$row->q_id}\" data-key=\"{$key}\">" .
+						 $this->msg( 'quiz-reinstate' )->text() . '</a>';
 			} else {
-				$buttons .= "<a href=\"javascript:QuizGame.unprotectById({$row->q_id}, '{$key}')\">" .
-					wfMsg( 'quiz-unprotect' ) . "</a>";
+				$buttons .= "<a class=\"unprotect-by-id\" href=\"#\" data-quiz-id=\"{$row->q_id}\" data-key=\"{$key}\">" .
+					$this->msg( 'quiz-unprotect' )->text() . '</a>';
 			}
 
 			if( $row->q_flag == QUIZGAME_FLAG_FLAGGED ) {
 				$reason = '';
 				if( $row->q_comment != '' ) {
 					$reason = "<div class=\"quizgame-flagged-answers\" id=\"quizgame-flagged-reason-{$row->q_id}\">
-						<b>" . wfMsg( 'quiz-flagged-reason' ) . "</b>: {$row->q_comment}
+						<b>" . $this->msg( 'quiz-flagged-reason' )->text() . "</b>: {$row->q_comment}
 					</div><p>";
 				}
 
@@ -381,7 +403,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 			}
 		}
 
-		$wgOut->setPageTitle( wfMsg( 'quiz-admin-panel-title' ) );
+		$this->getOutput()->setPageTitle( $this->msg( 'quiz-admin-panel-title' )->text() );
 
 		$output = '<div class="quizgame-admin" id="quizgame-admin">
 
@@ -392,15 +414,15 @@ class QuizGameHome extends UnlistedSpecialPage {
 						wfMsg( 'quiz-admin-back' ) . '</a>
 				</div>
 
-				<h1>' . wfMsg( 'quiz-admin-flagged' ) . "</h1>
+				<h1>' . $this->msg( 'quiz-admin-flagged' )->text() . "</h1>
 				{$flaggedQuestions}
 
-				<h1>" . wfMsg( 'quiz-admin-protected' ) . "</h1>
+				<h1>" . $this->msg( 'quiz-admin-protected' )->text() . "</h1>
 				{$protectedQuestions}
 
 			</div>";
 
-		$wgOut->addHTML( $output );
+		$this->getOutput()->addHTML( $output );
 	}
 
 	/**
@@ -408,28 +430,28 @@ class QuizGameHome extends UnlistedSpecialPage {
 	 * Updates the SQL and then forwards to the permalink
 	 */
 	function completeEdit() {
-		global $wgRequest, $wgUser, $wgOut;
+		$request = $this->getRequest();
 
-		$key = $wgRequest->getVal( 'quizGameKey' );
-		$id = $wgRequest->getInt( 'quizGameId' );
+		$key = $request->getVal( 'quizGameKey' );
+		$id = $request->getInt( 'quizGameId' );
 
 		// Only Quiz Administrators can perform this operation.
-		if( !$wgUser->isAllowed( 'quizadmin' ) ) {
-			$wgOut->addHTML( wfMsg( 'quiz-admin-permission' ) );
+		if( !$this->getUser()->isAllowed( 'quizadmin' ) ) {
+			$this->getOutput()->addHTML( $this->msg( 'quiz-admin-permission' )->text() );
 			return;
 		}
 
-		$question = $wgRequest->getVal( 'quizgame-question' );
-		$choices_count = $wgRequest->getInt( 'choices_count' );
-		$old_correct_id = $wgRequest->getInt( 'old_correct' );
+		$question = $request->getVal( 'quizgame-question' );
+		$choices_count = $request->getInt( 'choices_count' );
+		$old_correct_id = $request->getInt( 'old_correct' );
 
-		$picture = $wgRequest->getVal( 'quizGamePicture' );
+		$picture = $request->getVal( 'quizGamePicture' );
 
 		// Updated quiz choices
 		$dbw = wfGetDB( DB_MASTER );
 		for( $x = 1; $x <= $choices_count; $x++ ) {
-			if( $wgRequest->getVal( "quizgame-answer-{$x}" ) ) {
-				if( $wgRequest->getVal( "quizgame-isright-{$x}" ) == 'on' ) {
+			if( $request->getVal( "quizgame-answer-{$x}" ) ) {
+				if( $request->getVal( "quizgame-isright-{$x}" ) == 'on' ) {
 					$is_correct = 1;
 				} else {
 					$is_correct = 0;
@@ -438,7 +460,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 				$dbw->update(
 					'quizgame_choice',
 					array(
-						'choice_text' => $wgRequest->getVal( "quizgame-answer-{$x}" ),
+						'choice_text' => $request->getVal( "quizgame-answer-{$x}" ),
 						'choice_is_correct' => $is_correct
 					),
 					array( 'choice_q_id' => $id, 'choice_order' => $x ),
@@ -534,22 +556,25 @@ class QuizGameHome extends UnlistedSpecialPage {
 	 * Shows the edit panel for a single question
 	 */
 	function editItem() {
-		global $wgRequest, $wgOut, $wgScriptPath, $wgUploadPath, $wgQuizID;
+		global $wgExtensionAssetsPath, $wgUploadPath, $wgQuizID;
 
-		$key = $wgRequest->getVal( 'quizGameKey' );
-		$id = $wgRequest->getInt( 'quizGameId' );
+		$out = $this->getOutput();
+		$request = $this->getRequest();
+
+		$key = $request->getVal( 'quizGameKey' );
+		$id = $request->getInt( 'quizGameId' );
 
 		$wgQuizID = $id;
 
 		if( $key != md5( $this->SALT . $id ) ) {
 			// @todo FIXME/CHECKME: why is this commented out?
-			//$wgOut->addHTML( wfMsg( 'quiz-admin-permission' ) );
+			//$out->addWikiMsg( 'quiz-admin-permission' );
 			//return;
 		}
 
 		$question = $this->getQuestion( $id );
 
-		$wgOut->setPageTitle( wfMsg( 'quiz-edit-title', $question['text'] ) );
+		$out->setPageTitle( $this->msg( 'quiz-edit-title', $question['text'] )->parse() );
 
 		$user_name = $question['user_name'];
 		$user_id = $question['user_id'];
@@ -573,13 +598,11 @@ class QuizGameHome extends UnlistedSpecialPage {
 			}
 
 			$pictag = '<div id="quizgame-picture" class="quizgame-picture">' . $thumbtag . '</div>
-					<p id="quizgame-editpicture-link"><a href="javascript:QuizGame.showUpload()">' .
-						wfMsg( 'quiz-edit-picture-link' ) . '</a></p>
+					<p id="quizgame-editpicture-link"><!-- jQuery injects a link here --></p>
 					<div id="quizgame-upload" class="quizgame-upload" style="display:none">
 						<iframe id="imageUpload-frame" class="imageUpload-frame" width="650" scrolling="no" frameborder="0" src="' .
 							$uploadPage->escapeFullURL( wfArrayToCGI( array(
 								'wpThumbWidth' => '80',
-								'wpCategory' => 'Quizgames',
 								'wpOverwriteFile' => 'true',
 								'wpDestFile' => $question['image']
 							) ) ) . '">
@@ -593,8 +616,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 					<div id="quizgame-upload" class="quizgame-upload">
 						<iframe id="imageUpload-frame" class="imageUpload-frame" width="650" scrolling="no" frameborder="0" src="' .
 							$uploadPage->escapeFullURL( wfArrayToCGI( array(
-								'wpThumbWidth' => '80',
-								'wpCategory' => 'Quizgames'
+								'wpThumbWidth' => '80'
 							) ) ) . '">
 						</iframe>
 					</div>';
@@ -611,7 +633,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 							<span class=\"quizgame-answer-number\">{$x}.</span>
 							<input name=\"quizgame-answer-{$x}\" id=\"quizgame-answer-{$x}\" type=\"text\" value=\"" .
 								htmlspecialchars( $choice['text'], ENT_QUOTES ) . "\" size=\"32\" />
-							<input type=\"checkbox\" onclick=\"javascript:QuizGame.toggleCheck(this)\" id=\"quizgame-isright-{$x}\" " .
+							<input type=\"checkbox\" id=\"quizgame-isright-{$x}\" " .
 								( ( $choice['is_correct'] ) ? 'checked="checked"' : '' ) .
 								" name=\"quizgame-isright-{$x}\">
 						</div>";
@@ -632,13 +654,13 @@ class QuizGameHome extends UnlistedSpecialPage {
 		if ( $wgRightsText ) {
 			$copywarnMsg = 'copyrightwarning';
 			$copywarnMsgParams = array(
-				'[[' . wfMsgForContent( 'copyrightpage' ) . ']]',
+				'[[' . $this->msg( 'copyrightpage' )->inContentLanguage()->plain() . ']]',
 				$wgRightsText
 			);
 		} else {
 			$copywarnMsg = 'copyrightwarning2';
 			$copywarnMsgParams = array(
-				'[[' . wfMsgForContent( 'copyrightpage' ) . ']]'
+				'[[' . $this->msg( 'copyrightpage' )->inContentLanguage()->plain() . ']]'
 			);
 		}
 
@@ -649,7 +671,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 						'">
 
 						<div class="credit-box" id="creditBox">
-							<h1>' . wfMsg( 'quiz-submitted-by' ) . "</h1>
+							<h1>' . $this->msg( 'quiz-submitted-by' )->text() . "</h1>
 
 							<div id=\"submitted-by-image\" class=\"submitted-by-image\">
 							<a href=\"{$user_title->getFullURL()}\">
@@ -662,15 +684,15 @@ class QuizGameHome extends UnlistedSpecialPage {
 								</div>
 								<ul>
 									<li id=\"userstats-votes\">
-										<img src=\"{$wgScriptPath}/extensions/QuizGame/images/voteIcon.gif\" border=\"0\" alt=\"\" />
+										<img src=\"{$wgExtensionAssetsPath}/QuizGame/images/voteIcon.gif\" border=\"0\" alt=\"\" />
 										{$stats_data['votes']}
 									</li>
 									<li id=\"userstats-edits\">
-										<img src=\"{$wgScriptPath}/extensions/QuizGame/images/pencilIcon.gif\" border=\"0\" alt=\"\" />
+										<img src=\"{$wgExtensionAssetsPath}/QuizGame/images/pencilIcon.gif\" border=\"0\" alt=\"\" />
 										{$stats_data['edits']}
 									</li>
 									<li id=\"userstats-comments\">
-										<img src=\"{$wgScriptPath}/extensions/QuizGame/images/commentsIcon.gif\" border=\"0\" alt=\"\" />
+										<img src=\"{$wgExtensionAssetsPath}/QuizGame/images/commentsIcon.gif\" border=\"0\" alt=\"\" />
 										{$stats_data['comments']}
 									</li>
 								</ul>
@@ -680,13 +702,13 @@ class QuizGameHome extends UnlistedSpecialPage {
 
 						<div class=\"ajax-messages\" id=\"ajax-messages\" style=\"margin:20px 0px 15px 0px;\"></div>
 
-						<h1>" . wfMsg( 'quiz-question' ) . "</h1>
+						<h1>" . $this->msg( 'quiz-question' )->text() . "</h1>
 						<input name=\"quizgame-question\" id=\"quizgame-question\" type=\"text\" value=\"" .
 							htmlspecialchars( $question['text'], ENT_QUOTES ) . "\" size=\"64\" />
-						<h1>" . wfMsg( 'quiz-answers' ) . "</h1>
-						<div style=\"margin:10px 0px;\">" . wfMsg( 'quiz-correct-answer-checked' ) . "</div>
+						<h1>" . $this->msg( 'quiz-answers' )->text() . "</h1>
+						<div style=\"margin:10px 0px;\">" . $this->msg( 'quiz-correct-answer-checked' )->text() . "</div>
 						{$quizOptions}
-						<h1>" . wfMsg( 'quiz-picture' ) . "</h1>
+						<h1>" . $this->msg( 'quiz-picture' )->text() . "</h1>
 						<div class=\"quizgame-edit-picture\" id=\"quizgame-edit-picture\">
 							{$pictag}
 						</div>
@@ -701,58 +723,56 @@ class QuizGameHome extends UnlistedSpecialPage {
 				</div>
 
 				<div class=\"quizgame-copyright-warning\">" .
-					wfMsgExt( $copywarnMsg, 'parse', $copywarnMsgParams ) .
+					$this->msg( $copywarnMsg )->params( $copywarnMsgParams )->parse() .
 				"</div>
 
 				<div class=\"quizgame-edit-buttons\" id=\"quizgame-edit-buttons\">
-					<input type=\"button\" class=\"site-button\" value=\"" . wfMsg( 'quiz-save-page-button' ) . "\" onclick=\"javascript:document.quizGameEditForm.submit()\"/>
-					<input type=\"button\" class=\"site-button\" value=\"" . wfMsg( 'quiz-cancel-button' ) . "\" onclick=\"javascript:document.location='" .
+					<input type=\"button\" class=\"site-button\" value=\"" . $this->msg( 'quiz-save-page-button' )->text() . "\" onclick=\"javascript:document.quizGameEditForm.submit()\"/>
+					<input type=\"button\" class=\"site-button\" value=\"" . $this->msg( 'quiz-cancel-button' )->text() . "\" onclick=\"javascript:document.location='" .
 						$this->getTitle()->escapeFullURL( 'questionGameAction=launchGame' ) . '\'" />
 				</div>
 			</div>';
 
-		$wgOut->addHTML( $output );
+		$out->addHTML( $output );
 	}
 
 	/**
 	 * Present a "log in" message
 	 */
 	function renderLoginPage() {
-		global $wgOut;
+		$this->getOutput()->setPageTitle( $this->msg( 'quiz-login-title' )->text() );
 
-		$wgOut->setPageTitle( wfMsg( 'quiz-login-title' ) );
-
-		$output = wfMsg( 'quiz-login-text' ) . '<p>';
+		$output = $this->msg( 'quiz-login-text' )->text() . '<p>';
 		$output .= '<div>
 			<input type="button" class="site-button" value="' .
-				wfMsg( 'quiz-main-page-button' ) . '" onclick="window.location=\'' .
+				$this->msg( 'quiz-main-page-button' )->text() . '" onclick="window.location=\'' .
 				Title::newMainPage()->escapeFullURL() . '\'" />
 			<input type="button" class="site-button" value="' .
-			wfMsg( 'quiz-login-button' ) . '" onclick="window.location=\'' .
+			$this->msg( 'quiz-login-button' )->text() . '" onclick="window.location=\'' .
 			SpecialPage::getTitleFor( 'Userlogin' )->escapeFullURL() . '\'" />
 		</div>';
-		$wgOut->addHTML( $output );
+		$this->getOutput()->addHTML( $output );
 	}
 
 	/**
 	 * Present "No more quizzes" message to the user
 	 */
 	function renderQuizOver() {
-		global $wgOut, $wgSupressPageTitle;
+		global $wgSupressPageTitle;
 
 		$wgSupressPageTitle = false;
 
-		$wgOut->setPageTitle( wfMsg( 'quiz-nomore-questions' ) );
+		$this->getOutput()->setPageTitle( $this->msg( 'quiz-nomore-questions' )->text() );
 
-		$output = wfMsgExt( 'quiz-ohnoes', 'parse' );
+		$output = $this->msg( 'quiz-ohnoes' )->parse();
 		$output .= '<div>
 		<input type="button" class="site-button" value="' .
-			wfMsg( 'quiz-create-button' ) . '" onclick="window.location=\'' .
+			$this->msg( 'quiz-create-button' )->text() . '" onclick="window.location=\'' .
 			$this->getTitle()->escapeFullURL( 'questionGameAction=createForm' ) .
 			'\'"/>
 
 		</div>';
-		$wgOut->addHTML( $output );
+		$this->getOutput()->addHTML( $output );
 		return '';
 	}
 
@@ -760,22 +780,20 @@ class QuizGameHome extends UnlistedSpecialPage {
 	 * Renders the "permalink is not available" error message.
 	 */
 	function renderPermalinkError() {
-		global $wgOut, $wgSupressPageTitle;
+		global $wgSupressPageTitle;
 
 		$wgSupressPageTitle = false;
 
-		$wgOut->setPageTitle( wfMsg( 'quiz-title' ) );
-		$wgOut->addWikiMsg( 'quiz-unavailable' );
+		$this->getOutput()->setPageTitle( $this->msg( 'quiz-title' )->text() );
+		$this->getOutput()->addWikiMsg( 'quiz-unavailable' );
 	}
 
 	function renderStart() {
-		global $wgOut;
-
-		$wgOut->setPageTitle( wfMsg( 'quiz-title' ) );
+		$this->getOutput()->setPageTitle( $this->msg( 'quiz-title' )->text() );
 		$url = $this->getTitle()->escapeFullURL( 'questionGameAction=launchGame' );
-		$output = wfMsg( 'quiz-intro' ) . '  <a href="' . $url . '">' .
-			wfMsg( 'quiz-introlink' ) . '</a>';
-		$wgOut->addHTML( $output );
+		$output = $this->msg( 'quiz-intro' )->parse() . '  <a href="' . $url . '">' .
+			$this->msg( 'quiz-introlink' )->text() . '</a>';
+		$this->getOutput()->addHTML( $output );
 	}
 
 	/**
@@ -783,7 +801,11 @@ class QuizGameHome extends UnlistedSpecialPage {
 	 * Also handles rendering a permalink.
 	 */
 	function launchGame() {
-		global $wgRequest, $wgUser, $wgOut, $wgUploadPath, $wgScriptPath, $wgHooks;
+		global $wgUploadPath, $wgExtensionAssetsPath;
+
+		$out = $this->getOutput();
+		$request = $this->getRequest();
+		$user = $this->getUser();
 
 		$on_load = 'QuizGame.showAnswers();';
 
@@ -796,10 +818,10 @@ class QuizGameHome extends UnlistedSpecialPage {
 		// $permalinkID...which caused a bug (wrong msg) to be displayed when
 		// there were no questions *at all* in the DB (the permalink error msg
 		// does not have a link that allows you to *create* a quiz...)
-		$permalinkID = $wgRequest->getInt( 'permalinkID', 0 );
+		$permalinkID = $request->getInt( 'permalinkID', 0 );
 
-		$lastid = addslashes( $wgRequest->getVal( 'lastid' ) );
-		$skipid = addslashes( $wgRequest->getVal( 'skipid' ) );
+		$lastid = addslashes( $request->getVal( 'lastid' ) );
+		$skipid = addslashes( $request->getVal( 'skipid' ) );
 
 		$isFixedlink = false;
 		$permalinkOptions = -1;
@@ -808,7 +830,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 		$editLinks = '';
 
 		// Logged in user's stats
-		$stats = new UserStats( $wgUser->getID(), $wgUser->getName() );
+		$stats = new UserStats( $user->getID(), $user->getName() );
 		$current_user_stats = $stats->getUserStats();
 		if( !$current_user_stats['quiz_points'] ) {
 			$current_user_stats['quiz_points'] = 0;
@@ -846,10 +868,10 @@ class QuizGameHome extends UnlistedSpecialPage {
 		$wgQuizID = $question['id'];
 
 		$timestampedViewed = 0;
-		if( $wgUser->getName() != $question['user_name'] ) {
+		if( $user->getName() != $question['user_name'] ) {
 			// check to see if the user already had viewed this question
 			global $wgMemc;
-			$key = wfMemcKey( 'quizgame-user-view', $wgUser->getID(), $question['id'] );
+			$key = wfMemcKey( 'quizgame-user-view', $user->getID(), $question['id'] );
 			$data = $wgMemc->get( $key );
 			if( $data > 0 ) {
 				$timestampedViewed = $data;
@@ -864,10 +886,14 @@ class QuizGameHome extends UnlistedSpecialPage {
 			$prev_question = $this->getQuestion( $lastid );
 		}
 
-		$wgOut->addScript( "<script type=\"text/javascript\">addOnloadHook( function() {" . $on_load . "} );</script>\n" );
+		$out->addScript( '<script type="text/javascript">jQuery( document ).ready( function() {
+			mw.loader.using( \'ext.quizGame\', function() { ' . $on_load . " } );
+		} );</script>\n" );
 
 		$gameid = $question['id'];
-		$wgOut->setPageTitle( $question['text'] );
+
+		$out->setPageTitle( $question['text'] );
+
 		if( strlen( $question['image'] ) > 0 ) {
 			$image = wfFindFile( $question['image'] );
 			$imageThumb = '';
@@ -884,9 +910,8 @@ class QuizGameHome extends UnlistedSpecialPage {
 					$imgWidth = $image->getWidth();
 				}
 			}
-			$imageTag = "
-			<div id=\"quizgame-picture\" class=\"quizgame-picture\">
-				<img src='" . $imageThumb . "' width='" . $imgWidth . "'></div>";
+			$imageTag = '<div id="quizgame-picture" class="quizgame-picture">
+				<img src="' . $imageThumb . '" width="' . $imgWidth . '"></div>';
 		} else {
 			$imageTag = '';
 		}
@@ -901,87 +926,94 @@ class QuizGameHome extends UnlistedSpecialPage {
 		$stats = new UserStats( $id, $user_name );
 		$stats_data = $stats->getUserStats();
 
-		$user_answer = $this->userAnswered( $wgUser->getName(), $gameid );
+		$user_answer = $this->userAnswered( $user->getName(), $gameid );
 
 		global $wgUseEditButtonFloat;
-		if ( ( $wgUser->getID() == $question['user_id'] ||
-			( $user_answer && $wgUser->isLoggedIn() && $wgUser->isAllowed( 'quizadmin' ) )
-			|| $wgUser->isAllowed( 'quizadmin' ) ) && ( $wgUseEditButtonFloat == true )
+		if ( ( $user->getID() == $question['user_id'] ||
+			( $user_answer && $user->isLoggedIn() && $user->isAllowed( 'quizadmin' ) )
+			|| $user->isAllowed( 'quizadmin' ) ) && ( $wgUseEditButtonFloat == true )
 		) {
 			$editMenu = "
 				<div class=\"edit-menu-quiz-game\">
 					<div class=\"edit-button-quiz-game\">
-						<img src=\"{$wgScriptPath}/extensions/QuizGame/images/editIcon.gif\" alt=\"\" />
-						<a href=\"javascript:QuizGame.showEditMenu()\">" . wfMsg( 'quiz-edit' ) . "</a>
+						<img src=\"{$wgExtensionAssetsPath}/QuizGame/images/editIcon.gif\" alt=\"\" />
+						<!-- jQuery inserts an edit link here -->
 					</div>
 				</div>";
 
-			$editLinks = '
-				<a href="' . $this->getTitle()->escapeFullURL( 'questionGameAction=adminPanel' ) . '">' .
-					wfMsg( 'quiz-admin-panel-title' ) . '</a> -
-				<a href="javascript:QuizGame.protectImage()">' . wfMsg( 'quiz-protect' ) . '</a> -
-				<a href="javascript:QuizGame.deleteQuestion()">' . wfMsg( 'quiz-delete' ) . '</a> -';
+			$editLinks = Linker::link(
+				$this->getTitle(),
+				$this->msg( 'quiz-admin-panel-title' )->text(),
+				array(),
+				array( 'questionGameAction' => 'adminPanel' )
+			) . ' -
+				<a class="protect-image-link" href="#">' . $this->msg( 'quiz-protect' )->text() . '</a> - ' .
+				'<a class="delete-quiz-link" href="#">' . $this->msg( 'quiz-delete' )->text() . '</a> -';
 		}
 
-		if( $wgUser->isLoggedIn() ) {
+		// For registered users, display their personal scorecard; for anons,
+		// encourage them to join the site to play quizzes.
+		if( $user->isLoggedIn() ) {
 			$leaderboard_title = SpecialPage::getTitleFor( 'QuizLeaderboard' );
 			$stats_box = '<div class="user-rank">
-					<h2>' . wfMsg( 'quiz-leaderboard-scoretitle' ) . '</h2>
+					<h2>' . $this->msg( 'quiz-leaderboard-scoretitle' )->text() . '</h2>
 
-					<p><b>' . wfMsg( 'quiz-leaderboard-quizpoints' ) . "</b></p>
+					<p><b>' . $this->msg( 'quiz-leaderboard-quizpoints' )->text() . "</b></p>
 					<p class=\"user-rank-points\">{$current_user_stats['quiz_points']}</p>
 					<div class=\"cleared\"></div>
 
-					<p><b>" . wfMsg( 'quiz-leaderboard-correct' ) . "</b></p>
+					<p><b>" . $this->msg( 'quiz-leaderboard-correct' )->text() . "</b></p>
 					<p>{$current_user_stats['quiz_correct']}</p>
 					<div class=\"cleared\"></div>
 
-					<p><b>" . wfMsg( 'quiz-leaderboard-answered' ) . "</b></p>
+					<p><b>" . $this->msg( 'quiz-leaderboard-answered' )->text() . "</b></p>
 					<p>{$current_user_stats['quiz_answered']}</p>
 					<div class=\"cleared\"></div>
 
-					<p><b>" . wfMsg( 'quiz-leaderboard-pctcorrect' ) . "</b></p>
+					<p><b>" . $this->msg( 'quiz-leaderboard-pctcorrect' )->text() . "</b></p>
 					<p>{$current_user_stats['quiz_correct_percent']}%</p>
 					<div class=\"cleared\"></div>
 
-					<p><b>" . wfMsg( 'quiz-leaderboard-rank' ) . "</b></p>
+					<p><b>" . $this->msg( 'quiz-leaderboard-rank' )->text() . "</b></p>
 					<p>{$quiz_rank} <span class=\"user-rank-link\">
-						<a href=\"{$leaderboard_title->getFullURL()}\">(" . wfMsg( 'quiz-leaderboard-link' ) . ")</a>
+						<a href=\"{$leaderboard_title->getFullURL()}\">(" . $this->msg( 'quiz-leaderboard-link' )->text() . ")</a>
 					</span></p>
 					<div class=\"cleared\"></div>
 
 				</div>";
 		} else {
 			$stats_box = '<div class="user-rank">
-				<h2>' . wfMsg( 'quiz-leaderboard-scoretitle' ) . '</h2>'
-					. wfMsgExt( 'quiz-login-or-create-to-climb', 'parse' ) .
+				<h2>' . $this->msg( 'quiz-leaderboard-scoretitle' )->text() . '</h2>'
+					. $this->msg( 'quiz-login-or-create-to-climb' )->parse() .
 			'</div>';
 		}
 
 		$answers = '';
 		if( $user_answer ) {
-			$answers .= "<div class=\"answer-percent-correct\">{$question['correct_percent']}" .
-				wfMsg( 'quiz-pct-answered-correct' ) . '</div>';
+			$answers .= '<div class="answer-percent-correct">' .
+				$this->msg( 'quiz-pct-answered-correct', $question['correct_percent'] )->text() . '</div>';
 			if( $user_answer == $question['correct_answer'] ) {
 				$answers .= '<div class="answer-message-correct">' .
-					wfMsg( 'quiz-answered-correctly' ) . '</div>';
+					$this->msg( 'quiz-answered-correctly' )->text() . '</div>';
 			} else {
 				if( $user_answer == -1 ) {
 					$answers .= '<div class="answer-message-incorrect">' .
-						wfMsg( 'quiz-skipped' ) . '</div>';
+						$this->msg( 'quiz-skipped' )->text() . '</div>';
 				} else {
 					$answers .= '<div class="answer-message-incorrect">' .
-						wfMsg( 'quiz-answered-incorrectly' ) . '</div>';
+						$this->msg( 'quiz-answered-incorrectly' )->text() .
+						'</div>';
 				}
 			}
 		}
 
-		// User hasn't answered yet, so display the quiz options with the ability to play the question
-		if( !$user_answer && $wgUser->getName() != $question['user_name'] ) {
+		// User hasn't answered yet, so display the quiz options with the
+		// ability to play the question
+		if( !$user_answer && $user->getName() != $question['user_name'] ) {
 			$answers .= '<ul>';
 			$x = 1;
 			foreach( $question['choices'] as $choice ) {
-				$answers .= "<li id=\"{$x}\"><a href=\"javascript:QuizGame.vote({$choice['id']});\">{$choice['text']}</a></li>";
+				$answers .= "<li id=\"{$x}\"><a class=\"quiz-vote-link\" data-choice-id=\"{$choice['id']}\" href=\"#\">{$choice['text']}</a></li>";
 				$x++;
 			}
 			$answers .= '</ul>';
@@ -999,29 +1031,25 @@ class QuizGameHome extends UnlistedSpecialPage {
 				$incorrectMsg = $correctMsg = '';
 				if ( $user_answer == $choice['id'] && $question['correct_answer'] != $choice['id'] ) {
 					$incorrectMsg = '- <span class="answer-message-incorrect">' .
-						wfMsg( 'quiz-your-answer' ) . '</span>';
+						$this->msg( 'quiz-your-answer' )->text() . '</span>';
 				}
 				if ( $question['correct_answer'] == $choice['id'] ) {
 					$correctMsg = '- <span class="answer-message-correct">' .
-						wfMsg( 'quiz-correct-answer' ) . '</span>';
+						$this->msg( 'quiz-correct-answer' )->text() . '</span>';
 				}
 				$answers .= "<div id=\"{$x}\" class=\"answer-choice\">{$choice['text']}" .
 						$incorrectMsg . $correctMsg .
 					'</div>';
 				$answers .= "<div id=\"one-answer-bar\" style=\"margin-bottom:10px;\" class=\"answer-" . $barColor . "\">
-						<img border=\"0\" style=\"width:{$bar_width}px; height: 9px;\" id=\"one-answer-width\" src=\"{$wgScriptPath}/extensions/QuizGame/images/vote-bar-" . $barColor . ".gif\"/>
+						<img border=\"0\" style=\"width:{$bar_width}px; height: 9px;\" id=\"one-answer-width\" src=\"{$wgExtensionAssetsPath}/QuizGame/images/vote-bar-" . $barColor . ".gif\"/>
 						<span class=\"answer-percent\">{$choice['percent']}%</span>
 					</div>";
 				$x++;
 			}
 		}
 
-		if ( defined( 'MW_SUPPORTS_RESOURCE_MODULES' ) ) {
-			$wgOut->addModules( 'ext.quizGame.lightBox' );
-		} else {
-			$wgOut->addScriptFile( $wgScriptPath . '/extensions/QuizGame/js/LightBox.js' );
-		}
-		$wgHooks['MakeGlobalVariablesScript'][] = 'QuizGameHome::addJSGlobals';
+		// Add lightbox JS to the output
+		$out->addModules( 'ext.quizGame.lightBox' );
 
 		$output = "
 		<div id=\"quizgame-container\" class=\"quizgame-container\">
@@ -1032,15 +1060,16 @@ class QuizGameHome extends UnlistedSpecialPage {
 					{$question['text']}
 				</div>";
 
-		if( !$user_answer && $wgUser->getName() != $question['user_name'] ) {
+		if( !$user_answer && $user->getName() != $question['user_name'] ) {
 			global $wgUserStatsPointValues;
+			$quizPoints = ( isset( $wgUserStatsPointValues['quiz_points'] ) ? $wgUserStatsPointValues['quiz_points'] : 0 );
 			$output .= '<div class="time-box">
 					<div class="quiz-countdown">
-						<span id="time-countdown">-</span> ' . wfMsg( 'quiz-js-seconds' ) .
+						<span id="time-countdown">-</span> ' . $this->msg( 'quiz-js-seconds' )->text() .
 					'</div>
 
 					<div class="quiz-points" id="quiz-points">' .
-						wfMsg( 'quiz-points', $wgUserStatsPointValues['quiz_points'] ) .
+						$this->msg( 'quiz-points', $quizPoints )->parse() .
 					'</div>
 					<div class="quiz-notime" id="quiz-notime"></div>
 					</div>';
@@ -1052,7 +1081,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 
 					{$imageTag}
 
-					<div id=\"loading-answers\">" . wfMsg( 'quiz-js-loading' ) . "</div>
+					<div id=\"loading-answers\">" . $this->msg( 'quiz-js-loading' )->text() . "</div>
 					<div id=\"quizgame-answers\" style=\"display:none;\" class=\"quizgame-answers\">
 						{$answers}
 					</div>
@@ -1065,12 +1094,12 @@ class QuizGameHome extends UnlistedSpecialPage {
 					<div class=\"navigation-buttons\">
 						{$backButton}";
 
-		if( !$user_answer && $wgUser->getName() != $question['user_name'] ) {
-			$output .= '<a href="javascript:void(0);" onclick="javascript:QuizGame.skipQuestion();">' .
-				wfMsg( 'quiz-skip' ) . '</a>';
+		if( !$user_answer && $user->getName() != $question['user_name'] ) {
+			$output .= '<a class="skip-question-link" href="javascript:void(0);">' .
+				$this->msg( 'quiz-skip' )->text() . '</a>';
 		} else {
 			$output .= '<a href="' . $this->getTitle()->escapeFullURL( 'questionGameAction=launchGame' ) . '">' .
-				wfMsg( 'quiz-next' ) . '</a>';
+				$this->msg( 'quiz-next' )->text() . '</a>';
 		}
 		$output .= '</div>';
 
@@ -1080,11 +1109,11 @@ class QuizGameHome extends UnlistedSpecialPage {
 							<div class="last-game">
 
 							<div class="last-question-heading">'
-								. wfMsg( 'quiz-last-question' ) . ' - <a href="' .
+								. $this->msg( 'quiz-last-question' )->text() . ' - <a href="' .
 								$this->getTitle()->escapeFullURL( "questionGameAction=renderPermalink&permalinkID={$prev_question['id']}" ) .
 								"\">{$prev_question['text']}</a>
 								<div class=\"last-question-count\">" .
-									wfMsg( 'quiz-times-answered', $prev_question['answer_count'] ) .
+									$this->msg( 'quiz-times-answered', $prev_question['answer_count'] )->parse() .
 								'</div>
 							</div>';
 
@@ -1096,11 +1125,11 @@ class QuizGameHome extends UnlistedSpecialPage {
 						$your_answer = $choice['text'];
 						if( $choice['is_correct'] == 1 ) {
 							$your_answer_status = '<div class="answer-status-correct">' .
-								wfMsg( 'quiz-chose-correct', $prev_question['points'] ) .
+								$this->msg( 'quiz-chose-correct', $prev_question['points'] )->parse() .
 							'</div>';
 						} else {
 							$your_answer_status = '<div class="answer-status-incorrect">' .
-								wfMsg( 'quiz-chose-incorrect' ) .
+								$this->msg( 'quiz-chose-incorrect' )->text() .
 							'</div>';
 						}
 					}
@@ -1123,7 +1152,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 				$output .= "<div class=\"answer-bar\" id=\"answer-bar-one\" style=\"display:block\">
 						<div id=\"one-answer\" class=\"small-answer-" . $answerClass . "\">{$choice['text']}</div>
 						<span id=\"one-answer-bar\" class=\"answer-" . $answerColor . "\">
-							<img border=\"0\" style=\"width:{$bar_width}px; height: 11px;\" id=\"one-answer-width\" src=\"{$wgScriptPath}/extensions/QuizGame/images/vote-bar-" . $answerColor . ".gif\"/>
+							<img border=\"0\" style=\"width:{$bar_width}px; height: 11px;\" id=\"one-answer-width\" src=\"{$wgExtensionAssetsPath}/QuizGame/images/vote-bar-" . $answerColor . ".gif\"/>
 							<span id=\"one-answer-percent\" class=\"answer-percent\">{$choice['percent']}%</span>
 						</span>
 					</div>";
@@ -1138,13 +1167,13 @@ class QuizGameHome extends UnlistedSpecialPage {
 				<div class=\"quizgame-right\">
 
 					<div class=\"create-link\">
-						<img border=\"0\" src=\"{$wgScriptPath}/extensions/QuizGame/images/addIcon.gif\" alt=\"\" />
+						<img border=\"0\" src=\"{$wgExtensionAssetsPath}/QuizGame/images/addIcon.gif\" alt=\"\" />
 						<a href=\"" . $this->getTitle()->escapeFullURL( 'questionGameAction=createForm' ) . '">'
-							. wfMsg( 'quiz-create-title' ) .
+							. $this->msg( 'quiz-create-title' )->text() .
 						"</a>
 					</div>
 					<div class=\"credit-box\" id=\"creditBox\">
-						<h1>" . wfMsg( 'quiz-submitted-by' ) . "</h1>
+						<h1>" . $this->msg( 'quiz-submitted-by' )->text() . "</h1>
 
 						<div id=\"submitted-by-image\" class=\"submitted-by-image\">
 							<a href=\"{$user_title->getFullURL()}\">
@@ -1158,15 +1187,15 @@ class QuizGameHome extends UnlistedSpecialPage {
 							</div>
 							<ul>
 								<li id=\"userstats-votes\">
-									<img src=\"{$wgScriptPath}/extensions/QuizGame/images/voteIcon.gif\" border=\"0\" alt=\"\" />
+									<img src=\"{$wgExtensionAssetsPath}/QuizGame/images/voteIcon.gif\" border=\"0\" alt=\"\" />
 									{$stats_data['votes']}
 								</li>
 								<li id=\"userstats-edits\">
-									<img src=\"{$wgScriptPath}/extensions/QuizGame/images/pencilIcon.gif\" border=\"0\" alt=\"\" />
+									<img src=\"{$wgExtensionAssetsPath}/QuizGame/images/pencilIcon.gif\" border=\"0\" alt=\"\" />
 									{$stats_data['edits']}
 								</li>
 								<li id=\"userstats-comments\">
-									<img src=\"{$wgScriptPath}/extensions/QuizGame/images/commentsIcon.gif\" border=\"0\" alt=\"\" />
+									<img src=\"{$wgExtensionAssetsPath}/QuizGame/images/commentsIcon.gif\" border=\"0\" alt=\"\" />
 									{$stats_data['comments']}
 								</li>
 							</ul>
@@ -1175,46 +1204,48 @@ class QuizGameHome extends UnlistedSpecialPage {
 						{$stats_box}
 					</div>
 						<div class=\"bottom-links\" id=\"utility-buttons\">
-							<a href=\"javascript:QuizGame.flagQuestion()\">" .
-								wfMsg( 'quiz-flag' ) . '</a> - ';
+							<a class=\"flag-quiz-link\" href=\"#\">" .
+								$this->msg( 'quiz-flag' )->text() . '</a> - ';
 
 		// Protect & delete links for quiz administrators
-		if ( $wgUser->isAllowed( 'quizadmin' ) ) {
+		if ( $user->isAllowed( 'quizadmin' ) ) {
 			$output .= '<a href="' . $this->getTitle()->escapeFullURL( 'questionGameAction=adminPanel' ) . '">'
-					. wfMsg( 'quiz-admin-panel-title' ) .
-				'</a> - <a href="javascript:QuizGame.protectImage()">' .
-					wfMsg( 'quiz-protect' ) . '</a> -' .
-				'<a href="javascript:QuizGame.deleteQuestion()">' .
-					wfMsg( 'quiz-delete' ) . '</a> - ';
+					. $this->msg( 'quiz-admin-panel-title' )->text() .
+				'</a> - <a class="protect-image-link" href="#">' .
+					$this->msg( 'quiz-protect' )->text() . '</a> - ' .
+				'<a class="delete-quiz-link" href="#">' .
+					$this->msg( 'quiz-delete' )->text() . '</a> - ';
 		}
 
 		$output .= "<a href=\"javascript:document.location='" .
 			$this->getTitle()->escapeFullURL( 'questionGameAction=renderPermalink' ) .
 			"&permalinkID=' + document.getElementById( 'quizGameId' ).value\">" .
-				wfMsg( 'quiz-permalink' ) . "</a>
+				$this->msg( 'quiz-permalink' )->text() . '</a>
 
-							<div id=\"flag-comment\" style=\"display:none;margin-top:5px;\">" .
-							wfMsg( 'quiz-flagged-reason' ) . ": <input type=\"text\" size=\"20\" id=\"flag-reason\" />
-							<input type=\"button\" onclick=\"QuizGame.doFlagQuestion()\" value=\"" . wfMsg( 'quiz-submit' ) . "\" /></div>
+							<div id="flag-comment" style="display:none;margin-top:5px;">' .
+							$this->msg( 'quiz-flagged-reason' )->text() . ": <input type=\"text\" size=\"20\" id=\"flag-reason\" />
+							<input type=\"button\" value=\"" . $this->msg( 'quiz-submit' )->text() . "\" /></div>
 						</div>
 				</div>
 			</div>
 
-			<div class=\"cleared\"/>
+			<div class=\"cleared\"></div>
 			<div class=\"hiddendiv\" style=\"display:none\">
-				<img src=\"{$wgScriptPath}/extensions/QuizGame/images/overlay.png\" alt=\"\" />
-			</div>
-		</div>";
+				<img src=\"{$wgExtensionAssetsPath}/QuizGame/images/overlay.png\" alt=\"\" />
+			</div>";
 
-		$wgOut->addHTML( $output );
+		$out->addHTML( $output );
 	}
 
 	// Function that inserts questions into the database
 	function createQuizGame() {
-		global $wgRequest, $wgUser, $wgMemc, $wgQuizLogs;
+		global $wgMemc, $wgQuizLogs;
 
-		$key = $wgRequest->getText( 'key' );
-		$chain = $wgRequest->getText( 'chain' );
+		$request = $this->getRequest();
+		$user = $this->getUser();
+
+		$key = $request->getText( 'key' );
+		$chain = $request->getText( 'chain' );
 
 		$max_answers = 8;
 
@@ -1223,16 +1254,16 @@ class QuizGameHome extends UnlistedSpecialPage {
 			return;
 		}
 
-		$question = $wgRequest->getText( 'quizgame-question' );
-		$imageName = $wgRequest->getText( 'quizGamePictureName' );
+		$question = $request->getText( 'quizgame-question' );
+		$imageName = $request->getText( 'quizGamePictureName' );
 
 		// Add quiz question
 		$dbw = wfGetDB( DB_MASTER );
 		$dbw->insert(
 			'quizgame_questions',
 			array(
-				'q_user_id' => $wgUser->getID(),
-				'q_user_name' => $wgUser->getName(),
+				'q_user_id' => $user->getID(),
+				'q_user_name' => $user->getName(),
 				'q_text' => strip_tags( $question ), // make sure nobody inserts malicious code
 				'q_picture' => $imageName,
 				'q_date' => date( 'Y-m-d H:i:s' ),
@@ -1244,8 +1275,8 @@ class QuizGameHome extends UnlistedSpecialPage {
 
 		// Add Quiz Choices
 		for( $x = 1; $x <= $max_answers; $x++ ) {
-			if( $wgRequest->getVal( "quizgame-answer-{$x}" ) ) {
-				if( $wgRequest->getVal( "quizgame-isright-{$x}" ) == 'on' ) {
+			if( $request->getVal( "quizgame-answer-{$x}" ) ) {
+				if( $request->getVal( "quizgame-isright-{$x}" ) == 'on' ) {
 					$is_correct = 1;
 				} else {
 					$is_correct = 0;
@@ -1254,7 +1285,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 					'quizgame_choice',
 					array(
 						'choice_q_id' => $questionId,
-						'choice_text' => strip_tags( $wgRequest->getVal( "quizgame-answer-{$x}" ) ), // make sure nobody inserts malicious code
+						'choice_text' => strip_tags( $request->getVal( "quizgame-answer-{$x}" ) ), // make sure nobody inserts malicious code
 						'choice_order' => $x,
 						'choice_is_correct' => $is_correct
 					),
@@ -1263,21 +1294,26 @@ class QuizGameHome extends UnlistedSpecialPage {
 				$dbw->commit();
 			}
 		}
-		$stats = new UserStatsTrack( $wgUser->getID(), $wgUser->getName() );
+
+		// Update social statistics
+		$stats = new UserStatsTrack( $user->getID(), $user->getName() );
 		$stats->incStatField( 'quiz_created' );
 
 		// Add a log entry if quiz logging is enabled
 		if( $wgQuizLogs ) {
-			$message = wfMsgForContent(
-				'quiz-questions-log-create-text',
-				"Special:QuizGameHome/{$questionId}"
-			);
-			$log = new LogPage( 'quiz' );
-			$log->addEntry( 'create', $wgUser->getUserPage(), $message );
+			$logEntry = new ManualLogEntry( 'quiz', 'create' );
+			$logEntry->setPerformer( $user );
+			$logEntry->setTarget( $this->getTitle( $questionId ) );
+			$logEntry->setParameters( array(
+				'4::quizid' => $questionId
+			) );
+
+			$logId = $logEntry->insert();
+			$logEntry->publish( $logId );
 		}
 
 		// Delete memcached key
-		$key = wfMemcKey( 'user', 'profile', 'quiz', $wgUser->getID() );
+		$key = wfMemcKey( 'user', 'profile', 'quiz', $user->getID() );
 		$wgMemc->delete( $key );
 
 		// Redirect the user
@@ -1285,22 +1321,24 @@ class QuizGameHome extends UnlistedSpecialPage {
 	}
 
 	function renderWelcomePage() {
-		global $wgRequest, $wgUser, $wgOut, $wgHooks;
+		global $wgCreateQuizThresholds;
+
+		$out = $this->getOutput();
+		$user = $this->getUser();
 
 		// No access for blocked users
-		if( $wgUser->isBlocked() ) {
-			$wgOut->blockedPage( false );
+		if( $user->isBlocked() ) {
+			$out->blockedPage( false );
 			return false;
 		}
 
 		/**
 		 * Create Quiz Thresholds based on User Stats
 		 */
-		global $wgCreateQuizThresholds;
 		if( is_array( $wgCreateQuizThresholds ) && count( $wgCreateQuizThresholds ) > 0 ) {
 			$can_create = true;
 
-			$stats = new UserStats( $wgUser->getID(), $wgUser->getName() );
+			$stats = new UserStats( $user->getID(), $user->getName() );
 			$stats_data = $stats->getUserStats();
 
 			$threshold_reason = '';
@@ -1314,8 +1352,8 @@ class QuizGameHome extends UnlistedSpecialPage {
 			if( $can_create == false ) {
 				global $wgSupressPageTitle;
 				$wgSupressPageTitle = false;
-				$wgOut->setPageTitle( wfMsg( 'quiz-create-threshold-title' ) );
-				$wgOut->addHTML( wfMsg( 'quiz-create-threshold-reason', $threshold_reason ) );
+				$out->setPageTitle( $this->msg( 'quiz-create-threshold-title' )->text() );
+				$out->addHTML( $this->msg( 'quiz-create-threshold-reason', $threshold_reason )->parse() );
 				return '';
 			}
 		}
@@ -1324,19 +1362,16 @@ class QuizGameHome extends UnlistedSpecialPage {
 		$key = md5( $this->SALT . $chain );
 		$max_answers = 8;
 
-		// Add i18n messages (and max_answers) for the JS file
-		$wgHooks['MakeGlobalVariablesScript'][] = 'QuizGameHome::addJSGlobalsForRenderWelcomePage';
-
-		$wgOut->setPageTitle( wfMsg( 'quiz-create-title' ) );
+		$out->setPageTitle( $this->msg( 'quiz-create-title' )->text() );
 
 		$output = '<div id="quiz-container" class="quiz-container">
 
 			<div class="create-message">
-				<h1>' . wfMsg( 'quiz-create-title' ) . '</h1>
-				<p>' . wfMsgExt( 'quiz-create-message', 'parse' ) . '</p>
+				<h1>' . $this->msg( 'quiz-create-title' )->text() . '</h1>
+				<p>' . $this->msg( 'quiz-create-message' )->parse() . '</p>
 				<p><input class="site-button" type="button" onclick="document.location=\'' .
 					$this->getTitle()->escapeFullURL( 'questionGameAction=launchGame' ) .
-					'\'" value="' . wfMsg( 'quiz-play-quiz' ) . '" /></p>
+					'\'" value="' . $this->msg( 'quiz-play-quiz' )->text() . '" /></p>
 			</div>
 
 			<div class="quizgame-create-form" id="quizgame-create-form">
@@ -1344,17 +1379,23 @@ class QuizGameHome extends UnlistedSpecialPage {
 					$this->getTitle()->escapeFullURL( 'questionGameAction=createGame' ) . '">
 				<div id="quiz-game-errors" style="color:red"></div>
 
-				<h1>' . wfMsg( 'quiz-create-write-question' ) . '</h1>
+				<h1>' . $this->msg( 'quiz-create-write-question' )->text() . '</h1>
 				<input name="quizgame-question" id="quizgame-question" type="text" value="" size="64" />
-				<h1 class="write-answer">' . wfMsg( 'quiz-create-write-answers' ) . '</h1>
-				<span style="margin-top:10px;">' . wfMsg( 'quiz-create-check-correct' ) . '</span>';
+				<h1 class="write-answer">' . $this->msg( 'quiz-create-write-answers' )->text() . '</h1>
+				<span style="margin-top:10px;">' . $this->msg( 'quiz-create-check-correct' )->text() . '</span>
+				<span style="display:none;" id="this-is-the-welcome-page"></span>';
+		// the span#this-is-the-welcome-page element is an epic hack for JS
+		// because I can't think of a better way to detect where we are and JS
+		// needs to know if it's on the welcome page or not because there is a
+		// code block nearly identical to the below one elsewhere in this file,
+		// the only big difference being the hook handlers
 
 		for( $x = 1; $x <= $max_answers; $x++ ) {
 			$output .= "<div id=\"quizgame-answer-container-{$x}\" class=\"quizgame-answer\"" .
 				( ( $x > 2 ) ? ' style="display:none;"' : '' ) . ">
 				<span class=\"quizgame-answer-number\">{$x}.</span>
-				<input name=\"quizgame-answer-{$x}\" id=\"quizgame-answer-{$x}\" type=\"text\" value=\"\" size=\"32\" onkeyup=\"QuizGame.updateAnswerBoxes();\" />
-				<input type=\"checkbox\" onclick=\"javascript:QuizGame.welcomePage_toggleCheck(this)\" id=\"quizgame-isright-{$x}\" name=\"quizgame-isright-{$x}\">
+				<input name=\"quizgame-answer-{$x}\" id=\"quizgame-answer-{$x}\" type=\"text\" value=\"\" size=\"32\" />
+				<input type=\"checkbox\" id=\"quizgame-isright-{$x}\" name=\"quizgame-isright-{$x}\">
 			</div>";
 		}
 
@@ -1365,75 +1406,28 @@ class QuizGameHome extends UnlistedSpecialPage {
 			</form>
 
 			<h1 style="margin-top:20px">' .
-				wfMsg( 'quiz-create-add-picture' ) . '</h1>
+				$this->msg( 'quiz-create-add-picture' )->text() . '</h1>
 			<div id="quizgame-picture-upload" style="display:block;">
 
 				<div id="real-form" style="display:block; height:90px;">
 					<iframe id="imageUpload-frame" class="imageUpload-frame" width="650"
 						scrolling="no" border="0" frameborder="0" src="' .
-						SpecialPage::getTitleFor( 'QuestionGameUpload' )->escapeFullURL( 'wpThumbWidth=75&wpCategory=Quizgames' ) . '">
+						SpecialPage::getTitleFor( 'QuestionGameUpload' )->escapeFullURL( 'wpThumbWidth=75' ) . '">
 					</iframe>
 				</div>
 			</div>
 			<div id="quizgame-picture-preview" class="quizgame-picture-preview"></div>
+			<!-- jQuery injects the link element into the next node, the p element -->
 			<p id="quizgame-picture-reupload" style="display:none">
-				<a href="javascript:QuizGame.showAttachPicture()">' .
-					wfMsg( 'quiz-create-edit-picture' ) . '</a>
 			</p>
 			</div>
 
 			<div id="startButton" class="startButton">
-				<input type="button" class="site-button" onclick="QuizGame.startGame()" value="' . wfMsg( 'quiz-create-play' ) . '" />
+				<input type="button" class="site-button" value="' . $this->msg( 'quiz-create-play' )->text() . '" />
 			</div>
 
 			</div>';
 
-		$wgOut->addHTML( $output );
-	}
-
-	/**
-	 * Add some new JS globals into the page output. Most of this can be
-	 * replaced by ResourceLoader in the future.
-	 *
-	 * @see QuizGameHome::renderWelcomePage()
-	 *
-	 * @param $vars Array: array of pre-existing JS globals
-	 * @return Boolean: true
-	 */
-	public static function addJSGlobalsForRenderWelcomePage( $vars ) {
-		$vars['__quiz_max_answers__'] = 8; // there's no way to retrieve this so we just hardcode it here
-		$vars['__quiz_create_error_numanswers__'] = wfMsg( 'quiz-create-error-numanswers' );
-		$vars['__quiz_create_error_noquestion__'] = wfMsg( 'quiz-create-error-noquestion' );
-		$vars['__quiz_create_error_numcorrect__'] = wfMsg( 'quiz-create-error-numcorrect' );
-		return true;
-	}
-
-	/**
-	 * Add some new JS globals into the page output. This can be replaced by
-	 * ResourceLoader in the future.
-	 *
-	 * @see QuizGameHome::launchGame()
-	 *
-	 * @param $vars Array: array of pre-existing JS globals
-	 * @return Boolean: true
-	 */
-	public static function addJSGlobals( $vars ) {
-		$vars['__quiz_js_reloading__'] = wfMsg( 'quiz-js-reloading' );
-		$vars['__quiz_js_errorwas__'] = wfMsg( 'quiz-js-errorwas' );
-		$vars['__quiz_js_timesup__'] = wfMsg( 'quiz-js-timesup' );
-		$vars['__quiz_js_points__'] = wfMsg( 'quiz-js-points' );
-		$vars['__quiz_pause_continue__'] = wfMsg( 'quiz-pause-continue' );
-		$vars['__quiz_pause_view_leaderboard__'] = wfMsg( 'quiz-pause-view-leaderboard' );
-		$vars['__quiz_pause_create_question__'] = wfMsg( 'quiz-pause-create-question' );
-		$vars['__quiz_main_page_button__'] = wfMsg( 'quiz-main-page-button' );
-		$vars['__quiz_js_loading__'] = wfMsg( 'quiz-js-loading' );
-		$vars['__quiz_lightbox_pause_quiz__'] = wfMsg( 'quiz-lightbox-pause-quiz' );
-		$vars['__quiz_lightbox_breakdown__'] = wfMsg( 'quiz-lightbox-breakdown' );
-		$vars['__quiz_lightbox_breakdown_percent__'] = wfMsg( 'quiz-lightbox-breakdown-percent' );
-		$vars['__quiz_lightbox_correct__'] = wfMsg( 'quiz-lightbox-correct' );
-		$vars['__quiz_lightbox_incorrect__'] = wfMsg( 'quiz-lightbox-incorrect' );
-		$vars['__quiz_lightbox_correct_points__'] = wfMsg( 'quiz-lightbox-correct-points' );
-		$vars['__quiz_lightbox_incorrect_correct__'] = wfMsg( 'quiz-lightbox-incorrect-correct' );
-		return true;
+		$out->addHTML( $output );
 	}
 }

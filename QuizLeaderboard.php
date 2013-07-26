@@ -15,34 +15,35 @@ class QuizLeaderboard extends UnlistedSpecialPage {
 	 * @param $input Mixed: parameter passed to the page or null
 	 */
 	public function execute( $input ) {
-		global $wgOut, $wgUser, $wgScriptPath;
+		$out = $this->getOutput();
+		$user = $this->getUser();
 
 		if( !$input ) {
 			$input = 'points';
 		}
 
-		$wgOut->addExtensionStyle( $wgScriptPath . '/extensions/QuizGame/questiongame.css' );
+		$out->addModules( 'ext.quizGame.leaderboard' );
 
 		$whereConds = array();
 
 		switch( $input ) {
 			case 'correct':
-				$wgOut->setPageTitle( wfMsg( 'quiz-leaderboard-most-correct' ) );
+				$out->setPageTitle( $this->msg( 'quiz-leaderboard-most-correct' )->text() );
 				$field = 'stats_quiz_questions_correct';
 				break;
 			case 'percentage':
-				$wgOut->setPageTitle( wfMsg( 'quiz-leaderboard-highest-percent' ) );
+				$out->setPageTitle( $this->msg( 'quiz-leaderboard-highest-percent' )->text() );
 				$field = 'stats_quiz_questions_correct_percent';
 				$whereConds[] = 'stats_quiz_questions_answered >= 50';
 				break;
 			case 'points':
-				$wgOut->setPageTitle( wfMsg( 'quiz-leaderboard-most-points' ) );
+				$out->setPageTitle( $this->msg( 'quiz-leaderboard-most-points' )->text() );
 				$field = 'stats_quiz_points';
 				break;
 		}
 
 		$dbr = wfGetDB( DB_MASTER );
-		$whereConds[] = 'stats_user_id <> 0';
+		$whereConds[] = 'stats_user_id <> 0'; // Exclude anonymous users
 		$res = $dbr->select(
 			'user_stats',
 			array(
@@ -59,8 +60,8 @@ class QuizLeaderboard extends UnlistedSpecialPage {
 
 		$output = '<div class="quiz-leaderboard-nav">';
 
-		if( $wgUser->isLoggedIn() ) {
-			$stats = new UserStats( $wgUser->getID(), $wgUser->getName() );
+		if( $user->isLoggedIn() ) {
+			$stats = new UserStats( $user->getID(), $user->getName() );
 			$stats_data = $stats->getUserStats();
 
 			// Get users rank
@@ -68,48 +69,49 @@ class QuizLeaderboard extends UnlistedSpecialPage {
 			$s = $dbr->selectRow(
 				'user_stats',
 				array( 'COUNT(*) AS count' ),
-				array( 'stats_quiz_points >' . str_replace( ',', '', $stats_data['quiz_points'] ) ),
+				array( 'stats_quiz_points > ' . str_replace( ',', '', $stats_data['quiz_points'] ) ),
 				__METHOD__
 			);
 			if ( $s !== false ) {
 				$quiz_rank = $s->count + 1;
 			}
-			$avatar = new wAvatar( $wgUser->getID(), 'm' );
+			$avatar = new wAvatar( $user->getID(), 'm' );
 
+			// Display the current user's scorecard
 			$output .= "<div class=\"user-rank-lb\">
-				<h2>{$avatar->getAvatarURL()} " . wfMsg( 'quiz-leaderboard-scoretitle' ) . '</h2>
+				<h2>{$avatar->getAvatarURL()} " . $this->msg( 'quiz-leaderboard-scoretitle' )->text() . '</h2>
 
-					<p><b>' . wfMsg( 'quiz-leaderboard-quizpoints' ) . "</b></p>
+					<p><b>' . $this->msg( 'quiz-leaderboard-quizpoints' )->text() . "</b></p>
 					<p class=\"user-rank-points\">{$stats_data['quiz_points']}</p>
 					<div class=\"cleared\"></div>
 
-					<p><b>" . wfMsg( 'quiz-leaderboard-correct' ) . "</b></p>
+					<p><b>" . $this->msg( 'quiz-leaderboard-correct' )->text() . "</b></p>
 					<p>{$stats_data['quiz_correct']}</p>
 					<div class=\"cleared\"></div>
 
-					<p><b>" . wfMsg( 'quiz-leaderboard-answered' ) . "</b></p>
+					<p><b>" . $this->msg( 'quiz-leaderboard-answered' )->text() . "</b></p>
 					<p>{$stats_data['quiz_answered']}</p>
 					<div class=\"cleared\"></div>
 
-					<p><b>" . wfMsg( 'quiz-leaderboard-pctcorrect' ) . "</b></p>
+					<p><b>" . $this->msg( 'quiz-leaderboard-pctcorrect' )->text() . "</b></p>
 					<p>{$stats_data['quiz_correct_percent']}%</p>
 					<div class=\"cleared\"></div>
 
-					<p><b>" . wfMsg( 'quiz-leaderboard-rank' ) . "</b></p>
+					<p><b>" . $this->msg( 'quiz-leaderboard-rank' )->text() . "</b></p>
 					<p>{$quiz_rank}</p>
 					<div class=\"cleared\"></div>
 
 				</div>";
 		}
 
-		// Build nav
+		// Build the "Order" navigation menu
 		$menu = array(
-			wfMsg( 'quiz-leaderboard-menu-points' ) => 'points',
-			wfMsg( 'quiz-leaderboard-menu-correct' ) => 'correct',
-			wfMsg( 'quiz-leaderboard-menu-pct' ) => 'percentage'
+			$this->msg( 'quiz-leaderboard-menu-points' )->text() => 'points',
+			$this->msg( 'quiz-leaderboard-menu-correct' )->text() => 'correct',
+			$this->msg( 'quiz-leaderboard-menu-pct' )->text() => 'percentage'
 		);
 
-		$output .= '<h1>' . wfMsg( 'quiz-leaderboard-order-menu' ) . '</h1>';
+		$output .= '<h1>' . $this->msg( 'quiz-leaderboard-order-menu' )->text() . '</h1>';
 
 		foreach( $menu as $title => $qs ) {
 			if ( $input != $qs ) {
@@ -121,11 +123,13 @@ class QuizLeaderboard extends UnlistedSpecialPage {
 
 		$output .= '</div>';
 
-		$output .= '<div class="quiz-leaderboard-top-links">
-			<a href="' . $quizgame_title->getFullURL( 'questionGameAction=launchGame' ) . '">'
-				. wfMsg( 'quiz-admin-back' ) .
-			'</a>
-		</div>';
+		$output .= '<div class="quiz-leaderboard-top-links">' .
+			Linker::link(
+				$quizgame_title,
+				$this->msg( 'quiz-admin-back' )->text(),
+				array(),
+				array( 'questionGameAction' => 'launchGame' )
+			) . '</div>';
 
 		$x = 1;
 		$output .= '<div class="top-users">';
@@ -134,27 +138,23 @@ class QuizLeaderboard extends UnlistedSpecialPage {
 		    $user_name = $row->stats_user_name;
 		    $user_title = Title::makeTitle( NS_USER, $row->stats_user_name );
 		    $avatar = new wAvatar( $row->stats_user_id, 'm' );
-			if ( $user_name == substr( $user_name, 0, 18 ) ) {
-				$user_name_short = $user_name;
-			} else {
-				$user_name_short = substr( $user_name, 0, 18 ) . wfMsg( 'ellipsis' );
-			}
+			$user_name_short = $this->getLanguage()->truncate( $user_name, 18 );
 
 		    $output .= "<div class=\"top-fan-row\">
 		 		   <span class=\"top-fan-num\">{$x}.</span>
 				   <span class=\"top-fan\">{$avatar->getAvatarURL()}
-				   <a href='" . $user_title->getFullURL() . "'>" . $user_name_short . '</a>
+				   <a href=\"" . $user_title->getFullURL() . '">' . $user_name_short . '</a>
 				</span>';
 
 			switch( $input ) {
 				case 'correct':
-					$stat = number_format( $row->$field ) . ' ' . wfMsg( 'quiz-leaderboard-desc-correct' );
+					$stat = $this->msg( 'quiz-leaderboard-desc-correct', $this->getLanguage()->formatNum( $row->$field ) )->parse();
 					break;
 				case 'percentage':
-					$stat = number_format( $row->$field * 100, 2 ) . wfMsg( 'quiz-leaderboard-desc-pct' );
+					$stat = $this->msg( 'quiz-leaderboard-desc-pct', $this->getLanguage()->formatNum( $row->$field * 100 ) )->parse();
 					break;
 				case 'points':
-					$stat = number_format( $row->$field ) . ' ' . wfMsg( 'quiz-leaderboard-desc-points' );
+					$stat = $this->msg( 'quiz-leaderboard-desc-points', $this->getLanguage()->formatNum( $row->$field ) )->parse();
 					break;
 			}
 
@@ -165,7 +165,6 @@ class QuizLeaderboard extends UnlistedSpecialPage {
 		}
 		$output .= '</div><div class="cleared"></div>';
 
-		$wgOut->addHTML( $output );
-
+		$out->addHTML( $output );
 	}
 }

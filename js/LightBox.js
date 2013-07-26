@@ -296,6 +296,4 @@ var LightBox = {
 };
 
 // added
-if ( typeof( addOnloadHook ) == 'function' ) {
-	addOnloadHook( LightBox.init );
-}
+jQuery( document ).ready( LightBox.init );

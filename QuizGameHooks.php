@@ -15,7 +15,7 @@ class QuizGameHooks {
 	 * @param $content_actions Array
 	 * @return Boolean: true
 	 */
-	public static function addQuizContentActions( $skin, $content_actions ) {
+	public static function addQuizContentActions( &$skinTemplate, &$links ) {
 		global $wgUser, $wgRequest, $wgQuizID, $wgTitle;
 
 		// Add edit tab to content actions for quiz admins
@@ -30,21 +30,20 @@ class QuizGameHooks {
 			if ( $wgRequest->getVal( 'questionGameAction' ) == 'editItem' ) {
 				$selected = 'selected';
 			}
-			$content_actions['edit'] = array(
+			$links['views']['edit'] = array(
 				'class' => $selected,
-				'text' => wfMsg( 'edit' ),
+				'text' => wfMessage( 'edit' )->plain(),
 				'href' => $quiz->getFullURL( 'questionGameAction=editItem&quizGameId=' . $wgQuizID ), // @bug 2457, 2510
 			);
 		}
 
 		// If editing, make special page go back to quiz question
 		if( $wgRequest->getVal( 'questionGameAction' ) == 'editItem' ) {
-			global $wgQuizID;
 			$quiz = SpecialPage::getTitleFor( 'QuizGameHome' );
-			$content_actions[$wgTitle->getNamespaceKey()] = array(
+			$links['views'][$wgTitle->getNamespaceKey()] = array(
 				'class' => 'selected',
-				'text' => wfMsg( 'nstab-special' ),
-				'href' => $quiz->getFullURL( 'questionGameAction=renderPermalink&permalinkID=' . $wgQuizID ), 
+				'text' => wfMessage( 'nstab-special' )->plain(),
+				'href' => $quiz->getFullURL( 'questionGameAction=renderPermalink&permalinkID=' . $wgQuizID ),
 			);
 		}
 
@@ -61,7 +60,7 @@ class QuizGameHooks {
 	 */
 	public static function addJSGlobals( $vars ) {
 		global $wgUserStatsPointValues;
-		$vars['__quiz_js_points_value__'] = $wgUserStatsPointValues['quiz_points'];
+		$vars['__quiz_js_points_value__'] = ( isset( $wgUserStatsPointValues['quiz_points'] ) ? $wgUserStatsPointValues['quiz_points'] : 0 );
 		return true;
 	}
 
@@ -69,24 +68,16 @@ class QuizGameHooks {
 	 * Creates the necessary database tables when the user runs
 	 * maintenance/update.php.
 	 *
-	 * @param $updater Object: instance of DatabaseUpdater
+	 * @param $updater DatabaseUpdater
 	 * @return Boolean: true
 	 */
-	public static function addTables( $updater = null ) {
+	public static function addTables( $updater ) {
 		$dir = dirname( __FILE__ );
 		$file = "$dir/quizgame.sql";
-		if ( $updater === null ) {
-			global $wgExtNewTables;
-			$wgExtNewTables[] = array( 'quizgame_questions', $file );
-			$wgExtNewTables[] = array( 'quizgame_answers', $file );
-			$wgExtNewTables[] = array( 'quizgame_choice', $file );
-			$wgExtNewTables[] = array( 'quizgame_user_view', $file );
-		} else {
-			$updater->addExtensionUpdate( array( 'addTable', 'quizgame_questions', $file, true ) );
-			$updater->addExtensionUpdate( array( 'addTable', 'quizgame_answers', $file, true ) );
-			$updater->addExtensionUpdate( array( 'addTable', 'quizgame_choice', $file, true ) );
-			$updater->addExtensionUpdate( array( 'addTable', 'quizgame_user_view', $file, true ) );
-		}
+		$updater->addExtensionUpdate( array( 'addTable', 'quizgame_questions', $file, true ) );
+		$updater->addExtensionUpdate( array( 'addTable', 'quizgame_answers', $file, true ) );
+		$updater->addExtensionUpdate( array( 'addTable', 'quizgame_choice', $file, true ) );
+		$updater->addExtensionUpdate( array( 'addTable', 'quizgame_user_view', $file, true ) );
 		return true;
 	}
 

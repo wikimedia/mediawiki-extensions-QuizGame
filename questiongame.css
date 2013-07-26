@@ -564,7 +564,9 @@ h1.write-answer {
 
 .view-quizzes-user-name {
 	float: left;
+	/* looks bad with usernames > 10 characters
 	width: 70px;
+	*/
 	font-size: 14px;
 	color: #002BB8;
 	font-weight: bold;

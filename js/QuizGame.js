@@ -1,12 +1,10 @@
 /**
- * Main JavaScript file for the QuizGame extension
- * Stuff from renderwelcomepage.js is prefixed with welcomePage_, i.e.
- * welcomePage_uploadError (otherwise we'd get conflicting method names).
+ * Main JavaScript file for the QuizGame extension.
  *
  * @file
  * @ingroup Extensions
  * @author Jack Phoenix <jack@countervandalism.net>
- * @date 28 June 2011
+ * @date 25 July 2013
  */
 var QuizGame = {
 	continue_timer: '', // has to have an initial value...
@@ -26,11 +24,17 @@ var QuizGame = {
 		document.getElementById( 'items[' + id + ']' ).style.display = 'none';
 		document.getElementById( 'items[' + id + ']' ).style.visibility = 'hidden';
 
-		sajax_request_type = 'POST';
-		sajax_do_call(
-			'wfQuestionGameAdmin',
-			[ 'deleteItem', key, id ],
-			document.getElementById( 'ajax-messages' )
+		jQuery.getJSON(
+			mw.util.wikiScript( 'api' ), {
+				format: 'json',
+				action: 'quizgame',
+				quizaction: 'deleteItem',
+				key: key,
+				id: id
+			},
+			function( data ) {
+				document.getElementById( 'ajax-messages' ).innerHTML = data.quizgame.output;
+			}
 		);
 	},
 
@@ -38,11 +42,17 @@ var QuizGame = {
 		document.getElementById( 'items[' + id + ']' ).style.display = 'none';
 		document.getElementById( 'items[' + id + ']' ).style.visibility = 'hidden';
 
-		sajax_request_type = 'POST';
-		sajax_do_call(
-			'wfQuestionGameAdmin',
-			[ 'unflagItem', key, id ],
-			document.getElementById( 'ajax-messages' )
+		jQuery.getJSON(
+			mw.util.wikiScript( 'api' ), {
+				format: 'json',
+				action: 'quizgame',
+				quizaction: 'unflagItem',
+				key: key,
+				id: id
+			},
+			function( data ) {
+				document.getElementById( 'ajax-messages' ).innerHTML = data.quizgame.output;
+			}
 		);
 	},
 
@@ -50,26 +60,44 @@ var QuizGame = {
 		document.getElementById( 'items[' + id + ']' ).style.display = 'none';
 		document.getElementById( 'items[' + id + ']' ).style.visibility = 'hidden';
 
-		sajax_request_type = 'POST';
-		sajax_do_call(
-			'wfQuestionGameAdmin',
-			[ 'unprotectItem', key, id ],
-			document.getElementById( 'ajax-messages' )
+		jQuery.getJSON(
+			mw.util.wikiScript( 'api' ), {
+				format: 'json',
+				action: 'quizgame',
+				quizaction: 'unprotectItem',
+				key: key,
+				id: id
+			},
+			function( data ) {
+				document.getElementById( 'ajax-messages' ).innerHTML = data.quizgame.output;
+			}
 		);
 	},
 
 	protectById: function( id, key ) {
-		sajax_request_type = 'POST';
-		sajax_do_call(
-			'wfQuestionGameAdmin',
-			[ 'protectItem', key, id ],
-			document.getElementById( 'ajax-messages' )
+		jQuery.getJSON(
+			mw.util.wikiScript( 'api' ), {
+				format: 'json',
+				action: 'quizgame',
+				quizaction: 'protectItem',
+				key: key,
+				id: id
+			},
+			function( data ) {
+				document.getElementById( 'ajax-messages' ).innerHTML = data.quizgame.output;
+			}
 		);
 	},
 
-	/* this is from edititem.js */
 	toggleCheck: function( thisBox ) {
-		for( var x = 1; x <= ( __choices_count__ ); x++ ) {
+		var nameOfOurCountableVariable;
+		// Different loop variable when we're on the welcome page
+		if ( jQuery( 'span#this-is-the-welcome-page' ).length > 0 ) {
+			nameOfOurCountableVariable = 8 - 1;
+		} else {
+			nameOfOurCountableVariable = __choices_count__;
+		}
+		for( var x = 1; x <= ( nameOfOurCountableVariable ); x++ ) {
 			document.getElementById( 'quizgame-isright-' + x ).checked = false;
 		}
 		thisBox.checked = true;
@@ -79,8 +107,8 @@ var QuizGame = {
 		document.getElementById( 'ajax-messages' ).innerHTML = message;
 		document.getElementById( 'quizgame-picture' ).innerHTML = '';
 
-		document.getElementById( 'imageUpload-frame' ).src =
-			'index.php?title=Special:QuestionGameUpload&wpThumbWidth=80&wpCategory=Quizgames&wpOverwriteFile=true&wpDestFile=' +
+		document.getElementById( 'imageUpload-frame' ).src = mw.config.get( 'wgScriptPath' ) +
+			'/index.php?title=Special:QuestionGameUpload&wpThumbWidth=80&wpOverwriteFile=true&wpDestFile=' +
 			document.getElementById( 'quizGamePicture' ).value;
 		document.getElementById( 'quizgame-upload' ).style.display = 'block';
 		document.getElementById( 'quizgame-upload' ).style.visibility = 'visible';
@@ -90,8 +118,8 @@ var QuizGame = {
 		document.getElementById( 'quizgame-upload' ).style.display = 'none';
 		document.getElementById( 'quizgame-upload' ).style.visibility = 'hidden';
 		document.getElementById( 'quizgame-picture' ).innerHTML =
-			'<img src="' + wgServer + wgScriptPath +
-			'/extensions/QuizGame/images/ajax-loader-white.gif" alt="" />';
+			'<img src="' + mw.config.get( 'wgExtensionAssetsPath' ) +
+			'/QuizGame/images/ajax-loader-white.gif" alt="" />';
 	},
 
 	uploadComplete: function( imgSrc, imgName, imgDesc ) {
@@ -104,22 +132,32 @@ var QuizGame = {
 		document.quizGameEditForm.quizGamePicture.value = imgName;
 
 		document.getElementById( 'imageUpload-frame' ).src =
-			'index.php?title=Special:QuestionGameUpload&wpThumbWidth=80&wpCategory=Quizgames&wpOverwriteFile=true&wpDestFile=' +
+			'/index.php?title=Special:QuestionGameUpload&wpThumbWidth=80&wpOverwriteFile=true&wpDestFile=' +
 			imgName;
 
 		document.getElementById( 'quizgame-editpicture-link' ).innerHTML =
-			'<a href="javascript:QuizGame.showUpload()">Edit Picture</a>';
+			jQuery( 'a' ).prop( 'href', QuizGame.showUpload() ).text( mw.msg( 'quiz-create-edit-picture' ) );
 		document.getElementById( 'quizgame-editpicture-link' ).style.display = 'block';
 		document.getElementById( 'quizgame-editpicture-link' ).style.visibility = 'visible';
 	},
 
 	showUpload: function() {
-		document.getElementById( 'quizgame-editpicture-link' ).style.display = 'none';
-		document.getElementById( 'quizgame-editpicture-link' ).style.visibility = 'hidden';
-		document.getElementById( 'quizgame-upload' ).style.display = 'block';
-		document.getElementById( 'quizgame-upload' ).style.visibility = 'visible';
+		if ( document.getElementById( 'quizgame-editpicture-link' ) ) {
+			document.getElementById( 'quizgame-editpicture-link' ).style.display = 'none';
+			document.getElementById( 'quizgame-editpicture-link' ).style.visibility = 'hidden';
+		}
+		if ( document.getElementById( 'quizgame-upload' ) ) {
+			document.getElementById( 'quizgame-upload' ).style.display = 'block';
+			document.getElementById( 'quizgame-upload' ).style.visibility = 'visible';
+		}
 	},
 
+	/**
+	 * Detects Firefox on Mac by returning boolean true if the current
+	 * User-Agent is that.
+	 *
+	 * @return Boolean
+	 */
 	detectMacXFF: function() {
 		var userAgent = navigator.userAgent.toLowerCase();
 		if( userAgent.indexOf( 'mac' ) != -1 && userAgent.indexOf( 'firefox' ) != -1 ) {
@@ -130,55 +168,84 @@ var QuizGame = {
 	deleteQuestion: function() {
 		var gameKey = document.getElementById( 'quizGameKey' ).value;
 		var gameId = document.getElementById( 'quizGameId' ).value;
-		sajax_request_type = 'POST';
-		sajax_do_call(
-			'wfQuestionGameAdmin',
-			[ 'deleteItem', gameKey, gameId ],
-			function( t ) {
-				document.getElementById( 'ajax-messages' ).innerHTML =
-					t.responseText + '<br />' + __quiz_js_reloading__;
-				document.location = wgScriptPath +
+		jQuery.getJSON(
+			mw.util.wikiScript( 'api' ), {
+				format: 'json',
+				action: 'quizgame',
+				quizaction: 'deleteItem',
+				key: gameKey,
+				id: gameId
+			},
+			function( data ) {
+				document.getElementById( 'ajax-messages' ).innerHTML = data.quizgame.output + '<br />' + mw.msg( 'quiz-js-reloading' );
+				document.location = mw.config.get( 'wgScriptPath' ) +
 					'/index.php?title=Special:QuizGameHome&questionGameAction=launchGame';
 			}
 		);
 	},
 
 	showEditMenu: function() {
-		document.location = wgServer + wgScriptPath + '/index.php?title=Special:QuizGameHome&questionGameAction=editItem&quizGameId=' +
+		document.location = mw.config.get( 'wgServer' ) +
+			mw.config.get( 'wgScriptPath' ) +
+			'/index.php?title=Special:QuizGameHome&questionGameAction=editItem&quizGameId=' +
 			document.getElementById( 'quizGameId' ).value + '&quizGameKey=' +
 			document.getElementById( 'quizGameKey' ).value;
 	},
 
+	/**
+	 * Makes the "Reason for flagging this quiz" box visible.
+	 * The actual backend logic is in doFlagQuestion() (below), which gets
+	 * called when the user pressed the button to really submit the flagging.
+	 */
 	flagQuestion: function() {
 		document.getElementById( 'flag-comment' ).style.display = 'block';
 		document.getElementById( 'flag-comment' ).style.visibility = 'visible';
 	},
 
+	/**
+	 * Flags a quiz question for administrator attention and temporarily
+	 * removes it from circulation by calling the API.
+	 * Once done, the status is reported to the user and the
+	 * "reason for flagging" field is hidden again.
+	 */
 	doFlagQuestion: function() {
 		var gameKey = document.getElementById( 'quizGameKey' ).value;
 		var gameId = document.getElementById( 'quizGameId' ).value;
 		var reason = document.getElementById( 'flag-reason' ).value;
-		sajax_request_type = 'POST';
-		sajax_do_call(
-			'wfQuestionGameAdmin',
-			[ 'flagItem', gameKey, gameId, reason ],
-			function( t ) {
-				document.getElementById( 'ajax-messages' ).innerHTML = t.responseText;
+		jQuery.getJSON(
+			mw.util.wikiScript( 'api' ), {
+				format: 'json',
+				action: 'quizgame',
+				quizaction: 'flagItem',
+				key: gameKey,
+				id: gameId,
+				reason: reason
+			},
+			function( data ) {
+				document.getElementById( 'ajax-messages' ).innerHTML = data.quizgame.output;
 				document.getElementById( 'flag-comment' ).style.display = 'none';
 				document.getElementById( 'flag-comment' ).style.visibility = 'hidden';
 			}
 		);
 	},
 
+	/**
+	 * Protects the image used in the quiz game by calling the API and
+	 * reporting back to the user.
+	 */
 	protectImage: function() {
 		var gameKey = document.getElementById( 'quizGameKey' ).value;
 		var gameId = document.getElementById( 'quizGameId' ).value;
-		sajax_request_type = 'POST';
-		sajax_do_call(
-			'wfQuestionGameAdmin',
-			[ 'protectItem', gameKey, gameId ],
-			function( t ) {
-				document.getElementById( 'ajax-messages' ).innerHTML = t.responseText;
+		jQuery.getJSON(
+			mw.util.wikiScript( 'api' ), {
+				format: 'json',
+				action: 'quizgame',
+				quizaction: 'protectItem',
+				key: gameKey,
+				id: gameId
+			},
+			function( data ) {
+				document.getElementById( 'ajax-messages' ).innerHTML = data.quizgame.output;
 			}
 		);
 	},
@@ -193,13 +260,29 @@ var QuizGame = {
 		document.getElementById( 'quizgame-answers' ).style.visibility = 'visible';
 	},
 
+	/**
+	 * @param {time_viewed} number
+	 */
 	countDown: function( time_viewed ) {
-		if( time_viewed ) {
+		/**
+		 * QuizGameHome::launchGame() calls this function no matter what, and
+		 * setLevel() below attempts to manipulate div#quiz-points, which
+		 * exists only when the question hasn't been created by you and you
+		 * haven't answered it yet.
+		 *
+		 * Likewise, this function attempts to manipulate #time-countdown, and
+		 * (un)surprisingly enough, that also fails...
+		 */
+
+		if ( time_viewed ) {
 			QuizGame.adjustTimer( time_viewed );
 		}
-		QuizGame.setLevel();
+		// It doesn't exist if you've already answered it and are a quiz admin
+		if ( jQuery( '#quiz-points' ).length > 0 ) {
+			QuizGame.setLevel();
+		}
 
-		if( ( QuizGame.timer - QuizGame.next_level ) == 3 ) {
+		if ( ( QuizGame.timer - QuizGame.next_level ) == 3 ) {
 			/* @todo FIXME: get rid of YUI and use jQuery instead
 			var options = {
 				ease: YAHOO.util.Easing.easeOut,
@@ -210,11 +293,17 @@ var QuizGame = {
 			*/
 		}
 
-		document.getElementById( 'time-countdown' ).innerHTML = QuizGame.timer;
+		if ( jQuery( '#time-countdown' ).length > 0 ) {
+			document.getElementById( 'time-countdown' ).innerHTML = QuizGame.timer;
+		}
+
 		QuizGame.timer--;
-		if( QuizGame.timer == -1 ) {
-			document.getElementById( 'quiz-notime' ).innerHTML = __quiz_js_timesup__;
-			if( QuizGame.count_second ) {
+
+		if ( QuizGame.timer == -1 ) {
+			if ( jQuery( '#quiz-notime' ).length > 0 ) { // this one's pure paranoia
+				document.getElementById( 'quiz-notime' ).innerHTML = mw.msg( 'quiz-js-timesup' );
+			}
+			if ( QuizGame.count_second ) {
 				clearTimeout( QuizGame.count_second );
 			}
 		} else {
@@ -226,13 +315,13 @@ var QuizGame = {
 		for( var x = 0; x <= QuizGame.levels_array.length - 1; x++ ) {
 			if(
 				( QuizGame.timer === 0 && x == QuizGame.levels_array.length - 1 ) ||
-				( QuizGame.timer <= QuizGame.levels_array[x] && QuizGame.timer > QuizGame.levels_array[x +1] )
+				( QuizGame.timer <= QuizGame.levels_array[x] && QuizGame.timer > QuizGame.levels_array[x + 1] )
 			)
 			{
 				//document.getElementById( 'quiz-level-' + ( x ) ).className = 'quiz-level-on';
 				QuizGame.points = QuizGame.points_array[x];
 				document.getElementById( 'quiz-points' ).innerHTML =
-					QuizGame.points + ' ' + __quiz_js_points__;
+					mw.msg( 'quiz-js-points', QuizGame.points );
 				QuizGame.next_level = ( ( QuizGame.levels_array[x + 1] ) ? QuizGame.levels_array[x + 1] : 0 );
 			} else {
 				//document.getElementById( 'quiz-level-' + ( x ) ).className = 'quiz-level-off';
@@ -257,12 +346,12 @@ var QuizGame = {
 	 * @param id Integer: quiz ID number
 	 */
 	goToQuiz: function( id ) {
-		window.location = wgServer + wgScriptPath +
+		window.location = mw.config.get( 'wgServer' ) + mw.config.get( 'wgScriptPath' ) +
 			'/index.php?title=Special:QuizGameHome&questionGameAction=launchGame&permalinkID=' + id;
 	},
 
 	goToNextQuiz: function() {
-		window.location = wgServer + wgScriptPath +
+		window.location = mw.config.get( 'wgServer' ) + mw.config.get( 'wgScriptPath' ) +
 			'/index.php?title=Special:QuizGameHome&questionGameAction=launchGame&lastid=' +
 			document.getElementById( 'quizGameId' ).value;
 	},
@@ -276,22 +365,35 @@ var QuizGame = {
 		}
 		document.getElementById( 'quiz-controls' ).innerHTML =
 			'<a href="javascript:QuizGame.goToNextQuiz();" class="stop-button">' +
-			__quiz_pause_continue__ + '</a> - <a href="' + wgScriptPath + '/index.php?title=Special:QuizLeaderboard" class="stop-button">' +
-			__quiz_pause_view_leaderboard__ + '</a> - <a href="' + wgScriptPath + '/index.php?title=Special:QuizGameHome&questionGameAction=createForm" class="stop-button">' +
-			__quiz_pause_create_question__ + '</a><br /><br /><a href="' +
-			wgServer + wgScriptPath + '" class="stop-button">' + __quiz_main_page_button__ +
+			mw.msg( 'quiz-pause-continue' ) + '</a> - <a href="' +
+			mw.config.get( 'wgScriptPath' ) + '/index.php?title=Special:QuizLeaderboard" class="stop-button">' +
+			mw.msg( 'quiz-pause-view-leaderboard' ) + '</a> - <a href="' +
+			mw.config.get( 'wgScriptPath' ) + '/index.php?title=Special:QuizGameHome&questionGameAction=createForm" class="stop-button">' +
+			mw.msg( 'quiz-pause-create-question' ) + '</a><br /><br /><a href="' +
+			mw.config.get( 'wgServer' ) + mw.config.get( 'wgScriptPath' ) + '" class="stop-button">' +
+			mw.msg( 'quiz-main-page-button' ) +
 			'</a>';
 	},
 
+	/**
+	 * Get the HTML for the "Loading..." Flash animation.
+	 *
+	 * @return {string} "Loading" Flash animation HTML
+	 */
 	getLoader: function() {
 		var loader = '';
-		loader += '<div id="lightbox-loader"><embed src="' + wgScriptPath +
-			'/extensions/QuizGame/ajax-loading.swf" quality="high" wmode="transparent" bgcolor="#ffffff"' +
+		loader += '<div id="lightbox-loader"><embed src="' + mw.config.get( 'wgExtensionAssetsPath' ) +
+			'/QuizGame/ajax-loading.swf" quality="high" wmode="transparent" bgcolor="#ffffff"' +
 			'pluginspage="http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash"' +
 			'type="application/x-shockwave-flash" width="100" height="100"></embed></div>';
 		return loader;
 	},
 
+	/**
+	 * Sets the given string as the text for the lightbox.
+	 *
+	 * @param {txt} string Text to output in the lightbox
+	 */
 	setLightboxText: function( txt ) {
 		var textForLightBox = '';
 		if( txt ) {
@@ -300,15 +402,19 @@ var QuizGame = {
 		if( !QuizGame.detectMacXFF() ) {
 			LightBox.setText( QuizGame.getLoader() + textForLightBox );
 		} else {
-			LightBox.setText( __quiz_js_loading__ + textForLightBox );
+			LightBox.setText( mw.msg( 'quiz-js-loading' ) + textForLightBox );
 		}
 	},
 
+	/**
+	 * Marks a question as skipped (via the API) and moves onto the next
+	 * question.
+	 */
 	skipQuestion: function() {
 		var objLink = {};
 
 		objLink.href = '';
-		objLink.title =  __quiz_js_loading__;
+		objLink.title =  mw.msg( 'quiz-js-loading' );
 
 		LightBox.show( objLink );
 
@@ -316,13 +422,26 @@ var QuizGame = {
 
 		var gameKey = document.getElementById( 'quizGameKey' ).value;
 		var gameId = document.getElementById( 'quizGameId' ).value;
-		sajax_request_type = 'POST';
-		sajax_do_call( 'wfQuestionGameVote', [ -1, gameKey, gameId, 0 ], function( t ) {
-			QuizGame.goToNextQuiz( document.getElementById( 'quizGameId' ).value );
-		});
+		jQuery.getJSON(
+			mw.util.wikiScript( 'api' ), {
+				format: 'json',
+				action: 'quizgamevote',
+				answer: -1,
+				key: gameKey,
+				id: gameId,
+				points: 0
+			},
+			function( data ) {
+				QuizGame.goToNextQuiz( document.getElementById( 'quizGameId' ).value );
+			}
+		);
 	},
 
-	// Casts a vote and forwards the user to a new question
+	/**
+	 * Casts a vote and forwards the user to a new question
+	 *
+	 * @param {id} number Number (on a range from 1 to 8) of the answer option
+	 */
 	vote: function( id ) {
 		if( QuizGame.count_second ) {
 			clearTimeout( QuizGame.count_second );
@@ -344,45 +463,62 @@ var QuizGame = {
 		LightBox.show( objLink );
 
 		var quiz_controls = '<div id="quiz-controls"><a href="javascript:void(0)" onclick="QuizGame.pauseQuiz()" class="stop-button">' +
-			__quiz_lightbox_pause_quiz__ + '</a></div>';
+			mw.msg( 'quiz-lightbox-pause-quiz' ) + '</a></div>';
 
 		var view_results_button = '<a href="javascript:QuizGame.goToQuiz(' +
 			document.getElementById( 'quizGameId' ).value +
-			');" class="stop-button">' + __quiz_lightbox_breakdown__ + '</a>';
+			');" class="stop-button">' + mw.msg( 'quiz-lightbox-breakdown' ) + '</a>';
 
 		var gameKey = document.getElementById( 'quizGameKey' ).value;
 		var gameId = document.getElementById( 'quizGameId' ).value;
-		sajax_request_type = 'POST';
-		sajax_do_call( 'wfQuestionGameVote', [ id, gameKey, gameId, QuizGame.points ], function( t ) {
-			var payload = eval( '(' + t.responseText + ')' );
-			QuizGame.continue_timer = setTimeout( 'QuizGame.goToNextQuiz()', 3000 );
-			//window.location = 'index.php?title=Special:QuizGameHome&questionGameAction=launchGame&lastid=' + document.getElementById( 'quizGameId' ).value;
-			var percent_right = payload.percentRight + __quiz_lightbox_breakdown_percent__;
-			if( payload.isRight == 'true' ) {
-				QuizGame.setLightboxText(
-					'<p class="quizgame-lightbox-righttext">' +
-					__quiz_lightbox_correct__ + '<br /><br />' +
-					__quiz_lightbox_correct_points__ + ' ' + QuizGame.points + ' ' +
-					__quiz_js_points__ + '</p><br />' + percent_right +
-					'<br /><br />' + view_results_button + '<br /><br />' +
-					quiz_controls
-				);
-			} else {
-				QuizGame.setLightboxText(
-					'<p class="quizgame-lightbox-wrongtext">' +
-					__quiz_lightbox_incorrect__ + '<br />' +
-					__quiz_lightbox_incorrect_correct__ + ' ' +
-					payload.rightAnswer + '</p><br />' + percent_right +
-					'<br /><br />' + view_results_button + '<br /><br />' +
-					quiz_controls
-				);
+
+		jQuery.getJSON(
+			mw.util.wikiScript( 'api' ), {
+				format: 'json',
+				action: 'quizgamevote',
+				answer: id,
+				key: gameKey,
+				id: gameId,
+				points: QuizGame.points
+			},
+			function( payload ) {
+				var text;
+
+				QuizGame.continue_timer = setTimeout( 'QuizGame.goToNextQuiz()', 3000 );
+
+				// An unlikely edge case: someone tries to vote twice for some reason
+				if ( payload.error ) {
+					QuizGame.setLightboxText(
+						'<p class="quizgame-lightbox-wrongtext">' +
+						payload.error.info +
+						'</p>'
+					);
+				}
+
+				var percent_right = mw.msg( 'quiz-lightbox-breakdown-percent', payload.quizgamevote.result.percentRight );
+				if ( payload.quizgamevote.result.isRight == 'true' ) {
+					text = '<p class="quizgame-lightbox-righttext">' +
+						mw.msg( 'quiz-lightbox-correct' ) + '<br /><br />' +
+						mw.msg( 'quiz-lightbox-correct-points', QuizGame.points ) +
+						'</p><br />' + percent_right +
+						'<br /><br />' + view_results_button + '<br /><br />' +
+						quiz_controls;
+				} else {
+					text = '<p class="quizgame-lightbox-wrongtext">' +
+						mw.msg( 'quiz-lightbox-incorrect' ) + '<br />' +
+						mw.msg( 'quiz-lightbox-incorrect-correct', payload.quizgamevote.result.rightAnswer ) +
+						'</p><br />' + percent_right +
+						'<br /><br />' + view_results_button + '<br /><br />' +
+						quiz_controls;
+				}
+				QuizGame.setLightboxText( text );
 			}
-		});
+		);
 	},
 
 	welcomePage_uploadError: function( message ) {
-		document.getElementById( 'imageUpload-frame' ).src =
-			'index.php?title=Special:QuestionGameUpload&wpThumbWidth=75&wpCategory=Quizgames';
+		document.getElementById( 'imageUpload-frame' ).src = mw.config.get( 'wgScriptPath' ) +
+			'/index.php?title=Special:QuestionGameUpload&wpThumbWidth=75';
 		var uploadElement = document.getElementById( 'quizgame-picture-upload' );
 		if ( uploadElement ) {
 			uploadElement.style.display = 'block';
@@ -398,26 +534,44 @@ var QuizGame = {
 		}
 		var preview = document.getElementById( 'quizgame-picture-preview' );
 		if ( preview ) {
-			preview.innerHTML = '<img src="' + wgScriptPath +
-				'/extensions/QuizGame/images/ajax-loader-white.gif" alt="" />';
+			preview.innerHTML = '<img src="' + mw.config.get( 'wgExtensionAssetsPath' ) +
+				'/QuizGame/images/ajax-loader-white.gif" alt="" />';
 		}
 	},
 
+	/**
+	 * Called on the new quiz creation page after a successful image upload.
+	 * This sets the value of the hidden "quizGamePictureName" field as well as
+	 * shows a small preview of the uploaded image.
+	 *
+	 * @param {imgSrc} string The full img tag of the uploaded file
+	 * @param {imgName} string Name of the uploaded file
+	 * @param {imgDesc} string Unused, consider removing this useless parameter
+	 */
 	welcomePage_uploadComplete: function( imgSrc, imgName, imgDesc ) {
 		var previewElement = document.getElementById( 'quizgame-picture-preview' );
 		if ( previewElement ) {
 			previewElement.innerHTML = imgSrc;
+			// Show the image after reupload (i.e. user uploads an image, then
+			// clicks on the "Edit picture" link and uploads a different image)
+			// Without these two lines, the "reuploaded" image doesn't show up
+			previewElement.style.visibility = 'visible';
+			previewElement.style.display = 'block';
 		}
 		// This line sets the value of the hidden "quizGamePictureName" field
 		document.quizGameCreate.quizGamePictureName.value = imgName;
-		document.getElementById( 'imageUpload-frame' ).src =
-			'index.php?title=Special:QuestionGameUpload&wpThumbWidth=75&wpCategory=Quizgames';
+		document.getElementById( 'imageUpload-frame' ).src = mw.config.get( 'wgScriptPath' ) +
+			'/index.php?title=Special:QuestionGameUpload&wpThumbWidth=75';
 		document.getElementById( 'quizgame-picture-reupload' ).style.display = 'block';
 		document.getElementById( 'quizgame-picture-reupload' ).style.visibility = 'visible';
 	},
 
+	/**
+	 * Creates new answer boxes (up to 8 boxes) and makes
+	 * them visible on the welcome page.
+	 */
 	updateAnswerBoxes: function() {
-		for( var x = 1; x <= ( __quiz_max_answers__ - 1 ); x++ ) {
+		for( var x = 1; x <= ( 8 - 1 ); x++ ) {
 			if( document.getElementById( 'quizgame-answer-' + x ).value ) {
 				document.getElementById( 'quizgame-answer-container-' + ( x + 1 ) ).style.display = 'block';
 				document.getElementById( 'quizgame-answer-container-' + ( x + 1 ) ).style.visibility = 'visible';
@@ -425,39 +579,39 @@ var QuizGame = {
 		}
 	},
 
-	welcomePage_toggleCheck: function( thisBox ) {
-		for( var x = 1; x <= ( __quiz_max_answers__ - 1 ); x++ ) {
-			document.getElementById( 'quizgame-isright-' + x ).checked = false;
-		}
-		thisBox.checked = true;
-	},
-
+	/**
+	 * Called when the user clicks on the submit button on the new quiz creation
+	 * form.
+	 * Performs some validation and if there is a question, at least two answers
+	 * and one correct choice, submits the form.
+	 * Otherwise an error message is displayed to the user.
+	 */
 	startGame: function() {
-		var errorText = '';
+		var errorText = '',
+			answers = 0,
+			right = 0;
 
-		var answers = 0;
-		for( var x = 1; x <= __quiz_max_answers__; x++ ) {
+		for( var x = 1; x <= 8; x++ ) {
 			if( document.getElementById( 'quizgame-answer-' + x ).value ) {
 				answers++;
 			}
 		}
 
 		if( answers < 2 ) {
-			errorText += __quiz_create_error_numanswers__ + '<p>';
+			errorText += mw.msg( 'quiz-create-error-numanswers' ) + '<p>';
 		}
 		if( !document.getElementById( 'quizgame-question' ).value ) {
-			errorText += __quiz_create_error_noquestion__ + '<p>';
+			errorText += mw.msg( 'quiz-create-error-noquestion' ) + '<p>';
 		}
 
-		var right = 0;
-		for( x = 1; x <= __quiz_max_answers__; x++ ) {
+		for( x = 1; x <= 8; x++ ) {
 			if( document.getElementById( 'quizgame-isright-' + x ).checked ) {
 				right++;
 			}
 		}
 
 		if( right != 1 ) {
-			errorText += __quiz_create_error_numcorrect__ + '<p>';
+			errorText += mw.msg( 'quiz-create-error-numcorrect' ) + '<p>';
 		}
 
 		if( !errorText ) {
@@ -484,3 +638,105 @@ var QuizGame = {
 		document.getElementById( divID ).style.backgroundColor = '';
 	}
 };
+
+jQuery( document ).ready( function() {
+	// Code specific to Special:QuizGameHome
+	if ( mw.config.get( 'wgCanonicalSpecialPageName' ) == 'QuizGameHome' ) {
+		// When editing a quiz game that has an image
+		jQuery( 'p#quizgame-editpicture-link' ).append(
+			jQuery( '<a>' )
+				.attr( 'href', '#' )
+				.on( 'click', function() { QuizGame.showUpload(); } )
+				.text( mw.msg( 'quiz-edit-picture-link' ) )
+		);
+
+		// "Edit" link
+		jQuery( 'div.edit-button-quiz-game' ).append(
+			jQuery( '<a>' )
+				.attr( 'href', '#' )
+				.on( 'click', function() { QuizGame.showEditMenu(); } )
+				.text( mw.msg( 'quiz-edit' ) )
+		);
+
+		// Voting links
+		jQuery( 'a.quiz-vote-link' ).each( function( index ) {
+			jQuery( this ).on( 'click', function() {
+				QuizGame.vote( jQuery( this ).data( 'choice-id' ) );
+			} );
+		} );
+
+		// "Skip this question" link
+		jQuery( 'a.skip-question-link' ).on( 'click', function() {
+			QuizGame.skipQuestion();
+		} );
+
+		// Various admin panel links all over the place
+		jQuery( 'a.flag-quiz-link' )
+			.attr( 'href', '#' )
+			.on( 'click', function() { QuizGame.flagQuestion(); } );
+		jQuery( 'a.protect-image-link' )
+			.attr( 'href', '#' )
+			.on( 'click', function() { QuizGame.protectImage(); } );
+		jQuery( 'a.delete-quiz-link' )
+			.attr( 'href', '#' )
+			.on( 'click', function() { QuizGame.deleteQuestion(); } );
+		jQuery( 'a.delete-by-id' )
+			.attr( 'href', '#' )
+			.on( 'click', function() { QuizGame.deleteById( jQuery( this ).data( 'quiz-id' ), jQuery( this ).data( 'key' ) ); } );
+		jQuery( 'a.protect-by-id' )
+			.attr( 'href', '#' )
+			.on( 'click', function() { QuizGame.protectById( jQuery( this ).data( 'quiz-id' ), jQuery( this ).data( 'key' ) ); } );
+		jQuery( 'a.unflag-by-id' )
+			.attr( 'href', '#' )
+			.on( 'click', function() { QuizGame.unflagById( jQuery( this ).data( 'quiz-id' ), jQuery( this ).data( 'key' ) ); } );
+		jQuery( 'a.unprotect-by-id' )
+			.attr( 'href', '#' )
+			.on( 'click', function() { QuizGame.unprotectById( jQuery( this ).data( 'quiz-id' ), jQuery( this ).data( 'key' ) ); } );
+
+		// "Flag quiz" button
+		jQuery( 'div#flag-comment input[type="button"]' ).on( 'click', function() {
+			QuizGame.doFlagQuestion();
+		} );
+
+		// Answer boxes on the quiz creation view (welcome page)
+		if ( jQuery( 'span#this-is-the-welcome-page' ).length > 0 ) {
+			jQuery( 'input[id^="quizgame-answer-"]' ).on( 'keyup', function() {
+				QuizGame.updateAnswerBoxes();
+			} );
+		}
+		jQuery( 'input[type="checkbox"]' ).on( 'click', function() {
+			QuizGame.toggleCheck( this );
+		} );
+
+		// "Edit Picture" link
+		jQuery( 'p#quizgame-picture-reupload' ).append(
+			jQuery( '<a>' )
+				.attr( 'href', '#' )
+				.on( 'click', function( event ) { event.preventDefault(); QuizGame.showAttachPicture(); } )
+				.text( mw.msg( 'quiz-create-edit-picture' ) )
+		);
+
+		// Handler for the "Create and Play!" button
+		jQuery( 'div#startButton > input[class="site-button"]' ).on( 'click', function() {
+			QuizGame.startGame();
+		} );
+	}
+
+	// Code specific to Special:ViewQuizzes
+	if ( mw.config.get( 'wgCanonicalSpecialPageName' ) == 'ViewQuizzes' ) {
+		jQuery( 'div.view-quizzes-row, div.view-quizzes-row-bottom' ).each( function( index ) {
+			jQuery( this ).on({
+				/* this has to stay on the PHP code for the time being...
+				'click': function() {
+				},
+				*/
+				'mouseout': function() {
+					QuizGame.endHover( jQuery( this ).attr( 'id' ) );
+				},
+				'mouseover': function() {
+					QuizGame.doHover( jQuery( this ).attr( 'id' ) );
+				}
+			} );
+		} );
+	}
+} );
