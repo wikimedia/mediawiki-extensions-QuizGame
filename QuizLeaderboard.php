@@ -28,16 +28,16 @@ class QuizLeaderboard extends UnlistedSpecialPage {
 
 		switch( $input ) {
 			case 'correct':
-				$out->setPageTitle( $this->msg( 'quiz-leaderboard-most-correct' )->text() );
+				$out->setPageTitle( $this->msg( 'quizgame-leaderboard-most-correct' )->text() );
 				$field = 'stats_quiz_questions_correct';
 				break;
 			case 'percentage':
-				$out->setPageTitle( $this->msg( 'quiz-leaderboard-highest-percent' )->text() );
+				$out->setPageTitle( $this->msg( 'quizgame-leaderboard-highest-percent' )->text() );
 				$field = 'stats_quiz_questions_correct_percent';
 				$whereConds[] = 'stats_quiz_questions_answered >= 50';
 				break;
 			case 'points':
-				$out->setPageTitle( $this->msg( 'quiz-leaderboard-most-points' )->text() );
+				$out->setPageTitle( $this->msg( 'quizgame-leaderboard-most-points' )->text() );
 				$field = 'stats_quiz_points';
 				break;
 		}
@@ -79,25 +79,25 @@ class QuizLeaderboard extends UnlistedSpecialPage {
 
 			// Display the current user's scorecard
 			$output .= "<div class=\"user-rank-lb\">
-				<h2>{$avatar->getAvatarURL()} " . $this->msg( 'quiz-leaderboard-scoretitle' )->text() . '</h2>
+				<h2>{$avatar->getAvatarURL()} " . $this->msg( 'quizgame-leaderboard-scoretitle' )->text() . '</h2>
 
-					<p><b>' . $this->msg( 'quiz-leaderboard-quizpoints' )->text() . "</b></p>
+					<p><b>' . $this->msg( 'quizgame-leaderboard-quizpoints' )->text() . "</b></p>
 					<p class=\"user-rank-points\">{$stats_data['quiz_points']}</p>
 					<div class=\"cleared\"></div>
 
-					<p><b>" . $this->msg( 'quiz-leaderboard-correct' )->text() . "</b></p>
+					<p><b>" . $this->msg( 'quizgame-leaderboard-correct' )->text() . "</b></p>
 					<p>{$stats_data['quiz_correct']}</p>
 					<div class=\"cleared\"></div>
 
-					<p><b>" . $this->msg( 'quiz-leaderboard-answered' )->text() . "</b></p>
+					<p><b>" . $this->msg( 'quizgame-leaderboard-answered' )->text() . "</b></p>
 					<p>{$stats_data['quiz_answered']}</p>
 					<div class=\"cleared\"></div>
 
-					<p><b>" . $this->msg( 'quiz-leaderboard-pctcorrect' )->text() . "</b></p>
+					<p><b>" . $this->msg( 'quizgame-leaderboard-pctcorrect' )->text() . "</b></p>
 					<p>{$stats_data['quiz_correct_percent']}%</p>
 					<div class=\"cleared\"></div>
 
-					<p><b>" . $this->msg( 'quiz-leaderboard-rank' )->text() . "</b></p>
+					<p><b>" . $this->msg( 'quizgame-leaderboard-rank' )->text() . "</b></p>
 					<p>{$quiz_rank}</p>
 					<div class=\"cleared\"></div>
 
@@ -106,12 +106,12 @@ class QuizLeaderboard extends UnlistedSpecialPage {
 
 		// Build the "Order" navigation menu
 		$menu = array(
-			$this->msg( 'quiz-leaderboard-menu-points' )->text() => 'points',
-			$this->msg( 'quiz-leaderboard-menu-correct' )->text() => 'correct',
-			$this->msg( 'quiz-leaderboard-menu-pct' )->text() => 'percentage'
+			$this->msg( 'quizgame-leaderboard-menu-points' )->text() => 'points',
+			$this->msg( 'quizgame-leaderboard-menu-correct' )->text() => 'correct',
+			$this->msg( 'quizgame-leaderboard-menu-pct' )->text() => 'percentage'
 		);
 
-		$output .= '<h1>' . $this->msg( 'quiz-leaderboard-order-menu' )->text() . '</h1>';
+		$output .= '<h1>' . $this->msg( 'quizgame-leaderboard-order-menu' )->text() . '</h1>';
 
 		foreach( $menu as $title => $qs ) {
 			if ( $input != $qs ) {
@@ -126,7 +126,7 @@ class QuizLeaderboard extends UnlistedSpecialPage {
 		$output .= '<div class="quiz-leaderboard-top-links">' .
 			Linker::link(
 				$quizgame_title,
-				$this->msg( 'quiz-admin-back' )->text(),
+				$this->msg( 'quizgame-admin-back' )->text(),
 				array(),
 				array( 'questionGameAction' => 'launchGame' )
 			) . '</div>';
@@ -148,13 +148,13 @@ class QuizLeaderboard extends UnlistedSpecialPage {
 
 			switch( $input ) {
 				case 'correct':
-					$stat = $this->msg( 'quiz-leaderboard-desc-correct', $this->getLanguage()->formatNum( $row->$field ) )->parse();
+					$stat = $this->msg( 'quizgame-leaderboard-desc-correct', $this->getLanguage()->formatNum( $row->$field ) )->parse();
 					break;
 				case 'percentage':
-					$stat = $this->msg( 'quiz-leaderboard-desc-pct', $this->getLanguage()->formatNum( $row->$field * 100 ) )->parse();
+					$stat = $this->msg( 'quizgame-leaderboard-desc-pct', $this->getLanguage()->formatNum( $row->$field * 100 ) )->parse();
 					break;
 				case 'points':
-					$stat = $this->msg( 'quiz-leaderboard-desc-points', $this->getLanguage()->formatNum( $row->$field ) )->parse();
+					$stat = $this->msg( 'quizgame-leaderboard-desc-points', $this->getLanguage()->formatNum( $row->$field ) )->parse();
 					break;
 			}
 

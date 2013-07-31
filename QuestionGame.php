@@ -41,18 +41,18 @@ $wgResourceModules['ext.quizGame'] = $quizGameResourceTemplate + array(
 	'styles' => 'questiongame.css',
 	'scripts' => 'js/QuizGame.js',
 	'messages' => array(
-		'quiz-create-error-numanswers', 'quiz-create-error-noquestion',
-		'quiz-create-error-numcorrect', 'quiz-js-reloading',
-		'quiz-js-timesup', 'quiz-js-points',
-		'quiz-pause-continue', 'quiz-pause-view-leaderboard',
-		'quiz-pause-create-question', 'quiz-main-page-button',
-		'quiz-js-loading', 'quiz-lightbox-pause-quiz',
-		'quiz-lightbox-breakdown', 'quiz-lightbox-breakdown-percent',
-		'quiz-lightbox-correct', 'quiz-lightbox-incorrect',
-		'quiz-lightbox-correct-points', 'quiz-lightbox-incorrect-correct',
-		'quiz-create-edit-picture', 'quiz-edit',
-		'quiz-ajax-nonnumeric-answer', 'quiz-ajax-already-answered',
-		'quiz-ajax-invalid-id'
+		'quizgame-create-error-numanswers', 'quizgame-create-error-noquestion',
+		'quizgame-create-error-numcorrect', 'quizgame-js-reloading',
+		'quizgame-js-timesup', 'quizgame-js-points',
+		'quizgame-pause-continue', 'quizgame-pause-view-leaderboard',
+		'quizgame-pause-create-question', 'quizgame-main-page-button',
+		'quizgame-js-loading', 'quizgame-lightbox-pause-quiz',
+		'quizgame-lightbox-breakdown', 'quizgame-lightbox-breakdown-percent',
+		'quizgame-lightbox-correct', 'quizgame-lightbox-incorrect',
+		'quizgame-lightbox-correct-points', 'quizgame-lightbox-incorrect-correct',
+		'quizgame-create-edit-picture', 'quizgame-edit',
+		'quizgame-ajax-nonnumeric-answer', 'quizgame-ajax-already-answered',
+		'quizgame-ajax-invalid-id'
 	)
 );
 

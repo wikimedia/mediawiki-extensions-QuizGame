@@ -35,11 +35,11 @@ class ApiQuizGameVote extends ApiBase {
 		// Check that the key is correct to make sure that no-one's trying any
 		// funny business
 		if ( $key != md5( 'SALT' . $id ) ) {
-			$this->dieUsage( wfMessage( 'quiz-ajax-invalid-key' )->text(), 'invalidkey' );
+			$this->dieUsage( wfMessage( 'quizgame-ajax-invalid-key' )->text(), 'invalidkey' );
 		}
 
 		if ( !is_numeric( $answer ) ) {
-			$this->dieUsage( wfMessage( 'quiz-ajax-nonnumeric-answer' )->text(), 'nonnumericanswer' );
+			$this->dieUsage( wfMessage( 'quizgame-ajax-nonnumeric-answer' )->text(), 'nonnumericanswer' );
 		}
 
 		$dbw = wfGetDB( DB_MASTER );
@@ -53,7 +53,7 @@ class ApiQuizGameVote extends ApiBase {
 		);
 
 		if ( $s !== false ) {
-			$this->dieUsage( wfMessage( 'quiz-ajax-already-answered' )->text(), 'alreadyanswered' );
+			$this->dieUsage( wfMessage( 'quizgame-ajax-already-answered' )->text(), 'alreadyanswered' );
 		}
 
 		// Add answer by user
@@ -168,7 +168,7 @@ class ApiQuizGameVote extends ApiBase {
 				array( 'result' => $data )
 			);
 		} else {
-			$this->dieUsage( wfMessage( 'quiz-ajax-invalid-id' )->text(), 'nosuchquestion' );
+			$this->dieUsage( wfMessage( 'quizgame-ajax-invalid-id' )->text(), 'nosuchquestion' );
 		}
 	}
 
@@ -217,9 +217,9 @@ class ApiQuizGameVote extends ApiBase {
 
 	public function getPossibleErrors() {
 		return array_merge( parent::getPossibleErrors(), array(
-			array( 'code' => 'nonnumericanswer', 'info' => wfMessage( 'quiz-ajax-nonnumeric-answer' )->text() ),
-			array( 'code' => 'alreadyanswered', 'info' => wfMessage( 'quiz-ajax-already-answered' )->text() ),
-			array( 'code' => 'nosuchquestion', 'info' => wfMessage( 'quiz-ajax-invalid-id' )->text() ),
+			array( 'code' => 'nonnumericanswer', 'info' => wfMessage( 'quizgame-ajax-nonnumeric-answer' )->text() ),
+			array( 'code' => 'alreadyanswered', 'info' => wfMessage( 'quizgame-ajax-already-answered' )->text() ),
+			array( 'code' => 'nosuchquestion', 'info' => wfMessage( 'quizgame-ajax-invalid-id' )->text() ),
 		) );
 	}
 

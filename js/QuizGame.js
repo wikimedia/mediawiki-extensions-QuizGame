@@ -136,7 +136,7 @@ var QuizGame = {
 			imgName;
 
 		document.getElementById( 'quizgame-editpicture-link' ).innerHTML =
-			jQuery( 'a' ).prop( 'href', QuizGame.showUpload() ).text( mw.msg( 'quiz-create-edit-picture' ) );
+			jQuery( 'a' ).prop( 'href', QuizGame.showUpload() ).text( mw.msg( 'quizgame-create-edit-picture' ) );
 		document.getElementById( 'quizgame-editpicture-link' ).style.display = 'block';
 		document.getElementById( 'quizgame-editpicture-link' ).style.visibility = 'visible';
 	},
@@ -177,7 +177,7 @@ var QuizGame = {
 				id: gameId
 			},
 			function( data ) {
-				document.getElementById( 'ajax-messages' ).innerHTML = data.quizgame.output + '<br />' + mw.msg( 'quiz-js-reloading' );
+				document.getElementById( 'ajax-messages' ).innerHTML = data.quizgame.output + '<br />' + mw.msg( 'quizgame-js-reloading' );
 				document.location = mw.config.get( 'wgScriptPath' ) +
 					'/index.php?title=Special:QuizGameHome&questionGameAction=launchGame';
 			}
@@ -301,7 +301,7 @@ var QuizGame = {
 
 		if ( QuizGame.timer == -1 ) {
 			if ( jQuery( '#quiz-notime' ).length > 0 ) { // this one's pure paranoia
-				document.getElementById( 'quiz-notime' ).innerHTML = mw.msg( 'quiz-js-timesup' );
+				document.getElementById( 'quiz-notime' ).innerHTML = mw.msg( 'quizgame-js-timesup' );
 			}
 			if ( QuizGame.count_second ) {
 				clearTimeout( QuizGame.count_second );
@@ -321,7 +321,7 @@ var QuizGame = {
 				//document.getElementById( 'quiz-level-' + ( x ) ).className = 'quiz-level-on';
 				QuizGame.points = QuizGame.points_array[x];
 				document.getElementById( 'quiz-points' ).innerHTML =
-					mw.msg( 'quiz-js-points', QuizGame.points );
+					mw.msg( 'quizgame-js-points', QuizGame.points );
 				QuizGame.next_level = ( ( QuizGame.levels_array[x + 1] ) ? QuizGame.levels_array[x + 1] : 0 );
 			} else {
 				//document.getElementById( 'quiz-level-' + ( x ) ).className = 'quiz-level-off';
@@ -365,13 +365,13 @@ var QuizGame = {
 		}
 		document.getElementById( 'quiz-controls' ).innerHTML =
 			'<a href="javascript:QuizGame.goToNextQuiz();" class="stop-button">' +
-			mw.msg( 'quiz-pause-continue' ) + '</a> - <a href="' +
+			mw.msg( 'quizgame-pause-continue' ) + '</a> - <a href="' +
 			mw.config.get( 'wgScriptPath' ) + '/index.php?title=Special:QuizLeaderboard" class="stop-button">' +
-			mw.msg( 'quiz-pause-view-leaderboard' ) + '</a> - <a href="' +
+			mw.msg( 'quizgame-pause-view-leaderboard' ) + '</a> - <a href="' +
 			mw.config.get( 'wgScriptPath' ) + '/index.php?title=Special:QuizGameHome&questionGameAction=createForm" class="stop-button">' +
-			mw.msg( 'quiz-pause-create-question' ) + '</a><br /><br /><a href="' +
+			mw.msg( 'quizgame-pause-create-question' ) + '</a><br /><br /><a href="' +
 			mw.config.get( 'wgServer' ) + mw.config.get( 'wgScriptPath' ) + '" class="stop-button">' +
-			mw.msg( 'quiz-main-page-button' ) +
+			mw.msg( 'quizgame-main-page-button' ) +
 			'</a>';
 	},
 
@@ -402,7 +402,7 @@ var QuizGame = {
 		if( !QuizGame.detectMacXFF() ) {
 			LightBox.setText( QuizGame.getLoader() + textForLightBox );
 		} else {
-			LightBox.setText( mw.msg( 'quiz-js-loading' ) + textForLightBox );
+			LightBox.setText( mw.msg( 'quizgame-js-loading' ) + textForLightBox );
 		}
 	},
 
@@ -414,7 +414,7 @@ var QuizGame = {
 		var objLink = {};
 
 		objLink.href = '';
-		objLink.title =  mw.msg( 'quiz-js-loading' );
+		objLink.title =  mw.msg( 'quizgame-js-loading' );
 
 		LightBox.show( objLink );
 
@@ -463,11 +463,11 @@ var QuizGame = {
 		LightBox.show( objLink );
 
 		var quiz_controls = '<div id="quiz-controls"><a href="javascript:void(0)" onclick="QuizGame.pauseQuiz()" class="stop-button">' +
-			mw.msg( 'quiz-lightbox-pause-quiz' ) + '</a></div>';
+			mw.msg( 'quizgame-lightbox-pause-quiz' ) + '</a></div>';
 
 		var view_results_button = '<a href="javascript:QuizGame.goToQuiz(' +
 			document.getElementById( 'quizGameId' ).value +
-			');" class="stop-button">' + mw.msg( 'quiz-lightbox-breakdown' ) + '</a>';
+			');" class="stop-button">' + mw.msg( 'quizgame-lightbox-breakdown' ) + '</a>';
 
 		var gameKey = document.getElementById( 'quizGameKey' ).value;
 		var gameId = document.getElementById( 'quizGameId' ).value;
@@ -495,18 +495,18 @@ var QuizGame = {
 					);
 				}
 
-				var percent_right = mw.msg( 'quiz-lightbox-breakdown-percent', payload.quizgamevote.result.percentRight );
+				var percent_right = mw.msg( 'quizgame-lightbox-breakdown-percent', payload.quizgamevote.result.percentRight );
 				if ( payload.quizgamevote.result.isRight == 'true' ) {
 					text = '<p class="quizgame-lightbox-righttext">' +
-						mw.msg( 'quiz-lightbox-correct' ) + '<br /><br />' +
-						mw.msg( 'quiz-lightbox-correct-points', QuizGame.points ) +
+						mw.msg( 'quizgame-lightbox-correct' ) + '<br /><br />' +
+						mw.msg( 'quizgame-lightbox-correct-points', QuizGame.points ) +
 						'</p><br />' + percent_right +
 						'<br /><br />' + view_results_button + '<br /><br />' +
 						quiz_controls;
 				} else {
 					text = '<p class="quizgame-lightbox-wrongtext">' +
-						mw.msg( 'quiz-lightbox-incorrect' ) + '<br />' +
-						mw.msg( 'quiz-lightbox-incorrect-correct', payload.quizgamevote.result.rightAnswer ) +
+						mw.msg( 'quizgame-lightbox-incorrect' ) + '<br />' +
+						mw.msg( 'quizgame-lightbox-incorrect-correct', payload.quizgamevote.result.rightAnswer ) +
 						'</p><br />' + percent_right +
 						'<br /><br />' + view_results_button + '<br /><br />' +
 						quiz_controls;
@@ -598,10 +598,10 @@ var QuizGame = {
 		}
 
 		if( answers < 2 ) {
-			errorText += mw.msg( 'quiz-create-error-numanswers' ) + '<p>';
+			errorText += mw.msg( 'quizgame-create-error-numanswers' ) + '<p>';
 		}
 		if( !document.getElementById( 'quizgame-question' ).value ) {
-			errorText += mw.msg( 'quiz-create-error-noquestion' ) + '<p>';
+			errorText += mw.msg( 'quizgame-create-error-noquestion' ) + '<p>';
 		}
 
 		for( x = 1; x <= 8; x++ ) {
@@ -611,7 +611,7 @@ var QuizGame = {
 		}
 
 		if( right != 1 ) {
-			errorText += mw.msg( 'quiz-create-error-numcorrect' ) + '<p>';
+			errorText += mw.msg( 'quizgame-create-error-numcorrect' ) + '<p>';
 		}
 
 		if( !errorText ) {
@@ -647,7 +647,7 @@ jQuery( document ).ready( function() {
 			jQuery( '<a>' )
 				.attr( 'href', '#' )
 				.on( 'click', function() { QuizGame.showUpload(); } )
-				.text( mw.msg( 'quiz-edit-picture-link' ) )
+				.text( mw.msg( 'quizgame-edit-picture-link' ) )
 		);
 
 		// "Edit" link
@@ -655,7 +655,7 @@ jQuery( document ).ready( function() {
 			jQuery( '<a>' )
 				.attr( 'href', '#' )
 				.on( 'click', function() { QuizGame.showEditMenu(); } )
-				.text( mw.msg( 'quiz-edit' ) )
+				.text( mw.msg( 'quizgame-edit' ) )
 		);
 
 		// Voting links
@@ -713,7 +713,7 @@ jQuery( document ).ready( function() {
 			jQuery( '<a>' )
 				.attr( 'href', '#' )
 				.on( 'click', function( event ) { event.preventDefault(); QuizGame.showAttachPicture(); } )
-				.text( mw.msg( 'quiz-create-edit-picture' ) )
+				.text( mw.msg( 'quizgame-create-edit-picture' ) )
 		);
 
 		// Handler for the "Create and Play!" button

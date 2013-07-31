@@ -41,7 +41,7 @@ class ApiQuizGame extends ApiBase {
 		// function also handles flagging...all the other actions are admin-only,
 		// though
 		if ( $key != md5( 'SALT' . $id ) ) {
-			$this->dieUsage( wfMessage( 'quiz-ajax-invalid-key' )->text(), 'invalidkey' );
+			$this->dieUsage( wfMessage( 'quizgame-ajax-invalid-key' )->text(), 'invalidkey' );
 		}
 
 		// ApiBase's getDB() supports only slave connections, lame...
@@ -57,7 +57,7 @@ class ApiQuizGame extends ApiBase {
 				);
 				$dbw->commit();
 
-				$output = wfMessage( 'quiz-ajax-unprotected' )->text();
+				$output = wfMessage( 'quizgame-ajax-unprotected' )->text();
 
 				// Add a log entry if quiz logging is enabled
 				if ( $wgQuizLogs ) {
@@ -74,7 +74,7 @@ class ApiQuizGame extends ApiBase {
 				);
 				$dbw->commit();
 
-				$output = wfMessage( 'quiz-ajax-protected' )->text();
+				$output = wfMessage( 'quizgame-ajax-protected' )->text();
 
 				// Add a log entry if quiz logging is enabled
 				if ( $wgQuizLogs ) {
@@ -108,7 +108,7 @@ class ApiQuizGame extends ApiBase {
 				);
 				$dbw->commit();
 
-				$output = wfMessage( 'quiz-ajax-unflagged' )->text();
+				$output = wfMessage( 'quizgame-ajax-unflagged' )->text();
 
 				// Add a log entry if quiz logging is enabled
 				if ( $wgQuizLogs ) {
@@ -149,7 +149,7 @@ class ApiQuizGame extends ApiBase {
 				);
 				$dbw->commit();
 
-				$output = wfMessage( 'quiz-ajax-flagged' )->text();
+				$output = wfMessage( 'quizgame-ajax-flagged' )->text();
 
 				// Add a log entry if quiz logging is enabled
 				if ( $wgQuizLogs ) {
@@ -228,7 +228,7 @@ class ApiQuizGame extends ApiBase {
 				);
 				$dbw->commit();
 
-				$output = wfMessage( 'quiz-ajax-deleted' )->text();
+				$output = wfMessage( 'quizgame-ajax-deleted' )->text();
 
 				// Add a log entry if quiz logging is enabled
 				if ( $wgQuizLogs ) {
@@ -237,7 +237,7 @@ class ApiQuizGame extends ApiBase {
 
 				break;
 			default:
-				$output = wfMessage( 'quiz-ajax-invalid-option' )->text();
+				$output = wfMessage( 'quizgame-ajax-invalid-option' )->text();
 				break;
 		} // switch() loop end
 
@@ -318,7 +318,7 @@ class ApiQuizGame extends ApiBase {
 
 	public function getPossibleErrors() {
 		return array_merge( parent::getPossibleErrors(), array(
-			array( 'code' => 'invalidkey', 'info' => wfMessage( 'quiz-ajax-invalid-key' )->text() ),
+			array( 'code' => 'invalidkey', 'info' => wfMessage( 'quizgame-ajax-invalid-key' )->text() ),
 		) );
 	}
 

@@ -317,7 +317,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 			$choices = $this->getQuestionChoices( $row->q_id );
 			foreach( $choices as $choice ) {
 				$options .= '<li>' . $choice['text'] . ' ' .
-					( ( $choice['is_correct'] == 1 ) ? ' — ' . $this->msg( 'quiz-correct-answer' )->text() : '' ) .
+					( ( $choice['is_correct'] == 1 ) ? ' — ' . $this->msg( 'quizgame-correct-answer' )->text() : '' ) .
 					'</li>';
 			}
 			$options .= '</ul>';
@@ -336,7 +336,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 			$key = md5( $this->SALT . $row->q_id );
 			$buttons = Linker::link(
 				$this->getTitle(),
-				$this->msg( 'quiz-edit' )->text(),
+				$this->msg( 'quizgame-edit' )->text(),
 				array(),
 				array(
 					'questionGameAction' => 'editItem',
@@ -345,23 +345,23 @@ class QuizGameHome extends UnlistedSpecialPage {
 				)
 			) . " -
 					<a class=\"delete-by-id\" href=\"#\" data-quiz-id=\"{$row->q_id}\" data-key=\"{$key}\">" .
-					$this->msg( 'quiz-delete' )->text() . '</a> - ';
+					$this->msg( 'quizgame-delete' )->text() . '</a> - ';
 
 			if ( $row->q_flag == QUIZGAME_FLAG_FLAGGED ) {
 				$buttons .= "<a class=\"protect-by-id\" href=\"#\" data-quiz-id=\"{$row->q_id}\" data-key=\"{$key}\">" .
-					$this->msg( 'quiz-protect' )->text() . "</a>
+					$this->msg( 'quizgame-protect' )->text() . "</a>
 						 - <a class=\"unflag-by-id\" href=\"#\" data-quiz-id=\"{$row->q_id}\" data-key=\"{$key}\">" .
-						 $this->msg( 'quiz-reinstate' )->text() . '</a>';
+						 $this->msg( 'quizgame-reinstate' )->text() . '</a>';
 			} else {
 				$buttons .= "<a class=\"unprotect-by-id\" href=\"#\" data-quiz-id=\"{$row->q_id}\" data-key=\"{$key}\">" .
-					$this->msg( 'quiz-unprotect' )->text() . '</a>';
+					$this->msg( 'quizgame-unprotect' )->text() . '</a>';
 			}
 
 			if( $row->q_flag == QUIZGAME_FLAG_FLAGGED ) {
 				$reason = '';
 				if( $row->q_comment != '' ) {
 					$reason = "<div class=\"quizgame-flagged-answers\" id=\"quizgame-flagged-reason-{$row->q_id}\">
-						<b>" . $this->msg( 'quiz-flagged-reason' )->text() . "</b>: {$row->q_comment}
+						<b>" . $this->msg( 'quizgame-flagged-reason' )->text() . "</b>: {$row->q_comment}
 					</div><p>";
 				}
 
@@ -403,7 +403,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 			}
 		}
 
-		$this->getOutput()->setPageTitle( $this->msg( 'quiz-admin-panel-title' )->text() );
+		$this->getOutput()->setPageTitle( $this->msg( 'quizgame-admin-panel-title' )->text() );
 
 		$output = '<div class="quizgame-admin" id="quizgame-admin">
 
@@ -411,13 +411,13 @@ class QuizGameHome extends UnlistedSpecialPage {
 
 				<div class="quizgame-admin-top-links">
 					<a href="' . $this->getTitle()->escapeFullURL( 'questionGameAction=launchGame' ) . '">' .
-						wfMsg( 'quiz-admin-back' ) . '</a>
+						$this->msg( 'quizgame-admin-back' )->text() . '</a>
 				</div>
 
-				<h1>' . $this->msg( 'quiz-admin-flagged' )->text() . "</h1>
+				<h1>' . $this->msg( 'quizgame-admin-flagged' )->text() . "</h1>
 				{$flaggedQuestions}
 
-				<h1>" . $this->msg( 'quiz-admin-protected' )->text() . "</h1>
+				<h1>" . $this->msg( 'quizgame-admin-protected' )->text() . "</h1>
 				{$protectedQuestions}
 
 			</div>";
@@ -437,7 +437,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 
 		// Only Quiz Administrators can perform this operation.
 		if( !$this->getUser()->isAllowed( 'quizadmin' ) ) {
-			$this->getOutput()->addHTML( $this->msg( 'quiz-admin-permission' )->text() );
+			$this->getOutput()->addHTML( $this->msg( 'quizgame-admin-permission' )->text() );
 			return;
 		}
 
@@ -568,13 +568,13 @@ class QuizGameHome extends UnlistedSpecialPage {
 
 		if( $key != md5( $this->SALT . $id ) ) {
 			// @todo FIXME/CHECKME: why is this commented out?
-			//$out->addWikiMsg( 'quiz-admin-permission' );
+			//$out->addWikiMsg( 'quizgame-admin-permission' );
 			//return;
 		}
 
 		$question = $this->getQuestion( $id );
 
-		$out->setPageTitle( $this->msg( 'quiz-edit-title', $question['text'] )->parse() );
+		$out->setPageTitle( $this->msg( 'quizgame-edit-title', $question['text'] )->parse() );
 
 		$user_name = $question['user_name'];
 		$user_id = $question['user_id'];
@@ -671,7 +671,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 						'">
 
 						<div class="credit-box" id="creditBox">
-							<h1>' . $this->msg( 'quiz-submitted-by' )->text() . "</h1>
+							<h1>' . $this->msg( 'quizgame-submitted-by' )->text() . "</h1>
 
 							<div id=\"submitted-by-image\" class=\"submitted-by-image\">
 							<a href=\"{$user_title->getFullURL()}\">
@@ -702,13 +702,13 @@ class QuizGameHome extends UnlistedSpecialPage {
 
 						<div class=\"ajax-messages\" id=\"ajax-messages\" style=\"margin:20px 0px 15px 0px;\"></div>
 
-						<h1>" . $this->msg( 'quiz-question' )->text() . "</h1>
+						<h1>" . $this->msg( 'quizgame-question' )->text() . "</h1>
 						<input name=\"quizgame-question\" id=\"quizgame-question\" type=\"text\" value=\"" .
 							htmlspecialchars( $question['text'], ENT_QUOTES ) . "\" size=\"64\" />
-						<h1>" . $this->msg( 'quiz-answers' )->text() . "</h1>
-						<div style=\"margin:10px 0px;\">" . $this->msg( 'quiz-correct-answer-checked' )->text() . "</div>
+						<h1>" . $this->msg( 'quizgame-answers' )->text() . "</h1>
+						<div style=\"margin:10px 0px;\">" . $this->msg( 'quizgame-correct-answer-checked' )->text() . "</div>
 						{$quizOptions}
-						<h1>" . $this->msg( 'quiz-picture' )->text() . "</h1>
+						<h1>" . $this->msg( 'quizgame-picture' )->text() . "</h1>
 						<div class=\"quizgame-edit-picture\" id=\"quizgame-edit-picture\">
 							{$pictag}
 						</div>
@@ -727,8 +727,8 @@ class QuizGameHome extends UnlistedSpecialPage {
 				"</div>
 
 				<div class=\"quizgame-edit-buttons\" id=\"quizgame-edit-buttons\">
-					<input type=\"button\" class=\"site-button\" value=\"" . $this->msg( 'quiz-save-page-button' )->text() . "\" onclick=\"javascript:document.quizGameEditForm.submit()\"/>
-					<input type=\"button\" class=\"site-button\" value=\"" . $this->msg( 'quiz-cancel-button' )->text() . "\" onclick=\"javascript:document.location='" .
+					<input type=\"button\" class=\"site-button\" value=\"" . $this->msg( 'quizgame-save-page-button' )->text() . "\" onclick=\"javascript:document.quizGameEditForm.submit()\"/>
+					<input type=\"button\" class=\"site-button\" value=\"" . $this->msg( 'quizgame-cancel-button' )->text() . "\" onclick=\"javascript:document.location='" .
 						$this->getTitle()->escapeFullURL( 'questionGameAction=launchGame' ) . '\'" />
 				</div>
 			</div>';
@@ -740,15 +740,15 @@ class QuizGameHome extends UnlistedSpecialPage {
 	 * Present a "log in" message
 	 */
 	function renderLoginPage() {
-		$this->getOutput()->setPageTitle( $this->msg( 'quiz-login-title' )->text() );
+		$this->getOutput()->setPageTitle( $this->msg( 'quizgame-login-title' )->text() );
 
-		$output = $this->msg( 'quiz-login-text' )->text() . '<p>';
+		$output = $this->msg( 'quizgame-login-text' )->text() . '<p>';
 		$output .= '<div>
 			<input type="button" class="site-button" value="' .
-				$this->msg( 'quiz-main-page-button' )->text() . '" onclick="window.location=\'' .
+				$this->msg( 'quizgame-main-page-button' )->text() . '" onclick="window.location=\'' .
 				Title::newMainPage()->escapeFullURL() . '\'" />
 			<input type="button" class="site-button" value="' .
-			$this->msg( 'quiz-login-button' )->text() . '" onclick="window.location=\'' .
+			$this->msg( 'quizgame-login-button' )->text() . '" onclick="window.location=\'' .
 			SpecialPage::getTitleFor( 'Userlogin' )->escapeFullURL() . '\'" />
 		</div>';
 		$this->getOutput()->addHTML( $output );
@@ -762,12 +762,12 @@ class QuizGameHome extends UnlistedSpecialPage {
 
 		$wgSupressPageTitle = false;
 
-		$this->getOutput()->setPageTitle( $this->msg( 'quiz-nomore-questions' )->text() );
+		$this->getOutput()->setPageTitle( $this->msg( 'quizgame-nomore-questions' )->text() );
 
-		$output = $this->msg( 'quiz-ohnoes' )->parse();
+		$output = $this->msg( 'quizgame-ohnoes' )->parse();
 		$output .= '<div>
 		<input type="button" class="site-button" value="' .
-			$this->msg( 'quiz-create-button' )->text() . '" onclick="window.location=\'' .
+			$this->msg( 'quizgame-create-button' )->text() . '" onclick="window.location=\'' .
 			$this->getTitle()->escapeFullURL( 'questionGameAction=createForm' ) .
 			'\'"/>
 
@@ -784,15 +784,15 @@ class QuizGameHome extends UnlistedSpecialPage {
 
 		$wgSupressPageTitle = false;
 
-		$this->getOutput()->setPageTitle( $this->msg( 'quiz-title' )->text() );
-		$this->getOutput()->addWikiMsg( 'quiz-unavailable' );
+		$this->getOutput()->setPageTitle( $this->msg( 'quizgame-title' )->text() );
+		$this->getOutput()->addWikiMsg( 'quizgame-unavailable' );
 	}
 
 	function renderStart() {
-		$this->getOutput()->setPageTitle( $this->msg( 'quiz-title' )->text() );
+		$this->getOutput()->setPageTitle( $this->msg( 'quizgame-title' )->text() );
 		$url = $this->getTitle()->escapeFullURL( 'questionGameAction=launchGame' );
-		$output = $this->msg( 'quiz-intro' )->parse() . '  <a href="' . $url . '">' .
-			$this->msg( 'quiz-introlink' )->text() . '</a>';
+		$output = $this->msg( 'quizgame-intro' )->parse() . '  <a href="' . $url . '">' .
+			$this->msg( 'quizgame-introlink' )->text() . '</a>';
 		$this->getOutput()->addHTML( $output );
 	}
 
@@ -943,12 +943,12 @@ class QuizGameHome extends UnlistedSpecialPage {
 
 			$editLinks = Linker::link(
 				$this->getTitle(),
-				$this->msg( 'quiz-admin-panel-title' )->text(),
+				$this->msg( 'quizgame-admin-panel-title' )->text(),
 				array(),
 				array( 'questionGameAction' => 'adminPanel' )
 			) . ' -
-				<a class="protect-image-link" href="#">' . $this->msg( 'quiz-protect' )->text() . '</a> - ' .
-				'<a class="delete-quiz-link" href="#">' . $this->msg( 'quiz-delete' )->text() . '</a> -';
+				<a class="protect-image-link" href="#">' . $this->msg( 'quizgame-protect' )->text() . '</a> - ' .
+				'<a class="delete-quiz-link" href="#">' . $this->msg( 'quizgame-delete' )->text() . '</a> -';
 		}
 
 		// For registered users, display their personal scorecard; for anons,
@@ -956,52 +956,52 @@ class QuizGameHome extends UnlistedSpecialPage {
 		if( $user->isLoggedIn() ) {
 			$leaderboard_title = SpecialPage::getTitleFor( 'QuizLeaderboard' );
 			$stats_box = '<div class="user-rank">
-					<h2>' . $this->msg( 'quiz-leaderboard-scoretitle' )->text() . '</h2>
+					<h2>' . $this->msg( 'quizgame-leaderboard-scoretitle' )->text() . '</h2>
 
-					<p><b>' . $this->msg( 'quiz-leaderboard-quizpoints' )->text() . "</b></p>
+					<p><b>' . $this->msg( 'quizgame-leaderboard-quizpoints' )->text() . "</b></p>
 					<p class=\"user-rank-points\">{$current_user_stats['quiz_points']}</p>
 					<div class=\"cleared\"></div>
 
-					<p><b>" . $this->msg( 'quiz-leaderboard-correct' )->text() . "</b></p>
+					<p><b>" . $this->msg( 'quizgame-leaderboard-correct' )->text() . "</b></p>
 					<p>{$current_user_stats['quiz_correct']}</p>
 					<div class=\"cleared\"></div>
 
-					<p><b>" . $this->msg( 'quiz-leaderboard-answered' )->text() . "</b></p>
+					<p><b>" . $this->msg( 'quizgame-leaderboard-answered' )->text() . "</b></p>
 					<p>{$current_user_stats['quiz_answered']}</p>
 					<div class=\"cleared\"></div>
 
-					<p><b>" . $this->msg( 'quiz-leaderboard-pctcorrect' )->text() . "</b></p>
+					<p><b>" . $this->msg( 'quizgame-leaderboard-pctcorrect' )->text() . "</b></p>
 					<p>{$current_user_stats['quiz_correct_percent']}%</p>
 					<div class=\"cleared\"></div>
 
-					<p><b>" . $this->msg( 'quiz-leaderboard-rank' )->text() . "</b></p>
+					<p><b>" . $this->msg( 'quizgame-leaderboard-rank' )->text() . "</b></p>
 					<p>{$quiz_rank} <span class=\"user-rank-link\">
-						<a href=\"{$leaderboard_title->getFullURL()}\">(" . $this->msg( 'quiz-leaderboard-link' )->text() . ")</a>
+						<a href=\"{$leaderboard_title->getFullURL()}\">(" . $this->msg( 'quizgame-leaderboard-link' )->text() . ")</a>
 					</span></p>
 					<div class=\"cleared\"></div>
 
 				</div>";
 		} else {
 			$stats_box = '<div class="user-rank">
-				<h2>' . $this->msg( 'quiz-leaderboard-scoretitle' )->text() . '</h2>'
-					. $this->msg( 'quiz-login-or-create-to-climb' )->parse() .
+				<h2>' . $this->msg( 'quizgame-leaderboard-scoretitle' )->text() . '</h2>'
+					. $this->msg( 'quizgame-login-or-create-to-climb' )->parse() .
 			'</div>';
 		}
 
 		$answers = '';
 		if( $user_answer ) {
 			$answers .= '<div class="answer-percent-correct">' .
-				$this->msg( 'quiz-pct-answered-correct', $question['correct_percent'] )->text() . '</div>';
+				$this->msg( 'quizgame-pct-answered-correct', $question['correct_percent'] )->text() . '</div>';
 			if( $user_answer == $question['correct_answer'] ) {
 				$answers .= '<div class="answer-message-correct">' .
-					$this->msg( 'quiz-answered-correctly' )->text() . '</div>';
+					$this->msg( 'quizgame-answered-correctly' )->text() . '</div>';
 			} else {
 				if( $user_answer == -1 ) {
 					$answers .= '<div class="answer-message-incorrect">' .
-						$this->msg( 'quiz-skipped' )->text() . '</div>';
+						$this->msg( 'quizgame-skipped' )->text() . '</div>';
 				} else {
 					$answers .= '<div class="answer-message-incorrect">' .
-						$this->msg( 'quiz-answered-incorrectly' )->text() .
+						$this->msg( 'quizgame-answered-incorrectly' )->text() .
 						'</div>';
 				}
 			}
@@ -1031,11 +1031,11 @@ class QuizGameHome extends UnlistedSpecialPage {
 				$incorrectMsg = $correctMsg = '';
 				if ( $user_answer == $choice['id'] && $question['correct_answer'] != $choice['id'] ) {
 					$incorrectMsg = '- <span class="answer-message-incorrect">' .
-						$this->msg( 'quiz-your-answer' )->text() . '</span>';
+						$this->msg( 'quizgame-your-answer' )->text() . '</span>';
 				}
 				if ( $question['correct_answer'] == $choice['id'] ) {
 					$correctMsg = '- <span class="answer-message-correct">' .
-						$this->msg( 'quiz-correct-answer' )->text() . '</span>';
+						$this->msg( 'quizgame-correct-answer' )->text() . '</span>';
 				}
 				$answers .= "<div id=\"{$x}\" class=\"answer-choice\">{$choice['text']}" .
 						$incorrectMsg . $correctMsg .
@@ -1065,11 +1065,11 @@ class QuizGameHome extends UnlistedSpecialPage {
 			$quizPoints = ( isset( $wgUserStatsPointValues['quiz_points'] ) ? $wgUserStatsPointValues['quiz_points'] : 0 );
 			$output .= '<div class="time-box">
 					<div class="quiz-countdown">
-						<span id="time-countdown">-</span> ' . $this->msg( 'quiz-js-seconds' )->text() .
+						<span id="time-countdown">-</span> ' . $this->msg( 'quizgame-js-seconds' )->text() .
 					'</div>
 
 					<div class="quiz-points" id="quiz-points">' .
-						$this->msg( 'quiz-points', $quizPoints )->parse() .
+						$this->msg( 'quizgame-points', $quizPoints )->parse() .
 					'</div>
 					<div class="quiz-notime" id="quiz-notime"></div>
 					</div>';
@@ -1081,7 +1081,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 
 					{$imageTag}
 
-					<div id=\"loading-answers\">" . $this->msg( 'quiz-js-loading' )->text() . "</div>
+					<div id=\"loading-answers\">" . $this->msg( 'quizgame-js-loading' )->text() . "</div>
 					<div id=\"quizgame-answers\" style=\"display:none;\" class=\"quizgame-answers\">
 						{$answers}
 					</div>
@@ -1096,10 +1096,10 @@ class QuizGameHome extends UnlistedSpecialPage {
 
 		if( !$user_answer && $user->getName() != $question['user_name'] ) {
 			$output .= '<a class="skip-question-link" href="javascript:void(0);">' .
-				$this->msg( 'quiz-skip' )->text() . '</a>';
+				$this->msg( 'quizgame-skip' )->text() . '</a>';
 		} else {
 			$output .= '<a href="' . $this->getTitle()->escapeFullURL( 'questionGameAction=launchGame' ) . '">' .
-				$this->msg( 'quiz-next' )->text() . '</a>';
+				$this->msg( 'quizgame-next' )->text() . '</a>';
 		}
 		$output .= '</div>';
 
@@ -1109,11 +1109,11 @@ class QuizGameHome extends UnlistedSpecialPage {
 							<div class="last-game">
 
 							<div class="last-question-heading">'
-								. $this->msg( 'quiz-last-question' )->text() . ' - <a href="' .
+								. $this->msg( 'quizgame-last-question' )->text() . ' - <a href="' .
 								$this->getTitle()->escapeFullURL( "questionGameAction=renderPermalink&permalinkID={$prev_question['id']}" ) .
 								"\">{$prev_question['text']}</a>
 								<div class=\"last-question-count\">" .
-									$this->msg( 'quiz-times-answered', $prev_question['answer_count'] )->parse() .
+									$this->msg( 'quizgame-times-answered', $prev_question['answer_count'] )->parse() .
 								'</div>
 							</div>';
 
@@ -1125,11 +1125,11 @@ class QuizGameHome extends UnlistedSpecialPage {
 						$your_answer = $choice['text'];
 						if( $choice['is_correct'] == 1 ) {
 							$your_answer_status = '<div class="answer-status-correct">' .
-								$this->msg( 'quiz-chose-correct', $prev_question['points'] )->parse() .
+								$this->msg( 'quizgame-chose-correct', $prev_question['points'] )->parse() .
 							'</div>';
 						} else {
 							$your_answer_status = '<div class="answer-status-incorrect">' .
-								$this->msg( 'quiz-chose-incorrect' )->text() .
+								$this->msg( 'quizgame-chose-incorrect' )->text() .
 							'</div>';
 						}
 					}
@@ -1169,11 +1169,11 @@ class QuizGameHome extends UnlistedSpecialPage {
 					<div class=\"create-link\">
 						<img border=\"0\" src=\"{$wgExtensionAssetsPath}/QuizGame/images/addIcon.gif\" alt=\"\" />
 						<a href=\"" . $this->getTitle()->escapeFullURL( 'questionGameAction=createForm' ) . '">'
-							. $this->msg( 'quiz-create-title' )->text() .
+							. $this->msg( 'quizgame-create-title' )->text() .
 						"</a>
 					</div>
 					<div class=\"credit-box\" id=\"creditBox\">
-						<h1>" . $this->msg( 'quiz-submitted-by' )->text() . "</h1>
+						<h1>" . $this->msg( 'quizgame-submitted-by' )->text() . "</h1>
 
 						<div id=\"submitted-by-image\" class=\"submitted-by-image\">
 							<a href=\"{$user_title->getFullURL()}\">
@@ -1205,26 +1205,26 @@ class QuizGameHome extends UnlistedSpecialPage {
 					</div>
 						<div class=\"bottom-links\" id=\"utility-buttons\">
 							<a class=\"flag-quiz-link\" href=\"#\">" .
-								$this->msg( 'quiz-flag' )->text() . '</a> - ';
+								$this->msg( 'quizgame-flag' )->text() . '</a> - ';
 
 		// Protect & delete links for quiz administrators
 		if ( $user->isAllowed( 'quizadmin' ) ) {
 			$output .= '<a href="' . $this->getTitle()->escapeFullURL( 'questionGameAction=adminPanel' ) . '">'
-					. $this->msg( 'quiz-admin-panel-title' )->text() .
+					. $this->msg( 'quizgame-admin-panel-title' )->text() .
 				'</a> - <a class="protect-image-link" href="#">' .
-					$this->msg( 'quiz-protect' )->text() . '</a> - ' .
+					$this->msg( 'quizgame-protect' )->text() . '</a> - ' .
 				'<a class="delete-quiz-link" href="#">' .
-					$this->msg( 'quiz-delete' )->text() . '</a> - ';
+					$this->msg( 'quizgame-delete' )->text() . '</a> - ';
 		}
 
 		$output .= "<a href=\"javascript:document.location='" .
 			$this->getTitle()->escapeFullURL( 'questionGameAction=renderPermalink' ) .
 			"&permalinkID=' + document.getElementById( 'quizGameId' ).value\">" .
-				$this->msg( 'quiz-permalink' )->text() . '</a>
+				$this->msg( 'quizgame-permalink' )->text() . '</a>
 
 							<div id="flag-comment" style="display:none;margin-top:5px;">' .
-							$this->msg( 'quiz-flagged-reason' )->text() . ": <input type=\"text\" size=\"20\" id=\"flag-reason\" />
-							<input type=\"button\" value=\"" . $this->msg( 'quiz-submit' )->text() . "\" /></div>
+							$this->msg( 'quizgame-flagged-reason' )->text() . ": <input type=\"text\" size=\"20\" id=\"flag-reason\" />
+							<input type=\"button\" value=\"" . $this->msg( 'quizgame-submit' )->text() . "\" /></div>
 						</div>
 				</div>
 			</div>
@@ -1352,8 +1352,8 @@ class QuizGameHome extends UnlistedSpecialPage {
 			if( $can_create == false ) {
 				global $wgSupressPageTitle;
 				$wgSupressPageTitle = false;
-				$out->setPageTitle( $this->msg( 'quiz-create-threshold-title' )->text() );
-				$out->addHTML( $this->msg( 'quiz-create-threshold-reason', $threshold_reason )->parse() );
+				$out->setPageTitle( $this->msg( 'quizgame-create-threshold-title' )->text() );
+				$out->addHTML( $this->msg( 'quizgame-create-threshold-reason', $threshold_reason )->parse() );
 				return '';
 			}
 		}
@@ -1362,16 +1362,16 @@ class QuizGameHome extends UnlistedSpecialPage {
 		$key = md5( $this->SALT . $chain );
 		$max_answers = 8;
 
-		$out->setPageTitle( $this->msg( 'quiz-create-title' )->text() );
+		$out->setPageTitle( $this->msg( 'quizgame-create-title' )->text() );
 
 		$output = '<div id="quiz-container" class="quiz-container">
 
 			<div class="create-message">
-				<h1>' . $this->msg( 'quiz-create-title' )->text() . '</h1>
-				<p>' . $this->msg( 'quiz-create-message' )->parse() . '</p>
+				<h1>' . $this->msg( 'quizgame-create-title' )->text() . '</h1>
+				<p>' . $this->msg( 'quizgame-create-message' )->parse() . '</p>
 				<p><input class="site-button" type="button" onclick="document.location=\'' .
 					$this->getTitle()->escapeFullURL( 'questionGameAction=launchGame' ) .
-					'\'" value="' . $this->msg( 'quiz-play-quiz' )->text() . '" /></p>
+					'\'" value="' . $this->msg( 'quizgame-play-quiz' )->text() . '" /></p>
 			</div>
 
 			<div class="quizgame-create-form" id="quizgame-create-form">
@@ -1379,10 +1379,10 @@ class QuizGameHome extends UnlistedSpecialPage {
 					$this->getTitle()->escapeFullURL( 'questionGameAction=createGame' ) . '">
 				<div id="quiz-game-errors" style="color:red"></div>
 
-				<h1>' . $this->msg( 'quiz-create-write-question' )->text() . '</h1>
+				<h1>' . $this->msg( 'quizgame-create-write-question' )->text() . '</h1>
 				<input name="quizgame-question" id="quizgame-question" type="text" value="" size="64" />
-				<h1 class="write-answer">' . $this->msg( 'quiz-create-write-answers' )->text() . '</h1>
-				<span style="margin-top:10px;">' . $this->msg( 'quiz-create-check-correct' )->text() . '</span>
+				<h1 class="write-answer">' . $this->msg( 'quizgame-create-write-answers' )->text() . '</h1>
+				<span style="margin-top:10px;">' . $this->msg( 'quizgame-create-check-correct' )->text() . '</span>
 				<span style="display:none;" id="this-is-the-welcome-page"></span>';
 		// the span#this-is-the-welcome-page element is an epic hack for JS
 		// because I can't think of a better way to detect where we are and JS
@@ -1406,7 +1406,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 			</form>
 
 			<h1 style="margin-top:20px">' .
-				$this->msg( 'quiz-create-add-picture' )->text() . '</h1>
+				$this->msg( 'quizgame-create-add-picture' )->text() . '</h1>
 			<div id="quizgame-picture-upload" style="display:block;">
 
 				<div id="real-form" style="display:block; height:90px;">
@@ -1423,7 +1423,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 			</div>
 
 			<div id="startButton" class="startButton">
-				<input type="button" class="site-button" value="' . $this->msg( 'quiz-create-play' )->text() . '" />
+				<input type="button" class="site-button" value="' . $this->msg( 'quizgame-create-play' )->text() . '" />
 			</div>
 
 			</div>';

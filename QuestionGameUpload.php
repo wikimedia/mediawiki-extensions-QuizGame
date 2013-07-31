@@ -252,7 +252,7 @@ class SpecialQuestionGameUpload extends SpecialUpload {
 		// so can I. It's not my fault that loadRequest() is a useless piece of
 		// crap.
 		$localizedNS = $wgContLang->getNsText( NS_CATEGORY );
-		$categoriesText = '[[' . $localizedNS . ':' . wfMessage( 'quiz-images-category' )->inContentLanguage()->plain() . ']]';
+		$categoriesText = '[[' . $localizedNS . ':' . wfMessage( 'quizgame-images-category' )->inContentLanguage()->plain() . ']]';
 
 		// Get the page text if this is not a reupload
 		//if( !$this->mForReUpload ) {

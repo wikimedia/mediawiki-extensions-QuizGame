@@ -51,20 +51,20 @@ class ViewQuizzes extends UnlistedSpecialPage {
 		$output = '<div class="view-quizzes-top-links">' .
 			Linker::link(
 				$quizGameHome,
-				$this->msg( 'quiz-playneverending' )->text(),
+				$this->msg( 'quizgame-playneverending' )->text(),
 				array(),
 				array( 'questionGameAction' => 'launchGame' )
 			) . ' - ' .
 			Linker::link(
 				$quizGameHome,
-				$this->msg( 'quiz-viewquizzes-create' )->text(),
+				$this->msg( 'quizgame-viewquizzes-create' )->text(),
 				array(),
 				array( 'questionGameAction' => 'createForm' )
 			) . '<br /><br />
 		</div>
 
 		<div class="view-quizzes-navigation">
-			<h2>' . $this->msg( 'quiz-leaderboard-order-menu' )->text() . '</h2>';
+			<h2>' . $this->msg( 'quizgame-leaderboard-order-menu' )->text() . '</h2>';
 
 		$dbr = wfGetDB( DB_MASTER );
 
@@ -81,10 +81,10 @@ class ViewQuizzes extends UnlistedSpecialPage {
 
 		if( $type == 'newest' ) {
 			$linkQueryParameters['type'] = 'most';
-			$output .= '<p><b>' . $this->msg( 'quiz-newest' )->text() . '</b></p>
+			$output .= '<p><b>' . $this->msg( 'quizgame-newest' )->text() . '</b></p>
 				<p>' . Linker::link(
 					$title,
-					$this->msg( 'quiz-popular' )->text(),
+					$this->msg( 'quizgame-popular' )->text(),
 					array(),
 					$linkQueryParameters
 				) . '</p>';
@@ -92,19 +92,19 @@ class ViewQuizzes extends UnlistedSpecialPage {
 			$linkQueryParameters['type'] = 'newest';
 			$output .= '<p>' . Linker::link(
 				$title,
-				$this->msg( 'quiz-newest' )->text(),
+				$this->msg( 'quizgame-newest' )->text(),
 				array(),
 				$linkQueryParameters
 			) . '</p>
-				<p><b>' . $this->msg( 'quiz-popular' )->text() . '</b></p>';
+				<p><b>' . $this->msg( 'quizgame-popular' )->text() . '</b></p>';
 		}
 
 		$output .= '</div>';
 
 		if ( $user ) {
-			$out->setPageTitle( $this->msg( 'quiz-viewquizzes-title-by-user', $user )->parse() );
+			$out->setPageTitle( $this->msg( 'quizgame-viewquizzes-title-by-user', $user )->parse() );
 		} else {
-			$out->setPageTitle( $this->msg( 'quiz-viewquizzes-title' )->text() );
+			$out->setPageTitle( $this->msg( 'quizgame-viewquizzes-title' )->text() );
 		}
 
 		$res = $dbr->select(
@@ -163,9 +163,9 @@ class ViewQuizzes extends UnlistedSpecialPage {
 				<div class=\"view-quizzes-text\">
 					<p><b><u>{$quiz_title}</u></b></p>
 					<p class=\"view-quizzes-num-answers\">" .
-						$this->msg( 'quiz-answered', $quiz_answers )->parse() . '</p>
+						$this->msg( 'quizgame-answered', $quiz_answers )->parse() . '</p>
 					<p class="view-quizzes-time">(' .
-						$this->msg( 'quiz-time-ago', self::getTimeAgo( $quiz_date ) )->parse() .
+						$this->msg( 'quizgame-time-ago', self::getTimeAgo( $quiz_date ) )->parse() .
 					')</p>
 				</div>
 				<div class="cleared"></div>
@@ -186,7 +186,7 @@ class ViewQuizzes extends UnlistedSpecialPage {
 				$linkQueryParameters['page'] = ( $page - 1 );
 				$output .= Linker::link(
 					$title,
-					$this->msg( 'quiz-prev' )->text(),
+					$this->msg( 'quizgame-prev' )->text(),
 					array(),
 					$linkQueryParameters
 				) . $this->msg( 'word-separator' )->text();
@@ -223,7 +223,7 @@ class ViewQuizzes extends UnlistedSpecialPage {
 				$output .= $this->msg( 'word-separator' )->text() .
 					Linker::link(
 						$title,
-						$this->msg( 'quiz-nav-next' )->text(),
+						$this->msg( 'quizgame-nav-next' )->text(),
 						array(),
 						$linkQueryParameters
 					);
@@ -255,7 +255,7 @@ class ViewQuizzes extends UnlistedSpecialPage {
 	static function getTimeOffset( $time, $timeabrv, $timename ) {
 		$timeStr = '';
 		if( $time[$timeabrv] > 0 ) {
-			$timeStr = wfMessage( "quiz-time-{$timename}", $time[$timeabrv] )->parse();
+			$timeStr = wfMessage( "quizgame-time-{$timename}", $time[$timeabrv] )->parse();
 		}
 		if( $timeStr ) {
 			$timeStr .= ' ';
@@ -279,7 +279,7 @@ class ViewQuizzes extends UnlistedSpecialPage {
 			}
 		}
 		if( !$timeStr ) {
-			$timeStr = wfMessage( 'quiz-time-seconds', 1 )->parse();
+			$timeStr = wfMessage( 'quizgame-time-seconds', 1 )->parse();
 		}
 		return $timeStr;
 	}
