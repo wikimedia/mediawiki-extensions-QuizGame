@@ -23,10 +23,11 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 
 // Extension credits that will show up on Special:Version
 $wgExtensionCredits['specialpage'][] = array(
+	'path' => __FILE__,
 	'name' => 'QuizGame',
 	'version' => '3.0',
 	'author' => array( 'Aaron Wright', 'Ashish Datta', 'David Pean', 'Jack Phoenix' ),
-	'description' => '[[Special:QuizGameHome|Interactive question game that uses AJAX]]',
+	'descriptionmsg' => 'quizgame-desc',
 	'url' => 'https://www.mediawiki.org/wiki/Extension:QuizGame',
 );
 

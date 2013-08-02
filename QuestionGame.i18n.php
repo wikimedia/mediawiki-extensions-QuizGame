@@ -13,6 +13,7 @@ $messages = array();
  * @author David Pean <david.pean@gmail.com>
  */
 $messages['en'] = array(
+	'quizgame-desc' => 'Adds an interactive [[Special:QuizGameHome|question game]]',
 	'quizgame-edit' => 'Edit',
 	'quizgame-delete' => 'Delete',
 	'quizgame-protect' => 'Protect',
