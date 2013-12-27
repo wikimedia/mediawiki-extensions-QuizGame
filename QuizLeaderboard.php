@@ -115,7 +115,7 @@ class QuizLeaderboard extends UnlistedSpecialPage {
 
 		foreach( $menu as $title => $qs ) {
 			if ( $input != $qs ) {
-				$output .= "<p><a href=\"{$this->getTitle()->getFullURL()}/{$qs}\">{$title}</a><p>";
+				$output .= "<p><a href=\"{$this->getPageTitle()->getFullURL()}/{$qs}\">{$title}</a><p>";
 			} else {
 				$output .= "<p><b>{$title}</b></p>";
 			}

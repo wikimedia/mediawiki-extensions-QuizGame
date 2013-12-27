@@ -19,7 +19,7 @@ class ViewQuizzes extends UnlistedSpecialPage {
 
 		$out = $this->getOutput();
 		$request = $this->getRequest();
-		$title = $this->getTitle();
+		$title = $this->getPageTitle();
 
 		// Add CSS & JS
 		$out->addModules( 'ext.quizGame' );
