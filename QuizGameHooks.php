@@ -16,7 +16,7 @@ class QuizGameHooks {
 	 * @return Boolean: true
 	 */
 	public static function addQuizContentActions( &$skinTemplate, &$links ) {
-		global $wgUser, $wgRequest, $wgQuizID, $wgTitle;
+		global $wgUser, $wgRequest, $wgQuizID;
 
 		// Add edit tab to content actions for quiz admins
 		if(
@@ -40,7 +40,7 @@ class QuizGameHooks {
 		// If editing, make special page go back to quiz question
 		if( $wgRequest->getVal( 'questionGameAction' ) == 'editItem' ) {
 			$quiz = SpecialPage::getTitleFor( 'QuizGameHome' );
-			$links['views'][$wgTitle->getNamespaceKey()] = array(
+			$links['views'][$skinTemplate->getTitle()->getNamespaceKey()] = array(
 				'class' => 'selected',
 				'text' => wfMessage( 'nstab-special' )->plain(),
 				'href' => $quiz->getFullURL( 'questionGameAction=renderPermalink&permalinkID=' . $wgQuizID ),
