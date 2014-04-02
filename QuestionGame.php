@@ -4,7 +4,6 @@
  *
  * @file
  * @ingroup Extensions
- * @version 3.0
  * @author Aaron Wright <aaron.wright@gmail.com>
  * @author Ashish Datta <ashish@setfive.com>
  * @author David Pean <david.pean@gmail.com>
@@ -25,7 +24,7 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 $wgExtensionCredits['specialpage'][] = array(
 	'path' => __FILE__,
 	'name' => 'QuizGame',
-	'version' => '3.0',
+	'version' => '3.1.0',
 	'author' => array( 'Aaron Wright', 'Ashish Datta', 'David Pean', 'Jack Phoenix' ),
 	'descriptionmsg' => 'quizgame-desc',
 	'url' => 'https://www.mediawiki.org/wiki/Extension:QuizGame',
@@ -72,6 +71,7 @@ define( 'QUIZGAME_FLAG_PROTECT', 2 );
 
 // Set up the new special pages
 $dir = dirname( __FILE__ ) . '/';
+$wgMessagesDirs['QuizGame'] = __DIR__ . '/i18n';
 $wgExtensionMessagesFiles['QuizGame'] = $dir . 'QuestionGame.i18n.php';
 $wgExtensionMessagesFiles['QuizGameAlias'] = $dir . 'QuestionGame.alias.php';
 $wgAutoloadClasses['QuizGameLogFormatter'] = $dir . 'QuizGameLogFormatter.php';
