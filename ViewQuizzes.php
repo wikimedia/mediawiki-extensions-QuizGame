@@ -146,10 +146,10 @@ class ViewQuizzes extends UnlistedSpecialPage {
 			$quiz_id = $row->q_id;
 			$row_id = "quizz-row-{$x}";
 
-			$url = $quizGameHome->escapeFullURL( array(
+			$url = htmlspecialchars( $quizGameHome->getFullURL( array(
 				'questionGameAction' => 'renderPermalink',
 				'permalinkID' => $quiz_id
-			) );
+			) ) );
 			// Hover support is done in /js/QuizGame.js
 			if ( ( $x < $total ) && ( $x % $per_page != 0 ) ) {
 				$output .= "<div class=\"view-quizzes-row\" id=\"{$row_id}\" onclick=\"window.location='" . $url . '\'">';
