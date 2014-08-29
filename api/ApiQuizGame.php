@@ -316,12 +316,6 @@ class ApiQuizGame extends ApiBase {
 		);
 	}
 
-	public function getPossibleErrors() {
-		return array_merge( parent::getPossibleErrors(), array(
-			array( 'code' => 'invalidkey', 'info' => wfMessage( 'quizgame-ajax-invalid-key' )->text() ),
-		) );
-	}
-
 	public function getExamples() {
 		return array(
 			'api.php?action=quizgame&quizaction=flagItem&comment=Inappropriate%20question&id=30&key=ThisObviouslyIsntARealKey',

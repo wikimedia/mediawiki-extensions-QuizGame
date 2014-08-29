@@ -215,14 +215,6 @@ class ApiQuizGameVote extends ApiBase {
 		);
 	}
 
-	public function getPossibleErrors() {
-		return array_merge( parent::getPossibleErrors(), array(
-			array( 'code' => 'nonnumericanswer', 'info' => wfMessage( 'quizgame-ajax-nonnumeric-answer' )->text() ),
-			array( 'code' => 'alreadyanswered', 'info' => wfMessage( 'quizgame-ajax-already-answered' )->text() ),
-			array( 'code' => 'nosuchquestion', 'info' => wfMessage( 'quizgame-ajax-invalid-id' )->text() ),
-		) );
-	}
-
 	public function getExamples() {
 		return array(
 			'api.php?action=quizgamevote&answer=3&id=245&key=ThisObviouslyIsntARealKey',
