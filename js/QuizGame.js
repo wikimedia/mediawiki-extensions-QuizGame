@@ -395,15 +395,18 @@ var QuizGame = {
 	 * @param {txt} string Text to output in the lightbox
 	 */
 	setLightboxText: function( txt ) {
-		var textForLightBox = '';
+		var textForLightBox = '', loader = '';
 		if( txt ) {
 			textForLightBox = '<br /><br />' + txt;
 		}
 		if( !QuizGame.detectMacXFF() ) {
-			LightBox.setText( QuizGame.getLoader() + textForLightBox );
+			loader = QuizGame.getLoader();
 		} else {
-			LightBox.setText( mw.msg( 'quizgame-js-loading' ) + textForLightBox );
+			loader = mw.msg( 'quizgame-js-loading' );
 		}
+		mw.loader.using( 'ext.pollNY.lightBox', function() {
+			LightBox.setText( loader + textForLightBox );
+		} );
 	},
 
 	/**
@@ -416,8 +419,9 @@ var QuizGame = {
 		objLink.href = '';
 		objLink.title =  mw.msg( 'quizgame-js-loading' );
 
-		LightBox.show( objLink );
-
+		mw.loader.using( 'ext.pollNY.lightBox', function() {
+			LightBox.show( objLink );
+		} );
 		QuizGame.setLightboxText( '' );
 
 		var gameKey = document.getElementById( 'quizGameKey' ).value;
@@ -460,7 +464,9 @@ var QuizGame = {
 		objLink.href = '';
 		objLink.title = '';
 
-		LightBox.show( objLink );
+		mw.loader.using( 'ext.pollNY.lightBox', function() {
+			LightBox.show( objLink );
+		} );
 
 		var quiz_controls = '<div id="quiz-controls"><a href="javascript:void(0)" onclick="QuizGame.pauseQuiz()" class="stop-button">' +
 			mw.msg( 'quizgame-lightbox-pause-quiz' ) + '</a></div>';

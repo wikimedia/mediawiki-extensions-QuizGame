@@ -11,7 +11,7 @@
 	This is a copy of the LightBox.js that resides in /extensions/PollNY/ with
 	some minor modifications (look for the word "added")
 */
-var LightBox = {
+window.LightBox = {
 	/**
 	 * Core code from quirksmode.org
 	 * @return Array with x,y page scroll values.

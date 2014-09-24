@@ -24,7 +24,7 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 $wgExtensionCredits['specialpage'][] = array(
 	'path' => __FILE__,
 	'name' => 'QuizGame',
-	'version' => '3.1.0',
+	'version' => '3.1.1',
 	'author' => array( 'Aaron Wright', 'Ashish Datta', 'David Pean', 'Jack Phoenix' ),
 	'descriptionmsg' => 'quizgame-desc',
 	'url' => 'https://www.mediawiki.org/wiki/Extension:QuizGame',
@@ -32,7 +32,7 @@ $wgExtensionCredits['specialpage'][] = array(
 
 // ResourceLoader support for MediaWiki 1.17+
 $quizGameResourceTemplate = array(
-	'localBasePath' => dirname( __FILE__ ),
+	'localBasePath' => __DIR__,
 	'remoteExtPath' => 'QuizGame',
 	'position' => 'top' // available since r85616
 );
@@ -70,17 +70,15 @@ define( 'QUIZGAME_FLAG_FLAGGED', 1 );
 define( 'QUIZGAME_FLAG_PROTECT', 2 );
 
 // Set up the new special pages
-$dir = dirname( __FILE__ ) . '/';
 $wgMessagesDirs['QuizGame'] = __DIR__ . '/i18n';
-$wgExtensionMessagesFiles['QuizGame'] = $dir . 'QuestionGame.i18n.php';
-$wgExtensionMessagesFiles['QuizGameAlias'] = $dir . 'QuestionGame.alias.php';
-$wgAutoloadClasses['QuizGameLogFormatter'] = $dir . 'QuizGameLogFormatter.php';
-$wgAutoloadClasses['QuizGameHome'] = $dir . 'QuestionGameHome.body.php';
-$wgAutoloadClasses['SpecialQuestionGameUpload'] = $dir . 'QuestionGameUpload.php';
-$wgAutoloadClasses['QuestionGameUploadForm'] = $dir . 'QuestionGameUpload.php';
-$wgAutoloadClasses['QuizLeaderboard'] = $dir . 'QuizLeaderboard.php';
-$wgAutoloadClasses['QuizRecalcStats'] = $dir . 'RecalculateStats.php';
-$wgAutoloadClasses['ViewQuizzes'] = $dir . 'ViewQuizzes.php';
+$wgExtensionMessagesFiles['QuizGameAlias'] = __DIR__ . '/QuestionGame.alias.php';
+$wgAutoloadClasses['QuizGameLogFormatter'] = __DIR__ . '/QuizGameLogFormatter.php';
+$wgAutoloadClasses['QuizGameHome'] = __DIR__ . '/QuestionGameHome.body.php';
+$wgAutoloadClasses['SpecialQuestionGameUpload'] = __DIR__ . '/QuestionGameUpload.php';
+$wgAutoloadClasses['QuestionGameUploadForm'] = __DIR__ . '/QuestionGameUpload.php';
+$wgAutoloadClasses['QuizLeaderboard'] = __DIR__ . '/QuizLeaderboard.php';
+$wgAutoloadClasses['QuizRecalcStats'] = __DIR__ . '/RecalculateStats.php';
+$wgAutoloadClasses['ViewQuizzes'] = __DIR__ . '/ViewQuizzes.php';
 $wgSpecialPages['QuizGameHome'] = 'QuizGameHome';
 $wgSpecialPages['QuestionGameUpload'] = 'SpecialQuestionGameUpload';
 $wgSpecialPages['QuizLeaderboard'] = 'QuizLeaderboard';
@@ -88,9 +86,9 @@ $wgSpecialPages['QuizRecalcStats'] = 'QuizRecalcStats';
 $wgSpecialPages['ViewQuizzes'] = 'ViewQuizzes';
 
 // API modules
-$wgAutoloadClasses['ApiQuizGame'] = $dir . 'api/ApiQuizGame.php';
+$wgAutoloadClasses['ApiQuizGame'] = __DIR__ . '/api/ApiQuizGame.php';
 $wgAPIModules['quizgame'] = 'ApiQuizGame';
-$wgAutoloadClasses['ApiQuizGameVote'] = $dir . 'api/ApiQuizGameVote.php';
+$wgAutoloadClasses['ApiQuizGameVote'] = __DIR__ . '/api/ApiQuizGameVote.php';
 $wgAPIModules['quizgamevote'] = 'ApiQuizGameVote';
 
 // New user right for protecting/deleting/unflagging questions
@@ -116,7 +114,7 @@ if( $wgQuizLogs ) {
 $wgCreateQuizThresholds = array();
 
 // Hooked functions
-$wgAutoloadClasses['QuizGameHooks'] = $dir . 'QuizGameHooks.php';
+$wgAutoloadClasses['QuizGameHooks'] = __DIR__ . '/QuizGameHooks.php';
 
 $wgHooks['SkinTemplateNavigation::SpecialPage'][] = 'QuizGameHooks::addQuizContentActions';
 $wgHooks['MakeGlobalVariablesScript'][] = 'QuizGameHooks::addJSGlobals';
