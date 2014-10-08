@@ -4,9 +4,9 @@
  * @file
  * @ingroup Extensions
  * @author Jack Phoenix <jack@countervandalism.net>
- * @date 25 July 2013
+ * @date 8 October 2014
  */
-var QuizGame = {
+window.QuizGame = {
 	continue_timer: '', // has to have an initial value...
 	voted: 0,
 	// time() JS function from http://phpjs.org/functions/time:562
