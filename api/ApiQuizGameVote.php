@@ -173,6 +173,7 @@ class ApiQuizGameVote extends ApiBase {
 	}
 
 	/**
+	 * @deprecated since MediaWiki core 1.25
 	 * @return String: the description string for this module
 	 */
 	public function getDescription() {
@@ -204,6 +205,7 @@ class ApiQuizGameVote extends ApiBase {
 	 * Get the human-readable descriptions of all the parameters that this
 	 * module accepts/requires.
 	 *
+	 * @deprecated since MediaWiki core 1.25
 	 * @return Array
 	 */
 	public function getParamDescription() {
@@ -215,10 +217,18 @@ class ApiQuizGameVote extends ApiBase {
 		);
 	}
 
+	/**
+	 * @deprecated since MediaWiki core 1.25
+	 */
 	public function getExamples() {
 		return array(
-			'api.php?action=quizgamevote&answer=3&id=245&key=ThisObviouslyIsntARealKey',
-			'api.php?action=quizgamevote&answer=6&id=30&id=364&key=YetAnotherExampleKey',
+			'api.php?action=quizgamevote&answer=3&id=245&key=ThisObviouslyIsntARealKey'
+		);
+	}
+
+	public function getExamplesMessages() {
+		return array(
+			'action=quizgamevote&answer=3&id=245&key=ThisObviouslyIsntARealKey' => 'apihelp-quizgamevote-example-1'
 		);
 	}
 }

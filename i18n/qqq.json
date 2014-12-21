@@ -125,5 +125,18 @@
     "logentry-quiz-unflag": "Log action; $1 is the username, $4 is the question ID number",
     "logentry-quiz-unprotect": "Log action; $1 is the username, $4 is the question ID number",
     "quizgame-images-category": "Category where all images uploaded via Special:QuestionGameUpload will be placed into",
-    "right-quizadmin": "Description of the \"quizgame\" user right, shown on [[Special:ListGroupRights]]"
+    "right-quizadmin": "Description of the \"quizgame\" user right, shown on [[Special:ListGroupRights]]",
+    "apihelp-quizgame-description": "{{doc-apihelp-description|quizgame}}",
+    "apihelp-quizgame-param-comment": "{{doc-apihelp-param|quizgame|comment}}",
+    "apihelp-quizgame-param-id": "{{doc-apihelp-param|quizgame|id}}",
+    "apihelp-quizgame-param-key": "{{doc-apihelp-param|quizgame|key}}",
+    "apihelp-quizgame-param-quizaction": "{{doc-apihelp-param|quizgame|quizaction}}",
+    "apihelp-quizgame-example-1": "{{doc-apihelp-example|quizgame}}",
+    "apihelp-quizgame-example-2": "{{doc-apihelp-example|quizgame}}",
+    "apihelp-quizgamevote-description": "{{doc-apihelp-description|quizgamevote}}",
+    "apihelp-quizgamevote-param-answer": "{{doc-apihelp-param|quizgamevote|answer}}",
+    "apihelp-quizgamevote-param-id": "{{doc-apihelp-param|quizgamevote|id}}",
+    "apihelp-quizgamevote-param-key": "{{doc-apihelp-param|quizgamevote|key}}",
+    "apihelp-quizgamevote-param-points": "{{doc-apihelp-param|quizgamevote|points}}",
+    "apihelp-quizgamevote-example-1": "{{doc-apihelp-example|quizgamevote}}"
 }

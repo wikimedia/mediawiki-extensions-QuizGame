@@ -133,5 +133,18 @@
     "logentry-quiz-unflag": "$1 unflagged [[Special:QuizGameHome/$4|quiz question #$4]]",
     "logentry-quiz-unprotect": "$1 unprotected [[Special:QuizGameHome/$4|quiz question #$4]]",
     "quizgame-images-category": "QuizGame images",
-    "right-quizadmin": "Administrate question games"
+    "right-quizadmin": "Administrate question games",
+    "apihelp-quizgame-description": "Question Game API for administrative actions.",
+    "apihelp-quizgame-param-comment": "Reason for flagging (used only in flagItem).",
+    "apihelp-quizgame-param-id": "Quiz ID number.",
+    "apihelp-quizgame-param-key": "MD5 hash of the salt and the quiz ID number.",
+    "apihelp-quizgame-param-quizaction": "What to do + the word \"Item\", i.e. deleteItem.",
+    "apihelp-quizgame-example-1": "Flag a quiz.",
+    "apihelp-quizgame-example-2": "Delete a quiz.",
+    "apihelp-quizgamevote-description": "Question Game API for voting.",
+    "apihelp-quizgamevote-param-answer": "Numeric answer ID.",
+    "apihelp-quizgamevote-param-id": "Quiz ID number.",
+    "apihelp-quizgamevote-param-key": "MD5 hash of the salt and the quiz ID number.",
+    "apihelp-quizgamevote-param-points": "How many points are given out for the correct answer.",
+    "apihelp-quizgamevote-example-1": "Vote."
 }
