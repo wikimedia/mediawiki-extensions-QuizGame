@@ -136,7 +136,12 @@ class ApiQuizGameVote extends ApiBase {
 				'rightAnswer' => addslashes( $s->choice_text ), // @todo FIXME/CHECKME: addslashes() still needed?
 				'percentRight' => $percent
 			);
-			ApiResult::setContent( $data, '' );
+			if ( defined( 'ApiResult::META_CONTENT' ) ) {
+				// Why?
+				ApiResult::setContentValue( $data, 'content', '' );
+			} else {
+				ApiResult::setContent( $data, '' );
+			}
 
 			if ( $s->choice_id == $answer ) {
 				// Update question answered correctly for entire question
