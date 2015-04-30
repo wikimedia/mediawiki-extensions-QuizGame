@@ -558,6 +558,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 	function editItem() {
 		global $wgExtensionAssetsPath, $wgUploadPath, $wgQuizID;
 
+		$lang = $this->getLanguage();
 		$out = $this->getOutput();
 		$request = $this->getRequest();
 
@@ -664,6 +665,9 @@ class QuizGameHome extends UnlistedSpecialPage {
 			);
 		}
 
+		$formattedVoteCount = $lang->formatNum( $stats_data['votes'] );
+		$formattedEditCount = $lang->formatNum( $stats_data['edits'] );
+		$formattedCommentCount = $lang->formatNum( $stats_data['comments'] );
 		$output .= "
 				<div class=\"quizgame-edit-question\" id=\"quizgame-edit-question\">
 					<form name=\"quizGameEditForm\" id=\"quizGameEditForm\" method=\"post\" action=\"" .
@@ -685,15 +689,15 @@ class QuizGameHome extends UnlistedSpecialPage {
 								<ul>
 									<li id=\"userstats-votes\">
 										<img src=\"{$wgExtensionAssetsPath}/QuizGame/images/voteIcon.gif\" border=\"0\" alt=\"\" />
-										{$stats_data['votes']}
+										{$formattedVoteCount}
 									</li>
 									<li id=\"userstats-edits\">
 										<img src=\"{$wgExtensionAssetsPath}/QuizGame/images/pencilIcon.gif\" border=\"0\" alt=\"\" />
-										{$stats_data['edits']}
+										{$formattedEditCount}
 									</li>
 									<li id=\"userstats-comments\">
 										<img src=\"{$wgExtensionAssetsPath}/QuizGame/images/commentsIcon.gif\" border=\"0\" alt=\"\" />
-										{$stats_data['comments']}
+										{$formattedCommentCount}
 									</li>
 								</ul>
 							</div>
@@ -803,6 +807,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 	function launchGame() {
 		global $wgUploadPath, $wgExtensionAssetsPath;
 
+		$lang = $this->getLanguage();
 		$out = $this->getOutput();
 		$request = $this->getRequest();
 		$user = $this->getUser();
@@ -841,7 +846,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 		$s = $dbr->selectRow(
 			'user_stats',
 			array( 'COUNT(*) AS count' ),
-			array( 'stats_quiz_points > ' . str_replace( ',', '', $current_user_stats['quiz_points'] ) ),
+			array( 'stats_quiz_points > ' . $current_user_stats['quiz_points'] ),
 			__METHOD__
 		);
 		if ( $s !== false ) {
@@ -955,19 +960,22 @@ class QuizGameHome extends UnlistedSpecialPage {
 		// encourage them to join the site to play quizzes.
 		if( $user->isLoggedIn() ) {
 			$leaderboard_title = SpecialPage::getTitleFor( 'QuizLeaderboard' );
+			$formattedQuizPoints = $lang->formatNum( $current_user_stats['quiz_points'] );
+			$formattedCorrectAnswers = $lang->formatNum( $current_user_stats['quiz_correct'] );
+			$formattedTotalAnswers = $lang->formatNum( $current_user_stats['quiz_answered'] );
 			$stats_box = '<div class="user-rank">
 					<h2>' . $this->msg( 'quizgame-leaderboard-scoretitle' )->text() . '</h2>
 
 					<p><b>' . $this->msg( 'quizgame-leaderboard-quizpoints' )->text() . "</b></p>
-					<p class=\"user-rank-points\">{$current_user_stats['quiz_points']}</p>
+					<p class=\"user-rank-points\">{$formattedQuizPoints}</p>
 					<div class=\"cleared\"></div>
 
 					<p><b>" . $this->msg( 'quizgame-leaderboard-correct' )->text() . "</b></p>
-					<p>{$current_user_stats['quiz_correct']}</p>
+					<p>{$formattedCorrectAnswers}</p>
 					<div class=\"cleared\"></div>
 
 					<p><b>" . $this->msg( 'quizgame-leaderboard-answered' )->text() . "</b></p>
-					<p>{$current_user_stats['quiz_answered']}</p>
+					<p>{$formattedTotalAnswers}</p>
 					<div class=\"cleared\"></div>
 
 					<p><b>" . $this->msg( 'quizgame-leaderboard-pctcorrect' )->text() . "</b></p>
@@ -1162,6 +1170,9 @@ class QuizGameHome extends UnlistedSpecialPage {
 							</div>';
 		}
 
+		$formattedVoteCount = $lang->formatNum( $stats_data['votes'] );
+		$formattedEditCount = $lang->formatNum( $stats_data['edits'] );
+		$formattedCommentCount = $lang->formatNum( $stats_data['comments'] );
 		$output .= "</div>
 
 				<div class=\"quizgame-right\">
@@ -1188,15 +1199,15 @@ class QuizGameHome extends UnlistedSpecialPage {
 							<ul>
 								<li id=\"userstats-votes\">
 									<img src=\"{$wgExtensionAssetsPath}/QuizGame/images/voteIcon.gif\" border=\"0\" alt=\"\" />
-									{$stats_data['votes']}
+									{$formattedVoteCount}
 								</li>
 								<li id=\"userstats-edits\">
 									<img src=\"{$wgExtensionAssetsPath}/QuizGame/images/pencilIcon.gif\" border=\"0\" alt=\"\" />
-									{$stats_data['edits']}
+									{$formattedEditCount}
 								</li>
 								<li id=\"userstats-comments\">
 									<img src=\"{$wgExtensionAssetsPath}/QuizGame/images/commentsIcon.gif\" border=\"0\" alt=\"\" />
-									{$stats_data['comments']}
+									{$formattedCommentCount}
 								</li>
 							</ul>
 						</div>

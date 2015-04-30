@@ -15,6 +15,7 @@ class QuizLeaderboard extends UnlistedSpecialPage {
 	 * @param $input Mixed: parameter passed to the page or null
 	 */
 	public function execute( $input ) {
+		$lang = $this->getLanguage();
 		$out = $this->getOutput();
 		$user = $this->getUser();
 
@@ -69,7 +70,7 @@ class QuizLeaderboard extends UnlistedSpecialPage {
 			$s = $dbr->selectRow(
 				'user_stats',
 				array( 'COUNT(*) AS count' ),
-				array( 'stats_quiz_points > ' . str_replace( ',', '', $stats_data['quiz_points'] ) ),
+				array( 'stats_quiz_points > ' . $stats_data['quiz_points'] ),
 				__METHOD__
 			);
 			if ( $s !== false ) {
@@ -77,20 +78,23 @@ class QuizLeaderboard extends UnlistedSpecialPage {
 			}
 			$avatar = new wAvatar( $user->getID(), 'm' );
 
+			$formattedTotalPoints = $lang->formatNum( $stats_data['quiz_points'] );
+			$formattedCorrectAnswers = $lang->formatNum( $stats_data['quiz_correct'] );
+			$formattedAnswers = $lang->formatNum( $stats_data['quiz_answered'] );
 			// Display the current user's scorecard
 			$output .= "<div class=\"user-rank-lb\">
 				<h2>{$avatar->getAvatarURL()} " . $this->msg( 'quizgame-leaderboard-scoretitle' )->text() . '</h2>
 
 					<p><b>' . $this->msg( 'quizgame-leaderboard-quizpoints' )->text() . "</b></p>
-					<p class=\"user-rank-points\">{$stats_data['quiz_points']}</p>
+					<p class=\"user-rank-points\">{$formattedTotalPoints}</p>
 					<div class=\"cleared\"></div>
 
 					<p><b>" . $this->msg( 'quizgame-leaderboard-correct' )->text() . "</b></p>
-					<p>{$stats_data['quiz_correct']}</p>
+					<p>{$formattedCorrectAnswers}</p>
 					<div class=\"cleared\"></div>
 
 					<p><b>" . $this->msg( 'quizgame-leaderboard-answered' )->text() . "</b></p>
-					<p>{$stats_data['quiz_answered']}</p>
+					<p>{$formattedAnswers}</p>
 					<div class=\"cleared\"></div>
 
 					<p><b>" . $this->msg( 'quizgame-leaderboard-pctcorrect' )->text() . "</b></p>
@@ -138,7 +142,7 @@ class QuizLeaderboard extends UnlistedSpecialPage {
 		    $user_name = $row->stats_user_name;
 		    $user_title = Title::makeTitle( NS_USER, $row->stats_user_name );
 		    $avatar = new wAvatar( $row->stats_user_id, 'm' );
-			$user_name_short = $this->getLanguage()->truncate( $user_name, 18 );
+			$user_name_short = $lang->truncate( $user_name, 18 );
 
 		    $output .= "<div class=\"top-fan-row\">
 		 		   <span class=\"top-fan-num\">{$x}.</span>
@@ -148,13 +152,13 @@ class QuizLeaderboard extends UnlistedSpecialPage {
 
 			switch( $input ) {
 				case 'correct':
-					$stat = $this->msg( 'quizgame-leaderboard-desc-correct', $this->getLanguage()->formatNum( $row->$field ) )->parse();
+					$stat = $this->msg( 'quizgame-leaderboard-desc-correct', $lang->formatNum( $row->$field ) )->parse();
 					break;
 				case 'percentage':
-					$stat = $this->msg( 'quizgame-leaderboard-desc-pct', $this->getLanguage()->formatNum( $row->$field * 100 ) )->parse();
+					$stat = $this->msg( 'quizgame-leaderboard-desc-pct', $lang->formatNum( $row->$field * 100 ) )->parse();
 					break;
 				case 'points':
-					$stat = $this->msg( 'quizgame-leaderboard-desc-points', $this->getLanguage()->formatNum( $row->$field ) )->parse();
+					$stat = $this->msg( 'quizgame-leaderboard-desc-points', $lang->formatNum( $row->$field ) )->parse();
 					break;
 			}
 
