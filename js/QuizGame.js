@@ -404,7 +404,7 @@ window.QuizGame = {
 		} else {
 			loader = mw.msg( 'quizgame-js-loading' );
 		}
-		mw.loader.using( 'ext.pollNY.lightBox', function() {
+		mw.loader.using( 'ext.quizGame.lightBox', function() {
 			LightBox.setText( loader + textForLightBox );
 		} );
 	},
@@ -419,7 +419,7 @@ window.QuizGame = {
 		objLink.href = '';
 		objLink.title =  mw.msg( 'quizgame-js-loading' );
 
-		mw.loader.using( 'ext.pollNY.lightBox', function() {
+		mw.loader.using( 'ext.quizGame.lightBox', function() {
 			LightBox.show( objLink );
 		} );
 		QuizGame.setLightboxText( '' );
@@ -464,7 +464,7 @@ window.QuizGame = {
 		objLink.href = '';
 		objLink.title = '';
 
-		mw.loader.using( 'ext.pollNY.lightBox', function() {
+		mw.loader.using( 'ext.quizGame.lightBox', function() {
 			LightBox.show( objLink );
 		} );
 
