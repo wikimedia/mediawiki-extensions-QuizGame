@@ -12,33 +12,18 @@
  * @link https://www.mediawiki.org/wiki/Extension:QuizGame Documentation
  */
 
-/**
- * Protect against register_globals vulnerabilities.
- * This line must be present before any global variable is referenced.
- */
-if ( !defined( 'MEDIAWIKI' ) ) {
-	die( "This is not a valid entry point.\n" );
-}
-
 // Extension credits that will show up on Special:Version
 $wgExtensionCredits['specialpage'][] = array(
 	'path' => __FILE__,
 	'name' => 'QuizGame',
-	'version' => '3.1.1',
+	'version' => '3.2',
 	'author' => array( 'Aaron Wright', 'Ashish Datta', 'David Pean', 'Jack Phoenix' ),
 	'descriptionmsg' => 'quizgame-desc',
 	'url' => 'https://www.mediawiki.org/wiki/Extension:QuizGame',
 );
 
 // ResourceLoader support for MediaWiki 1.17+
-$quizGameResourceTemplate = array(
-	'localBasePath' => __DIR__,
-	'remoteExtPath' => 'QuizGame',
-	'position' => 'top' // available since r85616
-);
-
-$wgResourceModules['ext.quizGame'] = $quizGameResourceTemplate + array(
-	'styles' => 'questiongame.css',
+$wgResourceModules['ext.quizGame'] = array(
 	'scripts' => 'js/QuizGame.js',
 	'messages' => array(
 		'quizgame-create-error-numanswers', 'quizgame-create-error-noquestion',
@@ -53,15 +38,21 @@ $wgResourceModules['ext.quizGame'] = $quizGameResourceTemplate + array(
 		'quizgame-create-edit-picture', 'quizgame-edit',
 		'quizgame-ajax-nonnumeric-answer', 'quizgame-ajax-already-answered',
 		'quizgame-ajax-invalid-id'
-	)
+	),
+	'dependencies' => array(
+		'ext.socialprofile.flash',
+		'ext.socialprofile.LightBox'
+	),
+	'localBasePath' => __DIR__,
+	'remoteExtPath' => 'QuizGame',
+	'position' => 'bottom'
 );
 
-$wgResourceModules['ext.quizGame.lightBox'] = $quizGameResourceTemplate + array(
-	'scripts' => 'js/LightBox.js'
-);
-
-$wgResourceModules['ext.quizGame.leaderboard'] = $quizGameResourceTemplate + array(
-	'styles' => 'questiongame.css'
+$wgResourceModules['ext.quizGame.css'] = array(
+	'styles' => 'questiongame.css',
+	'localBasePath' => __DIR__,
+	'remoteExtPath' => 'QuizGame',
+	'position' => 'top'
 );
 
 // quizgame_questions.q_flag used to be an enum() and that sucked, big time

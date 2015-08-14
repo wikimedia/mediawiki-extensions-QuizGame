@@ -23,7 +23,7 @@ class QuizLeaderboard extends UnlistedSpecialPage {
 			$input = 'points';
 		}
 
-		$out->addModules( 'ext.quizGame.leaderboard' );
+		$out->addModuleStyles( 'ext.quizGame.css' );
 
 		$whereConds = array();
 
@@ -87,23 +87,23 @@ class QuizLeaderboard extends UnlistedSpecialPage {
 
 					<p><b>' . $this->msg( 'quizgame-leaderboard-quizpoints' )->text() . "</b></p>
 					<p class=\"user-rank-points\">{$formattedTotalPoints}</p>
-					<div class=\"cleared\"></div>
+					<div class=\"visualClear\"></div>
 
 					<p><b>" . $this->msg( 'quizgame-leaderboard-correct' )->text() . "</b></p>
 					<p>{$formattedCorrectAnswers}</p>
-					<div class=\"cleared\"></div>
+					<div class=\"visualClear\"></div>
 
 					<p><b>" . $this->msg( 'quizgame-leaderboard-answered' )->text() . "</b></p>
 					<p>{$formattedAnswers}</p>
-					<div class=\"cleared\"></div>
+					<div class=\"visualClear\"></div>
 
 					<p><b>" . $this->msg( 'quizgame-leaderboard-pctcorrect' )->text() . "</b></p>
 					<p>{$stats_data['quiz_correct_percent']}%</p>
-					<div class=\"cleared\"></div>
+					<div class=\"visualClear\"></div>
 
 					<p><b>" . $this->msg( 'quizgame-leaderboard-rank' )->text() . "</b></p>
 					<p>{$quiz_rank}</p>
-					<div class=\"cleared\"></div>
+					<div class=\"visualClear\"></div>
 
 				</div>";
 		}
@@ -163,11 +163,11 @@ class QuizLeaderboard extends UnlistedSpecialPage {
 			}
 
 			$output .= "<span class=\"top-fan-points\"><b>{$stat}</b></span>";
-		    $output .= '<div class="cleared"></div>';
+		    $output .= '<div class="visualClear"></div>';
 		    $output .= '</div>';
 		    $x++;
 		}
-		$output .= '</div><div class="cleared"></div>';
+		$output .= '</div><div class="visualClear"></div>';
 
 		$out->addHTML( $output );
 	}

@@ -22,6 +22,7 @@ class ViewQuizzes extends UnlistedSpecialPage {
 		$title = $this->getPageTitle();
 
 		// Add CSS & JS
+		$out->addModuleStyles( 'ext.quizGame.css' );
 		$out->addModules( 'ext.quizGame' );
 
 		// Page either most or newest for everyone
@@ -168,14 +169,14 @@ class ViewQuizzes extends UnlistedSpecialPage {
 						$this->msg( 'quizgame-time-ago', self::getTimeAgo( $quiz_date ) )->parse() .
 					')</p>
 				</div>
-				<div class="cleared"></div>
+				<div class="visualClear"></div>
 			</div>';
 
 			$x++;
 		}
 
 		$output .= '</div>
-		<div class="cleared"></div>';
+		<div class="visualClear"></div>';
 
 		$numofpages = $total / $per_page;
 

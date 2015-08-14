@@ -57,6 +57,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 		$wgSupressPageTitle = true;
 
 		// Add CSS & JS
+		$out->addModuleStyles( 'ext.quizGame.css' );
 		$out->addModules( 'ext.quizGame' );
 
 		// salt at will
@@ -679,7 +680,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 
 							<div id=\"submitted-by-image\" class=\"submitted-by-image\">
 							<a href=\"{$user_title->getFullURL()}\">
-								<img src=\"{$wgUploadPath}/avatars/{$avatarID}\" style=\"border:1px solid #d7dee8; width:50px; height:50px;\" alt=\"\" /></a>
+								<img src=\"{$wgUploadPath}/avatars/{$avatarID}\" alt=\"\" /></a>
 							</div>
 
 							<div id=\"submitted-by-user\" class=\"submitted-by-user\">
@@ -688,20 +689,20 @@ class QuizGameHome extends UnlistedSpecialPage {
 								</div>
 								<ul>
 									<li id=\"userstats-votes\">
-										<img src=\"{$wgExtensionAssetsPath}/QuizGame/images/voteIcon.gif\" border=\"0\" alt=\"\" />
+										<img src=\"{$wgExtensionAssetsPath}/SocialProfile/images/voteIcon.gif\" alt=\"\" />
 										{$formattedVoteCount}
 									</li>
 									<li id=\"userstats-edits\">
-										<img src=\"{$wgExtensionAssetsPath}/QuizGame/images/pencilIcon.gif\" border=\"0\" alt=\"\" />
+										<img src=\"{$wgExtensionAssetsPath}/SocialProfile/images/editIcon.gif\" alt=\"\" />
 										{$formattedEditCount}
 									</li>
 									<li id=\"userstats-comments\">
-										<img src=\"{$wgExtensionAssetsPath}/QuizGame/images/commentsIcon.gif\" border=\"0\" alt=\"\" />
+										<img src=\"{$wgExtensionAssetsPath}/SocialProfile/images/commentsIcon.gif\" alt=\"\" />
 										{$formattedCommentCount}
 									</li>
 								</ul>
 							</div>
-							<div class=\"cleared\"></div>
+							<div class=\"visualClear\"></div>
 						</div>
 
 						<div class=\"ajax-messages\" id=\"ajax-messages\" style=\"margin:20px 0px 15px 0px;\"></div>
@@ -941,7 +942,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 			$editMenu = "
 				<div class=\"edit-menu-quiz-game\">
 					<div class=\"edit-button-quiz-game\">
-						<img src=\"{$wgExtensionAssetsPath}/QuizGame/images/editIcon.gif\" alt=\"\" />
+						<img src=\"{$wgExtensionAssetsPath}/SocialProfile/images/editIcon.gif\" alt=\"\" />
 						<!-- jQuery inserts an edit link here -->
 					</div>
 				</div>";
@@ -968,25 +969,25 @@ class QuizGameHome extends UnlistedSpecialPage {
 
 					<p><b>' . $this->msg( 'quizgame-leaderboard-quizpoints' )->text() . "</b></p>
 					<p class=\"user-rank-points\">{$formattedQuizPoints}</p>
-					<div class=\"cleared\"></div>
+					<div class=\"visualClear\"></div>
 
 					<p><b>" . $this->msg( 'quizgame-leaderboard-correct' )->text() . "</b></p>
 					<p>{$formattedCorrectAnswers}</p>
-					<div class=\"cleared\"></div>
+					<div class=\"visualClear\"></div>
 
 					<p><b>" . $this->msg( 'quizgame-leaderboard-answered' )->text() . "</b></p>
 					<p>{$formattedTotalAnswers}</p>
-					<div class=\"cleared\"></div>
+					<div class=\"visualClear\"></div>
 
 					<p><b>" . $this->msg( 'quizgame-leaderboard-pctcorrect' )->text() . "</b></p>
 					<p>{$current_user_stats['quiz_correct_percent']}%</p>
-					<div class=\"cleared\"></div>
+					<div class=\"visualClear\"></div>
 
 					<p><b>" . $this->msg( 'quizgame-leaderboard-rank' )->text() . "</b></p>
 					<p>{$quiz_rank} <span class=\"user-rank-link\">
 						<a href=\"{$leaderboard_title->getFullURL()}\">(" . $this->msg( 'quizgame-leaderboard-link' )->text() . ")</a>
 					</span></p>
-					<div class=\"cleared\"></div>
+					<div class=\"visualClear\"></div>
 
 				</div>";
 		} else {
@@ -1033,8 +1034,10 @@ class QuizGameHome extends UnlistedSpecialPage {
 				$bar_width = floor( 220 * ( $choice['percent'] / 100 ) );
 				if ( $choice['is_correct'] == 1 ) {
 					$barColor = 'green';
+					$barColorNumber = '3';
 				} else {
 					$barColor = 'red';
+					$barColorNumber = '2';
 				}
 				$incorrectMsg = $correctMsg = '';
 				if ( $user_answer == $choice['id'] && $question['correct_answer'] != $choice['id'] ) {
@@ -1049,15 +1052,12 @@ class QuizGameHome extends UnlistedSpecialPage {
 						$incorrectMsg . $correctMsg .
 					'</div>';
 				$answers .= "<div id=\"one-answer-bar\" style=\"margin-bottom:10px;\" class=\"answer-" . $barColor . "\">
-						<img border=\"0\" style=\"width:{$bar_width}px; height: 9px;\" id=\"one-answer-width\" src=\"{$wgExtensionAssetsPath}/QuizGame/images/vote-bar-" . $barColor . ".gif\"/>
+						<img border=\"0\" style=\"width:{$bar_width}px; height: 9px;\" id=\"one-answer-width\" src=\"{$wgExtensionAssetsPath}/SocialProfile/images/vote-bar-" . $barColorNumber . ".gif\"/>
 						<span class=\"answer-percent\">{$choice['percent']}%</span>
 					</div>";
 				$x++;
 			}
 		}
-
-		// Add lightbox JS to the output
-		$out->addModules( 'ext.quizGame.lightBox' );
 
 		$output = "
 		<div id=\"quizgame-container\" class=\"quizgame-container\">
@@ -1153,14 +1153,16 @@ class QuizGameHome extends UnlistedSpecialPage {
 				if ( $choice['is_correct'] == 1 ) {
 					$answerClass = 'correct';
 					$answerColor = 'green';
+					$answerColorNumber = '3';
 				} else {
 					$answerClass = 'incorrect';
 					$answerColor = 'red';
+					$answerColorNumber = '2';
 				}
 				$output .= "<div class=\"answer-bar\" id=\"answer-bar-one\" style=\"display:block\">
 						<div id=\"one-answer\" class=\"small-answer-" . $answerClass . "\">{$choice['text']}</div>
 						<span id=\"one-answer-bar\" class=\"answer-" . $answerColor . "\">
-							<img border=\"0\" style=\"width:{$bar_width}px; height: 11px;\" id=\"one-answer-width\" src=\"{$wgExtensionAssetsPath}/QuizGame/images/vote-bar-" . $answerColor . ".gif\"/>
+							<img border=\"0\" style=\"width:{$bar_width}px; height: 11px;\" id=\"one-answer-width\" src=\"{$wgExtensionAssetsPath}/SocialProfile/images/vote-bar-" . $answerColorNumber . ".gif\"/>
 							<span id=\"one-answer-percent\" class=\"answer-percent\">{$choice['percent']}%</span>
 						</span>
 					</div>";
@@ -1178,7 +1180,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 				<div class=\"quizgame-right\">
 
 					<div class=\"create-link\">
-						<img border=\"0\" src=\"{$wgExtensionAssetsPath}/QuizGame/images/addIcon.gif\" alt=\"\" />
+						<img border=\"0\" src=\"{$wgExtensionAssetsPath}/SocialProfile/images/addIcon.gif\" alt=\"\" />
 						<a href=\"" . htmlspecialchars( $this->getPageTitle()->getFullURL( 'questionGameAction=createForm' ) ) . '">'
 							. $this->msg( 'quizgame-create-title' )->text() .
 						"</a>
@@ -1188,7 +1190,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 
 						<div id=\"submitted-by-image\" class=\"submitted-by-image\">
 							<a href=\"{$user_title->getFullURL()}\">
-								<img src=\"{$wgUploadPath}/avatars/{$avatarID}\" style=\"border:1px solid #d7dee8; width:50px; height:50px;\" alt=\"\" />
+								<img src=\"{$wgUploadPath}/avatars/{$avatarID}\" alt=\"\" />
 							</a>
 						</div>
 
@@ -1198,20 +1200,20 @@ class QuizGameHome extends UnlistedSpecialPage {
 							</div>
 							<ul>
 								<li id=\"userstats-votes\">
-									<img src=\"{$wgExtensionAssetsPath}/QuizGame/images/voteIcon.gif\" border=\"0\" alt=\"\" />
+									<img src=\"{$wgExtensionAssetsPath}/SocialProfile/images/voteIcon.gif\" alt=\"\" />
 									{$formattedVoteCount}
 								</li>
 								<li id=\"userstats-edits\">
-									<img src=\"{$wgExtensionAssetsPath}/QuizGame/images/pencilIcon.gif\" border=\"0\" alt=\"\" />
+									<img src=\"{$wgExtensionAssetsPath}/SocialProfile/images/editIcon.gif\" alt=\"\" />
 									{$formattedEditCount}
 								</li>
 								<li id=\"userstats-comments\">
-									<img src=\"{$wgExtensionAssetsPath}/QuizGame/images/commentsIcon.gif\" border=\"0\" alt=\"\" />
+									<img src=\"{$wgExtensionAssetsPath}/SocialProfile/images/commentsIcon.gif\" alt=\"\" />
 									{$formattedCommentCount}
 								</li>
 							</ul>
 						</div>
-						<div class=\"cleared\"></div>
+						<div class=\"visualClear\"></div>
 						{$stats_box}
 					</div>
 						<div class=\"bottom-links\" id=\"utility-buttons\">
@@ -1233,16 +1235,16 @@ class QuizGameHome extends UnlistedSpecialPage {
 			"&permalinkID=' + document.getElementById( 'quizGameId' ).value\">" .
 				$this->msg( 'quizgame-permalink' )->text() . '</a>
 
-							<div id="flag-comment" style="display:none;margin-top:5px;">' .
+							<div id="flag-comment">' .
 							$this->msg( 'quizgame-flagged-reason' )->text() . ": <input type=\"text\" size=\"20\" id=\"flag-reason\" />
 							<input type=\"button\" value=\"" . $this->msg( 'quizgame-submit' )->text() . "\" /></div>
 						</div>
 				</div>
 			</div>
 
-			<div class=\"cleared\"></div>
+			<div class=\"visualClear\"></div>
 			<div class=\"hiddendiv\" style=\"display:none\">
-				<img src=\"{$wgExtensionAssetsPath}/QuizGame/images/overlay.png\" alt=\"\" />
+				<img src=\"{$wgExtensionAssetsPath}/SocialProfile/images/overlay.png\" alt=\"\" />
 			</div>";
 
 		$out->addHTML( $output );
