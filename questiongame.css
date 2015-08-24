@@ -49,11 +49,18 @@
 	width: 60px;
 }
 
+.submitted-by-image img {
+	border: 1px solid #d7dee8;
+	width: 50px;
+	height: 50px;
+}
+
 .submitted-by-user {
 	float: left;
 }
 
 .submitted-by-user img {
+	border: 0;
 	vertical-align: middle;
 }
 
@@ -138,7 +145,6 @@
 	background-color: transparent;
 	border: medium none;
 	clear: both;
-	display: none;
 }
 
 #lightboxText {
@@ -154,7 +160,7 @@
 	position: absolute;
 	top: 0;
 	left: 0;
-	z-index: 90;
+	z-index: 101;
 	width: 100%;
 	height: 500px;
 	/* background-image: url(overlay.png); */
@@ -259,39 +265,6 @@ li:hover {
 	margin: 0px 0px 10px !important;
 }
 
-.submitted-by-image {
-	float: left;
-	width: 60px;
-}
-
-.submitted-by-user {
-	float: left;
-}
-
-.submitted-by-user img {
-	vertical-align: middle;
-}
-
-.submitted-by-user a {
-	font-size: 14px;
-	font-weight: bold;
-	text-decoration: none;
-}
-
-.submitted-by-user ul {
-	list-style: none;
-	margin: 3px 0px 0px;
-	padding: 0px;
-}
-
-.submitted-by-user li {
-	color: #333333;
-	float: left;
-	font-size: 12px;
-	font-weight: bold;
-	margin: 0px 6px 0px 0px;
-}
-
 .last-game {
 	width: 100%;
 	border-top: 1px solid #dcdcdc;
@@ -375,6 +348,11 @@ li:hover {
 
 .bottom-links a {
 	text-decoration: none;
+}
+
+#flag-comment {
+	display: none;
+	margin-top: 5px;
 }
 
 .edit-menu-quiz-game {

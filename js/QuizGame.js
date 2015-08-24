@@ -119,7 +119,7 @@ window.QuizGame = {
 		document.getElementById( 'quizgame-upload' ).style.visibility = 'hidden';
 		document.getElementById( 'quizgame-picture' ).innerHTML =
 			'<img src="' + mw.config.get( 'wgExtensionAssetsPath' ) +
-			'/QuizGame/images/ajax-loader-white.gif" alt="" />';
+			'/SocialProfile/images/ajax-loader-white.gif" alt="" />';
 	},
 
 	uploadComplete: function( imgSrc, imgName, imgDesc ) {
@@ -376,16 +376,21 @@ window.QuizGame = {
 	},
 
 	/**
-	 * Get the HTML for the "Loading..." Flash animation.
+	 * Get the HTML for the "Loading..." animation.
 	 *
-	 * @return {string} "Loading" Flash animation HTML
+	 * @return {string} "Loading" animation HTML
 	 */
 	getLoader: function() {
 		var loader = '';
-		loader += '<div id="lightbox-loader"><embed src="' + mw.config.get( 'wgExtensionAssetsPath' ) +
-			'/QuizGame/ajax-loading.swf" quality="high" wmode="transparent" bgcolor="#ffffff"' +
+		loader += '<div id="lightbox-loader">';
+		if ( window.isFlashSupported() ) {
+			loader += '<embed src="' + mw.config.get( 'wgExtensionAssetsPath' ) +
+			'/SocialProfile/images/ajax-loading.swf" quality="high" wmode="transparent" bgcolor="#ffffff"' +
 			'pluginspage="http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash"' +
 			'type="application/x-shockwave-flash" width="100" height="100"></embed></div>';
+		} else {
+			loader += '<img src="' + mw.config.get( 'wgExtensionAssetsPath' ) + '/SocialProfile/images/ajax-loader-white.gif" alt="" />';
+		}
 		return loader;
 	},
 
@@ -404,9 +409,8 @@ window.QuizGame = {
 		} else {
 			loader = mw.msg( 'quizgame-js-loading' );
 		}
-		mw.loader.using( 'ext.quizGame.lightBox', function() {
-			LightBox.setText( loader + textForLightBox );
-		} );
+		LightBox.init();
+		LightBox.setText( loader + textForLightBox );
 	},
 
 	/**
@@ -419,9 +423,8 @@ window.QuizGame = {
 		objLink.href = '';
 		objLink.title =  mw.msg( 'quizgame-js-loading' );
 
-		mw.loader.using( 'ext.quizGame.lightBox', function() {
-			LightBox.show( objLink );
-		} );
+		LightBox.init();
+		LightBox.show( objLink );
 		QuizGame.setLightboxText( '' );
 
 		var gameKey = document.getElementById( 'quizGameKey' ).value;
@@ -464,9 +467,8 @@ window.QuizGame = {
 		objLink.href = '';
 		objLink.title = '';
 
-		mw.loader.using( 'ext.quizGame.lightBox', function() {
-			LightBox.show( objLink );
-		} );
+		LightBox.init();
+		LightBox.show( objLink );
 
 		var quiz_controls = '<div id="quiz-controls"><a href="javascript:void(0)" onclick="QuizGame.pauseQuiz()" class="stop-button">' +
 			mw.msg( 'quizgame-lightbox-pause-quiz' ) + '</a></div>';
@@ -541,7 +543,7 @@ window.QuizGame = {
 		var preview = document.getElementById( 'quizgame-picture-preview' );
 		if ( preview ) {
 			preview.innerHTML = '<img src="' + mw.config.get( 'wgExtensionAssetsPath' ) +
-				'/QuizGame/images/ajax-loader-white.gif" alt="" />';
+				'/SocialProfile/images/ajax-loader-white.gif" alt="" />';
 		}
 	},
 
@@ -706,8 +708,17 @@ jQuery( document ).ready( function() {
 
 		// Answer boxes on the quiz creation view (welcome page)
 		if ( jQuery( 'span#this-is-the-welcome-page' ).length > 0 ) {
-			jQuery( 'input[id^="quizgame-answer-"]' ).on( 'keyup', function() {
-				QuizGame.updateAnswerBoxes();
+			jQuery( 'input[id^="quizgame-answer-"]' ).on( {
+				'input': function() {
+					// Mobile (Android) support
+					// @see https://mathiasbynens.be/notes/oninput
+					// @todo FIXME: jumpy, but better than not showing the boxes 3-8 at all
+					jQuery( this ).off( 'keyup' );
+					QuizGame.updateAnswerBoxes();
+				},
+				'keyup': function() {
+					QuizGame.updateAnswerBoxes();
+				}
 			} );
 		}
 		jQuery( 'input[type="checkbox"]' ).on( 'click', function() {
