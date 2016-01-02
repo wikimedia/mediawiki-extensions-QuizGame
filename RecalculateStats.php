@@ -32,8 +32,7 @@ class QuizRecalcStats extends UnlistedSpecialPage {
 
 		// If user is blocked, s/he doesn't need to access this page
 		if( $user->isBlocked() ) {
-			$out->blockedPage();
-			return;
+			throw new UserBlockedError( $user->getBlock() );
 		}
 
 		$dbw = wfGetDB( DB_MASTER );
