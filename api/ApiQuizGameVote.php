@@ -81,7 +81,6 @@ class ApiQuizGameVote extends ApiBase {
 			array( 'uv_user_id' => $user->getId(), 'uv_q_id' => intval( $id ) ),
 			__METHOD__
 		);
-		$dbw->commit( __METHOD__ );
 
 		// Update answer picked
 		$dbw->update(

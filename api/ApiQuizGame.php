@@ -55,7 +55,6 @@ class ApiQuizGame extends ApiBase {
 					array( 'q_id' => intval( $id ) ),
 					__METHOD__
 				);
-				$dbw->commit( __METHOD__ );
 
 				$output = wfMessage( 'quizgame-ajax-unprotected' )->text();
 
@@ -72,7 +71,6 @@ class ApiQuizGame extends ApiBase {
 					array( 'q_id' => intval( $id ) ),
 					__METHOD__
 				);
-				$dbw->commit( __METHOD__ );
 
 				$output = wfMessage( 'quizgame-ajax-protected' )->text();
 
@@ -106,7 +104,6 @@ class ApiQuizGame extends ApiBase {
 					array( 'q_id' => intval( $id ) ),
 					__METHOD__
 				);
-				$dbw->commit( __METHOD__ );
 
 				$output = wfMessage( 'quizgame-ajax-unflagged' )->text();
 
@@ -147,7 +144,6 @@ class ApiQuizGame extends ApiBase {
 					array( 'q_id' => intval( $id ) ),
 					__METHOD__
 				);
-				$dbw->commit( __METHOD__ );
 
 				$output = wfMessage( 'quizgame-ajax-flagged' )->text();
 
@@ -212,21 +208,18 @@ class ApiQuizGame extends ApiBase {
 					array( 'a_q_id' => intval( $id ) ),
 					__METHOD__
 				);
-				$dbw->commit( __METHOD__ );
 
 				$dbw->delete(
 					'quizgame_choice',
 					array( 'choice_q_id' => intval( $id ) ),
 					__METHOD__
 				);
-				$dbw->commit( __METHOD__ );
 
 				$dbw->delete(
 					'quizgame_questions',
 					array( 'q_id' => intval( $id ) ),
 					__METHOD__
 				);
-				$dbw->commit( __METHOD__ );
 
 				$output = wfMessage( 'quizgame-ajax-deleted' )->text();
 

@@ -1303,7 +1303,6 @@ class QuizGameHome extends UnlistedSpecialPage {
 					),
 					__METHOD__
 				);
-				$dbw->commit( __METHOD__ );
 			}
 		}
 
