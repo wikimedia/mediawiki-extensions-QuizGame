@@ -119,7 +119,7 @@
 	"quizgame-ajax-protected": "The question has been protected.",
 	"quizgame-ajax-unflagged": "The question has been re-instated.",
 	"quizgame-ajax-flagged": "The question has been flagged.",
-	"quizgame-ajax-deleted": "Delete successful!",
+	"quizgame-ajax-deleted": "The question was deleted.",
 	"quizgame-ajax-invalid-option": "Invalid AJAX option.",
 	"quizgame-ajax-nonnumeric-answer": "Answer choice is not numeric.",
 	"quizgame-ajax-already-answered": "You already answered this question.",
