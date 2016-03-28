@@ -70,7 +70,7 @@ class ViewQuizzes extends UnlistedSpecialPage {
 		$dbr = wfGetDB( DB_MASTER );
 
 		$where = array();
-		$where[] = 'q_flag <> ' . QUIZGAME_FLAG_FLAGGED;
+		$where[] = 'q_flag <> ' . QuizGameHome::$FLAG_FLAGGED;
 
 		// Display only a user's most or newest
 		$user = $request->getVal( 'user' );

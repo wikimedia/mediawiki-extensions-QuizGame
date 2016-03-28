@@ -1,0 +1,108 @@
+{
+	"name": "QuizGame",
+	"version": "3.3",
+	"author": [
+		"Aaron Wright",
+		"Ashish Datta",
+		"David Pean",
+		"Jack Phoenix"
+	],
+	"license-name": "GPL-2.0+",
+	"url": "https://www.mediawiki.org/wiki/Extension:QuizGame",
+	"descriptionmsg": "quizgame-desc",
+	"type": "specialpage",
+	"config": {
+		"CreateQuizThresholds": [],
+		"QuizLogs": true
+	},
+	"callback": "QuizGameHooks::registerExtension",
+	"SpecialPages": {
+		"QuizGameHome": "QuizGameHome",
+		"QuestionGameUpload": "SpecialQuestionGameUpload",
+		"QuizLeaderboard": "QuizLeaderboard",
+		"QuizRecalcStats": "QuizRecalcStats",
+		"ViewQuizzes": "ViewQuizzes"
+	},
+	"MessagesDirs": {
+		"QuizGame": [
+			"i18n"
+		]
+	},
+	"APIModules": {
+		"quizgame": "ApiQuizGame",
+		"quizgamevote": "ApiQuizGameVote"
+	},
+	"ExtensionMessagesFiles": {
+		"QuizGameAlias": "QuestionGame.alias.php"
+	},
+	"AutoloadClasses": {
+		"ApiQuizGame": "api/ApiQuizGame.php",
+		"ApiQuizGameVote": "api/ApiQuizGameVote.php",
+		"QuizGameLogFormatter": "QuizGameLogFormatter.php",
+		"QuizGameHome": "QuestionGameHome.body.php",
+		"SpecialQuestionGameUpload": "QuestionGameUpload.php",
+		"QuestionGameUploadForm": "QuestionGameUpload.php",
+		"QuizLeaderboard": "QuizLeaderboard.php",
+		"QuizRecalcStats": "RecalculateStats.php",
+		"ViewQuizzes": "ViewQuizzes.php",
+		"QuizGameHooks": "QuizGameHooks.php"
+	},
+	"Hooks": {
+		"SkinTemplateNavigation::SpecialPage": [
+			"QuizGameHooks::addQuizContentActions"
+		],
+		"MakeGlobalVariablesScript": [
+			"QuizGameHooks::addJSGlobals"
+		],
+		"LoadExtensionSchemaUpdates": [
+			"QuizGameHooks::addTables"
+		],
+		"RenameUserSQL": [
+			"QuizGameHooks::onUserRename"
+		]
+	},
+	"ResourceFileModulePaths": {
+		"localBasePath": "",
+		"remoteExtPath": "QuizGame"
+	},
+	"ResourceModules": {
+		"ext.quizGame": {
+			"scripts": "js/QuizGame.js",
+			"messages": [
+				"quizgame-create-error-numanswers", "quizgame-create-error-noquestion",
+				"quizgame-create-error-numcorrect", "quizgame-js-reloading",
+				"quizgame-js-timesup", "quizgame-js-points",
+				"quizgame-pause-continue", "quizgame-pause-view-leaderboard",
+				"quizgame-pause-create-question", "quizgame-main-page-button",
+				"quizgame-js-loading", "quizgame-lightbox-pause-quiz",
+				"quizgame-lightbox-breakdown", "quizgame-lightbox-breakdown-percent",
+				"quizgame-lightbox-correct", "quizgame-lightbox-incorrect",
+				"quizgame-lightbox-correct-points", "quizgame-lightbox-incorrect-correct",
+				"quizgame-create-edit-picture", "quizgame-edit",
+				"quizgame-ajax-nonnumeric-answer", "quizgame-ajax-already-answered",
+				"quizgame-ajax-invalid-id"
+			],
+			"dependencies": [
+				"ext.socialprofile.flash",
+				"ext.socialprofile.LightBox"
+			],
+			"position": "bottom"
+		},
+		"ext.quizGame.css": {
+			"styles": "questiongame.css",
+			"position": "top"
+		}
+	},
+	"AvailableRights": [
+		"quizadmin"
+	],
+	"GroupPermissions": {
+		"staff": {
+			"quizadmin": true
+		},
+		"sysop": {
+			"quizadmin": true
+		}
+	},
+	"manifest_version": 1
+}

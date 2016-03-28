@@ -51,7 +51,7 @@ class ApiQuizGame extends ApiBase {
 			case 'unprotectItem':
 				$dbw->update(
 					'quizgame_questions',
-					array( 'q_flag' => QUIZGAME_FLAG_NONE ),
+					array( 'q_flag' => QuizGameHome::$FLAG_NONE ),
 					array( 'q_id' => intval( $id ) ),
 					__METHOD__
 				);
@@ -67,7 +67,7 @@ class ApiQuizGame extends ApiBase {
 			case 'protectItem':
 				$dbw->update(
 					'quizgame_questions',
-					array( 'q_flag' => QUIZGAME_FLAG_PROTECT ),
+					array( 'q_flag' => QuizGameHome::$FLAG_PROTECT ),
 					array( 'q_id' => intval( $id ) ),
 					__METHOD__
 				);
@@ -100,7 +100,7 @@ class ApiQuizGame extends ApiBase {
 
 				$dbw->update(
 					'quizgame_questions',
-					array( 'q_flag' => QUIZGAME_FLAG_NONE, 'q_comment' => '' ),
+					array( 'q_flag' => QuizGameHome::$FLAG_NONE, 'q_comment' => '' ),
 					array( 'q_id' => intval( $id ) ),
 					__METHOD__
 				);
@@ -133,14 +133,14 @@ class ApiQuizGame extends ApiBase {
 
 				$dbw->update(
 					'quizgame_questions',
-					array( 'q_flag' => QUIZGAME_FLAG_FLAGGED, 'q_comment' => $comment ),
+					array( 'q_flag' => QuizGameHome::$FLAG_FLAGGED, 'q_comment' => $comment ),
 					array( 'q_id' => intval( $id ) ),
 					__METHOD__
 				);
 
 				$dbw->update(
 					'quizgame_questions',
-					array( 'q_flag' => QUIZGAME_FLAG_FLAGGED ),
+					array( 'q_flag' => QuizGameHome::$FLAG_FLAGGED ),
 					array( 'q_id' => intval( $id ) ),
 					__METHOD__
 				);
@@ -262,7 +262,7 @@ class ApiQuizGame extends ApiBase {
 		$logEntry->setParameters( array(
 			'4::quizid' => $id
 		) );
- 
+
 		$logId = $logEntry->insert();
 		$logEntry->publish( $logId );
 	}

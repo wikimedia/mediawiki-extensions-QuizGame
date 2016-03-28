@@ -1,6 +1,23 @@
 <?php
+/**
+ * QuizGame extension - interactive question game that uses AJAX
+ *
+ * @file
+ * @ingroup Extensions
+ * @author Aaron Wright <aaron.wright@gmail.com>
+ * @author Ashish Datta <ashish@setfive.com>
+ * @author David Pean <david.pean@gmail.com>
+ * @author Jack Phoenix <jack@countervandalism.net>
+ * @license http://www.gnu.org/copyleft/gpl.html GNU General Public License 2.0 or later
+ * @link https://www.mediawiki.org/wiki/Extension:QuizGame Documentation
+ */
 
 class QuizGameHome extends UnlistedSpecialPage {
+
+	// quizgame_questions.q_flag used to be an enum() and that sucked, big time
+	static $FLAG_NONE = 0;
+	static $FLAG_FLAGGED = 1;
+	static $FLAG_PROTECT = 2;
 
 	/**
 	 * @var String: salt used to generate MD5-hashed keys; this is set to
@@ -162,7 +179,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 		$q_id = 0;
 		$sql = "SELECT q_id FROM {$dbr->tableName( 'quizgame_questions' )} {$use_index} WHERE q_id NOT IN
 				(SELECT a_q_id FROM {$dbr->tableName( 'quizgame_answers' )} WHERE a_user_name = {$dbr->addQuotes( $userName )})
-				AND q_flag != " . QUIZGAME_FLAG_FLAGGED . " AND q_user_id <> {$userId} AND q_random > $randstr ORDER by q_random LIMIT 1";
+				AND q_flag != " . QuizGameHome::$FLAG_FLAGGED . " AND q_user_id <> {$userId} AND q_random > $randstr ORDER by q_random LIMIT 1";
 		$res = $dbr->query( $sql, __METHOD__ );
 		$row = $dbr->fetchObject( $res );
 
@@ -173,7 +190,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 		if( $q_id == 0 ) {
 			$sql = "SELECT q_id FROM {$dbr->tableName( 'quizgame_questions' )} {$use_index} WHERE q_id NOT IN
 					(SELECT a_q_id FROM {$dbr->tableName( 'quizgame_answers' )} WHERE a_user_name = {$dbr->addQuotes( $userName )})
-					AND q_flag != " . QUIZGAME_FLAG_FLAGGED . " AND q_user_id <> {$userId} AND q_random < $randstr ORDER by q_random LIMIT 1";
+					AND q_flag != " . QuizGameHome::$FLAG_FLAGGED . " AND q_user_id <> {$userId} AND q_random < $randstr ORDER by q_random LIMIT 1";
 			$res = $dbr->query( $sql, __METHOD__ );
 			$row = $dbr->fetchObject( $res );
 			if( $row ) {
@@ -302,8 +319,8 @@ class QuizGameHome extends UnlistedSpecialPage {
 				// Database::makeList() has a tendency of making the world
 				// explode (see my notes on VideoHooks::onVideoDelete to find
 				// out what I mean)
-				'q_flag = ' . QUIZGAME_FLAG_FLAGGED . ' OR q_flag = ' .
-					QUIZGAME_FLAG_PROTECT
+				'q_flag = ' . QuizGameHome::$FLAG_FLAGGED . ' OR q_flag = ' .
+					QuizGameHome::$FLAG_PROTECT
 			),
 			__METHOD__
 		);
@@ -347,7 +364,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 					<a class=\"delete-by-id\" href=\"#\" data-quiz-id=\"{$row->q_id}\" data-key=\"{$key}\">" .
 					$this->msg( 'quizgame-delete' )->text() . '</a> - ';
 
-			if ( $row->q_flag == QUIZGAME_FLAG_FLAGGED ) {
+			if ( $row->q_flag == QuizGameHome::$FLAG_FLAGGED ) {
 				$buttons .= "<a class=\"protect-by-id\" href=\"#\" data-quiz-id=\"{$row->q_id}\" data-key=\"{$key}\">" .
 					$this->msg( 'quizgame-protect' )->text() . "</a>
 						 - <a class=\"unflag-by-id\" href=\"#\" data-quiz-id=\"{$row->q_id}\" data-key=\"{$key}\">" .
@@ -357,7 +374,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 					$this->msg( 'quizgame-unprotect' )->text() . '</a>';
 			}
 
-			if( $row->q_flag == QUIZGAME_FLAG_FLAGGED ) {
+			if( $row->q_flag == QuizGameHome::$FLAG_FLAGGED ) {
 				$reason = '';
 				if( $row->q_comment != '' ) {
 					$reason = "<div class=\"quizgame-flagged-answers\" id=\"quizgame-flagged-reason-{$row->q_id}\">
@@ -891,8 +908,11 @@ class QuizGameHome extends UnlistedSpecialPage {
 			$prev_question = $this->getQuestion( $lastid );
 		}
 
-		$out->addScript( '<script type="text/javascript">jQuery( document ).ready( function() {
-			mw.loader.using( \'ext.quizGame\', function() { ' . $on_load . " } );
+		// @note This is an extremely filthy hack...but it seems to be working?
+		$out->addScript( '<script type="text/javascript">(window.RLQ = window.RLQ || []).push(function () {
+			jQuery( document ).ready( function() {
+				mw.loader.using( \'ext.quizGame\', function() { ' . $on_load . " } );
+			} );
 		} );</script>\n" );
 
 		$gameid = $question['id'];

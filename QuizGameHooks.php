@@ -101,4 +101,16 @@ class QuizGameHooks {
 		return true;
 	}
 
+	/**
+	 * If quiz logging is enabled, set up the new log type.
+	 */
+	public static function registerExtension() {
+		global $wgQuizLogs, $wgLogTypes, $wgLogActionsHandlers;
+		if ( $wgQuizLogs ) {
+			$wgLogTypes[] = 'quiz';
+			// default log formatter doesn't support wikilinks (?!?) so we have to have
+			// our own formatter here :-(
+			$wgLogActionsHandlers['quiz/*'] = 'QuizGameLogFormatter';
+		}
+	}
 }

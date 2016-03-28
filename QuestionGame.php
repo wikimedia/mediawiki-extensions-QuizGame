@@ -16,7 +16,7 @@
 $wgExtensionCredits['specialpage'][] = array(
 	'path' => __FILE__,
 	'name' => 'QuizGame',
-	'version' => '3.2',
+	'version' => '3.3',
 	'author' => array( 'Aaron Wright', 'Ashish Datta', 'David Pean', 'Jack Phoenix' ),
 	'descriptionmsg' => 'quizgame-desc',
 	'url' => 'https://www.mediawiki.org/wiki/Extension:QuizGame',
@@ -55,14 +55,10 @@ $wgResourceModules['ext.quizGame.css'] = array(
 	'position' => 'top'
 );
 
-// quizgame_questions.q_flag used to be an enum() and that sucked, big time
-define( 'QUIZGAME_FLAG_NONE', 0 );
-define( 'QUIZGAME_FLAG_FLAGGED', 1 );
-define( 'QUIZGAME_FLAG_PROTECT', 2 );
-
 // Set up the new special pages
 $wgMessagesDirs['QuizGame'] = __DIR__ . '/i18n';
 $wgExtensionMessagesFiles['QuizGameAlias'] = __DIR__ . '/QuestionGame.alias.php';
+
 $wgAutoloadClasses['QuizGameLogFormatter'] = __DIR__ . '/QuizGameLogFormatter.php';
 $wgAutoloadClasses['QuizGameHome'] = __DIR__ . '/QuestionGameHome.body.php';
 $wgAutoloadClasses['SpecialQuestionGameUpload'] = __DIR__ . '/QuestionGameUpload.php';
@@ -70,6 +66,7 @@ $wgAutoloadClasses['QuestionGameUploadForm'] = __DIR__ . '/QuestionGameUpload.ph
 $wgAutoloadClasses['QuizLeaderboard'] = __DIR__ . '/QuizLeaderboard.php';
 $wgAutoloadClasses['QuizRecalcStats'] = __DIR__ . '/RecalculateStats.php';
 $wgAutoloadClasses['ViewQuizzes'] = __DIR__ . '/ViewQuizzes.php';
+
 $wgSpecialPages['QuizGameHome'] = 'QuizGameHome';
 $wgSpecialPages['QuestionGameUpload'] = 'SpecialQuestionGameUpload';
 $wgSpecialPages['QuizLeaderboard'] = 'QuizLeaderboard';
@@ -79,6 +76,7 @@ $wgSpecialPages['ViewQuizzes'] = 'ViewQuizzes';
 // API modules
 $wgAutoloadClasses['ApiQuizGame'] = __DIR__ . '/api/ApiQuizGame.php';
 $wgAPIModules['quizgame'] = 'ApiQuizGame';
+
 $wgAutoloadClasses['ApiQuizGameVote'] = __DIR__ . '/api/ApiQuizGameVote.php';
 $wgAPIModules['quizgamevote'] = 'ApiQuizGameVote';
 

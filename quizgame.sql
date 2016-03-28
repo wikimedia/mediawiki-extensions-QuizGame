@@ -3,10 +3,10 @@ CREATE TABLE /*_*/quizgame_questions (
   `q_id` int(11) unsigned NOT NULL auto_increment PRIMARY KEY,
   `q_user_id` int(11) unsigned NOT NULL default '0',
   `q_user_name` varchar(255) NOT NULL default '',
-  -- One of the QUIZGAME_FLAG_* constants
-  -- 0 = QUIZGAME_FLAG_NONE = default state
-  -- 1 = QUIZGAME_FLAG_FLAGGED = flagged
-  -- 2 = QUIZGAME_FLAG_PROTECT = protected
+  -- One of the QuizGameHome::$FLAG_* static variables
+  -- 0 = QuizGameHome::$FLAG_NONE = default state
+  -- 1 = QuizGameHome::$FLAG_FLAGGED = flagged
+  -- 2 = QuizGameHome::$FLAG_PROTECT = protected
   --`q_flag` enum('NONE','PROTECT','FLAGGED') NOT NULL default 'NONE',
   `q_flag` tinyint(2) NOT NULL default '0',
   `q_text` varchar(255) NOT NULL default '',

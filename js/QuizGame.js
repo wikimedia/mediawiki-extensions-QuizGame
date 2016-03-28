@@ -17,7 +17,7 @@ window.QuizGame = {
 	points_array: [30, 20, 10, 0],
 	timer: 30,
 	count_second: '', // has to have an initial value...
-	points: __quiz_js_points_value__,// 30,
+	points: mw.config.get( '__quiz_js_points_value__' ),// 30,
 	next_level: 0, // has to have an initial value; introduced by Jack
 
 	deleteById: function( id, key ) {
