@@ -48,15 +48,16 @@ class ViewQuizzes extends UnlistedSpecialPage {
 			$limitvalue = $page * $limit - ( $limit );
 		}
 
+		$linkRenderer = $this->getLinkRenderer();
 		$quizGameHome = SpecialPage::getTitleFor( 'QuizGameHome' );
 		$output = '<div class="view-quizzes-top-links">' .
-			Linker::link(
+			$linkRenderer->makeLink(
 				$quizGameHome,
 				$this->msg( 'quizgame-playneverending' )->text(),
 				array(),
 				array( 'questionGameAction' => 'launchGame' )
 			) . ' - ' .
-			Linker::link(
+			$linkRenderer->makeLink(
 				$quizGameHome,
 				$this->msg( 'quizgame-viewquizzes-create' )->text(),
 				array(),
@@ -83,7 +84,7 @@ class ViewQuizzes extends UnlistedSpecialPage {
 		if( $type == 'newest' ) {
 			$linkQueryParameters['type'] = 'most';
 			$output .= '<p><b>' . $this->msg( 'quizgame-newest' )->text() . '</b></p>
-				<p>' . Linker::link(
+				<p>' . $linkRenderer->makeLink(
 					$title,
 					$this->msg( 'quizgame-popular' )->text(),
 					array(),
@@ -91,7 +92,7 @@ class ViewQuizzes extends UnlistedSpecialPage {
 				) . '</p>';
 		} else {
 			$linkQueryParameters['type'] = 'newest';
-			$output .= '<p>' . Linker::link(
+			$output .= '<p>' . $linkRenderer->makeLink(
 				$title,
 				$this->msg( 'quizgame-newest' )->text(),
 				array(),
@@ -185,7 +186,7 @@ class ViewQuizzes extends UnlistedSpecialPage {
 			if( $page > 1 ) {
 				$linkQueryParameters['type'] = 'most';
 				$linkQueryParameters['page'] = ( $page - 1 );
-				$output .= Linker::link(
+				$output .= $linkRenderer->makeLink(
 					$title,
 					$this->msg( 'quizgame-prev' )->text(),
 					array(),
@@ -209,7 +210,7 @@ class ViewQuizzes extends UnlistedSpecialPage {
 				} else {
 					$linkQueryParameters['type'] = 'most';
 					$linkQueryParameters['page'] = $i;
-					$output .= Linker::link(
+					$output .= $linkRenderer->makeLink(
 						$title,
 						$i,
 						array(),
@@ -222,7 +223,7 @@ class ViewQuizzes extends UnlistedSpecialPage {
 				$linkQueryParameters['type'] = 'most';
 				$linkQueryParameters['page'] = ( $page + 1 );
 				$output .= $this->msg( 'word-separator' )->text() .
-					Linker::link(
+					$linkRenderer->makeLink(
 						$title,
 						$this->msg( 'quizgame-nav-next' )->text(),
 						array(),

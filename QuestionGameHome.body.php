@@ -351,7 +351,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 			}
 
 			$key = md5( $this->SALT . $row->q_id );
-			$buttons = Linker::link(
+			$buttons = $this->getLinkRenderer()->makeLink(
 				$this->getPageTitle(),
 				$this->msg( 'quizgame-edit' )->text(),
 				array(),
@@ -966,7 +966,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 					</div>
 				</div>";
 
-			$editLinks = Linker::link(
+			$editLinks = $this->getLinkRenderer()->makeLink(
 				$this->getPageTitle(),
 				$this->msg( 'quizgame-admin-panel-title' )->text(),
 				array(),

@@ -128,7 +128,7 @@ class QuizLeaderboard extends UnlistedSpecialPage {
 		$output .= '</div>';
 
 		$output .= '<div class="quiz-leaderboard-top-links">' .
-			Linker::link(
+			$this->getLinkRenderer()->makeLink(
 				$quizgame_title,
 				$this->msg( 'quizgame-admin-back' )->text(),
 				array(),
