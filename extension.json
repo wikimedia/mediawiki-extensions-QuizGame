@@ -42,6 +42,7 @@
 		"QuizGameHome": "QuestionGameHome.body.php",
 		"SpecialQuestionGameUpload": "QuestionGameUpload.php",
 		"QuestionGameUploadForm": "QuestionGameUpload.php",
+		"QuizFileUpload": "QuestionGameUpload.php",
 		"QuizLeaderboard": "QuizLeaderboard.php",
 		"QuizRecalcStats": "RecalculateStats.php",
 		"ViewQuizzes": "ViewQuizzes.php",
