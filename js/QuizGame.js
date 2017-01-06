@@ -647,7 +647,7 @@ window.QuizGame = {
 	}
 };
 
-jQuery( document ).ready( function() {
+jQuery( function() {
 	// Code specific to Special:QuizGameHome
 	if ( mw.config.get( 'wgCanonicalSpecialPageName' ) == 'QuizGameHome' ) {
 		// When editing a quiz game that has an image
