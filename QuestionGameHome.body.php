@@ -1437,11 +1437,10 @@ class QuizGameHome extends UnlistedSpecialPage {
 
 			<h1 style="margin-top:20px">' .
 				$this->msg( 'quizgame-create-add-picture' )->text() . '</h1>
-			<div id="quizgame-picture-upload" style="display:block;">
+			<div id="quizgame-picture-upload">
 
-				<div id="real-form" style="display:block; height:90px;">
-					<iframe id="imageUpload-frame" class="imageUpload-frame" width="650"
-						scrolling="no" border="0" frameborder="0" src="' .
+				<div id="real-form">
+					<iframe id="imageUpload-frame" class="imageUpload-frame" src="' .
 						htmlspecialchars( SpecialPage::getTitleFor( 'QuestionGameUpload' )->getFullURL( 'wpThumbWidth=75' ) ) . '">
 					</iframe>
 				</div>

@@ -1,3 +1,18 @@
+/* image upload frame */
+#quizgame-picture-upload {
+	display: block;
+}
+
+#real-form {
+	display: block;
+}
+
+.imageUpload-frame {
+	border: 0;
+	width: 650px;
+	overflow: hidden;
+}
+
 /* Quizboard */
 .quiz-leaderboard-nav {
 	float: right;
@@ -82,11 +97,6 @@
 	font-size: 12px;
 	font-weight: bold;
 	margin: 0px 6px 0px 0px;
-}
-
-.imageUpload-frame {
-	height: 90px;
-	border: medium none;
 }
 
 .startButton {
