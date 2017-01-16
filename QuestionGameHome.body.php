@@ -368,7 +368,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 				$buttons .= "<a class=\"protect-by-id\" href=\"#\" data-quiz-id=\"{$row->q_id}\" data-key=\"{$key}\">" .
 					$this->msg( 'quizgame-protect' )->text() . "</a>
 						 - <a class=\"unflag-by-id\" href=\"#\" data-quiz-id=\"{$row->q_id}\" data-key=\"{$key}\">" .
-						 $this->msg( 'quizgame-reinstate' )->text() . '</a>';
+						 $this->msg( 'quizgame-unflag' )->text() . '</a>';
 			} else {
 				$buttons .= "<a class=\"unprotect-by-id\" href=\"#\" data-quiz-id=\"{$row->q_id}\" data-key=\"{$key}\">" .
 					$this->msg( 'quizgame-unprotect' )->text() . '</a>';

@@ -21,39 +21,59 @@ window.QuizGame = {
 	next_level: 0, // has to have an initial value; introduced by Jack
 
 	deleteById: function( id, key ) {
-		document.getElementById( 'items[' + id + ']' ).style.display = 'none';
-		document.getElementById( 'items[' + id + ']' ).style.visibility = 'hidden';
+		var options = {
+			actions: [
+				{ label: mw.msg( 'quizgame-cancel' ) },
+				{ label: mw.msg( 'quizgame-delete' ), action: 'accept', flags: ['destructive'] }
+			]
+		}
+		OO.ui.confirm( mw.msg( 'quizgame-delete-confirm' ), options ).done( function ( confirmed ) {
+			if ( confirmed ) {
+				document.getElementById( 'items[' + id + ']' ).style.display = 'none';
+				document.getElementById( 'items[' + id + ']' ).style.visibility = 'hidden';
 
-		jQuery.getJSON(
-			mw.util.wikiScript( 'api' ), {
-				format: 'json',
-				action: 'quizgame',
-				quizaction: 'deleteItem',
-				key: key,
-				id: id
-			},
-			function( data ) {
-				document.getElementById( 'ajax-messages' ).innerHTML = data.quizgame.output;
+				jQuery.getJSON(
+					mw.util.wikiScript( 'api' ), {
+						format: 'json',
+						action: 'quizgame',
+						quizaction: 'deleteItem',
+						key: key,
+						id: id
+					},
+					function( data ) {
+						document.getElementById( 'ajax-messages' ).innerHTML = data.quizgame.output;
+					}
+				);
 			}
-		);
+		});
 	},
 
 	unflagById: function( id, key ) {
-		document.getElementById( 'items[' + id + ']' ).style.display = 'none';
-		document.getElementById( 'items[' + id + ']' ).style.visibility = 'hidden';
+		var options = {
+			actions: [
+				{ label: mw.msg( 'quizgame-cancel' ) },
+				{ label: mw.msg( 'quizgame-unflag' ), action: 'accept', flags: ['constructive'] }
+			]
+		}
+		OO.ui.confirm( mw.msg( 'quizgame-unflag-confirm' ), options ).done( function ( confirmed ) {
+			if ( confirmed ) {
+				document.getElementById( 'items[' + id + ']' ).style.display = 'none';
+				document.getElementById( 'items[' + id + ']' ).style.visibility = 'hidden';
 
-		jQuery.getJSON(
-			mw.util.wikiScript( 'api' ), {
-				format: 'json',
-				action: 'quizgame',
-				quizaction: 'unflagItem',
-				key: key,
-				id: id
-			},
-			function( data ) {
-				document.getElementById( 'ajax-messages' ).innerHTML = data.quizgame.output;
+				jQuery.getJSON(
+					mw.util.wikiScript( 'api' ), {
+						format: 'json',
+						action: 'quizgame',
+						quizaction: 'unflagItem',
+						key: key,
+						id: id
+					},
+					function( data ) {
+						document.getElementById( 'ajax-messages' ).innerHTML = data.quizgame.output;
+					}
+				);
 			}
-		);
+		});
 	},
 
 	unprotectById: function( id, key ) {
@@ -166,22 +186,32 @@ window.QuizGame = {
 	},
 
 	deleteQuestion: function() {
-		var gameKey = document.getElementById( 'quizGameKey' ).value;
-		var gameId = document.getElementById( 'quizGameId' ).value;
-		jQuery.getJSON(
-			mw.util.wikiScript( 'api' ), {
-				format: 'json',
-				action: 'quizgame',
-				quizaction: 'deleteItem',
-				key: gameKey,
-				id: gameId
-			},
-			function( data ) {
-				document.getElementById( 'ajax-messages' ).innerHTML = data.quizgame.output + '<br />' + mw.msg( 'quizgame-js-reloading' );
-				document.location = mw.config.get( 'wgScriptPath' ) +
-					'/index.php?title=Special:QuizGameHome&questionGameAction=launchGame';
+		var options = {
+			actions: [
+				{ label: mw.msg( 'quizgame-cancel' ) },
+				{ label: mw.msg( 'quizgame-delete' ), action: 'accept', flags: ['destructive'] }
+			]
+		}
+		OO.ui.confirm( mw.msg( 'quizgame-delete-confirm' ), options ).done( function ( confirmed ) {
+			if ( confirmed ) {
+				var gameKey = document.getElementById( 'quizGameKey' ).value;
+				var gameId = document.getElementById( 'quizGameId' ).value;
+				jQuery.getJSON(
+					mw.util.wikiScript( 'api' ), {
+						format: 'json',
+						action: 'quizgame',
+						quizaction: 'deleteItem',
+						key: gameKey,
+						id: gameId
+					},
+					function( data ) {
+						document.getElementById( 'ajax-messages' ).innerHTML = data.quizgame.output + '<br />' + mw.msg( 'quizgame-js-reloading' );
+						document.location = mw.config.get( 'wgScriptPath' ) +
+						'/index.php?title=Special:QuizGameHome&questionGameAction=launchGame';
+					}
+				);
 			}
-		);
+		} );
 	},
 
 	showEditMenu: function() {

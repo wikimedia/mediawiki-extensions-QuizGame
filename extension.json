@@ -1,6 +1,6 @@
 {
 	"name": "QuizGame",
-	"version": "3.4",
+	"version": "3.5",
 	"author": [
 		"Aaron Wright",
 		"Ashish Datta",
@@ -81,11 +81,14 @@
 				"quizgame-lightbox-correct-points", "quizgame-lightbox-incorrect-correct",
 				"quizgame-create-edit-picture", "quizgame-edit",
 				"quizgame-ajax-nonnumeric-answer", "quizgame-ajax-already-answered",
-				"quizgame-ajax-invalid-id"
+				"quizgame-ajax-invalid-id", "quizgame-delete-confirm", "quizgame-delete",
+				"quizgame-cancel", "quizgame-unflag", "quizgame-unflag-confirm"
 			],
 			"dependencies": [
 				"ext.socialprofile.flash",
-				"ext.socialprofile.LightBox"
+				"ext.socialprofile.LightBox",
+				"oojs-ui-core",
+				"oojs-ui-windows"
 			],
 			"position": "bottom"
 		},
