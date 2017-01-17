@@ -113,8 +113,7 @@ class ViewQuizzes extends UnlistedSpecialPage {
 			'quizgame_questions',
 			array(
 				'q_id', 'q_user_id', 'q_user_name', 'q_text',
-				'UNIX_TIMESTAMP(q_date) AS quiz_date', 'q_picture',
-				'q_answer_count'
+				'q_date', 'q_picture', 'q_answer_count'
 			),
 			$where,
 			__METHOD__,
@@ -143,7 +142,7 @@ class ViewQuizzes extends UnlistedSpecialPage {
 			$user_id = $row->q_user_id;
 			$avatar = new wAvatar( $user_id, 'm' );
 			$quiz_title = $row->q_text;
-			$quiz_date = $row->quiz_date;
+			$quiz_date = wfTimestamp( TS_UNIX, $row->q_date );
 			$quiz_answers = $row->q_answer_count;
 			$quiz_id = $row->q_id;
 			$row_id = "quizz-row-{$x}";
