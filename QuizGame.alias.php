@@ -6,10 +6,10 @@
  * @ingroup Extensions
  */
 
-$aliases = array();
+$specialPageAliases = array();
 
 /** English */
-$aliases['en'] = array(
+$specialPageAliases['en'] = array(
 	'QuizGameHome' => array( 'QuizGameHome' ),
 	'QuestionGameUpload' => array( 'QuestionGameUpload' ),
 	'QuizLeaderboard' => array( 'QuizLeaderboard' ),
@@ -18,7 +18,7 @@ $aliases['en'] = array(
 );
 
 /** Finnish (Suomi) */
-$aliases['fi'] = array(
+$specialPageAliases['fi'] = array(
 	'QuizGameHome' => array( 'Kysymyspelin kotisivu' ),
 	'QuizLeaderboard' => array( 'Kysymyspelin tilastot' ), # "Quiz Game Statistics", since I couldn't find a translation for "leaderboard"
 	'ViewQuizzes' => array( 'Katso kysymyksiä' ),

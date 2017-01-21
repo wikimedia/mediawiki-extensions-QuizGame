@@ -1,6 +1,6 @@
 {
 	"name": "QuizGame",
-	"version": "3.5",
+	"version": "3.6",
 	"author": [
 		"Aaron Wright",
 		"Ashish Datta",
@@ -33,7 +33,7 @@
 		"quizgamevote": "ApiQuizGameVote"
 	},
 	"ExtensionMessagesFiles": {
-		"QuizGameAlias": "QuestionGame.alias.php"
+		"QuizGameAlias": "QuizGame.alias.php"
 	},
 	"AutoloadClasses": {
 		"ApiQuizGame": "api/ApiQuizGame.php",
