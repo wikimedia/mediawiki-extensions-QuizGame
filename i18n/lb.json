@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"Robby"
+		]
+	},
+	"quizgame-edit-picture-link": "Bild änneren",
+	"quizgame-question": "Fro",
+	"quizgame-answers": "Äntwerten",
+	"quizgame-correct-answer-checked": "Déi richteg Äntwert ass markéiert.",
+	"quizgame-nomore-questions": "Keng Froe méi!",
+	"quizgame-create-error-noquestion": "Dir musst eng Fro schreiwen",
+	"quizgame-ajax-already-answered": "Dir hutt dës Fro scho beäntwert.",
+	"apihelp-quizgame-example-1": "E Quiz markéieren."
+}

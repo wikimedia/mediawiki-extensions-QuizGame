@@ -1,0 +1,21 @@
+{
+	"@metadata": {
+		"authors": [
+			"MIKHEIL"
+		]
+	},
+	"quizgame-edit-picture-link": "სურათის რედაქტირება",
+	"quizgame-question": "შეკითხვა",
+	"quizgame-answers": "პასუხები",
+	"quizgame-correct-answer-checked": "სწორი პასუხი შემოწმებულია",
+	"quizgame-nomore-questions": "მეტი შეკითხვა არაა!",
+	"quizgame-leaderboard-order-menu": "რიგი",
+	"quizgame-lightbox-pause-quiz": "ქვიზის დაპაუზება",
+	"quizgame-prev": "გადახედვა",
+	"quizgame-viewquizzes-create": "შექმენით ქვიზის კითხვა",
+	"quizgame-create-error-noquestion": "უნდა დაწეროთ შეკითხვა",
+	"quizgame-play-quiz": "ითამაშეთ დაუსრულებელი ქვიზი",
+	"quizgame-last-question": "ბოლო კითხვა",
+	"quizgame-ajax-already-answered": "თქვენ უკვე უპასუხეთ ამ შეკითხვას.",
+	"apihelp-quizgame-example-2": "ქვიზის წაშლა"
+}
