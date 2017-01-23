@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Metalhead64"
+			"Metalhead64",
+			"Eddie"
 		]
 	},
 	"quizgame-desc": "Ergänzt ein interaktives [[Special:QuizGameHome|Fragespiel]]",
@@ -99,7 +100,7 @@
 	"quizgame-play-quiz": "Spiel das nie endende Quiz",
 	"quizgame-create-write-question": "Eine Frage verfassen",
 	"quizgame-create-write-answers": "Die Antworten verfassen",
-	"quizgame-create-check-correct": "Bitte kontrolliere die richtige Antwort.",
+	"quizgame-create-check-correct": "Bitte wähle die richtige Antwort.",
 	"quizgame-create-add-picture": "Ein Bild hinzufügen",
 	"quizgame-create-edit-picture": "Bild bearbeiten",
 	"quizgame-create-play": "Erstellen und spielen!",

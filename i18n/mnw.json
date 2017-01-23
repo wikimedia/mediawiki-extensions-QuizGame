@@ -1,0 +1,42 @@
+{
+	"@metadata": {
+		"authors": [
+			"Dr Lotus Black"
+		]
+	},
+	"quizgame-edit": "တည်းဖြတ်ရန်",
+	"quizgame-delete": "ဖျက်",
+	"quizgame-cancel": "ပယ်ဖျက်",
+	"quizgame-protect": "ကာကွယ်",
+	"quizgame-unprotect": "ကာကွယ်ခြင်းမှ ပယ်ဖျက်",
+	"quizgame-admin-protected": "ကာကွယ်ထားသော မေးခွန်းများ",
+	"quizgame-edit-title": "တည်းဖြတ်နေသည် - $1",
+	"quizgame-flagged-reason": "အကြောင်းပြချက်",
+	"quizgame-question": "မေးခွန်း",
+	"quizgame-answers": "အဖြေများ",
+	"quizgame-cancel-button": "ပယ်ဖျက်",
+	"quizgame-main-page-button": "ဗဟိုစာမျက်နှာ",
+	"quizgame-login-button": "ဝင်မည်",
+	"quizgame-leaderboard-correct": "အဖြေမှန်များ",
+	"quizgame-leaderboard-answered": "မေးခွန်းများ ဖြေပြီး",
+	"quizgame-leaderboard-pctcorrect": "မှန်ကန်မှု ရာခိုင်နှုန်း",
+	"quizgame-leaderboard-menu-points": "ရမှတ်များ",
+	"quizgame-leaderboard-menu-correct": "စုစုပေါင်း မှန်ကန်မှု",
+	"quizgame-leaderboard-menu-pct": "အမြင့်ဆုံး ရာခိုင်နှုန်း",
+	"quizgame-your-answer": "သင်၏ အဖြေ",
+	"quizgame-correct-answer": "အဖြေမှန်များ",
+	"quizgame-js-points": "$1 ရမှတ်များ",
+	"quizgame-js-seconds": "စက္ကန့်များ",
+	"quizgame-lightbox-incorrect-correct": "အဖြေမှန်မှာ: $1",
+	"quizgame-skip": "ကျော်သွားမည်",
+	"quizgame-nav-next": "နောက်ထပ်",
+	"quizgame-newest": "အသစ်ဆုံး",
+	"quizgame-create-error-numcorrect": "အဖြေမှန်တစ်ခု ရှိရပါမည်",
+	"quizgame-create-write-question": "မေးခွန်း ရေးမည်",
+	"quizgame-create-write-answers": "အဖြေများကို ရေးပါ",
+	"quizgame-pause-continue": "ဆက်သွားမည်",
+	"quizgame-pause-create-question": "မေးခွန်း ဖန်တီးမည်",
+	"quizgame-last-question": "နောက်ဆုံး မေးခွန်း",
+	"quizgame-time-ago": "$1 အကြာက",
+	"apihelp-quizgamevote-example-1": "မဲပေး"
+}

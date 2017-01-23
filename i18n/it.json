@@ -1,0 +1,32 @@
+{
+	"@metadata": {
+		"authors": [
+			"Valeria Spalla"
+		]
+	},
+	"quizgame-edit": "Modifica",
+	"quizgame-protect": "Proteggi",
+	"quizgame-submitted-by": "Inviato il",
+	"quizgame-login-text": "Devi essere registrato per creare un quiz!",
+	"quizgame-submit": "Invia",
+	"quizgame-intro": "Benvenuti al gioco a quiz. Qui ci sono alcune regole.",
+	"quizgame-leaderboard-desc-correct": "$1 corretto",
+	"quizgame-pct-answered-correct": "$1% ha risposto a questa domanda correttamente",
+	"quizgame-skipped": "Hai saltato questa domanda",
+	"quizgame-lightbox-pause-quiz": "Metti in pausa il quiz",
+	"quizgame-lightbox-correct-points": "Hai guadagnato $1 punti",
+	"quizgame-next": "Prossima domanda del quiz",
+	"quizgame-chose-correct": "Hai scelto la risposta corretta alla domanda precedente! ($1 punti)",
+	"quizgame-nav-next": "prossimo",
+	"quizgame-popular": "Popolare",
+	"quizgame-permalink": "Link permanente",
+	"quizgame-create-add-picture": "Aggiungi una foto",
+	"quizgame-last-question": "Ultima Domanda",
+	"quizgame-create-threshold-title": "Crea una domanda del quiz",
+	"quizgame-create-threshold-reason": "Mi dispiace, non è possibile creare un quiz di domande fino a quando si dispone di almeno $1",
+	"quizgame-time-ago": "$1 fa",
+	"quizgame-time-hours": "{{PLURAL:$1|un'ora|$1 ore}}",
+	"quizgame-time-seconds": "{{PLURAL:$1|one second|$1 seconds}}",
+	"logentry-quiz-delete": "$1 eliminato [[Speciale:QuizGameHome/$4|domanda-quiz #$4]]",
+	"apihelp-quizgamevote-param-answer": "Risposta numerica ID."
+}

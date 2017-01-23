@@ -1,0 +1,18 @@
+{
+	"@metadata": {
+		"authors": [
+			"Banjo"
+		]
+	},
+	"quizgame-edit": "Editar",
+	"quizgame-delete": "Borrar",
+	"quizgame-cancel": "Cancelar",
+	"quizgame-flagged-reason": "Motivo",
+	"quizgame-submitted-by": "Enviado por",
+	"quizgame-question": "Pregunta",
+	"quizgame-answers": "Respostas",
+	"quizgame-picture": "Imaxe",
+	"quizgame-save-page-button": "Gardar a páxina",
+	"quizgame-cancel-button": "Cancelar",
+	"quizgame-leaderboard-menu-points": "Puntos"
+}
