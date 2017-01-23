@@ -13,6 +13,8 @@
 	"quizgame-unflag": "Link title; un-flagging returns a flagged quiz into the pool of available quizzes, allowing users to play it again",
 	"quizgame-unflag-confirm": "Confirmation message shown in the un-flag dialog",
 	"quizgame-unprotect": "Link title\n{{Identical|Unprotect}}",
+	"quizgame-error-socialprofile": "Error message shown when SocialProfle extension is not installed.",
+	"quizgame-error-socialprofile-title": "Title for <code>quizgame-error-socialprofile</code>.",
 	"quizgame-admin-panel-title": "Link title",
 	"quizgame-admin-back": "Link title on the admin panel; clicking on this link takes you back to the question game from the administrative functions",
 	"quizgame-admin-flagged": "Header title on the admin panel of QuizGame",

@@ -14,6 +14,8 @@
 	"quizgame-unflag": "Un-flag",
 	"quizgame-unflag-confirm": "Are you sure you want to un-flag this quiz game?",
 	"quizgame-unprotect": "Unprotect",
+	"quizgame-error-socialprofile": "[https://www.mediawiki.org/wiki/Extension:SocialProfile SocialProfile extension] is not installed. Please install this extension and try again.",
+	"quizgame-error-socialprofile-title": "SocialProfile extension is not installed.",
 	"quizgame-admin-panel-title": "Admin panel",
 	"quizgame-admin-back": "< Back to never ending quiz",
 	"quizgame-admin-flagged": "Flagged questions",

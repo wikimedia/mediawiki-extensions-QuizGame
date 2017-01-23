@@ -52,6 +52,12 @@ class QuizGameHome extends UnlistedSpecialPage {
 			return false;
 		}
 
+		// https://phabricator.wikimedia.org/T155405
+		// Throws error message when SocialProfile extension is not installed
+		if( !class_exists( 'UserStats' ) ) {
+			throw new ErrorPageError( 'quizgame-error-socialprofile-title', 'quizgame-error-socialprofile' );
+		}
+
 		// Blocked through Special:Block? No access for you either!
 		if( $user->isBlocked() ) {
 			throw new UserBlockedError( $user->getBlock() );
