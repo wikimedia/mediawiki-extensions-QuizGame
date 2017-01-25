@@ -351,7 +351,7 @@ window.QuizGame = {
 				//document.getElementById( 'quiz-level-' + ( x ) ).className = 'quiz-level-on';
 				QuizGame.points = QuizGame.points_array[x];
 				document.getElementById( 'quiz-points' ).innerHTML =
-					mw.msg( 'quizgame-js-points', QuizGame.points );
+					mw.message( 'quizgame-js-points', QuizGame.points ).text();
 				QuizGame.next_level = ( ( QuizGame.levels_array[x + 1] ) ? QuizGame.levels_array[x + 1] : 0 );
 			} else {
 				//document.getElementById( 'quiz-level-' + ( x ) ).className = 'quiz-level-off';
