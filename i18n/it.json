@@ -1,11 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"Valeria Spalla"
+			"Valeria Spalla",
+			"Beta16"
 		]
 	},
 	"quizgame-edit": "Modifica",
 	"quizgame-protect": "Proteggi",
+	"quizgame-error-socialprofile-title": "L'estensione SocialProfile non è installata.",
 	"quizgame-submitted-by": "Inviato il",
 	"quizgame-login-text": "Devi essere registrato per creare un quiz!",
 	"quizgame-submit": "Invia",
@@ -21,12 +23,12 @@
 	"quizgame-popular": "Popolare",
 	"quizgame-permalink": "Link permanente",
 	"quizgame-create-add-picture": "Aggiungi una foto",
-	"quizgame-last-question": "Ultima Domanda",
+	"quizgame-last-question": "Ultima domanda",
 	"quizgame-create-threshold-title": "Crea una domanda del quiz",
 	"quizgame-create-threshold-reason": "Mi dispiace, non è possibile creare un quiz di domande fino a quando si dispone di almeno $1",
 	"quizgame-time-ago": "$1 fa",
 	"quizgame-time-hours": "{{PLURAL:$1|un'ora|$1 ore}}",
 	"quizgame-time-seconds": "{{PLURAL:$1|one second|$1 seconds}}",
-	"logentry-quiz-delete": "$1 eliminato [[Speciale:QuizGameHome/$4|domanda-quiz #$4]]",
+	"logentry-quiz-delete": "$1 ha cancellato la [[Special:QuizGameHome/$4|domanda #$4 del quiz]]",
 	"apihelp-quizgamevote-param-answer": "Risposta numerica ID."
 }

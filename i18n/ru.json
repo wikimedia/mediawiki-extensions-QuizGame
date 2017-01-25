@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			"Alex Great",
+			"Ivan-r"
+		]
+	},
+	"quizgame-error-socialprofile": "[https://www.mediawiki.org/wiki/Extension:SocialProfile Расширение «SocialProfile»] не установлено. Пожалуйста, установите это расширение и попробуйте снова.",
+	"quizgame-error-socialprofile-title": "Расширение SocialProfile не установлено.",
+	"quizgame-question": "Вопрос",
+	"quizgame-answers": "Ответы",
+	"quizgame-title": "Игра-опрос!",
+	"quizgame-prev": "пред.",
+	"quizgame-time-ago": "$1 назад",
+	"apihelp-quizgame-example-2": "Удалить опрос."
+}
