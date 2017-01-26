@@ -1258,12 +1258,8 @@ class QuizGameHome extends UnlistedSpecialPage {
 		$output .= "<a href=\"javascript:document.location='" .
 			htmlspecialchars( $this->getPageTitle()->getFullURL( 'questionGameAction=renderPermalink' ) ) .
 			"&permalinkID=' + document.getElementById( 'quizGameId' ).value\">" .
-				$this->msg( 'quizgame-permalink' )->text() . '</a>
-
-							<div id="flag-comment">' .
-							$this->msg( 'quizgame-flagged-reason' )->text() . ": <input type=\"text\" size=\"20\" id=\"flag-reason\" />
-							<input type=\"button\" value=\"" . $this->msg( 'quizgame-submit' )->text() . "\" /></div>
-						</div>
+				$this->msg( 'quizgame-permalink' )->text() . "</a>
+					</div>
 				</div>
 			</div>
 

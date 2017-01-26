@@ -1,6 +1,6 @@
 {
 	"name": "QuizGame",
-	"version": "3.6",
+	"version": "3.7",
 	"author": [
 		"Aaron Wright",
 		"Ashish Datta",
@@ -82,7 +82,8 @@
 				"quizgame-create-edit-picture", "quizgame-edit",
 				"quizgame-ajax-nonnumeric-answer", "quizgame-ajax-already-answered",
 				"quizgame-ajax-invalid-id", "quizgame-delete-confirm", "quizgame-delete",
-				"quizgame-cancel", "quizgame-unflag", "quizgame-unflag-confirm"
+				"cancel", "quizgame-unflag", "quizgame-unflag-confirm", "quizgame-flag-confirm",
+				"quizgame-flag", "quizgame-flagged-reason"
 			],
 			"dependencies": [
 				"ext.socialprofile.flash",
