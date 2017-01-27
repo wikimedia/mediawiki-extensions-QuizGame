@@ -38,8 +38,6 @@ class QuizGameHome extends UnlistedSpecialPage {
 	 * @param $permalink Mixed: parameter passed to the page or null
 	 */
 	public function execute( $permalink ) {
-		global $wgSupressPageTitle;
-
 		$out = $this->getOutput();
 		$user = $this->getUser();
 		$request = $this->getRequest();
@@ -72,11 +70,6 @@ class QuizGameHome extends UnlistedSpecialPage {
 				)
 			);
 		}
-
-		// Suppress the page title on certain skins of Wikia origin, such as
-		// Nimbus. Yes, the variable name is misspelled but it's all over the
-		// place, so I can't change its name just yet.
-		$wgSupressPageTitle = true;
 
 		// Add CSS & JS
 		$out->addModuleStyles( 'ext.quizGame.css' );
@@ -785,10 +778,6 @@ class QuizGameHome extends UnlistedSpecialPage {
 	 * Present "No more quizzes" message to the user
 	 */
 	function renderQuizOver() {
-		global $wgSupressPageTitle;
-
-		$wgSupressPageTitle = false;
-
 		$this->getOutput()->setPageTitle( $this->msg( 'quizgame-nomore-questions' )->text() );
 
 		$output = $this->msg( 'quizgame-ohnoes' )->parse();
@@ -807,10 +796,6 @@ class QuizGameHome extends UnlistedSpecialPage {
 	 * Renders the "permalink is not available" error message.
 	 */
 	function renderPermalinkError() {
-		global $wgSupressPageTitle;
-
-		$wgSupressPageTitle = false;
-
 		$this->getOutput()->setPageTitle( $this->msg( 'quizgame-title' )->text() );
 		$this->getOutput()->addWikiMsg( 'quizgame-unavailable' );
 	}
@@ -1088,10 +1073,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 		<div id=\"quizgame-container\" class=\"quizgame-container\">
 			{$editMenu}";
 
-		$output .= "<div class=\"quizgame-left\">
-				<div id=\"quizgame-title\" class=\"quizgame-title\">
-					{$question['text']}
-				</div>";
+		$output .= '<div class="quizgame-left">';
 
 		if( !$user_answer && $user->getName() != $question['user_name'] ) {
 			global $wgUserStatsPointValues;
@@ -1386,8 +1368,6 @@ class QuizGameHome extends UnlistedSpecialPage {
 			}
 
 			if( $can_create == false ) {
-				global $wgSupressPageTitle;
-				$wgSupressPageTitle = false;
 				$out->setPageTitle( $this->msg( 'quizgame-create-threshold-title' )->text() );
 				$out->addHTML( $this->msg( 'quizgame-create-threshold-reason', $threshold_reason )->parse() );
 				return '';
@@ -1403,7 +1383,6 @@ class QuizGameHome extends UnlistedSpecialPage {
 		$output = '<div id="quiz-container" class="quiz-container">
 
 			<div class="create-message">
-				<h1>' . $this->msg( 'quizgame-create-title' )->text() . '</h1>
 				<p>' . $this->msg( 'quizgame-create-message' )->parse() . '</p>
 				<p><input class="site-button" type="button" onclick="document.location=\'' .
 					htmlspecialchars( $this->getPageTitle()->getFullURL( 'questionGameAction=launchGame' ) ) .
