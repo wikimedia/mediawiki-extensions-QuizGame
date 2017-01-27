@@ -9,6 +9,8 @@
 	"quizgame-cancel": "Anuluj",
 	"quizgame-protect": "Zabezpiecz",
 	"quizgame-unprotect": "Odbezpiecz",
+	"quizgame-error-socialprofile": "[https://www.mediawiki.org/wiki/Extension:SocialProfile Rozszerzenie SocialProfile] nie jest zainstalowane. Zainstaluj je i spróbuj ponownie.",
+	"quizgame-error-socialprofile-title": "Rozszerzenie SocialProfile nie jest zainstalowane.",
 	"quizgame-admin-protected": "Zabezpieczone pytania",
 	"quizgame-admin-permission": "Nie masz uprawnień do edytowania",
 	"quizgame-flagged-reason": "Powód",
