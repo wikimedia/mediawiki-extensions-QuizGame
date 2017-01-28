@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Valeria Spalla",
-			"Beta16"
+			"Beta16",
+			"Margherita.mignanelli"
 		]
 	},
 	"quizgame-edit": "Modifica",
@@ -15,6 +16,7 @@
 	"quizgame-leaderboard-desc-correct": "$1 corretto",
 	"quizgame-pct-answered-correct": "$1% ha risposto a questa domanda correttamente",
 	"quizgame-skipped": "Hai saltato questa domanda",
+	"quizgame-js-points": "{{PLURAL:$1|1 punto|$1 punti}}",
 	"quizgame-lightbox-pause-quiz": "Metti in pausa il quiz",
 	"quizgame-lightbox-correct-points": "Hai guadagnato $1 punti",
 	"quizgame-next": "Prossima domanda del quiz",

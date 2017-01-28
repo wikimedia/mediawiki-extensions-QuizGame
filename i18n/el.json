@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"Geraki"
+		]
+	},
+	"quizgame-leaderboard-desc-points": "{{PLURAL:$1|1 βαθμός|$1 βαθμοί}}",
+	"quizgame-js-points": "{{PLURAL:$1|1 βαθμός|$1 βαθμοί}}"
+}
