@@ -23,8 +23,8 @@ window.QuizGame = {
 	deleteById: function( id, key ) {
 		var options = {
 			actions: [
-				{ label: mw.msg( 'quizgame-cancel' ) },
-				{ label: mw.msg( 'quizgame-delete' ), action: 'accept', flags: ['destructive'] }
+				{ label: mw.msg( 'cancel' ) },
+				{ label: mw.msg( 'quizgame-delete' ), action: 'accept', flags: ['destructive', 'primary'] }
 			]
 		}
 		OO.ui.confirm( mw.msg( 'quizgame-delete-confirm' ), options ).done( function ( confirmed ) {
@@ -51,8 +51,8 @@ window.QuizGame = {
 	unflagById: function( id, key ) {
 		var options = {
 			actions: [
-				{ label: mw.msg( 'quizgame-cancel' ) },
-				{ label: mw.msg( 'quizgame-unflag' ), action: 'accept', flags: ['constructive'] }
+				{ label: mw.msg( 'cancel' ) },
+				{ label: mw.msg( 'quizgame-unflag' ), action: 'accept', flags: ['constructive', 'primary'] }
 			]
 		}
 		OO.ui.confirm( mw.msg( 'quizgame-unflag-confirm' ), options ).done( function ( confirmed ) {
@@ -188,8 +188,8 @@ window.QuizGame = {
 	deleteQuestion: function() {
 		var options = {
 			actions: [
-				{ label: mw.msg( 'quizgame-cancel' ) },
-				{ label: mw.msg( 'quizgame-delete' ), action: 'accept', flags: ['destructive'] }
+				{ label: mw.msg( 'cancel' ) },
+				{ label: mw.msg( 'quizgame-delete' ), action: 'accept', flags: ['destructive', 'primary'] }
 			]
 		}
 		OO.ui.confirm( mw.msg( 'quizgame-delete-confirm' ), options ).done( function ( confirmed ) {
@@ -223,41 +223,42 @@ window.QuizGame = {
 	},
 
 	/**
-	 * Makes the "Reason for flagging this quiz" box visible.
-	 * The actual backend logic is in doFlagQuestion() (below), which gets
-	 * called when the user pressed the button to really submit the flagging.
+	 * Shows "Flag reason" dialog, and flags a quiz question
+	 * for administrator attention and temporarily
+	 * removes it from circulation by calling the API.
+	 * Once done, the status is reported to the user.
+	 * @see https://phabricator.wikimedia.org/T156304
 	 */
 	flagQuestion: function() {
-		document.getElementById( 'flag-comment' ).style.display = 'block';
-		document.getElementById( 'flag-comment' ).style.visibility = 'visible';
-	},
-
-	/**
-	 * Flags a quiz question for administrator attention and temporarily
-	 * removes it from circulation by calling the API.
-	 * Once done, the status is reported to the user and the
-	 * "reason for flagging" field is hidden again.
-	 */
-	doFlagQuestion: function() {
-		var gameKey = document.getElementById( 'quizGameKey' ).value;
-		var gameId = document.getElementById( 'quizGameId' ).value;
-		var reason = document.getElementById( 'flag-reason' ).value;
-		jQuery.getJSON(
-			mw.util.wikiScript( 'api' ), {
-				format: 'json',
-				action: 'quizgame',
-				quizaction: 'flagItem',
-				key: gameKey,
-				id: gameId,
-				reason: reason
-			},
-			function( data ) {
-				document.getElementById( 'ajax-messages' ).innerHTML = data.quizgame.output;
-				document.getElementById( 'flag-comment' ).style.display = 'none';
-				document.getElementById( 'flag-comment' ).style.visibility = 'hidden';
-			}
-		);
-	},
+		 var options = {
+			 actions: [
+				 { label: mw.msg( 'cancel' ) }
+				 { label: mw.msg( 'quizgame-flag' ), action: 'accept', flags: ['destructive', 'primary'] },
+			 ],
+			 textInput: { placeholder: mw.msg( 'quizgame-flagged-reason' ) }
+		 }
+		 OO.ui.prompt( mw.msg( 'quizgame-flag-confirm' ), options ).done( function ( reason ) {
+			 if ( reason !== null ) {
+				 var gameKey = document.getElementById( 'quizGameKey' ).value;
+				 var gameId = document.getElementById( 'quizGameId' ).value;
+				 jQuery.getJSON(
+					 mw.util.wikiScript( 'api' ), {
+						 format: 'json',
+						 action: 'quizgame',
+						 quizaction: 'flagItem',
+						 key: gameKey,
+						 id: gameId,
+						 reason: reason
+					 },
+					 function( data ) {
+						 document.getElementById( 'ajax-messages' ).innerHTML = data.quizgame.output;
+						 document.getElementById( 'flag-comment' ).style.display = 'none';
+						 document.getElementById( 'flag-comment' ).style.visibility = 'hidden';
+					 }
+				 );
+			 	}
+			 } );
+		 },
 
 	/**
 	 * Protects the image used in the quiz game by calling the API and
@@ -730,11 +731,6 @@ jQuery( function() {
 		jQuery( 'a.unprotect-by-id' )
 			.attr( 'href', '#' )
 			.on( 'click', function() { QuizGame.unprotectById( jQuery( this ).data( 'quiz-id' ), jQuery( this ).data( 'key' ) ); } );
-
-		// "Flag quiz" button
-		jQuery( 'div#flag-comment input[type="button"]' ).on( 'click', function() {
-			QuizGame.doFlagQuestion();
-		} );
 
 		// Answer boxes on the quiz creation view (welcome page)
 		if ( jQuery( 'span#this-is-the-welcome-page' ).length > 0 ) {
