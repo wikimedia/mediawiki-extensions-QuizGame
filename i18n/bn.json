@@ -7,7 +7,6 @@
 	"quizgame-edit": "সম্পাদনা",
 	"quizgame-delete": "অপসারণ",
 	"quizgame-delete-confirm": "আপনি কি নিশ্চিতভাবে এই কুইজ গেমটি মুছে ফেলতে চান?",
-	"quizgame-cancel": "বাতিল",
 	"quizgame-protect": "সুরক্ষা",
 	"quizgame-unprotect": "অসুরক্ষিত",
 	"quizgame-error-socialprofile": "[https://www.mediawiki.org/wiki/Extension:SocialProfile SocialProfile extension] ইনস্টল করা নেই। এই এক্সটেনশনটি ইনস্টল করে আবার চেষ্টা করুন।",

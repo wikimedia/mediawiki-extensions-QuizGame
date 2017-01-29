@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Liuxinyu970226"
+			"Liuxinyu970226",
+			"Umherirrender"
 		]
 	},
 	"quizgame-desc": "{{desc|name=QuizGame|url=https://www.mediawiki.org/wiki/Extension:QuizGame}}",
@@ -9,13 +10,11 @@
 	"quizgame-delete": "Link title\n{{Identical|Delete}}",
 	"quizgame-delete-confirm": "Confirmation message shown in the delete dialog.",
 	"quizgame-protect": "Link title\n{{Identical|Protect}}",
-	"quizgame-error-socialprofile": "Error message shown when SocialProfle extension is not installed.",
-	"quizgame-error-socialprofile-title": "Title for <code>quizgame-error-socialprofile</code>.",
 	"quizgame-unflag": "Link title; un-flagging returns a flagged quiz into the pool of available quizzes, allowing users to play it again",
 	"quizgame-unflag-confirm": "Confirmation message shown in the un-flag dialog",
 	"quizgame-unprotect": "Link title\n{{Identical|Unprotect}}",
 	"quizgame-error-socialprofile": "Error that shows when QuizGame was installed without installing SocialProfile first.",
-	"quizgame-error-socialprofile-title": "Title for message quizgame-error-socialprofile",
+	"quizgame-error-socialprofile-title": "Title for message {{msg-mw|quizgame-error-socialprofile}}",
 	"quizgame-admin-panel-title": "Link title",
 	"quizgame-admin-back": "Link title on the admin panel; clicking on this link takes you back to the question game from the administrative functions",
 	"quizgame-admin-flagged": "Header title on the admin panel of QuizGame",

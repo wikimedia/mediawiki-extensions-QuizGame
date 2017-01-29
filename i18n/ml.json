@@ -1,31 +1,31 @@
 {
 	"@metadata": {
 		"authors": [
-			"Jameela P."
+			"Jameela P.",
+			"Praveenp"
 		]
 	},
 	"quizgame-edit": "തിരുത്തുക",
 	"quizgame-delete": "മായ്ക്കുക",
-	"quizgame-cancel": "റദ്ദാക്കുക",
 	"quizgame-protect": "സം‌രക്ഷിക്കുക",
 	"quizgame-admin-back": "\n< ഒരിക്കലും അവസാനിക്കാത്ത പ്രശ്‌നോത്തരിയിലേക്ക് തിരികെപോവുക",
-	"quizgame-admin-protected": "സുരക്ഷിതമാക്കപ്പെട്ട ചോദ്യങ്ങൾ",
+	"quizgame-admin-protected": "സംരക്ഷിക്കപ്പെട്ട ചോദ്യങ്ങൾ",
 	"quizgame-admin-permission": "ഇത് തിരുത്താൻ താങ്കൾക്ക് അനുമതിയില്ല.",
 	"quizgame-edit-title": "$1 തിരുത്തുന്നു",
 	"quizgame-flagged-reason": "കാരണം",
-	"quizgame-submitted-by": "സമർപ്പിക്കുന്നത്",
+	"quizgame-submitted-by": "സമർപ്പിച്ചത്",
 	"quizgame-question": "ചോദ്യം",
 	"quizgame-answers": "ഉത്തരം",
 	"quizgame-save-page-button": "താൾ സേവ് ചെയ്യുക",
 	"quizgame-cancel-button": "റദ്ദാക്കുക",
-	"quizgame-login-title": "ഒരു പ്രശ്‌നോത്തരി സൃഷ്ടിക്കുന്നതിനായി നിങ്ങൾ ലോഗിൻ ചെയ്യേണ്ടതുണ്ട്",
-	"quizgame-login-text": "ഒരു പ്രശ്‌നോത്തരി സൃഷ്ടിക്കുന്നതിനായി നിങ്ങൾ ലോഗിൻ ചെയ്യേണ്ടതുണ്ട്!",
+	"quizgame-login-title": "ഒരു പ്രശ്‌നോത്തരി സൃഷ്ടിക്കുന്നതിനായി താങ്കൾ ലോഗിൻ ചെയ്യേണ്ടതുണ്ട്",
+	"quizgame-login-text": "ഒരു പ്രശ്‌നോത്തരി സൃഷ്ടിക്കുന്നതിനായി താങ്കൾ ലോഗിൻ ചെയ്യേണ്ടതുണ്ട്!",
 	"quizgame-main-page-button": "പ്രധാന താൾ",
 	"quizgame-login-button": "പ്രവേശിക്കുക",
 	"quizgame-submit": "സമർപ്പിക്കുക",
 	"quizgame-introlink": "ആരംഭിക്കുന്നതിനായി ഇവിടെ ക്ലിക്ക് ചെയ്യുക",
 	"quizgame-leaderboard-correct": "ശരിയുത്തരങ്ങൾ",
-	"quizgame-answered-correctly": "നിങ്ങൾ ശരിയായി ഉത്തരം നൽകിയിരിക്കുന്നു",
+	"quizgame-answered-correctly": "താങ്കൾ ശരിയായി ഉത്തരം നൽകിയിരിക്കുന്നു",
 	"quizgame-correct-answer": "ശരിയുത്തരം",
 	"quizgame-lightbox-pause-quiz": "പ്രശ്‌നോത്തരി താൽക്കാലികമായി നിർത്തുക",
 	"quizgame-lightbox-correct-points": " താങ്കൾ $1 പോയിന്റ് നേടിയിരിക്കുന്നു",
@@ -36,7 +36,7 @@
 	"quizgame-newest": "ഏറ്റവും പുതിയവ",
 	"quizgame-popular": "ജനപ്രിയം",
 	"quizgame-viewquizzes-title": "പ്രശ്‌നോത്തരി ചോദ്യങ്ങൾ കാണുക",
-	"quizgame-create-error-numanswers": "നിങ്ങൾക്ക് തിരഞ്ഞെടുക്കുന്നതിനായി കുറഞ്ഞത് രണ്ടു ഉത്തരങ്ങൾ ഉണ്ടായിരിക്കണം",
+	"quizgame-create-error-numanswers": "തിരഞ്ഞെടുക്കുന്നതിനായി കുറഞ്ഞത് രണ്ടു ഉത്തരങ്ങൾ ഉണ്ടായിരിക്കണം",
 	"quizgame-create-add-picture": "ഒരു ചിത്രം ചേർക്കുക",
 	"quizgame-pause-continue": "തുടരുക",
 	"quizgame-pause-create-question": "ചോദ്യം സൃഷ്ടിക്കുക",
@@ -45,5 +45,5 @@
 	"quizgame-time-ago": "$1 മുമ്പ്",
 	"quizgame-ajax-invalid-option": "അസാധുവായ അജാക്സ് തിരഞ്ഞെടുക്കൽ.",
 	"apihelp-quizgame-example-2": "പ്രശ്നോത്തരി ഇല്ലാതാക്കുക.",
-	"apihelp-quizgamevote-example-1": "വോട്ട്"
+	"apihelp-quizgamevote-example-1": "വോട്ട്."
 }

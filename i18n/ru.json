@@ -2,15 +2,34 @@
 	"@metadata": {
 		"authors": [
 			"Alex Great",
-			"Ivan-r"
+			"Ivan-r",
+			"Kareyac"
 		]
 	},
+	"quizgame-edit": "Править",
+	"quizgame-protect": "Защитить",
 	"quizgame-error-socialprofile": "[https://www.mediawiki.org/wiki/Extension:SocialProfile Расширение «SocialProfile»] не установлено. Пожалуйста, установите это расширение и попробуйте снова.",
 	"quizgame-error-socialprofile-title": "Расширение SocialProfile не установлено.",
+	"quizgame-edit-picture-link": "Редактировать изображение",
+	"quizgame-submitted-by": "Представленный",
 	"quizgame-question": "Вопрос",
 	"quizgame-answers": "Ответы",
+	"quizgame-cancel-button": "Отмена",
+	"quizgame-main-page-button": "Заглавная страница",
 	"quizgame-title": "Игра-опрос!",
+	"quizgame-leaderboard-scoretitle": "Ваша оценка",
+	"quizgame-skipped": "Вы пропустили этот вопрос",
+	"quizgame-your-answer": "Ваш ответ",
+	"quizgame-correct-answer": "Правильный ответ",
+	"quizgame-js-seconds": "секунды",
+	"quizgame-skip": "Пропустить",
+	"quizgame-flag": "Флаг",
 	"quizgame-prev": "пред.",
+	"quizgame-nav-next": "далее",
+	"quizgame-newest": "Самые новые",
+	"quizgame-create-write-question": "Написать вопрос",
+	"quizgame-create-edit-picture": "Редактировать изображение",
+	"quizgame-last-question": "Последний Вопрос",
 	"quizgame-time-ago": "$1 назад",
 	"apihelp-quizgame-example-2": "Удалить опрос."
 }
