@@ -14,6 +14,7 @@
 	"quizgame-submit": "Invia",
 	"quizgame-intro": "Benvenuti al gioco a quiz. Qui ci sono alcune regole.",
 	"quizgame-leaderboard-desc-correct": "$1 corretto",
+	"quizgame-leaderboard-desc-points": "{{PLURAL:$1|1 punto|$1 punti}}",
 	"quizgame-pct-answered-correct": "$1% ha risposto a questa domanda correttamente",
 	"quizgame-skipped": "Hai saltato questa domanda",
 	"quizgame-js-points": "{{PLURAL:$1|1 punto|$1 punti}}",
