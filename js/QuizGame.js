@@ -248,12 +248,10 @@ window.QuizGame = {
 						quizaction: 'flagItem',
 						key: gameKey,
 						id: gameId,
-						reason: reason
+						comment: reason
 					},
 					function( data ) {
 						document.getElementById( 'ajax-messages' ).innerHTML = data.quizgame.output;
-						document.getElementById( 'flag-comment' ).style.display = 'none';
-						document.getElementById( 'flag-comment' ).style.visibility = 'hidden';
 					}
 				);
 			}
