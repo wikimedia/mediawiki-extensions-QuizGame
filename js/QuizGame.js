@@ -26,7 +26,7 @@ window.QuizGame = {
 				{ label: mw.msg( 'cancel' ) },
 				{ label: mw.msg( 'quizgame-delete' ), action: 'accept', flags: ['destructive', 'primary'] }
 			]
-		}
+		};
 		OO.ui.confirm( mw.msg( 'quizgame-delete-confirm' ), options ).done( function ( confirmed ) {
 			if ( confirmed ) {
 				document.getElementById( 'items[' + id + ']' ).style.display = 'none';
@@ -45,7 +45,7 @@ window.QuizGame = {
 					}
 				);
 			}
-		});
+		} );
 	},
 
 	unflagById: function( id, key ) {
@@ -54,7 +54,7 @@ window.QuizGame = {
 				{ label: mw.msg( 'cancel' ) },
 				{ label: mw.msg( 'quizgame-unflag' ), action: 'accept', flags: ['constructive', 'primary'] }
 			]
-		}
+		};
 		OO.ui.confirm( mw.msg( 'quizgame-unflag-confirm' ), options ).done( function ( confirmed ) {
 			if ( confirmed ) {
 				document.getElementById( 'items[' + id + ']' ).style.display = 'none';
@@ -191,7 +191,7 @@ window.QuizGame = {
 				{ label: mw.msg( 'cancel' ) },
 				{ label: mw.msg( 'quizgame-delete' ), action: 'accept', flags: ['destructive', 'primary'] }
 			]
-		}
+		};
 		OO.ui.confirm( mw.msg( 'quizgame-delete-confirm' ), options ).done( function ( confirmed ) {
 			if ( confirmed ) {
 				var gameKey = document.getElementById( 'quizGameKey' ).value;
@@ -230,35 +230,35 @@ window.QuizGame = {
 	 * @see https://phabricator.wikimedia.org/T156304
 	 */
 	flagQuestion: function() {
-		 var options = {
-			 actions: [
-				 { label: mw.msg( 'cancel' ) }
-				 { label: mw.msg( 'quizgame-flag' ), action: 'accept', flags: ['destructive', 'primary'] },
-			 ],
-			 textInput: { placeholder: mw.msg( 'quizgame-flagged-reason' ) }
-		 }
-		 OO.ui.prompt( mw.msg( 'quizgame-flag-confirm' ), options ).done( function ( reason ) {
-			 if ( reason !== null ) {
-				 var gameKey = document.getElementById( 'quizGameKey' ).value;
-				 var gameId = document.getElementById( 'quizGameId' ).value;
-				 jQuery.getJSON(
-					 mw.util.wikiScript( 'api' ), {
-						 format: 'json',
-						 action: 'quizgame',
-						 quizaction: 'flagItem',
-						 key: gameKey,
-						 id: gameId,
-						 reason: reason
-					 },
-					 function( data ) {
-						 document.getElementById( 'ajax-messages' ).innerHTML = data.quizgame.output;
-						 document.getElementById( 'flag-comment' ).style.display = 'none';
-						 document.getElementById( 'flag-comment' ).style.visibility = 'hidden';
-					 }
-				 );
-			 	}
-			 } );
-		 },
+		var options = {
+			actions: [
+				{ label: mw.msg( 'cancel' ) },
+				{ label: mw.msg( 'quizgame-flag' ), action: 'accept', flags: ['destructive', 'primary'] },
+			],
+			textInput: { placeholder: mw.msg( 'quizgame-flagged-reason' ) }
+		};
+		OO.ui.prompt( mw.msg( 'quizgame-flag-confirm' ), options ).done( function ( reason ) {
+			if ( reason !== null ) {
+				var gameKey = document.getElementById( 'quizGameKey' ).value;
+				var gameId = document.getElementById( 'quizGameId' ).value;
+				jQuery.getJSON(
+					mw.util.wikiScript( 'api' ), {
+						format: 'json',
+						action: 'quizgame',
+						quizaction: 'flagItem',
+						key: gameKey,
+						id: gameId,
+						reason: reason
+					},
+					function( data ) {
+						document.getElementById( 'ajax-messages' ).innerHTML = data.quizgame.output;
+						document.getElementById( 'flag-comment' ).style.display = 'none';
+						document.getElementById( 'flag-comment' ).style.visibility = 'hidden';
+					}
+				);
+			}
+		} );
+	},
 
 	/**
 	 * Protects the image used in the quiz game by calling the API and
@@ -452,7 +452,7 @@ window.QuizGame = {
 		var objLink = {};
 
 		objLink.href = '';
-		objLink.title =  mw.msg( 'quizgame-js-loading' );
+		objLink.title = mw.msg( 'quizgame-js-loading' );
 
 		LightBox.init();
 		LightBox.show( objLink );
