@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			"Warley Felipe C."
+		]
+	},
+	"quizgame-edit-picture-link": "Editar imagem",
+	"quizgame-question": "Pergunta",
+	"quizgame-answers": "Respostas",
+	"quizgame-leaderboard-menu-points": "Pontos",
+	"quizgame-leaderboard-desc-correct": "$1 correto",
+	"quizgame-lightbox-correct": "Ótimo trabalho! Você respondeu corretamente a pergunta!",
+	"quizgame-next": "Próxima pergunta do quiz",
+	"quizgame-nav-next": "Próximo",
+	"quizgame-ajax-already-answered": "Você já respondeu esta pergunta."
+}
