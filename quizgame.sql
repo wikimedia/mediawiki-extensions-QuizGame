@@ -1,6 +1,6 @@
 -- Tables for QuizGame extension
 CREATE TABLE /*_*/quizgame_questions (
-  `q_id` int(11) unsigned NOT NULL auto_increment PRIMARY KEY,
+  `q_id` int(11) unsigned NOT NULL PRIMARY KEY auto_increment,
   `q_user_id` int(11) unsigned NOT NULL default '0',
   `q_user_name` varchar(255) NOT NULL default '',
   -- One of the QuizGameHome::$FLAG_* static variables
@@ -23,7 +23,7 @@ CREATE INDEX /*i*/q_user_id ON /*_*/quizgame_questions (q_user_id);
 CREATE INDEX /*i*/q_random ON /*_*/quizgame_questions (q_random);
 
 CREATE TABLE /*_*/quizgame_answers (
-  `a_id` int(10) unsigned NOT NULL auto_increment PRIMARY KEY,
+  `a_id` int(10) unsigned NOT NULL PRIMARY KEY auto_increment,
   `a_q_id` int(10) unsigned NOT NULL default '0',
   `a_choice_id` int(11) unsigned NOT NULL default '0',
   `a_user_id` int(11) unsigned NOT NULL default '0',
@@ -38,7 +38,7 @@ CREATE INDEX /*i*/a_user_id ON /*_*/quizgame_answers (a_user_id);
 CREATE INDEX /*i*/a_user_name ON /*_*/quizgame_answers (a_user_name);
 
 CREATE TABLE /*_*/quizgame_choice (
-  `choice_id` int(11) NOT NULL auto_increment PRIMARY KEY,
+  `choice_id` int(11) NOT NULL PRIMARY KEY auto_increment,
   `choice_q_id` int(11) NOT NULL default '0',
   `choice_order` int(5) default '0',
   `choice_text` text NOT NULL,
@@ -49,7 +49,7 @@ CREATE TABLE /*_*/quizgame_choice (
 CREATE INDEX /*i*/choice_q_id ON /*_*/quizgame_choice (choice_q_id);
 
 CREATE TABLE /*_*/quizgame_user_view (
-  `uv_id` int(11) unsigned NOT NULL auto_increment PRIMARY KEY,
+  `uv_id` int(11) unsigned NOT NULL PRIMARY KEY auto_increment,
   `uv_q_id` int(11) unsigned NOT NULL default '0',
   `uv_user_id` int(11) unsigned NOT NULL default '0',
   `uv_user_name` varchar(255) NOT NULL default '',
