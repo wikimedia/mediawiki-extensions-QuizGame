@@ -1,0 +1,8 @@
+{
+	"@metadata": {
+		"authors": [
+			"Ghybu"
+		]
+	},
+	"quizgame-time-days": "{{PLURAL:$1|rojek|roj}}"
+}
