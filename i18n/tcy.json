@@ -5,6 +5,13 @@
 		]
 	},
 	"quizgame-edit": "ಸೇರ್ಸಲೇ",
+	"quizgame-delete": "ಮಾಜಾಲೆ",
 	"quizgame-answers": "ಉತ್ತರೊ",
+	"quizgame-picture": "ಚಿತ್ರೊ",
+	"quizgame-cancel-button": "ವಜಾ ಮಲ್ಪುಲೆ",
+	"quizgame-skip": "ದುಂಬು ಪೊಲೆ",
+	"quizgame-nav-next": "ನನತಾ",
+	"quizgame-newest": "ಪೊಸತ್ತ್",
+	"quizgame-pause-continue": "ಮುಂದುವರೆಸಾಲೆ",
 	"quizgame-time-ago": "$1 ದುಂಬು"
 }

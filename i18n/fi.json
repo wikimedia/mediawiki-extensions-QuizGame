@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Jack Phoenix <jack@countervandalism.net>"
+			"Jack Phoenix <jack@countervandalism.net>",
+			"Pyscowicz"
 		]
 	},
 	"quizgame-edit": "Muokkaa",
@@ -49,7 +50,7 @@
 	"quizgame-leaderboard-menu-correct": "Yhteensä oikein",
 	"quizgame-leaderboard-menu-pct": "Korkein prosenttimäärä",
 	"quizgame-leaderboard-desc-correct": "$1 oikein",
-	"quizgame-leaderboard-desc-points": "$1 pistettä",
+	"quizgame-leaderboard-desc-points": "{{PLURAL:$1|1 piste|$1 pistettä}}",
 	"quizgame-login-or-create-to-climb": "[[Special:UserLogin|Kirjaudu sisään]] tai [[Special:UserLogin/signup|luo käyttäjätunnus]] kilpaillaksesi ja kiivetäksesi pistetilastossa!",
 	"quizgame-pct-answered-correct": "$1% vastaajista sai tämän kysymyksen oikein",
 	"quizgame-answered-correctly": "Vastasit oikein",
@@ -60,7 +61,7 @@
 	"quizgame-js-loading": "Ladataan...",
 	"quizgame-js-reloading": "Uudelleenladataan...",
 	"quizgame-js-timesup": "Aika loppui! Et ansaitse pisteitä, mutta yritä vastata siihen kuitenkin!",
-	"quizgame-js-points": "$1 pistettä",
+	"quizgame-js-points": "{{PLURAL:$1|1 piste|$1 pistettä}}",
 	"quizgame-js-seconds": "sekuntia",
 	"quizgame-lightbox-pause-quiz": "Keskeytä kysymyspeli",
 	"quizgame-lightbox-breakdown": "Katso erittely tälle kysymykselle",
