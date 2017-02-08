@@ -129,5 +129,6 @@
 	"logentry-quiz-unflag": "$1 poisti merkinnän [[Special:QuizGameHome/$4|tietovisakysymykseltä #$4]]",
 	"logentry-quiz-unprotect": "$1 poisti suojauksen [[Special:QuizGameHome/$4|tietovisakysymykseltä #$4]]",
 	"quizgame-images-category": "Kysymyspelin kuvat",
-	"right-quizadmin": "Ylläpitää kysymyspelejä"
+	"right-quizadmin": "Ylläpitää kysymyspelejä",
+	"apihelp-quizgamevote-example-1": "Äänestä."
 }
