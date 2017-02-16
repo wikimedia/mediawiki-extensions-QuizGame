@@ -33,6 +33,7 @@
 	"quizgame-js-points": "{{PLURAL:$1|1 punkt|$1 punkty|$1 punktów}}",
 	"quizgame-lightbox-incorrect-correct": "Poprawna odpowiedź to: $1",
 	"quizgame-skip": "Pomiń",
+	"quizgame-answered": "Odpowiedziano {{PLURAL:$1|jeden raz|$1 razy}}",
 	"quizgame-create-error-noquestion": "Musisz napisać pytanie",
 	"quizgame-create-write-question": "Napisz pytanie",
 	"quizgame-create-write-answers": "Napisz odpowiedzi",
@@ -46,5 +47,6 @@
 	"quizgame-time-seconds": "{{PLURAL:$1|1 sekunda|$1 sekundy|$1 sekund}}",
 	"quizgame-ajax-unprotected": "Pytanie zostało odbezpieczone.",
 	"quizgame-ajax-deleted": "Pytanie zostało usunięte.",
+	"quizgame-ajax-invalid-option": "Nieprawidłowa opcja AJAX.",
 	"apihelp-quizgame-example-2": "Usuń quiz."
 }
