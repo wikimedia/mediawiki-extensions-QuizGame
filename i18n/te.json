@@ -1,0 +1,31 @@
+{
+	"@metadata": {
+		"authors": [
+			"Veeven"
+		]
+	},
+	"quizgame-delete": "తొలగించు",
+	"quizgame-flagged-reason": "కారణం",
+	"quizgame-question": "ప్రశ్న",
+	"quizgame-answers": "జవాబులు",
+	"quizgame-save-page-button": "పేజీని భద్రపరచు",
+	"quizgame-cancel-button": "రద్దుచేయి",
+	"quizgame-nomore-questions": "ఇక ప్రశ్నలేమీ లేవు!",
+	"quizgame-leaderboard-correct": "సరి జవాబులు",
+	"quizgame-leaderboard-pctcorrect": "ఒప్పు శాతం",
+	"quizgame-leaderboard-order-menu": "క్రమం",
+	"quizgame-leaderboard-desc-correct": "$1 ఒప్పు",
+	"quizgame-skipped": "ఈ ప్రశ్నను మీరు వదిలివేసారు",
+	"quizgame-your-answer": "మీ జవాబు",
+	"quizgame-js-loading": "వస్తోంది…",
+	"quizgame-js-seconds": "క్షణాలు",
+	"quizgame-skip": "దాటవేయి",
+	"quizgame-nav-next": "తదుపరి",
+	"quizgame-newest": "కొత్తవి",
+	"quizgame-pause-continue": "కొనసాగించు",
+	"quizgame-last-question": "చివరి ప్రశ్న",
+	"quizgame-time-ago": "$1 క్రితం",
+	"quizgame-time-days": "{{PLURAL:$1|ఒక రోజు|$1 రోజుల}}",
+	"quizgame-time-hours": "{{PLURAL:$1|ఒక గంట|$1 గంటల}}",
+	"quizgame-time-seconds": "{{PLURAL:$1|ఒక క్షణం|$1 క్షణాల}}"
+}
