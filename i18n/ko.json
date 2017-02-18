@@ -60,6 +60,7 @@
 	"quizgame-create-error-noquestion": "문제를 입력해야 합니다",
 	"quizgame-create-title": "퀴즈 문제 만들기",
 	"quizgame-create-write-question": "문제 작성",
+	"quizgame-create-write-answers": "답변 쓰기",
 	"quizgame-create-add-picture": "그림 추가",
 	"quizgame-create-edit-picture": "그림 편집",
 	"quizgame-pause-continue": "계속",
