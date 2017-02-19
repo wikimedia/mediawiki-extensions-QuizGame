@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Metalhead64",
-			"Eddie"
+			"Eddie",
+			"Umherirrender"
 		]
 	},
 	"quizgame-desc": "Ergänzt ein interaktives [[Special:QuizGameHome|Fragespiel]]",
@@ -59,7 +60,7 @@
 	"quizgame-leaderboard-desc-correct": "$1 richtig",
 	"quizgame-leaderboard-desc-points": "{{PLURAL:$1|Ein Punkt|$1 Punkte}}",
 	"quizgame-login-or-create-to-climb": "[[Special:UserLogin|Melde dich an]] oder [[Special:UserLogin/signup|erstelle ein Benutzerkonto]], um auf der Bestenliste hochzuklettern!",
-	"quizgame-pct-answered-correct": "$1% haben diese Frage richtig beantwortet",
+	"quizgame-pct-answered-correct": "$1 % haben diese Frage richtig beantwortet",
 	"quizgame-answered-correctly": "Du hast richtig geantwortet",
 	"quizgame-skipped": "Du hast diese Frage übersprungen",
 	"quizgame-answered-incorrectly": "Du hast falsch geantwortet",
@@ -72,7 +73,7 @@
 	"quizgame-js-seconds": "Sekunden",
 	"quizgame-lightbox-pause-quiz": "Quiz pausieren",
 	"quizgame-lightbox-breakdown": "Statistiken für diese Frage ansehen",
-	"quizgame-lightbox-breakdown-percent": "$1% der Benutzer, die diese Frage beantwortet haben, lagen richtig.",
+	"quizgame-lightbox-breakdown-percent": "$1 % der Benutzer, die diese Frage beantwortet haben, lagen richtig.",
 	"quizgame-lightbox-correct": "Gut gemacht. Du hast die Frage richtig beantwortet!",
 	"quizgame-lightbox-correct-points": "Du hast $1 Punkte verdient",
 	"quizgame-lightbox-incorrect": "Leider hast du die Frage falsch beantwortet!",
