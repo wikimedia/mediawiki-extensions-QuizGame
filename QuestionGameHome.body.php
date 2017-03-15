@@ -45,10 +45,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 		// Is the database locked? If so, we can't do much since answering a
 		// question changes database state...and so does creating a new
 		// question
-		if( wfReadOnly() ) {
-			$out->readOnlyPage();
-			return false;
-		}
+		$this->checkReadOnly();
 
 		// https://phabricator.wikimedia.org/T155405
 		// Throws error message when SocialProfile extension is not installed
