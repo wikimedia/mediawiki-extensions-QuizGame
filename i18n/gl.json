@@ -6,6 +6,10 @@
 	},
 	"quizgame-edit": "Editar",
 	"quizgame-delete": "Borrar",
+	"quizgame-protect": "Protexer",
+	"quizgame-unprotect": "Desprotexer",
+	"quizgame-admin-permission": "Non tes permisos para editar",
+	"quizgame-edit-title": "Editando - $1",
 	"quizgame-flagged-reason": "Motivo",
 	"quizgame-submitted-by": "Enviado por",
 	"quizgame-question": "Pregunta",
@@ -13,5 +17,16 @@
 	"quizgame-picture": "Imaxe",
 	"quizgame-save-page-button": "Gardar a páxina",
 	"quizgame-cancel-button": "Cancelar",
-	"quizgame-leaderboard-menu-points": "Puntos"
+	"quizgame-main-page-button": "Páxina principal",
+	"quizgame-submit": "Enviar",
+	"quizgame-leaderboard-menu-points": "Puntos",
+	"quizgame-leaderboard-desc-points": "{{PLURAL:$1|1 punto|$1 puntos}}",
+	"quizgame-js-loading": "Cargando...",
+	"quizgame-js-seconds": "segundos",
+	"quizgame-skip": "Omitir",
+	"quizgame-pause-continue": "Continuar",
+	"quizgame-time-days": "{{PLURAL:$1|un día|$1 días}}",
+	"quizgame-time-hours": "{{PLURAL:$1|unha hora|$1 horas}}",
+	"quizgame-time-minutes": "{{PLURAL:$1|un minuto|$1 minutos}}",
+	"quizgame-time-seconds": "{{PLURAL:$1|un segundo|$1 segundos}}"
 }
