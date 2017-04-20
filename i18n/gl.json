@@ -26,6 +26,8 @@
 	"quizgame-main-page-button": "Páxina principal",
 	"quizgame-login-button": "Acceder ao sistema",
 	"quizgame-submit": "Enviar",
+	"quizgame-nomore-questions": "Non hai máis preguntasǃ",
+	"quizgame-unavailable": "Sentímolo, esta pregunta non está dispoñible!\n\t\n[[Special:QuizGameHome|Prema aquí para intentalo con outras preguntas]]",
 	"quizgame-introlink": "Prema aquí para comezar",
 	"quizgame-leaderboard-scoretitle": "A súa puntuación",
 	"quizgame-leaderboard-correct": "Respostas correctas",
