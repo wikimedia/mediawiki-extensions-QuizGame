@@ -90,6 +90,10 @@
 	"quizgame-ajax-nonnumeric-answer": "A opción de resposta non é numérica.",
 	"quizgame-ajax-already-answered": "Xa contestou a esta pregunta.",
 	"quizgame-ajax-invalid-id": "Non hai ningunha pregunta con ese identificador.",
+	"right-quizadmin": "Administrar xogos de preguntas",
+	"apihelp-quizgame-description": "API de xestión dos xogos de preguntas.",
+	"apihelp-quizgame-param-comment": "Motivo do marcado (só usado en flagItem).",
+	"apihelp-quizgame-param-quizaction": "Acción a realizar seguida de \"Item\", p. ex. deleteItem.",
 	"apihelp-quizgamevote-param-answer": "Identificador de resposta numérico.",
 	"apihelp-quizgamevote-example-1": "Votar."
 }
