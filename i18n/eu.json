@@ -1,0 +1,35 @@
+{
+	"@metadata": {
+		"authors": [
+			"Subi"
+		]
+	},
+	"quizgame-pct-answered-correct": "Erabiltzaileen % $1(e)k ongi erantzun dute",
+	"quizgame-answered-correctly": "Ongi erantzun duzu",
+	"quizgame-skipped": "Galdera hau erantzun gabe utzi duzu",
+	"quizgame-answered-incorrectly": "Gaizki erantzun duzu",
+	"quizgame-your-answer": "Zure erantzunak",
+	"quizgame-correct-answer": "Erantzun zuzena",
+	"quizgame-js-loading": "Kargatzen...",
+	"quizgame-js-reloading": "Birkargatzen...",
+	"quizgame-js-timesup": "Denbora amaitu da! Ez duzu punturik lortuko; dena dela, saia zaitez erantzuten!",
+	"quizgame-js-points": "{{PLURAL:$1|puntu 1|$1 puntu}}",
+	"quizgame-js-seconds": "segundo",
+	"quizgame-lightbox-correct-points": "$1 puntu lortu dituzu",
+	"quizgame-create-write-question": "Idatz ezazu galdera",
+	"quizgame-create-write-answers": "Idatz itzazu erantzunak",
+	"quizgame-create-check-correct": "Adieraz ezazu erantzun zuzena, mesedez.",
+	"quizgame-create-add-picture": "Gehitu irudia",
+	"quizgame-create-edit-picture": "Alatu irudia",
+	"quizgame-create-play": "Sortu eta jokatzera!",
+	"quizgame-pause-continue": "Jarraitu",
+	"quizgame-pause-view-leaderboard": "Ikusi sailkapen nagusia",
+	"quizgame-pause-create-question": "Sortu galdera",
+	"quizgame-last-question": "Azken galdera",
+	"quizgame-points": "$1 puntu",
+	"quizgame-time-ago": "duela $1",
+	"quizgame-time-days": "{{PLURAL:$1|egun bat|$1 egun}}",
+	"quizgame-time-hours": "{{PLURAL:$1|ordu bat|$1 ordu}}",
+	"quizgame-time-minutes": "{{PLURAL:$1|minutu bat|$1 minutu}}",
+	"quizgame-time-seconds": "{{PLURAL:$1|segundo bat|$1 segundo}}"
+}
