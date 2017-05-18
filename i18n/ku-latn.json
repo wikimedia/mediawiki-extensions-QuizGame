@@ -1,8 +1,17 @@
 {
 	"@metadata": {
 		"authors": [
-			"Ghybu"
+			"Ghybu",
+			"George Animal"
 		]
 	},
+	"quizgame-edit": "Biguherîne",
+	"quizgame-delete": "Jê bibe",
+	"quizgame-protect": "Biparêze",
+	"quizgame-save-page-button": "Rûpelê tomar bike",
+	"quizgame-cancel-button": "Betal bike",
+	"quizgame-your-answer": "Bersiva te",
+	"quizgame-correct-answer": "Bersiva rast",
+	"quizgame-js-loading": "Tê barkirin...",
 	"quizgame-time-days": "{{PLURAL:$1|rojek|roj}}"
 }
