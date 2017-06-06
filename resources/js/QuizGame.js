@@ -11,7 +11,7 @@
 	* That needs to be removed, when we drop support to MW 1.28. Modified copy pasta from OOjsUI windows.js
 	* @see https://gerrit.wikimedia.org/r/#/c/336008/
 	*/
-reasonPrompt = function ( text, options ) {
+reasonPrompt = OO.ui.prompt || function ( text, options ) {
 	manager = new OO.ui.WindowManager();
 	textInput = new OO.ui.TextInputWidget( ( options && options.textInput ) || {} );
 	textField = new OO.ui.FieldLayout( textInput, {
