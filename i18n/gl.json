@@ -118,6 +118,7 @@
 	"quizgame-time-hours": "{{PLURAL:$1|unha hora|$1 horas}}",
 	"quizgame-time-minutes": "{{PLURAL:$1|un minuto|$1 minutos}}",
 	"quizgame-time-seconds": "{{PLURAL:$1|un segundo|$1 segundos}}",
+	"quizgame-ajax-invalid-key": "Precisa unha clave válida para facer iso.",
 	"quizgame-ajax-unprotected": "A pregunta foi desprotexida.",
 	"quizgame-ajax-protected": "A pregunta foi protexida.",
 	"quizgame-ajax-unflagged": "A pregunta foi desmarcada.",
