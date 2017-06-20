@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"Obsuser"
+		]
+	},
+	"quizgame-js-seconds": "sekundi",
+	"quizgame-time-seconds": "{{PLURAL:$1|1 sekunda|$1 sekunda|$1 sekundi}}"
+}

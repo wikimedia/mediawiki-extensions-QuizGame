@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Milicevic01",
-			"Zoranzoki21"
+			"Zoranzoki21",
+			"Obsuser"
 		]
 	},
 	"quizgame-edit": "Уреди",
@@ -33,6 +34,7 @@
 	"quizgame-leaderboard-desc-correct": "$1 тачно",
 	"quizgame-skipped": "Ви сте прескочили питање",
 	"quizgame-correct-answer": "Тачан одговор!",
+	"quizgame-js-seconds": "секунди",
 	"quizgame-lightbox-pause-quiz": "Паузирај квиз",
 	"quizgame-lightbox-correct": "Одличан посао, ви сте тачно одговорили на питања!",
 	"quizgame-lightbox-correct-points": "Ви сте зарадили $1 поена",
@@ -54,6 +56,7 @@
 	"quizgame-time-ago": "пре $1",
 	"quizgame-time-days": "{{PLURAL:$1|један дан|$1 дана}}",
 	"quizgame-time-hours": "{{PLURAL:$1|један сат|$1 сата|$1 сати}}",
+	"quizgame-time-seconds": "{{PLURAL:$1|1 секунда|$1 секунда|$1 секунди}}",
 	"quizgame-ajax-invalid-option": "Невалидна AJAX опција.",
 	"quizgame-ajax-already-answered": "Ви сте већ одговорили на то питање.",
 	"apihelp-quizgame-param-id": "ID број квиза.",
