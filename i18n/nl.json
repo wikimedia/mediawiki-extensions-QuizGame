@@ -2,13 +2,15 @@
 	"@metadata": {
 		"authors": [
 			"Mark van Alphen",
-			"Mitchel Corstjens"
+			"Mitchel Corstjens",
+			"Mainframe98"
 		]
 	},
 	"quizgame-edit": "Bewerk",
 	"quizgame-delete": "Verwijder",
 	"quizgame-protect": "Beveilig",
 	"quizgame-unprotect": "Beveiliging opheffen",
+	"quizgame-error-socialprofile-title": "De uitbreiding SocialProfile is niet geïnstalleerd.",
 	"quizgame-admin-panel-title": "Beheerderspaneel",
 	"quizgame-admin-back": "&lt; Terug naar nooit eindigende quiz",
 	"quizgame-admin-flagged": "Gemarkeerde vragen",
@@ -51,7 +53,7 @@
 	"quizgame-leaderboard-menu-correct": "Totaal correct",
 	"quizgame-leaderboard-menu-pct": "Hoogste percentage",
 	"quizgame-leaderboard-desc-correct": "$1 correct",
-	"quizgame-leaderboard-desc-points": "$1 punten",
+	"quizgame-leaderboard-desc-points": "{{PLURAL:$1|1 punt|$1 punten}}",
 	"quizgame-login-or-create-to-climb": "[[Special:UserLogin|Inloggen]] of [[Special:UserLogin/signup|maak een account]] om te strijden en naar boven te klimmen op de topscores!",
 	"quizgame-pct-answered-correct": "$1% had deze vraag juist",
 	"quizgame-answered-correctly": "Je antwoordde correct",
@@ -62,7 +64,7 @@
 	"quizgame-js-loading": "Laden...",
 	"quizgame-js-reloading": "Herladen...",
 	"quizgame-js-timesup": "Tijd is om! Je krijgt geen punten meer, maar probeer hem toch te beantwoorden!",
-	"quizgame-js-points": "$1 punten",
+	"quizgame-js-points": "{{PLURAL:$2|1 punt|$2 punten}}",
 	"quizgame-js-seconds": "seconden",
 	"quizgame-lightbox-pause-quiz": "Pauzeer quiz",
 	"quizgame-lightbox-breakdown": "Bekijk breakdown voor deze vraag",
@@ -118,6 +120,9 @@
 	"quizgame-ajax-flagged": "De vraag is gemarkeerd.",
 	"quizgame-ajax-deleted": "Verwijderen succesvol",
 	"quizgame-ajax-invalid-option": "Ongeldige AJAX optie.",
+	"quizgame-ajax-nonnumeric-answer": "Gekozen antwoord is niet een nummer.",
+	"quizgame-ajax-already-answered": "U hebt deze vraag al beantwoord.",
+	"quizgame-ajax-invalid-id": "Er is geen vraag met deze ID.",
 	"log-name-quiz": "Quiz vraag logboek",
 	"log-description-quiz": "Dit is een logboek van quiz vraag acties.",
 	"logentry-quiz-create": "$1 gecreëerd [[Special:QuizGameHome/$4|een nieuwe quizvraag]]",
