@@ -73,7 +73,7 @@ class QuizGameHooks {
 	 */
 	public static function addTables( $updater ) {
 		$dir = dirname( __FILE__ );
-		$file = "$dir/quizgame.sql";
+		$file = "$dir/../sql/quizgame.sql";
 		$updater->addExtensionUpdate( array( 'addTable', 'quizgame_questions', $file, true ) );
 		$updater->addExtensionUpdate( array( 'addTable', 'quizgame_answers', $file, true ) );
 		$updater->addExtensionUpdate( array( 'addTable', 'quizgame_choice', $file, true ) );

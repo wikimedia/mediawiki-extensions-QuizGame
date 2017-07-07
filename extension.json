@@ -1,6 +1,6 @@
 {
 	"name": "QuizGame",
-	"version": "3.7.1",
+	"version": "3.8.0",
 	"author": [
 		"Aaron Wright",
 		"Ashish Datta",
@@ -33,20 +33,20 @@
 		"quizgamevote": "ApiQuizGameVote"
 	},
 	"ExtensionMessagesFiles": {
-		"QuizGameAlias": "QuizGame.alias.php"
+		"QuizGameAlias": "includes/QuizGame.alias.php"
 	},
 	"AutoloadClasses": {
-		"ApiQuizGame": "api/ApiQuizGame.php",
-		"ApiQuizGameVote": "api/ApiQuizGameVote.php",
-		"QuizGameLogFormatter": "QuizGameLogFormatter.php",
-		"QuizGameHome": "QuestionGameHome.body.php",
-		"SpecialQuestionGameUpload": "QuestionGameUpload.php",
-		"QuestionGameUploadForm": "QuestionGameUpload.php",
-		"QuizFileUpload": "QuestionGameUpload.php",
-		"QuizLeaderboard": "QuizLeaderboard.php",
-		"QuizRecalcStats": "RecalculateStats.php",
-		"ViewQuizzes": "ViewQuizzes.php",
-		"QuizGameHooks": "QuizGameHooks.php"
+		"ApiQuizGame": "includes/api/ApiQuizGame.php",
+		"ApiQuizGameVote": "includes/api/ApiQuizGameVote.php",
+		"QuizGameLogFormatter": "includes/QuizGameLogFormatter.class.php",
+		"QuizGameHome": "includes/specials/SpecialQuizGameHome.php",
+		"SpecialQuestionGameUpload": "includes/specials/SpecialQuestionGameUpload.php",
+		"QuestionGameUploadForm": "includes/upload/QuestionGameUploadForm.class.php",
+		"QuizFileUpload": "includes/upload/QuizFileUpload.class.php",
+		"QuizLeaderboard": "includes/specials/SpecialQuizLeaderboard.php",
+		"QuizRecalcStats": "includes/specials/SpecialQuizRecalcStats.php",
+		"ViewQuizzes": "includes/specials/SpecialViewQuizzes.php",
+		"QuizGameHooks": "includes/QuizGame.hooks.php"
 	},
 	"Hooks": {
 		"SkinTemplateNavigation::SpecialPage": [
@@ -68,7 +68,7 @@
 	},
 	"ResourceModules": {
 		"ext.quizGame": {
-			"scripts": "js/QuizGame.js",
+			"scripts": "resources/js/QuizGame.js",
 			"messages": [
 				"quizgame-create-error-numanswers", "quizgame-create-error-noquestion",
 				"quizgame-create-error-numcorrect", "quizgame-js-reloading",
@@ -95,7 +95,7 @@
 			"position": "bottom"
 		},
 		"ext.quizGame.css": {
-			"styles": "questiongame.css",
+			"styles": "resources/css/questiongame.css",
 			"position": "top"
 		}
 	},
