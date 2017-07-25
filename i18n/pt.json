@@ -137,6 +137,19 @@
 	"logentry-quiz-unprotect": "$1 desprotegeu [[Special:QuizGameHome/$4|a pergunta nº$4 do jogo]]",
 	"quizgame-images-category": "Imagens do jogo de perguntas",
 	"right-quizadmin": "Administrar jogos de perguntas",
-	"apihelp-quizgame-description": "API para ações administrativas do jogo de perguntas.",
-	"apihelp-quizgame-summary": "API para ações administrativas do jogo de perguntas."
+	"apihelp-quizgame-description": "API do jogo de perguntas para ações administrativas.",
+	"apihelp-quizgame-summary": "API do jogo de perguntas para ações administrativas.",
+	"apihelp-quizgame-param-comment": "Motivo da marcação (só usado em flagItem).",
+	"apihelp-quizgame-param-id": "Número de identificação do jogo.",
+	"apihelp-quizgame-param-key": "Resumo criptográfico MD5 do sal e do número de identificação do jogo.",
+	"apihelp-quizgame-param-quizaction": "Operação a realizar seguida de \"Item\", isto é, deleteItem.",
+	"apihelp-quizgame-example-1": "Marcar um jogo.",
+	"apihelp-quizgame-example-2": "Eliminar um jogo.",
+	"apihelp-quizgamevote-description": "API do jogo de perguntas para votar.",
+	"apihelp-quizgamevote-summary": "API do jogo de perguntas para votar.",
+	"apihelp-quizgamevote-param-answer": "Identificador numérico da resposta.",
+	"apihelp-quizgamevote-param-id": "Número de identificação do jogo.",
+	"apihelp-quizgamevote-param-key": "Resumo criptográfico MD5 do sal e do número de identificação do jogo.",
+	"apihelp-quizgamevote-param-points": "Quantos pontos são dados pela resposta certa.",
+	"apihelp-quizgamevote-example-1": "Votar."
 }
