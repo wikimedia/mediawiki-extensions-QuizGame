@@ -123,7 +123,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 	}
 
 	public function userAnswered( $user_name, $q_id ) {
-		$dbr = wfGetDB( DB_SLAVE );
+		$dbr = wfGetDB( DB_REPLICA );
 		$s = $dbr->selectRow(
 			'quizgame_answers',
 			array( 'a_choice_id' ),
@@ -144,7 +144,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 	}
 
 	public function getAnswerPoints( $user_name, $q_id ) {
-		$dbr = wfGetDB( DB_SLAVE );
+		$dbr = wfGetDB( DB_REPLICA );
 		$s = $dbr->selectRow(
 			'quizgame_answers',
 			array( 'a_points' ),
@@ -166,7 +166,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 	 * @return Integer: ID of the next unanswered question (or 0)
 	 */
 	public function getNextQuestion() {
-		$dbr = wfGetDB( DB_SLAVE );
+		$dbr = wfGetDB( DB_REPLICA );
 		$use_index = $dbr->useIndexClause( 'q_random' );
 		$randstr = wfRandom();
 		$userName = $this->getUser()->getName();
@@ -207,7 +207,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 	 */
 	public function getQuestion( $questionId, $skipId = 0 ) {
 		$userName = $this->getUser()->getName();
-		$dbr = wfGetDB( DB_SLAVE );
+		$dbr = wfGetDB( DB_REPLICA );
 		$where = array();
 		$where['q_id'] = intval( $questionId );
 		if( $skipId > 0 ) {
@@ -271,7 +271,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 	 * @return Array
 	 */
 	public function getQuestionChoices( $questionId, $question_answer_count = 0 ) {
-		$dbr = wfGetDB( DB_SLAVE );
+		$dbr = wfGetDB( DB_REPLICA );
 
 		$res = $dbr->select(
 			'quizgame_choice',
@@ -305,7 +305,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 	}
 
 	function adminPanel() {
-		$dbr = wfGetDB( DB_SLAVE );
+		$dbr = wfGetDB( DB_REPLICA );
 
 		$res = $dbr->select(
 			'quizgame_questions',
