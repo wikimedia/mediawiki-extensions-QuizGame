@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"Joetaras"
+		]
+	},
+	"quizgame-desc": "Aggiunge 'nu [[Special:QuizGameHome|sciuèche de domande]] inderattive",
+	"quizgame-edit": "Cange",
+	"quizgame-delete": "Scangìlle",
+	"quizgame-delete-confirm": "Sì secure ca vue ccu scangìlle stu sciueche de quiz?",
+	"quizgame-protect": "Protegge",
+	"quizgame-points": "$1 punde",
+	"quizgame-time-ago": "$1 fà",
+	"apihelp-quizgamevote-example-1": "Vote."
+}
