@@ -3,8 +3,6 @@
  *
  * @file
  * @ingroup Extensions
- * @author Jack Phoenix <jack@countervandalism.net>
- * @date 8 October 2014
  */
 
  /*
