@@ -92,7 +92,7 @@
 	"quizgame-viewquizzes-create": "Criar uma pergunta do jogo",
 	"quizgame-viewquizzes-title": "Ver as perguntas do jogo",
 	"quizgame-viewquizzes-title-by-user": "Ver as perguntas do jogo de $1",
-	"quizgame-permalink": "Link permanente",
+	"quizgame-permalink": "Hiperligação permanente",
 	"quizgame-create-error-numanswers": "Deve ter pelo menos duas opções de resposta",
 	"quizgame-create-error-noquestion": "Tem de escrever uma pergunta",
 	"quizgame-create-error-numcorrect": "Deve ter uma resposta certa",
