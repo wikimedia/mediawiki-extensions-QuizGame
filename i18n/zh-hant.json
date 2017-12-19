@@ -5,6 +5,8 @@
 		]
 	},
 	"quizgame-unprotect": "取消保護",
+	"quizgame-main-page-button": "首頁",
 	"quizgame-login-button": "登入",
+	"quizgame-leaderboard-order-menu": "排序",
 	"quizgame-permalink": "靜態連結"
 }
