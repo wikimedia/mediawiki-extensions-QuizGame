@@ -74,10 +74,10 @@ class QuizGameHooks {
 	public static function addTables( $updater ) {
 		$dir = dirname( __FILE__ );
 		$file = "$dir/../sql/quizgame.sql";
-		$updater->addExtensionUpdate( array( 'addTable', 'quizgame_questions', $file, true ) );
-		$updater->addExtensionUpdate( array( 'addTable', 'quizgame_answers', $file, true ) );
-		$updater->addExtensionUpdate( array( 'addTable', 'quizgame_choice', $file, true ) );
-		$updater->addExtensionUpdate( array( 'addTable', 'quizgame_user_view', $file, true ) );
+		$updater->addExtensionTable( 'quizgame_questions', $file );
+		$updater->addExtensionTable( 'quizgame_answers', $file );
+		$updater->addExtensionTable( 'quizgame_choice', $file );
+		$updater->addExtensionTable( 'quizgame_user_view', $file );
 		return true;
 	}
 
