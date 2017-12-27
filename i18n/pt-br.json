@@ -1,9 +1,19 @@
 {
 	"@metadata": {
 		"authors": [
-			"Warley Felipe C."
+			"Warley Felipe C.",
+			"Eduardo Addad de Oliveira"
 		]
 	},
+	"quizgame-desc": "Adiciona um [[Special:QuizGameHome|jogo de perguntas]] interativo",
+	"quizgame-edit": "Editar",
+	"quizgame-delete": "Deletar",
+	"quizgame-delete-confirm": "Tem a certeza de que quer eliminar este jogo de perguntas?",
+	"quizgame-protect": "Proteger",
+	"quizgame-unflag": "Desmarcar",
+	"quizgame-unflag-confirm": "Tem a certeza de que quer desmarcar este jogo de perguntas?",
+	"quizgame-unprotect": "Desproteger",
+	"quizgame-error-socialprofile": "A [https://www.mediawiki.org/wiki/Extension:SocialProfile extensão SocialProfile] não está instalada. Instale-a e tente novamente, por favor.",
 	"quizgame-edit-picture-link": "Editar imagem",
 	"quizgame-question": "Pergunta",
 	"quizgame-answers": "Respostas",
