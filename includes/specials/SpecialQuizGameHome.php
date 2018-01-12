@@ -881,7 +881,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 		if( $user->getName() != $question['user_name'] ) {
 			// check to see if the user already had viewed this question
 			global $wgMemc;
-			$key = wfMemcKey( 'quizgame-user-view', $user->getID(), $question['id'] );
+			$key = $wgMemc->makeKey( 'quizgame-user-view', $user->getID(), $question['id'] );
 			$data = $wgMemc->get( $key );
 			if( $data > 0 ) {
 				$timestampedViewed = $data;
@@ -1325,7 +1325,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 		}
 
 		// Delete memcached key
-		$key = wfMemcKey( 'user', 'profile', 'quiz', $user->getID() );
+		$key = $wgMemc->makeKey( 'user', 'profile', 'quiz', $user->getID() );
 		$wgMemc->delete( $key );
 
 		// Redirect the user

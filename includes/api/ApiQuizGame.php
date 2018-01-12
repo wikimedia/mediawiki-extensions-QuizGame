@@ -199,7 +199,7 @@ class ApiQuizGame extends ApiBase {
 					}
 
 					global $wgMemc;
-					$key = wfMemcKey( 'user', 'stats', $row->a_user_id );
+					$key = $wgMemc->makeKey( 'user', 'stats', $row->a_user_id );
 					$wgMemc->delete( $key );
 				}
 
