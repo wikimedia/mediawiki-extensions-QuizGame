@@ -83,7 +83,7 @@ window.QuizGame = {
 		var options = {
 			actions: [
 				{ label: mw.msg( 'cancel' ) },
-				{ label: mw.msg( 'quizgame-unflag' ), action: 'accept', flags: ['constructive', 'primary'] }
+				{ label: mw.msg( 'quizgame-unflag' ), action: 'accept', flags: ['progressive', 'primary'] }
 			]
 		};
 		OO.ui.confirm( mw.msg( 'quizgame-unflag-confirm' ), options ).done( function ( confirmed ) {
