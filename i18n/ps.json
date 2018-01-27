@@ -4,5 +4,6 @@
 			"Baloch Khan"
 		]
 	},
-	"quizgame-edit": "سمول"
+	"quizgame-edit": "سمول",
+	"quizgame-time-days": "{{PLURAL:$1|يوه ورځ|$1 ورځې}}"
 }
