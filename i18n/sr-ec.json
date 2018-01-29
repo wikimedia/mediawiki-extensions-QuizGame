@@ -58,7 +58,7 @@
 	"quizgame-time-days": "{{PLURAL:$1|један дан|$1 дана}}",
 	"quizgame-time-hours": "{{PLURAL:$1|један сат|$1 сата|$1 сати}}",
 	"quizgame-time-seconds": "{{PLURAL:$1|1 секунда|$1 секунда|$1 секунди}}",
-	"quizgame-ajax-invalid-option": "Невалидна AJAX опција.",
+	"quizgame-ajax-invalid-option": "Неисправна AJAX опција.",
 	"quizgame-ajax-already-answered": "Ви сте већ одговорили на то питање.",
 	"apihelp-quizgame-param-id": "ID број квиза.",
 	"apihelp-quizgame-example-1": "Обележи квиз.",
