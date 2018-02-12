@@ -91,12 +91,10 @@
 				"mediawiki.jqueryMsg",
 				"oojs-ui-core",
 				"oojs-ui-windows"
-			],
-			"position": "bottom"
+			]
 		},
 		"ext.quizGame.css": {
-			"styles": "resources/css/questiongame.css",
-			"position": "top"
+			"styles": "resources/css/questiongame.css"
 		}
 	},
 	"AvailableRights": [
