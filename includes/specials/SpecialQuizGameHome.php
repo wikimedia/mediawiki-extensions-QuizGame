@@ -20,12 +20,6 @@ class QuizGameHome extends UnlistedSpecialPage {
 	static $FLAG_PROTECT = 2;
 
 	/**
-	 * @var String: salt used to generate MD5-hashed keys; this is set to
-	 * 'SALT' in execute()
-	 */
-	private $SALT;
-
-	/**
 	 * Construct the MediaWiki special page
 	 */
 	public function __construct() {
@@ -346,27 +340,25 @@ class QuizGameHome extends UnlistedSpecialPage {
 				}
 			}
 
-			$key = md5( $this->SALT . $row->q_id );
 			$buttons = $this->getLinkRenderer()->makeLink(
 				$this->getPageTitle(),
 				$this->msg( 'quizgame-edit' )->text(),
 				array(),
 				array(
 					'questionGameAction' => 'editItem',
-					'quizGameId' => $row->q_id,
-					'quizGameKey' => $key
+					'quizGameId' => $row->q_id
 				)
 			) . " -
-					<a class=\"delete-by-id\" href=\"#\" data-quiz-id=\"{$row->q_id}\" data-key=\"{$key}\">" .
+					<a class=\"delete-by-id\" href=\"#\" data-quiz-id=\"{$row->q_id}\">" .
 					$this->msg( 'quizgame-delete' )->text() . '</a> - ';
 
 			if ( $row->q_flag == QuizGameHome::$FLAG_FLAGGED ) {
-				$buttons .= "<a class=\"protect-by-id\" href=\"#\" data-quiz-id=\"{$row->q_id}\" data-key=\"{$key}\">" .
+				$buttons .= "<a class=\"protect-by-id\" href=\"#\" data-quiz-id=\"{$row->q_id}\">" .
 					$this->msg( 'quizgame-protect' )->text() . "</a>
-						 - <a class=\"unflag-by-id\" href=\"#\" data-quiz-id=\"{$row->q_id}\" data-key=\"{$key}\">" .
+						 - <a class=\"unflag-by-id\" href=\"#\" data-quiz-id=\"{$row->q_id}\">" .
 						 $this->msg( 'quizgame-unflag' )->text() . '</a>';
 			} else {
-				$buttons .= "<a class=\"unprotect-by-id\" href=\"#\" data-quiz-id=\"{$row->q_id}\" data-key=\"{$key}\">" .
+				$buttons .= "<a class=\"unprotect-by-id\" href=\"#\" data-quiz-id=\"{$row->q_id}\">" .
 					$this->msg( 'quizgame-unprotect' )->text() . '</a>';
 			}
 
@@ -445,7 +437,6 @@ class QuizGameHome extends UnlistedSpecialPage {
 	function completeEdit() {
 		$request = $this->getRequest();
 
-		$key = $request->getVal( 'quizGameKey' );
 		$id = $request->getInt( 'quizGameId' );
 
 		// Only Quiz Administrators can perform this operation.
@@ -575,16 +566,9 @@ class QuizGameHome extends UnlistedSpecialPage {
 		$out = $this->getOutput();
 		$request = $this->getRequest();
 
-		$key = $request->getVal( 'quizGameKey' );
 		$id = $request->getInt( 'quizGameId' );
 
 		$wgQuizID = $id;
-
-		if( $key != md5( $this->SALT . $id ) ) {
-			// @todo FIXME/CHECKME: why is this commented out?
-			//$out->addWikiMsg( 'quizgame-admin-permission' );
-			//return;
-		}
 
 		$question = $this->getQuestion( $id );
 
@@ -733,7 +717,6 @@ class QuizGameHome extends UnlistedSpecialPage {
 						<input id=\"quizGamePicture\" name=\"quizGamePicture\" type=\"hidden\" value=\"{$question['image']}\" />
 
 						<input id=\"quizGameId\" name=\"quizGameId\" type=\"hidden\" value=\"{$question['id']}\" />
-						<input id=\"quizGameKey\" name=\"quizGameKey\" type=\"hidden\" value=\"{$key}\" />
 						<input name=\"choices_count\" type=\"hidden\" value=\"{$choices_count}\" />
 						<input id=\"old_correct\" name=\"old_correct\" type=\"hidden\" value=\"{$old_correct}\" />
 					</form>
@@ -881,7 +864,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 		if( $user->getName() != $question['user_name'] ) {
 			// check to see if the user already had viewed this question
 			global $wgMemc;
-			$key = $wgMemc->makeKey( 'quizgame-user-view', $user->getID(), $question['id'] );
+			$key = $wgMemc->makeKey( 'quizgame-user-view', $user->getId(), $question['id'] );
 			$data = $wgMemc->get( $key );
 			if( $data > 0 ) {
 				$timestampedViewed = $data;
@@ -928,8 +911,6 @@ class QuizGameHome extends UnlistedSpecialPage {
 		} else {
 			$imageTag = '';
 		}
-
-		$key = md5( $this->SALT . $gameid );
 
 		$user_name = $question['user_name'];
 		$user_title = Title::makeTitle( NS_USER, $user_name );
@@ -1100,7 +1081,6 @@ class QuizGameHome extends UnlistedSpecialPage {
 
 					<form name=\"quizGameForm\" id=\"quizGameForm\">
 						<input id=\"quizGameId\" name=\"quizGameId\" type=\"hidden\" value=\"{$gameid}\" />
-						<input id=\"quizGameKey\" name=\"quizGameKey\" type=\"hidden\" value=\"{$key}\" />
 					</form>
 
 					<div class=\"navigation-buttons\">
@@ -1257,12 +1237,9 @@ class QuizGameHome extends UnlistedSpecialPage {
 		$request = $this->getRequest();
 		$user = $this->getUser();
 
-		$key = $request->getText( 'key' );
-		$chain = $request->getText( 'chain' );
-
 		$max_answers = 8;
 
-		if( $key != md5( $this->SALT . $chain ) ) {
+		if ( !$user->matchEditToken( $request->getVal( 'wpEditToken' ) ) ) {
 			header( 'Location: ' . $this->getPageTitle()->getFullURL() );
 			return;
 		}
@@ -1308,7 +1285,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 		}
 
 		// Update social statistics
-		$stats = new UserStatsTrack( $user->getID(), $user->getName() );
+		$stats = new UserStatsTrack( $user->getId(), $user->getName() );
 		$stats->incStatField( 'quiz_created' );
 
 		// Add a log entry if quiz logging is enabled
@@ -1325,7 +1302,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 		}
 
 		// Delete memcached key
-		$key = $wgMemc->makeKey( 'user', 'profile', 'quiz', $user->getID() );
+		$key = $wgMemc->makeKey( 'user', 'profile', 'quiz', $user->getId() );
 		$wgMemc->delete( $key );
 
 		// Redirect the user
@@ -1368,7 +1345,6 @@ class QuizGameHome extends UnlistedSpecialPage {
 		}
 
 		$chain = time();
-		$key = md5( $this->SALT . $chain );
 		$max_answers = 8;
 
 		$out->setPageTitle( $this->msg( 'quizgame-create-title' )->text() );
@@ -1408,10 +1384,10 @@ class QuizGameHome extends UnlistedSpecialPage {
 		}
 
 		$output .= '<input id="quizGamePictureName" name="quizGamePictureName" type="hidden" value="" />
-				<input id="key" name="key" type="hidden" value="' . $key . '" />
-				<input id="chain" name="chain" type="hidden" value="' . $chain . '" />
+				<input id="chain" name="chain" type="hidden" value="' . $chain . '" />' .
+				Html::hidden( 'wpEditToken', $user->getEditToken() ) .
 
-			</form>
+			'</form>
 
 			<h1 style="margin-top:20px">' .
 				$this->msg( 'quizgame-create-add-picture' )->text() . '</h1>

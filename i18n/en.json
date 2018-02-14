@@ -119,7 +119,6 @@
 	"quizgame-time-hours": "{{PLURAL:$1|one hour|$1 hours}}",
 	"quizgame-time-minutes": "{{PLURAL:$1|one minute|$1 minutes}}",
 	"quizgame-time-seconds": "{{PLURAL:$1|one second|$1 seconds}}",
-	"quizgame-ajax-invalid-key": "You need a valid key to do that.",
 	"quizgame-ajax-unprotected": "The question has been un-protected.",
 	"quizgame-ajax-protected": "The question has been protected.",
 	"quizgame-ajax-unflagged": "The question has been un-flagged.",
@@ -143,7 +142,6 @@
 	"apihelp-quizgame-summary": "Question Game API for administrative actions.",
 	"apihelp-quizgame-param-comment": "Reason for flagging (used only in flagItem).",
 	"apihelp-quizgame-param-id": "Quiz ID number.",
-	"apihelp-quizgame-param-key": "MD5 hash of the salt and the quiz ID number.",
 	"apihelp-quizgame-param-quizaction": "What to do + the word \"Item\", i.e. deleteItem.",
 	"apihelp-quizgame-example-1": "Flag a quiz.",
 	"apihelp-quizgame-example-2": "Delete a quiz.",
@@ -151,7 +149,6 @@
 	"apihelp-quizgamevote-summary": "Question Game API for voting.",
 	"apihelp-quizgamevote-param-answer": "Numeric answer ID.",
 	"apihelp-quizgamevote-param-id": "Quiz ID number.",
-	"apihelp-quizgamevote-param-key": "MD5 hash of the salt and the quiz ID number.",
 	"apihelp-quizgamevote-param-points": "How many points are given out for the correct answer.",
 	"apihelp-quizgamevote-example-1": "Vote."
 }

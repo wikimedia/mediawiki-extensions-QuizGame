@@ -23,19 +23,12 @@ class ApiQuizGameVote extends ApiBase {
 
 		$answer = $params['answer']; // numeric answer ID
 		$id = $params['id']; // quiz ID number
-		$key = $params['key']; // MD5 hash of the salt and the quiz ID number
 		$points = $params['points'];
 
 		// Check that all of the required parameters are present, and if it
 		// ain't so, don't go any further
-		if ( $answer === null || $id === null || $key === null || $points === null ) {
+		if ( $answer === null || $id === null || $points === null ) {
 			$this->dieUsageMsg( 'missingparam' );
-		}
-
-		// Check that the key is correct to make sure that no-one's trying any
-		// funny business
-		if ( $key != md5( 'SALT' . $id ) ) {
-			$this->dieUsage( wfMessage( 'quizgame-ajax-invalid-key' )->text(), 'invalidkey' );
 		}
 
 		if ( !is_numeric( $answer ) ) {
@@ -184,6 +177,14 @@ class ApiQuizGameVote extends ApiBase {
 		return 'Question Game API for voting';
 	}
 
+	public function needsToken() {
+		return 'csrf';
+	}
+
+	public function isWriteMode() {
+		return true;
+	}
+
 	public function getAllowedParams() {
 		return array(
 			'answer' => array(
@@ -192,10 +193,6 @@ class ApiQuizGameVote extends ApiBase {
 			),
 			'id' => array(
 				ApiBase::PARAM_TYPE => 'integer',
-				ApiBase::PARAM_REQUIRED => true
-			),
-			'key' => array(
-				ApiBase::PARAM_TYPE => 'string',
 				ApiBase::PARAM_REQUIRED => true
 			),
 			'points' => array(
@@ -216,7 +213,6 @@ class ApiQuizGameVote extends ApiBase {
 		return array(
 			'answer' => 'Numeric answer ID',
 			'id' => 'Quiz ID number',
-			'key' => 'MD5 hash of the salt and the quiz ID number',
 			'points' => 'How many points are given out for the correct answer'
 		);
 	}
@@ -226,13 +222,13 @@ class ApiQuizGameVote extends ApiBase {
 	 */
 	public function getExamples() {
 		return array(
-			'api.php?action=quizgamevote&answer=3&id=245&key=ThisObviouslyIsntARealKey'
+			'api.php?action=quizgamevote&answer=3&id=245'
 		);
 	}
 
 	public function getExamplesMessages() {
 		return array(
-			'action=quizgamevote&answer=3&id=245&key=ThisObviouslyIsntARealKey' => 'apihelp-quizgamevote-example-1'
+			'action=quizgamevote&answer=3&id=245' => 'apihelp-quizgamevote-example-1'
 		);
 	}
 }

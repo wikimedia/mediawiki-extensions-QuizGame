@@ -119,7 +119,6 @@
 	"quizgame-time-hours": "number of hours, followed by {{msg-mw|quizgame-time-ago}}\n{{Identical|Hour}}",
 	"quizgame-time-minutes": "number of minutes, followed by {{msg-mw|quizgame-time-ago}}\n{{Identical|Minute}}",
 	"quizgame-time-seconds": "number of seconds, followed by {{msg-mw|quizgame-time-ago}}\n{{Identical|Second}}",
-	"quizgame-ajax-invalid-key": "Shown via JavaScript if a user tries to perform administrative actions without a valid key (key in this context is the same as \"token\")",
 	"quizgame-ajax-unprotected": "Shown via JavaScript after a question has been unprotected",
 	"quizgame-ajax-protected": "Shown via JavaScript after a question has been protected.",
 	"quizgame-ajax-unflagged": "Shown via JavaScript after a question has been un-flagged; un-flagging returns a flagged quiz into the pool of available quizzes, allowing users to play it again",
@@ -143,7 +142,6 @@
 	"apihelp-quizgame-summary": "{{doc-apihelp-summary|quizgame}}",
 	"apihelp-quizgame-param-comment": "{{doc-apihelp-param|quizgame|comment}}",
 	"apihelp-quizgame-param-id": "{{doc-apihelp-param|quizgame|id}}",
-	"apihelp-quizgame-param-key": "{{doc-apihelp-param|quizgame|key}}",
 	"apihelp-quizgame-param-quizaction": "{{doc-apihelp-param|quizgame|quizaction}}",
 	"apihelp-quizgame-example-1": "{{doc-apihelp-example|quizgame}}",
 	"apihelp-quizgame-example-2": "{{doc-apihelp-example|quizgame}}",
@@ -151,7 +149,6 @@
 	"apihelp-quizgamevote-summary": "{{doc-apihelp-summary|quizgamevote}}",
 	"apihelp-quizgamevote-param-answer": "{{doc-apihelp-param|quizgamevote|answer}}",
 	"apihelp-quizgamevote-param-id": "{{doc-apihelp-param|quizgamevote|id}}",
-	"apihelp-quizgamevote-param-key": "{{doc-apihelp-param|quizgamevote|key}}",
 	"apihelp-quizgamevote-param-points": "{{doc-apihelp-param|quizgamevote|points}}",
 	"apihelp-quizgamevote-example-1": "{{doc-apihelp-example|quizgamevote}}\n{{Identical|Vote}}"
 }

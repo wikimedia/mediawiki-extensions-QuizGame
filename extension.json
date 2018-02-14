@@ -1,6 +1,6 @@
 {
 	"name": "QuizGame",
-	"version": "3.8.1",
+	"version": "3.9.0",
 	"author": [
 		"Aaron Wright",
 		"Ashish Datta",
@@ -88,6 +88,7 @@
 			"dependencies": [
 				"ext.socialprofile.flash",
 				"ext.socialprofile.LightBox",
+				"mediawiki.api",
 				"mediawiki.jqueryMsg",
 				"oojs-ui-core",
 				"oojs-ui-windows"

@@ -27,21 +27,11 @@ class ApiQuizGame extends ApiBase {
 		$action = $params['quizaction']; // what to do + the word "Item", i.e. deleteItem
 		$comment = ( isset( $params['comment'] ) ? $params['comment'] : '' ); // reason for flagging (used only in flagItem)
 		$id = $params['id']; // quiz ID number
-		$key = $params['key']; // MD5 hash of the word 'SALT' and the quiz ID number
 
 		// Check that all of the required parameters are present, and if it
 		// ain't so, don't go any further
-		if ( $action === null || $id === null || $key === null ) {
+		if ( $action === null || $id === null ) {
 			$this->dieUsageMsg( 'missingparam' );
-		}
-
-		// Check that the key is correct to make sure that no-one's trying any
-		// funny business
-		// We cannot check for !$user->isAllowed( 'quizadmin' ) since this
-		// function also handles flagging...all the other actions are admin-only,
-		// though
-		if ( $key != md5( 'SALT' . $id ) ) {
-			$this->dieUsage( wfMessage( 'quizgame-ajax-invalid-key' )->text(), 'invalidkey' );
 		}
 
 		// ApiBase's getDB() supports only slave connections, lame...
@@ -275,6 +265,14 @@ class ApiQuizGame extends ApiBase {
 		return 'Question Game API for administrative actions';
 	}
 
+	public function needsToken() {
+		return 'csrf';
+	}
+
+	public function isWriteMode() {
+		return true;
+	}
+
 	public function getAllowedParams() {
 		return array(
 			'comment' => array(
@@ -282,10 +280,6 @@ class ApiQuizGame extends ApiBase {
 			),
 			'id' => array(
 				ApiBase::PARAM_TYPE => 'integer',
-				ApiBase::PARAM_REQUIRED => true
-			),
-			'key' => array(
-				ApiBase::PARAM_TYPE => 'string',
 				ApiBase::PARAM_REQUIRED => true
 			),
 			'quizaction' => array(
@@ -306,7 +300,6 @@ class ApiQuizGame extends ApiBase {
 		return array(
 			'comment' => 'Reason for flagging (used only in flagItem)',
 			'id' => 'Quiz ID number',
-			'key' => 'MD5 hash of the salt and the quiz ID number',
 			'quizaction' => 'What to do + the word "Item", i.e. deleteItem'
 		);
 	}
@@ -316,15 +309,15 @@ class ApiQuizGame extends ApiBase {
 	 */
 	public function getExamples() {
 		return array(
-			'api.php?action=quizgame&quizaction=flagItem&comment=Inappropriate%20question&id=30&key=ThisObviouslyIsntARealKey',
-			'api.php?action=quizgame&quizaction=deleteItem&id=30&key=YetAnotherExampleKey',
+			'api.php?action=quizgame&quizaction=flagItem&comment=Inappropriate%20question&id=30',
+			'api.php?action=quizgame&quizaction=deleteItem&id=30',
 		);
 	}
 
 	public function getExamplesMessages() {
 		return array(
-			'action=quizgame&quizaction=flagItem&comment=Inappropriate%20question&id=30&key=ThisObviouslyIsntARealKey' => 'apihelp-quizgame-example-1',
-			'action=quizgame&quizaction=deleteItem&id=30&key=YetAnotherExampleKey' => 'apihelp-quizgame-example-2',
+			'action=quizgame&quizaction=flagItem&comment=Inappropriate%20question&id=30' => 'apihelp-quizgame-example-1',
+			'action=quizgame&quizaction=deleteItem&id=30' => 'apihelp-quizgame-example-2',
 		);
 	}
 }
