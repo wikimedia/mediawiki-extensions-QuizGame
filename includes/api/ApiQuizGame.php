@@ -41,8 +41,8 @@ class ApiQuizGame extends ApiBase {
 			case 'unprotectItem':
 				$dbw->update(
 					'quizgame_questions',
-					array( 'q_flag' => QuizGameHome::$FLAG_NONE ),
-					array( 'q_id' => intval( $id ) ),
+					[ 'q_flag' => QuizGameHome::$FLAG_NONE ],
+					[ 'q_id' => intval( $id ) ],
 					__METHOD__
 				);
 
@@ -57,8 +57,8 @@ class ApiQuizGame extends ApiBase {
 			case 'protectItem':
 				$dbw->update(
 					'quizgame_questions',
-					array( 'q_flag' => QuizGameHome::$FLAG_PROTECT ),
-					array( 'q_id' => intval( $id ) ),
+					[ 'q_flag' => QuizGameHome::$FLAG_PROTECT ],
+					[ 'q_id' => intval( $id ) ],
 					__METHOD__
 				);
 
@@ -90,8 +90,8 @@ class ApiQuizGame extends ApiBase {
 
 				$dbw->update(
 					'quizgame_questions',
-					array( 'q_flag' => QuizGameHome::$FLAG_NONE, 'q_comment' => '' ),
-					array( 'q_id' => intval( $id ) ),
+					[ 'q_flag' => QuizGameHome::$FLAG_NONE, 'q_comment' => '' ],
+					[ 'q_id' => intval( $id ) ],
 					__METHOD__
 				);
 
@@ -123,15 +123,15 @@ class ApiQuizGame extends ApiBase {
 
 				$dbw->update(
 					'quizgame_questions',
-					array( 'q_flag' => QuizGameHome::$FLAG_FLAGGED, 'q_comment' => $comment ),
-					array( 'q_id' => intval( $id ) ),
+					[ 'q_flag' => QuizGameHome::$FLAG_FLAGGED, 'q_comment' => $comment ],
+					[ 'q_id' => intval( $id ) ],
 					__METHOD__
 				);
 
 				$dbw->update(
 					'quizgame_questions',
-					array( 'q_flag' => QuizGameHome::$FLAG_FLAGGED ),
-					array( 'q_id' => intval( $id ) ),
+					[ 'q_flag' => QuizGameHome::$FLAG_FLAGGED ],
+					[ 'q_id' => intval( $id ) ],
 					__METHOD__
 				);
 
@@ -145,12 +145,12 @@ class ApiQuizGame extends ApiBase {
 				break;
 			case 'deleteItem':
 				$res = $dbw->select(
-					array( 'quizgame_answers', 'quizgame_choice' ),
-					array( 'a_user_id', 'a_points', 'choice_is_correct' ),
-					array( 'a_q_id' => intval( $id ) ),
+					[ 'quizgame_answers', 'quizgame_choice' ],
+					[ 'a_user_id', 'a_points', 'choice_is_correct' ],
+					[ 'a_q_id' => intval( $id ) ],
 					__METHOD__,
 					'',
-					array( 'quizgame_choice' => array( 'LEFT JOIN', 'choice_id = a_choice_id' ) )
+					[ 'quizgame_choice' => [ 'LEFT JOIN', 'choice_id = a_choice_id' ] ]
 				);
 
 				foreach ( $res as $row ) {
@@ -163,13 +163,13 @@ class ApiQuizGame extends ApiBase {
 					// Update everyone who answered this question
 					$dbw->update(
 						'user_stats',
-						/* SET */array(
+						/* SET */[
 							$percentage,
 							'stats_quiz_questions_answered = stats_quiz_questions_answered - 1',
-						),
-						/* WHERE */array(
+						],
+						/* WHERE */[
 							'stats_user_id' => $row->a_user_id
-						),
+						],
 						__METHOD__
 					);
 
@@ -177,13 +177,13 @@ class ApiQuizGame extends ApiBase {
 					if ( $row->choice_is_correct == 1 ) {
 						$dbw->update(
 							'user_stats',
-							/* SET */array(
+							/* SET */[
 								'stats_quiz_questions_correct = stats_quiz_questions_correct - 1',
 								'stats_quiz_points = stats_quiz_points-' . $row->a_points
-							),
-							/* WHERE */array(
+							],
+							/* WHERE */[
 								'stats_user_id' => $row->a_user_id
-							),
+							],
 							__METHOD__
 						);
 					}
@@ -195,19 +195,19 @@ class ApiQuizGame extends ApiBase {
 
 				$dbw->delete(
 					'quizgame_answers',
-					array( 'a_q_id' => intval( $id ) ),
+					[ 'a_q_id' => intval( $id ) ],
 					__METHOD__
 				);
 
 				$dbw->delete(
 					'quizgame_choice',
-					array( 'choice_q_id' => intval( $id ) ),
+					[ 'choice_q_id' => intval( $id ) ],
 					__METHOD__
 				);
 
 				$dbw->delete(
 					'quizgame_questions',
-					array( 'q_id' => intval( $id ) ),
+					[ 'q_id' => intval( $id ) ],
 					__METHOD__
 				);
 
@@ -225,7 +225,7 @@ class ApiQuizGame extends ApiBase {
 		} // switch() loop end
 
 		// This is shown to the user via AJAX.
-		$data = array( 'output' => $output );
+		$data = [ 'output' => $output ];
 
 		// Dear API, Y U NO MAKE SENSE?
 		// The following, which is also used in the voting API, does NOT work:
@@ -237,9 +237,9 @@ class ApiQuizGame extends ApiBase {
 	/**
 	 * Log what was done to a particular quiz by whom at what time.
 	 *
-	 * @param $what String: action to log (delete, flag, protect, unflag or unprotect)
-	 * @param $id Integer: ID of the affected quiz game
-	 * @param $comment String: user-supplied comment; used only when flagging quizzes
+	 * @param string $what Action to log (delete, flag, protect, unflag or unprotect)
+	 * @param int $id ID of the affected quiz game
+	 * @param string $comment User-supplied comment; used only when flagging quizzes
 	 */
 	private function createLogEntry( $what, $id, $comment = '' ) {
 		$logEntry = new ManualLogEntry( 'quiz', $what );
@@ -249,9 +249,9 @@ class ApiQuizGame extends ApiBase {
 		if ( !empty( $comment ) ) {
 			$logEntry->setComment( $comment );
 		}
-		$logEntry->setParameters( array(
+		$logEntry->setParameters( [
 			'4::quizid' => $id
-		) );
+		] );
 
 		$logId = $logEntry->insert();
 		$logEntry->publish( $logId );
@@ -259,7 +259,7 @@ class ApiQuizGame extends ApiBase {
 
 	/**
 	 * @deprecated since MediaWiki core 1.25
-	 * @return String: the description string for this module
+	 * @return string The description string for this module
 	 */
 	public function getDescription() {
 		return 'Question Game API for administrative actions';
@@ -274,19 +274,19 @@ class ApiQuizGame extends ApiBase {
 	}
 
 	public function getAllowedParams() {
-		return array(
-			'comment' => array(
+		return [
+			'comment' => [
 				ApiBase::PARAM_TYPE => 'string'
-			),
-			'id' => array(
+			],
+			'id' => [
 				ApiBase::PARAM_TYPE => 'integer',
 				ApiBase::PARAM_REQUIRED => true
-			),
-			'quizaction' => array(
+			],
+			'quizaction' => [
 				ApiBase::PARAM_TYPE => 'string',
 				ApiBase::PARAM_REQUIRED => true
-			)
-		);
+			]
+		];
 	}
 
 	/**
@@ -294,30 +294,30 @@ class ApiQuizGame extends ApiBase {
 	 * module accepts/requires.
 	 *
 	 * @deprecated since MediaWiki core 1.25
-	 * @return Array
+	 * @return array
 	 */
 	public function getParamDescription() {
-		return array(
+		return [
 			'comment' => 'Reason for flagging (used only in flagItem)',
 			'id' => 'Quiz ID number',
 			'quizaction' => 'What to do + the word "Item", i.e. deleteItem'
-		);
+		];
 	}
 
 	/**
 	 * @deprecated since MediaWiki core 1.25
 	 */
 	public function getExamples() {
-		return array(
+		return [
 			'api.php?action=quizgame&quizaction=flagItem&comment=Inappropriate%20question&id=30',
 			'api.php?action=quizgame&quizaction=deleteItem&id=30',
-		);
+		];
 	}
 
 	public function getExamplesMessages() {
-		return array(
+		return [
 			'action=quizgame&quizaction=flagItem&comment=Inappropriate%20question&id=30' => 'apihelp-quizgame-example-1',
 			'action=quizgame&quizaction=deleteItem&id=30' => 'apihelp-quizgame-example-2',
-		);
+		];
 	}
 }

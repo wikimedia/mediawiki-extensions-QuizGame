@@ -40,8 +40,8 @@ class ApiQuizGameVote extends ApiBase {
 		// Check if they already answered
 		$s = $dbw->selectRow(
 			'quizgame_answers',
-			array( 'a_choice_id' ),
-			array( 'a_q_id' => intval( $id ), 'a_user_name' => $user->getName() ),
+			[ 'a_choice_id' ],
+			[ 'a_q_id' => intval( $id ), 'a_user_name' => $user->getName() ],
 			__METHOD__
 		);
 
@@ -52,14 +52,14 @@ class ApiQuizGameVote extends ApiBase {
 		// Add answer by user
 		$dbw->insert(
 			'quizgame_answers',
-			array(
+			[
 				'a_q_id' => intval( $id ),
 				'a_user_id' => $user->getId(),
 				'a_user_name' => $user->getName(),
 				'a_choice_id' => $answer,
 				'a_points' => $points,
 				'a_date' => date( 'Y-m-d H:i:s' )
-			),
+			],
 			__METHOD__
 		);
 
@@ -71,23 +71,23 @@ class ApiQuizGameVote extends ApiBase {
 		// Clear out anti-cheating table
 		$dbw->delete(
 			'quizgame_user_view',
-			array( 'uv_user_id' => $user->getId(), 'uv_q_id' => intval( $id ) ),
+			[ 'uv_user_id' => $user->getId(), 'uv_q_id' => intval( $id ) ],
 			__METHOD__
 		);
 
 		// Update answer picked
 		$dbw->update(
 			'quizgame_choice',
-			array( 'choice_answer_count = choice_answer_count + 1' ),
-			array( 'choice_id' => $answer ),
+			[ 'choice_answer_count = choice_answer_count + 1' ],
+			[ 'choice_id' => $answer ],
 			__METHOD__
 		);
 
 		// Update question answered
 		$dbw->update(
 			'quizgame_questions',
-			array( 'q_answer_count = q_answer_count + 1' ),
-			array( 'q_id' => intval( $id ) ),
+			[ 'q_answer_count = q_answer_count + 1' ],
+			[ 'q_id' => intval( $id ) ],
 			__METHOD__
 		);
 
@@ -98,8 +98,8 @@ class ApiQuizGameVote extends ApiBase {
 		// Check if the answer was right
 		$s = $dbw->selectRow(
 			'quizgame_questions',
-			array( 'q_answer_count' ),
-			array( 'q_id' => intval( $id ) ),
+			[ 'q_answer_count' ],
+			[ 'q_id' => intval( $id ) ],
 			__METHOD__
 		);
 		if ( $s !== false ) {
@@ -109,8 +109,8 @@ class ApiQuizGameVote extends ApiBase {
 		// Check if the answer was right
 		$s = $dbw->selectRow(
 			'quizgame_choice',
-			array( 'choice_id', 'choice_text', 'choice_answer_count' ),
-			array( 'choice_q_id' => intval( $id ), 'choice_is_correct' => 1 ),
+			[ 'choice_id', 'choice_text', 'choice_answer_count' ],
+			[ 'choice_q_id' => intval( $id ), 'choice_is_correct' => 1 ],
 			__METHOD__
 		);
 
@@ -123,11 +123,11 @@ class ApiQuizGameVote extends ApiBase {
 			}
 
 			$isRight = ( ( $s->choice_id == $answer ) ? 'true' : 'false' );
-			$data = array(
+			$data = [
 				'isRight' => $isRight,
 				'rightAnswer' => addslashes( $s->choice_text ), // @todo FIXME/CHECKME: addslashes() still needed?
 				'percentRight' => $percent
-			);
+			];
 			if ( defined( 'ApiResult::META_CONTENT' ) ) {
 				// Why?
 				ApiResult::setContentValue( $data, 'content', '' );
@@ -139,8 +139,8 @@ class ApiQuizGameVote extends ApiBase {
 				// Update question answered correctly for entire question
 				$dbw->update(
 					'quizgame_questions',
-					array( 'q_answer_correct_count = q_answer_correct_count+1' ),
-					array( 'q_id' => $id ),
+					[ 'q_answer_correct_count = q_answer_correct_count+1' ],
+					[ 'q_id' => $id ],
 					__METHOD__
 				);
 
@@ -156,13 +156,13 @@ class ApiQuizGameVote extends ApiBase {
 			// Update the users % correct
 			$dbw->update(
 				'user_stats',
-				array( 'stats_quiz_questions_correct_percent = stats_quiz_questions_correct/stats_quiz_questions_answered' ),
-				array( 'stats_user_id' => $user->getId() ),
+				[ 'stats_quiz_questions_correct_percent = stats_quiz_questions_correct/stats_quiz_questions_answered' ],
+				[ 'stats_user_id' => $user->getId() ],
 				__METHOD__
 			);
 
 			$this->getResult()->addValue( null, $this->getModuleName(),
-				array( 'result' => $data )
+				[ 'result' => $data ]
 			);
 		} else {
 			$this->dieUsage( wfMessage( 'quizgame-ajax-invalid-id' )->text(), 'nosuchquestion' );
@@ -171,7 +171,7 @@ class ApiQuizGameVote extends ApiBase {
 
 	/**
 	 * @deprecated since MediaWiki core 1.25
-	 * @return String: the description string for this module
+	 * @return string The description string for this module
 	 */
 	public function getDescription() {
 		return 'Question Game API for voting';
@@ -186,20 +186,20 @@ class ApiQuizGameVote extends ApiBase {
 	}
 
 	public function getAllowedParams() {
-		return array(
-			'answer' => array(
+		return [
+			'answer' => [
 				ApiBase::PARAM_TYPE => 'integer',
 				ApiBase::PARAM_REQUIRED => true
-			),
-			'id' => array(
+			],
+			'id' => [
 				ApiBase::PARAM_TYPE => 'integer',
 				ApiBase::PARAM_REQUIRED => true
-			),
-			'points' => array(
+			],
+			'points' => [
 				ApiBase::PARAM_TYPE => 'integer',
 				ApiBase::PARAM_REQUIRED => true
-			)
-		);
+			]
+		];
 	}
 
 	/**
@@ -207,28 +207,28 @@ class ApiQuizGameVote extends ApiBase {
 	 * module accepts/requires.
 	 *
 	 * @deprecated since MediaWiki core 1.25
-	 * @return Array
+	 * @return array
 	 */
 	public function getParamDescription() {
-		return array(
+		return [
 			'answer' => 'Numeric answer ID',
 			'id' => 'Quiz ID number',
 			'points' => 'How many points are given out for the correct answer'
-		);
+		];
 	}
 
 	/**
 	 * @deprecated since MediaWiki core 1.25
 	 */
 	public function getExamples() {
-		return array(
+		return [
 			'api.php?action=quizgamevote&answer=3&id=245'
-		);
+		];
 	}
 
 	public function getExamplesMessages() {
-		return array(
+		return [
 			'action=quizgamevote&answer=3&id=245' => 'apihelp-quizgamevote-example-1'
-		);
+		];
 	}
 }

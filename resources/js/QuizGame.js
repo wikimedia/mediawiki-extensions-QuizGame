@@ -96,7 +96,7 @@ window.QuizGame = {
 		} else {
 			nameOfOurCountableVariable = __choices_count__;
 		}
-		for( var x = 1; x <= ( nameOfOurCountableVariable ); x++ ) {
+		for ( var x = 1; x <= ( nameOfOurCountableVariable ); x++ ) {
 			document.getElementById( 'quizgame-isright-' + x ).checked = false;
 		}
 		thisBox.checked = true;
@@ -155,11 +155,11 @@ window.QuizGame = {
 	 * Detects Firefox on Mac by returning boolean true if the current
 	 * User-Agent is that.
 	 *
-	 * @return Boolean
+	 * @return {boolean}
 	 */
 	detectMacXFF: function() {
 		var userAgent = navigator.userAgent.toLowerCase();
-		if( userAgent.indexOf( 'mac' ) != -1 && userAgent.indexOf( 'firefox' ) != -1 ) {
+		if ( userAgent.indexOf( 'mac' ) != -1 && userAgent.indexOf( 'firefox' ) != -1 ) {
 			return true;
 		}
 	},
@@ -250,7 +250,7 @@ window.QuizGame = {
 	},
 
 	/**
-	 * @param {time_viewed} number
+	 * @param {number} time_viewed
 	 */
 	countDown: function( time_viewed ) {
 		/**
@@ -301,8 +301,8 @@ window.QuizGame = {
 	},
 
 	setLevel: function() {
-		for( var x = 0; x <= QuizGame.levels_array.length - 1; x++ ) {
-			if(
+		for ( var x = 0; x <= QuizGame.levels_array.length - 1; x++ ) {
+			if (
 				( QuizGame.timer === 0 && x == QuizGame.levels_array.length - 1 ) ||
 				( QuizGame.timer <= QuizGame.levels_array[x] && QuizGame.timer > QuizGame.levels_array[x + 1] )
 			)
@@ -320,19 +320,19 @@ window.QuizGame = {
 
 	adjustTimer: function( timeViewed ) {
 		var timeDiff = QuizGame.current_timestamp - timeViewed;
-		if( timeDiff > 30 ) {
+		if ( timeDiff > 30 ) {
 			QuizGame.timer = 0;
 		} else {
 			QuizGame.timer = 31 - timeDiff; // give them extra second for page load
 		}
-		if( QuizGame.timer > 30 ) {
+		if ( QuizGame.timer > 30 ) {
 			QuizGame.timer = 30;
 		}
 	},
 
 	/**
 	 * Go to a quiz when we know its ID (which is used in the permalink)
-	 * @param id Integer: quiz ID number
+	 * @param {number} id Quiz ID number
 	 */
 	goToQuiz: function( id ) {
 		window.location = mw.config.get( 'wgServer' ) + mw.config.get( 'wgScriptPath' ) +
@@ -346,10 +346,10 @@ window.QuizGame = {
 	},
 
 	pauseQuiz: function() {
-		if( document.getElementById( 'lightbox-loader' ) ) {
+		if ( document.getElementById( 'lightbox-loader' ) ) {
 			document.getElementById( 'lightbox-loader' ).innerHTML = '';
 		}
-		if( QuizGame.continue_timer ) {
+		if ( QuizGame.continue_timer ) {
 			clearTimeout( QuizGame.continue_timer );
 		}
 		document.getElementById( 'quiz-controls' ).innerHTML =
@@ -386,14 +386,14 @@ window.QuizGame = {
 	/**
 	 * Sets the given string as the text for the lightbox.
 	 *
-	 * @param {txt} string Text to output in the lightbox
+	 * @param {string} txt Text to output in the lightbox
 	 */
 	setLightboxText: function( txt ) {
 		var textForLightBox = '', loader = '';
-		if( txt ) {
+		if ( txt ) {
 			textForLightBox = '<br /><br />' + txt;
 		}
-		if( !QuizGame.detectMacXFF() ) {
+		if ( !QuizGame.detectMacXFF() ) {
 			loader = QuizGame.getLoader();
 		} else {
 			loader = mw.msg( 'quizgame-js-loading' );
@@ -430,14 +430,14 @@ window.QuizGame = {
 	/**
 	 * Casts a vote and forwards the user to a new question
 	 *
-	 * @param {id} number Number (on a range from 1 to 8) of the answer option
+	 * @param {number} id Number (on a range from 1 to 8) of the answer option
 	 */
 	vote: function( id ) {
-		if( QuizGame.count_second ) {
+		if ( QuizGame.count_second ) {
 			clearTimeout( QuizGame.count_second );
 		}
 
-		if( QuizGame.voted == 1 ) {
+		if ( QuizGame.voted == 1 ) {
 			return 0;
 		}
 
@@ -529,9 +529,9 @@ window.QuizGame = {
 	 * This sets the value of the hidden "quizGamePictureName" field as well as
 	 * shows a small preview of the uploaded image.
 	 *
-	 * @param {imgSrc} string The full img tag of the uploaded file
-	 * @param {imgName} string Name of the uploaded file
-	 * @param {imgDesc} string Unused, consider removing this useless parameter
+	 * @param {string} imgSrc The full img tag of the uploaded file
+	 * @param {string} imgName Name of the uploaded file
+	 * @param {string} imgDesc Unused, consider removing this useless parameter
 	 */
 	welcomePage_uploadComplete: function( imgSrc, imgName, imgDesc ) {
 		var previewElement = document.getElementById( 'quizgame-picture-preview' );
@@ -556,8 +556,8 @@ window.QuizGame = {
 	 * them visible on the welcome page.
 	 */
 	updateAnswerBoxes: function() {
-		for( var x = 1; x <= ( 8 - 1 ); x++ ) {
-			if( document.getElementById( 'quizgame-answer-' + x ).value ) {
+		for ( var x = 1; x <= ( 8 - 1 ); x++ ) {
+			if ( document.getElementById( 'quizgame-answer-' + x ).value ) {
 				document.getElementById( 'quizgame-answer-container-' + ( x + 1 ) ).style.display = 'block';
 				document.getElementById( 'quizgame-answer-container-' + ( x + 1 ) ).style.visibility = 'visible';
 			}
@@ -576,30 +576,30 @@ window.QuizGame = {
 			answers = 0,
 			right = 0;
 
-		for( var x = 1; x <= 8; x++ ) {
-			if( document.getElementById( 'quizgame-answer-' + x ).value ) {
+		for ( var x = 1; x <= 8; x++ ) {
+			if ( document.getElementById( 'quizgame-answer-' + x ).value ) {
 				answers++;
 			}
 		}
 
-		if( answers < 2 ) {
+		if ( answers < 2 ) {
 			errorText += mw.msg( 'quizgame-create-error-numanswers' ) + '<p>';
 		}
-		if( !document.getElementById( 'quizgame-question' ).value ) {
+		if ( !document.getElementById( 'quizgame-question' ).value ) {
 			errorText += mw.msg( 'quizgame-create-error-noquestion' ) + '<p>';
 		}
 
-		for( x = 1; x <= 8; x++ ) {
-			if( document.getElementById( 'quizgame-isright-' + x ).checked ) {
+		for ( x = 1; x <= 8; x++ ) {
+			if ( document.getElementById( 'quizgame-isright-' + x ).checked ) {
 				right++;
 			}
 		}
 
-		if( right != 1 ) {
+		if ( right != 1 ) {
 			errorText += mw.msg( 'quizgame-create-error-numcorrect' ) + '<p>';
 		}
 
-		if( !errorText ) {
+		if ( !errorText ) {
 			document.getElementById( 'quizGameCreate' ).submit();
 		} else {
 			document.getElementById( 'quiz-game-errors' ).innerHTML = '<h2>' + errorText + '</h2>';

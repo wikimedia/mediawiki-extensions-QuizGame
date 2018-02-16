@@ -6,20 +6,20 @@
  * @ingroup Extensions
  */
 
-$specialPageAliases = array();
+$specialPageAliases = [];
 
 /** English */
-$specialPageAliases['en'] = array(
-	'QuizGameHome' => array( 'QuizGameHome' ),
-	'QuestionGameUpload' => array( 'QuestionGameUpload' ),
-	'QuizLeaderboard' => array( 'QuizLeaderboard' ),
-	'QuizRecalcStats' => array( 'QuizRecalcStats' ),
-	'ViewQuizzes' => array( 'ViewQuizzes' ),
-);
+$specialPageAliases['en'] = [
+	'QuizGameHome' => [ 'QuizGameHome' ],
+	'QuestionGameUpload' => [ 'QuestionGameUpload' ],
+	'QuizLeaderboard' => [ 'QuizLeaderboard' ],
+	'QuizRecalcStats' => [ 'QuizRecalcStats' ],
+	'ViewQuizzes' => [ 'ViewQuizzes' ],
+];
 
-/** Finnish (Suomi) */
-$specialPageAliases['fi'] = array(
-	'QuizGameHome' => array( 'Kysymyspelin kotisivu' ),
-	'QuizLeaderboard' => array( 'Kysymyspelin tilastot' ), # "Quiz Game Statistics", since I couldn't find a translation for "leaderboard"
-	'ViewQuizzes' => array( 'Katso kysymyksiä' ),
-);
+/** Finnish (suomi) */
+$specialPageAliases['fi'] = [
+	'QuizGameHome' => [ 'Kysymyspelin kotisivu' ],
+	'QuizLeaderboard' => [ 'Kysymyspelin tilastot' ], # "Quiz Game Statistics", since I couldn't find a translation for "leaderboard"
+	'ViewQuizzes' => [ 'Katso kysymyksiä' ],
+];

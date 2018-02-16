@@ -12,7 +12,7 @@ class ViewQuizzes extends UnlistedSpecialPage {
 	/**
 	 * Show the special page
 	 *
-	 * @param $par Mixed: parameter passed to the page or null
+	 * @param string|null $par Parameter passed to the page
 	 */
 	public function execute( $par ) {
 		global $wgUploadPath;
@@ -27,13 +27,13 @@ class ViewQuizzes extends UnlistedSpecialPage {
 
 		// Page either most or newest for everyone
 		$type = $request->getVal( 'type' );
-		if( !$type ) {
+		if ( !$type ) {
 			$type = 'newest';
 		}
-		if( $type == 'newest' ) {
+		if ( $type == 'newest' ) {
 			$order = 'q_date';
 		}
-		if( $type == 'most' ) {
+		if ( $type == 'most' ) {
 			$order = 'q_answer_count';
 		}
 
@@ -54,14 +54,14 @@ class ViewQuizzes extends UnlistedSpecialPage {
 			$linkRenderer->makeLink(
 				$quizGameHome,
 				$this->msg( 'quizgame-playneverending' )->text(),
-				array(),
-				array( 'questionGameAction' => 'launchGame' )
+				[],
+				[ 'questionGameAction' => 'launchGame' ]
 			) . ' - ' .
 			$linkRenderer->makeLink(
 				$quizGameHome,
 				$this->msg( 'quizgame-viewquizzes-create' )->text(),
-				array(),
-				array( 'questionGameAction' => 'createForm' )
+				[],
+				[ 'questionGameAction' => 'createForm' ]
 			) . '<br /><br />
 		</div>
 
@@ -70,24 +70,24 @@ class ViewQuizzes extends UnlistedSpecialPage {
 
 		$dbr = wfGetDB( DB_MASTER );
 
-		$where = array();
+		$where = [];
 		$where[] = 'q_flag <> ' . QuizGameHome::$FLAG_FLAGGED;
 
 		// Display only a user's most or newest
 		$user = $request->getVal( 'user' );
-		$linkQueryParameters = array();
+		$linkQueryParameters = [];
 		if ( $user ) {
 			$where['q_user_name'] = $user;
 			$linkQueryParameters['user'] = $user;
 		}
 
-		if( $type == 'newest' ) {
+		if ( $type == 'newest' ) {
 			$linkQueryParameters['type'] = 'most';
 			$output .= '<p><b>' . $this->msg( 'quizgame-newest' )->text() . '</b></p>
 				<p>' . $linkRenderer->makeLink(
 					$title,
 					$this->msg( 'quizgame-popular' )->text(),
-					array(),
+					[],
 					$linkQueryParameters
 				) . '</p>';
 		} else {
@@ -95,7 +95,7 @@ class ViewQuizzes extends UnlistedSpecialPage {
 			$output .= '<p>' . $linkRenderer->makeLink(
 				$title,
 				$this->msg( 'quizgame-newest' )->text(),
-				array(),
+				[],
 				$linkQueryParameters
 			) . '</p>
 				<p><b>' . $this->msg( 'quizgame-popular' )->text() . '</b></p>';
@@ -111,17 +111,17 @@ class ViewQuizzes extends UnlistedSpecialPage {
 
 		$res = $dbr->select(
 			'quizgame_questions',
-			array(
+			[
 				'q_id', 'q_user_id', 'q_user_name', 'q_text',
 				'q_date', 'q_picture', 'q_answer_count'
-			),
+			],
 			$where,
 			__METHOD__,
-			array(
+			[
 				'ORDER BY' => "$order DESC",
 				'LIMIT' => $limit,
 				'OFFSET' => $limitvalue
-			)
+			]
 		);
 
 		$res_total = $dbr->select(
@@ -147,10 +147,10 @@ class ViewQuizzes extends UnlistedSpecialPage {
 			$quiz_id = $row->q_id;
 			$row_id = "quizz-row-{$x}";
 
-			$url = htmlspecialchars( $quizGameHome->getFullURL( array(
+			$url = htmlspecialchars( $quizGameHome->getFullURL( [
 				'questionGameAction' => 'renderPermalink',
 				'permalinkID' => $quiz_id
-			) ) );
+			] ) );
 			// Hover support is done in /js/QuizGame.js
 			if ( ( $x < $total ) && ( $x % $per_page != 0 ) ) {
 				$output .= "<div class=\"view-quizzes-row\" id=\"{$row_id}\" onclick=\"window.location='" . $url . '\'">';
@@ -180,31 +180,31 @@ class ViewQuizzes extends UnlistedSpecialPage {
 
 		$numofpages = $total / $per_page;
 
-		if( $numofpages > 1 ) {
+		if ( $numofpages > 1 ) {
 			$output .= '<div class="view-quizzes-page-nav">';
-			if( $page > 1 ) {
+			if ( $page > 1 ) {
 				$linkQueryParameters['type'] = 'most';
 				$linkQueryParameters['page'] = ( $page - 1 );
 				$output .= $linkRenderer->makeLink(
 					$title,
 					$this->msg( 'quizgame-prev' )->text(),
-					array(),
+					[],
 					$linkQueryParameters
 				) . $this->msg( 'word-separator' )->text();
 			}
 
-			if( ( $total % $per_page ) != 0 ) {
+			if ( ( $total % $per_page ) != 0 ) {
 				$numofpages++;
 			}
-			if( $numofpages >= 9 && $page < $total ) {
+			if ( $numofpages >= 9 && $page < $total ) {
 				$numofpages = 9 + $page;
 			}
-			if( $numofpages >= ( $total / $per_page ) ) {
+			if ( $numofpages >= ( $total / $per_page ) ) {
 				$numofpages = ( $total / $per_page ) + 1;
 			}
 
-			for( $i = 1; $i <= $numofpages; $i++ ) {
-				if( $i == $page ) {
+			for ( $i = 1; $i <= $numofpages; $i++ ) {
+				if ( $i == $page ) {
 					$output .= ( $i . ' ' );
 				} else {
 					$linkQueryParameters['type'] = 'most';
@@ -212,20 +212,20 @@ class ViewQuizzes extends UnlistedSpecialPage {
 					$output .= $linkRenderer->makeLink(
 						$title,
 						$i,
-						array(),
+						[],
 						$linkQueryParameters
 					) . $this->msg( 'word-separator' )->text();
 				}
 			}
 
-			if( ( $total - ( $per_page * $page ) ) > 0 ) {
+			if ( ( $total - ( $per_page * $page ) ) > 0 ) {
 				$linkQueryParameters['type'] = 'most';
 				$linkQueryParameters['page'] = ( $page + 1 );
 				$output .= $this->msg( 'word-separator' )->text() .
 					$linkRenderer->makeLink(
 						$title,
 						$this->msg( 'quizgame-nav-next' )->text(),
-						array(),
+						[],
 						$linkQueryParameters
 					);
 			}
@@ -255,10 +255,10 @@ class ViewQuizzes extends UnlistedSpecialPage {
 
 	static function getTimeOffset( $time, $timeabrv, $timename ) {
 		$timeStr = '';
-		if( $time[$timeabrv] > 0 ) {
+		if ( $time[$timeabrv] > 0 ) {
 			$timeStr = wfMessage( "quizgame-time-{$timename}", $time[$timeabrv] )->parse();
 		}
-		if( $timeStr ) {
+		if ( $timeStr ) {
 			$timeStr .= ' ';
 		}
 		return $timeStr;
@@ -272,14 +272,14 @@ class ViewQuizzes extends UnlistedSpecialPage {
 		$timeStrM = self::getTimeOffset( $timeArray, 'm', 'minutes' );
 		$timeStrS = self::getTimeOffset( $timeArray, 's', 'seconds' );
 		$timeStr = $timeStrD;
-		if( $timeStr < 2 ) {
+		if ( $timeStr < 2 ) {
 			$timeStr .= $timeStrH;
 			$timeStr .= $timeStrM;
-			if( !$timeStr ) {
+			if ( !$timeStr ) {
 				$timeStr .= $timeStrS;
 			}
 		}
-		if( !$timeStr ) {
+		if ( !$timeStr ) {
 			$timeStr = wfMessage( 'quizgame-time-seconds', 1 )->parse();
 		}
 		return $timeStr;

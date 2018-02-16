@@ -12,22 +12,22 @@ class QuizLeaderboard extends UnlistedSpecialPage {
 	/**
 	 * Show the special page
 	 *
-	 * @param $input Mixed: parameter passed to the page or null
+	 * @param string|null $input Parameter passed to the page
 	 */
 	public function execute( $input ) {
 		$lang = $this->getLanguage();
 		$out = $this->getOutput();
 		$user = $this->getUser();
 
-		if( !$input ) {
+		if ( !$input ) {
 			$input = 'points';
 		}
 
 		$out->addModuleStyles( 'ext.quizGame.css' );
 
-		$whereConds = array();
+		$whereConds = [];
 
-		switch( $input ) {
+		switch ( $input ) {
 			case 'correct':
 				$out->setPageTitle( $this->msg( 'quizgame-leaderboard-most-correct' )->text() );
 				$field = 'stats_quiz_questions_correct';
@@ -47,36 +47,36 @@ class QuizLeaderboard extends UnlistedSpecialPage {
 		$whereConds[] = 'stats_user_id <> 0'; // Exclude anonymous users
 		$res = $dbr->select(
 			'user_stats',
-			array(
+			[
 				'stats_user_id', 'stats_user_name', 'stats_quiz_points',
 				'stats_quiz_questions_correct',
 				'stats_quiz_questions_correct_percent'
-			),
+			],
 			$whereConds,
 			__METHOD__,
-			array( 'ORDER BY' => "{$field} DESC", 'LIMIT' => 50, 'OFFSET' => 0 )
+			[ 'ORDER BY' => "{$field} DESC", 'LIMIT' => 50, 'OFFSET' => 0 ]
 		);
 
 		$quizgame_title = SpecialPage::getTitleFor( 'QuizGameHome' );
 
 		$output = '<div class="quiz-leaderboard-nav">';
 
-		if( $user->isLoggedIn() ) {
-			$stats = new UserStats( $user->getID(), $user->getName() );
+		if ( $user->isLoggedIn() ) {
+			$stats = new UserStats( $user->getId(), $user->getName() );
 			$stats_data = $stats->getUserStats();
 
 			// Get users rank
 			$quiz_rank = 0;
 			$s = $dbr->selectRow(
 				'user_stats',
-				array( 'COUNT(*) AS count' ),
-				array( 'stats_quiz_points > ' . $stats_data['quiz_points'] ),
+				[ 'COUNT(*) AS count' ],
+				[ 'stats_quiz_points > ' . $stats_data['quiz_points'] ],
 				__METHOD__
 			);
 			if ( $s !== false ) {
 				$quiz_rank = $s->count + 1;
 			}
-			$avatar = new wAvatar( $user->getID(), 'm' );
+			$avatar = new wAvatar( $user->getId(), 'm' );
 
 			$formattedTotalPoints = $lang->formatNum( $stats_data['quiz_points'] );
 			$formattedCorrectAnswers = $lang->formatNum( $stats_data['quiz_correct'] );
@@ -109,15 +109,15 @@ class QuizLeaderboard extends UnlistedSpecialPage {
 		}
 
 		// Build the "Order" navigation menu
-		$menu = array(
+		$menu = [
 			$this->msg( 'quizgame-leaderboard-menu-points' )->text() => 'points',
 			$this->msg( 'quizgame-leaderboard-menu-correct' )->text() => 'correct',
 			$this->msg( 'quizgame-leaderboard-menu-pct' )->text() => 'percentage'
-		);
+		];
 
 		$output .= '<h1>' . $this->msg( 'quizgame-leaderboard-order-menu' )->text() . '</h1>';
 
-		foreach( $menu as $title => $qs ) {
+		foreach ( $menu as $title => $qs ) {
 			if ( $input != $qs ) {
 				$output .= "<p><a href=\"{$this->getPageTitle()->getFullURL()}/{$qs}\">{$title}</a><p>";
 			} else {
@@ -131,8 +131,8 @@ class QuizLeaderboard extends UnlistedSpecialPage {
 			$this->getLinkRenderer()->makeLink(
 				$quizgame_title,
 				$this->msg( 'quizgame-admin-back' )->text(),
-				array(),
-				array( 'questionGameAction' => 'launchGame' )
+				[],
+				[ 'questionGameAction' => 'launchGame' ]
 			) . '</div>';
 
 		$x = 1;
@@ -150,7 +150,7 @@ class QuizLeaderboard extends UnlistedSpecialPage {
 				   <a href=\"" . $user_title->getFullURL() . '">' . $user_name_short . '</a>
 				</span>';
 
-			switch( $input ) {
+			switch ( $input ) {
 				case 'correct':
 					$stat = $this->msg( 'quizgame-leaderboard-desc-correct', $lang->formatNum( $row->$field ) )->parse();
 					break;

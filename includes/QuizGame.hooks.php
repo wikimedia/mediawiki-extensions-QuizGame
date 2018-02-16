@@ -11,15 +11,14 @@ class QuizGameHooks {
 	/**
 	 * Adds an "edit" tab to Special:QuizGameHome.
 	 *
-	 * @param $skin Skin
-	 * @param $content_actions Array
-	 * @return Boolean: true
+	 * @param Skin $skinTemplate
+	 * @param array $links
 	 */
 	public static function addQuizContentActions( &$skinTemplate, &$links ) {
 		global $wgUser, $wgRequest, $wgQuizID;
 
 		// Add edit tab to content actions for quiz admins
-		if(
+		if (
 			$wgQuizID > 0 &&
 			$wgRequest->getVal( 'questionGameAction' ) != 'createForm' &&
 			$wgUser->isAllowed( 'quizadmin' )
@@ -30,24 +29,22 @@ class QuizGameHooks {
 			if ( $wgRequest->getVal( 'questionGameAction' ) == 'editItem' ) {
 				$selected = 'selected';
 			}
-			$links['views']['edit'] = array(
+			$links['views']['edit'] = [
 				'class' => $selected,
 				'text' => wfMessage( 'edit' )->plain(),
 				'href' => $quiz->getFullURL( 'questionGameAction=editItem&quizGameId=' . $wgQuizID ), // @bug 2457, 2510
-			);
+			];
 		}
 
 		// If editing, make special page go back to quiz question
-		if( $wgRequest->getVal( 'questionGameAction' ) == 'editItem' ) {
+		if ( $wgRequest->getVal( 'questionGameAction' ) == 'editItem' ) {
 			$quiz = SpecialPage::getTitleFor( 'QuizGameHome' );
-			$links['views'][$skinTemplate->getTitle()->getNamespaceKey()] = array(
+			$links['views'][$skinTemplate->getTitle()->getNamespaceKey()] = [
 				'class' => 'selected',
 				'text' => wfMessage( 'nstab-special' )->plain(),
 				'href' => $quiz->getFullURL( 'questionGameAction=renderPermalink&permalinkID=' . $wgQuizID ),
-			);
+			];
 		}
-
-		return true;
 	}
 
 	/**
@@ -55,50 +52,43 @@ class QuizGameHooks {
 	 * global for QuizGame.js.
 	 * I need to rethink this one day...
 	 *
-	 * @param $vars Array: array of pre-existing JS globals
-	 * @return Boolean: true
+	 * @param array $vars Array of pre-existing JS globals
 	 */
 	public static function addJSGlobals( $vars ) {
 		global $wgUserStatsPointValues;
 		$vars['__quiz_js_points_value__'] = ( isset( $wgUserStatsPointValues['quiz_points'] ) ? $wgUserStatsPointValues['quiz_points'] : 0 );
-		return true;
 	}
 
 	/**
 	 * Creates the necessary database tables when the user runs
 	 * maintenance/update.php.
 	 *
-	 * @param $updater DatabaseUpdater
-	 * @return Boolean: true
+	 * @param DatabaseUpdater $updater
 	 */
 	public static function addTables( $updater ) {
-		$dir = dirname( __FILE__ );
-		$file = "$dir/../sql/quizgame.sql";
+		$file = __DIR__ . '/../sql/quizgame.sql';
 		$updater->addExtensionTable( 'quizgame_questions', $file );
 		$updater->addExtensionTable( 'quizgame_answers', $file );
 		$updater->addExtensionTable( 'quizgame_choice', $file );
 		$updater->addExtensionTable( 'quizgame_user_view', $file );
-		return true;
 	}
 
 	/**
 	 * For integration with the Renameuser extension.
 	 *
-	 * @param $renameUserSQL
-	 * @return Boolean: true
+	 * @param RenameuserSQL $renameUserSQL
 	 */
 	public static function onUserRename( $renameUserSQL ) {
-		$renameUserSQL->tables['quizgame_questions'] = array(
+		$renameUserSQL->tables['quizgame_questions'] = [
 			'q_user_name', 'q_user_id'
-		);
-		$renameUserSQL->tables['quizgame_answers'] = array(
+		];
+		$renameUserSQL->tables['quizgame_answers'] = [
 			'a_user_name', 'a_user_id'
-		);
+		];
 		// quizgame_choice table has no information related to the user
-		$renameUserSQL->tables['quizgame_user_view'] = array(
+		$renameUserSQL->tables['quizgame_user_view'] = [
 			'uv_user_name', 'uv_user_id'
-		);
-		return true;
+		];
 	}
 
 	/**

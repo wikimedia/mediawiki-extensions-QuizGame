@@ -29,7 +29,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 	/**
 	 * Show the special page
 	 *
-	 * @param $permalink Mixed: parameter passed to the page or null
+	 * @param string|null $permalink Parameter passed to the page
 	 */
 	public function execute( $permalink ) {
 		$out = $this->getOutput();
@@ -43,18 +43,18 @@ class QuizGameHome extends UnlistedSpecialPage {
 
 		// https://phabricator.wikimedia.org/T155405
 		// Throws error message when SocialProfile extension is not installed
-		if( !class_exists( 'UserStats' ) ) {
+		if ( !class_exists( 'UserStats' ) ) {
 			throw new ErrorPageError( 'quizgame-error-socialprofile-title', 'quizgame-error-socialprofile' );
 		}
 
 		// Blocked through Special:Block? No access for you either!
-		if( $user->isBlocked() ) {
+		if ( $user->isBlocked() ) {
 			throw new UserBlockedError( $user->getBlock() );
 		}
 
 		// If a parameter was passed to the special page, assume that it's the
 		// permalink ID and forward the user to the question with that ID
-		if( $permalink ) {
+		if ( $permalink ) {
 			$out->redirect(
 				$this->getPageTitle()->getFullURL(
 					"questionGameAction=renderPermalink&permalinkID={$permalink}"
@@ -72,23 +72,23 @@ class QuizGameHome extends UnlistedSpecialPage {
 		// What we should do depends on the given action parameter
 		$action = $request->getVal( 'questionGameAction' );
 
-		switch( $action ) {
+		switch ( $action ) {
 			case 'adminPanel':
-				if( $user->isLoggedIn() && $user->isAllowed( 'quizadmin' ) ) {
+				if ( $user->isLoggedIn() && $user->isAllowed( 'quizadmin' ) ) {
 					$this->adminPanel();
 				} else {
 					$this->renderWelcomePage();
 				}
 				break;
 			case 'completeEdit':
-				if( $user->isLoggedIn() && $user->isAllowed( 'quizadmin' ) ) {
+				if ( $user->isLoggedIn() && $user->isAllowed( 'quizadmin' ) ) {
 					$this->completeEdit();
 				} else {
 					$this->renderWelcomePage();
 				}
 				break;
 			case 'createForm':
-				if( !$user->isLoggedIn() ) {
+				if ( !$user->isLoggedIn() ) {
 					$this->renderLoginPage();
 					return;
 				}
@@ -98,7 +98,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 				$this->createQuizGame();
 				break;
 			case 'editItem':
-				if( $user->isLoggedIn() && $user->isAllowed( 'quizadmin' ) ) {
+				if ( $user->isLoggedIn() && $user->isAllowed( 'quizadmin' ) ) {
 					$this->editItem();
 				} else {
 					$this->renderWelcomePage();
@@ -120,15 +120,15 @@ class QuizGameHome extends UnlistedSpecialPage {
 		$dbr = wfGetDB( DB_REPLICA );
 		$s = $dbr->selectRow(
 			'quizgame_answers',
-			array( 'a_choice_id' ),
-			array(
+			[ 'a_choice_id' ],
+			[
 				'a_q_id' => intval( $q_id ),
 				'a_user_name' => $user_name
-			),
+			],
 			__METHOD__
 		);
 		if ( $s !== false ) {
-			if( $s->a_choice_id == 0 ) {
+			if ( $s->a_choice_id == 0 ) {
 				return -1;
 			} else {
 				return $s->a_choice_id;
@@ -141,11 +141,11 @@ class QuizGameHome extends UnlistedSpecialPage {
 		$dbr = wfGetDB( DB_REPLICA );
 		$s = $dbr->selectRow(
 			'quizgame_answers',
-			array( 'a_points' ),
-			array(
+			[ 'a_points' ],
+			[
 				'a_q_id' => intval( $q_id ),
 				'a_user_name' => $user_name
-			),
+			],
 			__METHOD__
 		);
 		if ( $s !== false ) {
@@ -157,7 +157,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 	/**
 	 * Get the ID of the next unanswered question for the current user.
 	 *
-	 * @return Integer: ID of the next unanswered question (or 0)
+	 * @return int ID of the next unanswered question (or 0)
 	 */
 	public function getNextQuestion() {
 		$dbr = wfGetDB( DB_REPLICA );
@@ -173,17 +173,17 @@ class QuizGameHome extends UnlistedSpecialPage {
 		$res = $dbr->query( $sql, __METHOD__ );
 		$row = $dbr->fetchObject( $res );
 
-		if( $row ) {
+		if ( $row ) {
 			$q_id = $row->q_id;
 		}
 
-		if( $q_id == 0 ) {
+		if ( $q_id == 0 ) {
 			$sql = "SELECT q_id FROM {$dbr->tableName( 'quizgame_questions' )} {$use_index} WHERE q_id NOT IN
 					(SELECT a_q_id FROM {$dbr->tableName( 'quizgame_answers' )} WHERE a_user_name = {$dbr->addQuotes( $userName )})
 					AND q_flag != " . QuizGameHome::$FLAG_FLAGGED . " AND q_user_id <> {$userId} AND q_random < $randstr ORDER by q_random LIMIT 1";
 			$res = $dbr->query( $sql, __METHOD__ );
 			$row = $dbr->fetchObject( $res );
-			if( $row ) {
+			if ( $row ) {
 				$q_id = $row->q_id;
 			}
 		}
@@ -194,35 +194,34 @@ class QuizGameHome extends UnlistedSpecialPage {
 	/**
 	 * Get information about an individual question.
 	 *
-	 * @param $questionId Integer: question ID
-	 * @param $skipId Integer: if defined, the question ID (q_id) must *not* be
-	 *                         this
-	 * @return Array
+	 * @param int $questionId Question ID
+	 * @param int $skipId If defined, the question ID (q_id) must *not* be this
+	 * @return array
 	 */
 	public function getQuestion( $questionId, $skipId = 0 ) {
 		$userName = $this->getUser()->getName();
 		$dbr = wfGetDB( DB_REPLICA );
-		$where = array();
+		$where = [];
 		$where['q_id'] = intval( $questionId );
-		if( $skipId > 0 ) {
+		if ( $skipId > 0 ) {
 			$where[] = "q_id <> {$skipId}";
 		}
 		$res = $dbr->select(
 			'quizgame_questions',
-			array(
+			[
 				'q_id', 'q_user_id', 'q_user_name', 'q_text', 'q_flag',
 				'q_answer_count', 'q_answer_correct_count', 'q_picture',
 				'q_date'
-			),
+			],
 			$where,
 			__METHOD__,
-			array( 'LIMIT' => 1 )
+			[ 'LIMIT' => 1 ]
 		);
 
 		$row = $dbr->fetchObject( $res );
-		$quiz = array();
+		$quiz = [];
 
-		if( $row ) {
+		if ( $row ) {
 			$quiz['text'] = $row->q_text;
 			$quiz['image'] = $row->q_picture;
 			$quiz['user_name'] = $row->q_user_name;
@@ -231,7 +230,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 			$quiz['id'] = $row->q_id;
 			$quiz['status'] = $row->q_flag;
 
-			if( $row->q_answer_count > 0 ) {
+			if ( $row->q_answer_count > 0 ) {
 				$correct_percent = str_replace( '.0', '', number_format( $row->q_answer_correct_count / $row->q_answer_count * 100, 1 ) );
 			} else {
 				$correct_percent = 0;
@@ -240,13 +239,13 @@ class QuizGameHome extends UnlistedSpecialPage {
 			$quiz['correct_percent'] = $correct_percent;
 			$quiz['user_answer'] = $this->userAnswered( $userName, $row->q_id );
 
-			if( $quiz['user_answer'] ) {
+			if ( $quiz['user_answer'] ) {
 				$quiz['points'] = $this->getAnswerPoints( $userName, $questionId );
 			}
 
 			$choices = $this->getQuestionChoices( $questionId, $row->q_answer_count );
-			foreach( $choices as $choice ) {
-				if( $choice['is_correct'] ) {
+			foreach ( $choices as $choice ) {
+				if ( $choice['is_correct'] ) {
 					$quiz['correct_answer'] = $choice['id'];
 				}
 			}
@@ -260,39 +259,39 @@ class QuizGameHome extends UnlistedSpecialPage {
 	/**
 	 * Get the answer options for a question when we know its ID number.
 	 *
-	 * @param $questionId Integer: question ID
-	 * @param $question_answer_count Integer: amount of answers on the question
-	 * @return Array
+	 * @param int $questionId Question ID
+	 * @param int $question_answer_count Amount of answers on the question
+	 * @return array
 	 */
 	public function getQuestionChoices( $questionId, $question_answer_count = 0 ) {
 		$dbr = wfGetDB( DB_REPLICA );
 
 		$res = $dbr->select(
 			'quizgame_choice',
-			array(
+			[
 				'choice_id', 'choice_text', 'choice_order',
 				'choice_answer_count', 'choice_is_correct'
-			),
-			array( 'choice_q_id' => intval( $questionId ) ),
+			],
+			[ 'choice_q_id' => intval( $questionId ) ],
 			__METHOD__,
-			array( 'ORDER BY' => 'choice_order' )
+			[ 'ORDER BY' => 'choice_order' ]
 		);
 
-		$choices = array();
-		foreach( $res as $row ) {
-			if( $question_answer_count ) {
+		$choices = [];
+		foreach ( $res as $row ) {
+			if ( $question_answer_count ) {
 				$percent = str_replace( '.0', '', number_format( $row->choice_answer_count / $question_answer_count * 100, 1 ) );
 			} else {
 				$percent = 0;
 			}
 
-			$choices[] = array(
+			$choices[] = [
 				'id' => $row->choice_id,
 				'text' => $row->choice_text,
 				'is_correct' => $row->choice_is_correct,
 				'answers' => $row->choice_answer_count,
 				'percent' => $percent
-			);
+			];
 		}
 
 		return $choices;
@@ -303,15 +302,15 @@ class QuizGameHome extends UnlistedSpecialPage {
 
 		$res = $dbr->select(
 			'quizgame_questions',
-			array( 'q_id', 'q_text', 'q_flag', 'q_picture', 'q_comment' ),
-			array(
+			[ 'q_id', 'q_text', 'q_flag', 'q_picture', 'q_comment' ],
+			[
 				// I'd like to know the ideal way of doing this.
 				// Database::makeList() has a tendency of making the world
 				// explode (see my notes on VideoHooks::onVideoDelete to find
 				// out what I mean)
 				'q_flag = ' . QuizGameHome::$FLAG_FLAGGED . ' OR q_flag = ' .
 					QuizGameHome::$FLAG_PROTECT
-			),
+			],
 			__METHOD__
 		);
 
@@ -319,10 +318,10 @@ class QuizGameHome extends UnlistedSpecialPage {
 		$flaggedQuestions = '';
 		$protectedQuestions = '';
 
-		foreach( $res as $row ) {
+		foreach ( $res as $row ) {
 			$options = '<ul>';
 			$choices = $this->getQuestionChoices( $row->q_id );
-			foreach( $choices as $choice ) {
+			foreach ( $choices as $choice ) {
 				$options .= '<li>' . $choice['text'] . ' ' .
 					( ( $choice['is_correct'] == 1 ) ? ' — ' . $this->msg( 'quizgame-correct-answer' )->text() : '' ) .
 					'</li>';
@@ -335,7 +334,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 				// You know why this check is here, just grep for the function
 				// name (I'm too lazy to copypaste it here for the third time).
 				if ( is_object( $image ) ) {
-					$thumb = $image->transform( array( 'width' => 80, 'height' => 0 ) );
+					$thumb = $image->transform( [ 'width' => 80, 'height' => 0 ] );
 					$thumbnail = $thumb->toHtml();
 				}
 			}
@@ -343,11 +342,11 @@ class QuizGameHome extends UnlistedSpecialPage {
 			$buttons = $this->getLinkRenderer()->makeLink(
 				$this->getPageTitle(),
 				$this->msg( 'quizgame-edit' )->text(),
-				array(),
-				array(
+				[],
+				[
 					'questionGameAction' => 'editItem',
 					'quizGameId' => $row->q_id
-				)
+				]
 			) . " -
 					<a class=\"delete-by-id\" href=\"#\" data-quiz-id=\"{$row->q_id}\">" .
 					$this->msg( 'quizgame-delete' )->text() . '</a> - ';
@@ -362,9 +361,9 @@ class QuizGameHome extends UnlistedSpecialPage {
 					$this->msg( 'quizgame-unprotect' )->text() . '</a>';
 			}
 
-			if( $row->q_flag == QuizGameHome::$FLAG_FLAGGED ) {
+			if ( $row->q_flag == QuizGameHome::$FLAG_FLAGGED ) {
 				$reason = '';
-				if( $row->q_comment != '' ) {
+				if ( $row->q_comment != '' ) {
 					$reason = "<div class=\"quizgame-flagged-answers\" id=\"quizgame-flagged-reason-{$row->q_id}\">
 						<b>" . $this->msg( 'quizgame-flagged-reason' )->text() . "</b>: {$row->q_comment}
 					</div><p>";
@@ -440,7 +439,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 		$id = $request->getInt( 'quizGameId' );
 
 		// Only Quiz Administrators can perform this operation.
-		if( !$this->getUser()->isAllowed( 'quizadmin' ) ) {
+		if ( !$this->getUser()->isAllowed( 'quizadmin' ) ) {
 			$this->getOutput()->addHTML( $this->msg( 'quizgame-admin-permission' )->text() );
 			return;
 		}
@@ -453,9 +452,9 @@ class QuizGameHome extends UnlistedSpecialPage {
 
 		// Updated quiz choices
 		$dbw = wfGetDB( DB_MASTER );
-		for( $x = 1; $x <= $choices_count; $x++ ) {
-			if( $request->getVal( "quizgame-answer-{$x}" ) ) {
-				if( $request->getVal( "quizgame-isright-{$x}" ) == 'on' ) {
+		for ( $x = 1; $x <= $choices_count; $x++ ) {
+			if ( $request->getVal( "quizgame-answer-{$x}" ) ) {
+				if ( $request->getVal( "quizgame-isright-{$x}" ) == 'on' ) {
 					$is_correct = 1;
 				} else {
 					$is_correct = 0;
@@ -463,11 +462,11 @@ class QuizGameHome extends UnlistedSpecialPage {
 
 				$dbw->update(
 					'quizgame_choice',
-					array(
+					[
 						'choice_text' => $request->getVal( "quizgame-answer-{$x}" ),
 						'choice_is_correct' => $is_correct
-					),
-					array( 'choice_q_id' => $id, 'choice_order' => $x ),
+					],
+					[ 'choice_q_id' => $id, 'choice_order' => $x ],
 					__METHOD__
 				);
 			}
@@ -475,8 +474,8 @@ class QuizGameHome extends UnlistedSpecialPage {
 
 		$dbw->update(
 			'quizgame_questions',
-			array( 'q_text' => $question, 'q_picture' => $picture ),
-			array( 'q_id' => $id ),
+			[ 'q_text' => $question, 'q_picture' => $picture ],
+			[ 'q_id' => $id ],
 			__METHOD__
 		);
 
@@ -484,8 +483,8 @@ class QuizGameHome extends UnlistedSpecialPage {
 		// we have to update any user stats
 		$s = $dbw->selectRow(
 			'quizgame_choice',
-			array( 'choice_id' ),
-			array( 'choice_q_id' => $id, 'choice_is_correct' => 1 ),
+			[ 'choice_id' ],
+			[ 'choice_q_id' => $id, 'choice_is_correct' => 1 ],
 			__METHOD__
 		);
 		if ( $s !== false ) {
@@ -493,7 +492,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 		}
 
 		// Ruh roh rorge...we have to fix stats
-		if( $new_correct_id != $old_correct_id ) {
+		if ( $new_correct_id != $old_correct_id ) {
 			// Those who had the old answer ID correct need their total to be decremented
 			$sql = "UPDATE {$dbw->tableName( 'user_stats' )}
 				SET stats_quiz_questions_correct=stats_quiz_questions_correct-1
@@ -532,13 +531,13 @@ class QuizGameHome extends UnlistedSpecialPage {
 			$howMany = $dbw->selectField(
 				'quizgame_answers',
 				'COUNT(*)',
-				array( 'a_choice_id' => $new_correct_id ),
+				[ 'a_choice_id' => $new_correct_id ],
 				__METHOD__
 			);
 			$res = $dbw->update(
 				'quizgame_questions',
-				array( 'q_answer_correct_count' => intval( $howMany ) ),
-				array( 'q_id' => $id ),
+				[ 'q_answer_correct_count' => intval( $howMany ) ],
+				[ 'q_id' => $id ],
 				__METHOD__
 			);
 			*/
@@ -584,14 +583,14 @@ class QuizGameHome extends UnlistedSpecialPage {
 
 		$uploadPage = SpecialPage::getTitleFor( 'QuestionGameUpload' );
 
-		if( strlen( $question['image'] ) > 0 ) {
+		if ( strlen( $question['image'] ) > 0 ) {
 			$image = wfFindFile( $question['image'] );
 			$thumbtag = '';
 			// If a file that is still being used on a quiz game is
 			// independently deleted from the quiz game, poor users will
 			// stumble upon nasty fatals without this check here.
 			if ( is_object( $image ) ) {
-				$thumb = $image->transform( array( 'width' => 80 ) );
+				$thumb = $image->transform( [ 'width' => 80 ] );
 				$thumbtag = $thumb->toHtml();
 			}
 
@@ -599,11 +598,11 @@ class QuizGameHome extends UnlistedSpecialPage {
 					<p id="quizgame-editpicture-link"><!-- jQuery injects a link here --></p>
 					<div id="quizgame-upload" class="quizgame-upload" style="display:none">
 						<iframe id="imageUpload-frame" class="imageUpload-frame" width="650" scrolling="no" frameborder="0" src="' .
-							htmlspecialchars( $uploadPage->getFullURL( wfArrayToCGI( array(
+							htmlspecialchars( $uploadPage->getFullURL( wfArrayToCGI( [
 								'wpThumbWidth' => '80',
 								'wpOverwriteFile' => 'true',
 								'wpDestFile' => $question['image']
-							) ) ) ) . '">
+							] ) ) ) . '">
 						</iframe>
 					</div>';
 
@@ -613,9 +612,9 @@ class QuizGameHome extends UnlistedSpecialPage {
 
 					<div id="quizgame-upload" class="quizgame-upload">
 						<iframe id="imageUpload-frame" class="imageUpload-frame" width="650" scrolling="no" frameborder="0" src="' .
-							htmlspecialchars( $uploadPage->getFullURL( wfArrayToCGI( array(
+							htmlspecialchars( $uploadPage->getFullURL( wfArrayToCGI( [
 								'wpThumbWidth' => '80'
-							) ) ) ) . '">
+							] ) ) ) . '">
 						</iframe>
 					</div>';
 		}
@@ -623,8 +622,8 @@ class QuizGameHome extends UnlistedSpecialPage {
 		$x = 1;
 		$choices_count = count( $question['choices'] );
 		$quizOptions = '';
-		foreach( $question['choices'] as $choice ) {
-			if( $choice['is_correct'] ) {
+		foreach ( $question['choices'] as $choice ) {
+			if ( $choice['is_correct'] ) {
 				$old_correct = $choice['id'];
 			}
 			$quizOptions .= "<div id=\"quizgame-answer-container-{$x}\" class=\"quizgame-answer\">
@@ -651,15 +650,15 @@ class QuizGameHome extends UnlistedSpecialPage {
 		global $wgRightsText;
 		if ( $wgRightsText ) {
 			$copywarnMsg = 'copyrightwarning';
-			$copywarnMsgParams = array(
+			$copywarnMsgParams = [
 				'[[' . $this->msg( 'copyrightpage' )->inContentLanguage()->plain() . ']]',
 				$wgRightsText
-			);
+			];
 		} else {
 			$copywarnMsg = 'copyrightwarning2';
-			$copywarnMsgParams = array(
+			$copywarnMsgParams = [
 				'[[' . $this->msg( 'copyrightpage' )->inContentLanguage()->plain() . ']]'
-			);
+			];
 		}
 
 		$formattedVoteCount = $lang->formatNum( $stats_data['votes'] );
@@ -823,9 +822,9 @@ class QuizGameHome extends UnlistedSpecialPage {
 		$editLinks = '';
 
 		// Logged in user's stats
-		$stats = new UserStats( $user->getID(), $user->getName() );
+		$stats = new UserStats( $user->getId(), $user->getName() );
 		$current_user_stats = $stats->getUserStats();
-		if( !$current_user_stats['quiz_points'] ) {
+		if ( !$current_user_stats['quiz_points'] ) {
 			$current_user_stats['quiz_points'] = 0;
 		}
 
@@ -833,8 +832,8 @@ class QuizGameHome extends UnlistedSpecialPage {
 		$quiz_rank = 0;
 		$s = $dbr->selectRow(
 			'user_stats',
-			array( 'COUNT(*) AS count' ),
-			array( 'stats_quiz_points > ' . $current_user_stats['quiz_points'] ),
+			[ 'COUNT(*) AS count' ],
+			[ 'stats_quiz_points > ' . $current_user_stats['quiz_points'] ],
 			__METHOD__
 		);
 		if ( $s !== false ) {
@@ -843,15 +842,15 @@ class QuizGameHome extends UnlistedSpecialPage {
 
 		// This is assuming that lastId and permalinkId
 		// are mutually exclusive
-		if( $permalinkID ) {
+		if ( $permalinkID ) {
 			$question = $this->getQuestion( $permalinkID );
-			if( !$question ) {
+			if ( !$question ) {
 				$this->renderPermalinkError();
 				return '';
 			}
 		} else {
 			$question = $this->getQuestion( $this->getNextQuestion(), $skipid );
-			if( !$question ) {
+			if ( !$question ) {
 				$this->renderQuizOver();
 				return '';
 			}
@@ -861,12 +860,12 @@ class QuizGameHome extends UnlistedSpecialPage {
 		$wgQuizID = $question['id'];
 
 		$timestampedViewed = 0;
-		if( $user->getName() != $question['user_name'] ) {
+		if ( $user->getName() != $question['user_name'] ) {
 			// check to see if the user already had viewed this question
 			global $wgMemc;
 			$key = $wgMemc->makeKey( 'quizgame-user-view', $user->getId(), $question['id'] );
 			$data = $wgMemc->get( $key );
-			if( $data > 0 ) {
+			if ( $data > 0 ) {
 				$timestampedViewed = $data;
 			} else {
 				// mark that they viewed for first time
@@ -881,7 +880,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 
 		// @note This is an extremely filthy hack...but it seems to be working?
 		$out->addScript( '<script type="text/javascript">(window.RLQ = window.RLQ || []).push(function () {
-			jQuery( document ).ready( function() {
+			jQuery( function() {
 				mw.loader.using( \'ext.quizGame\', function() { ' . $on_load . " } );
 			} );
 		} );</script>\n" );
@@ -890,7 +889,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 
 		$out->setPageTitle( $question['text'] );
 
-		if( strlen( $question['image'] ) > 0 ) {
+		if ( strlen( $question['image'] ) > 0 ) {
 			$image = wfFindFile( $question['image'] );
 			$imageThumb = '';
 			$imgWidth = 0;
@@ -923,9 +922,10 @@ class QuizGameHome extends UnlistedSpecialPage {
 		$user_answer = $this->userAnswered( $user->getName(), $gameid );
 
 		global $wgUseEditButtonFloat;
-		if ( ( $user->getID() == $question['user_id'] ||
-			( $user_answer && $user->isLoggedIn() && $user->isAllowed( 'quizadmin' ) )
-			|| $user->isAllowed( 'quizadmin' ) ) && ( $wgUseEditButtonFloat == true )
+		if (
+			( $user->getId() == $question['user_id'] ||
+			( $user_answer && $user->isLoggedIn() && $user->isAllowed( 'quizadmin' ) ) ||
+			$user->isAllowed( 'quizadmin' ) ) && ( $wgUseEditButtonFloat == true )
 		) {
 			$editMenu = "
 				<div class=\"edit-menu-quiz-game\">
@@ -938,8 +938,8 @@ class QuizGameHome extends UnlistedSpecialPage {
 			$editLinks = $this->getLinkRenderer()->makeLink(
 				$this->getPageTitle(),
 				$this->msg( 'quizgame-admin-panel-title' )->text(),
-				array(),
-				array( 'questionGameAction' => 'adminPanel' )
+				[],
+				[ 'questionGameAction' => 'adminPanel' ]
 			) . ' -
 				<a class="protect-image-link" href="#">' . $this->msg( 'quizgame-protect' )->text() . '</a> - ' .
 				'<a class="delete-quiz-link" href="#">' . $this->msg( 'quizgame-delete' )->text() . '</a> -';
@@ -947,7 +947,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 
 		// For registered users, display their personal scorecard; for anons,
 		// encourage them to join the site to play quizzes.
-		if( $user->isLoggedIn() ) {
+		if ( $user->isLoggedIn() ) {
 			$leaderboard_title = SpecialPage::getTitleFor( 'QuizLeaderboard' );
 			$formattedQuizPoints = $lang->formatNum( $current_user_stats['quiz_points'] );
 			$formattedCorrectAnswers = $lang->formatNum( $current_user_stats['quiz_correct'] );
@@ -986,14 +986,14 @@ class QuizGameHome extends UnlistedSpecialPage {
 		}
 
 		$answers = '';
-		if( $user_answer ) {
+		if ( $user_answer ) {
 			$answers .= '<div class="answer-percent-correct">' .
 				$this->msg( 'quizgame-pct-answered-correct', $question['correct_percent'] )->text() . '</div>';
-			if( $user_answer == $question['correct_answer'] ) {
+			if ( $user_answer == $question['correct_answer'] ) {
 				$answers .= '<div class="answer-message-correct">' .
 					$this->msg( 'quizgame-answered-correctly' )->text() . '</div>';
 			} else {
-				if( $user_answer == -1 ) {
+				if ( $user_answer == -1 ) {
 					$answers .= '<div class="answer-message-incorrect">' .
 						$this->msg( 'quizgame-skipped' )->text() . '</div>';
 				} else {
@@ -1006,10 +1006,10 @@ class QuizGameHome extends UnlistedSpecialPage {
 
 		// User hasn't answered yet, so display the quiz options with the
 		// ability to play the question
-		if( !$user_answer && $user->getName() != $question['user_name'] ) {
+		if ( !$user_answer && $user->getName() != $question['user_name'] ) {
 			$answers .= '<ul>';
 			$x = 1;
-			foreach( $question['choices'] as $choice ) {
+			foreach ( $question['choices'] as $choice ) {
 				$answers .= "<li id=\"{$x}\"><a class=\"quiz-vote-link\" data-choice-id=\"{$choice['id']}\" href=\"#\">{$choice['text']}</a></li>";
 				$x++;
 			}
@@ -1018,7 +1018,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 			// User has answered, so display the right answer, and how many
 			// people picked what
 			$x = 1;
-			foreach( $question['choices'] as $choice ) {
+			foreach ( $question['choices'] as $choice ) {
 				$bar_width = floor( 220 * ( $choice['percent'] / 100 ) );
 				if ( $choice['is_correct'] == 1 ) {
 					$barColor = 'green';
@@ -1053,7 +1053,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 
 		$output .= '<div class="quizgame-left">';
 
-		if( !$user_answer && $user->getName() != $question['user_name'] ) {
+		if ( !$user_answer && $user->getName() != $question['user_name'] ) {
 			global $wgUserStatsPointValues;
 			$quizPoints = ( isset( $wgUserStatsPointValues['quiz_points'] ) ? $wgUserStatsPointValues['quiz_points'] : 0 );
 			$output .= '<div class="time-box">
@@ -1086,7 +1086,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 					<div class=\"navigation-buttons\">
 						{$backButton}";
 
-		if( !$user_answer && $user->getName() != $question['user_name'] ) {
+		if ( !$user_answer && $user->getName() != $question['user_name'] ) {
 			$output .= '<a class="skip-question-link" href="javascript:void(0);">' .
 				$this->msg( 'quizgame-skip' )->text() . '</a>';
 		} else {
@@ -1095,7 +1095,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 		}
 		$output .= '</div>';
 
-		if( !empty( $prev_question['id'] ) && !empty( $prev_question['user_answer'] ) ) {
+		if ( !empty( $prev_question['id'] ) && !empty( $prev_question['user_answer'] ) ) {
 			$output .= '<div id="answer-stats" class="answer-stats" style="display:block">
 
 							<div class="last-game">
@@ -1110,12 +1110,12 @@ class QuizGameHome extends UnlistedSpecialPage {
 							</div>';
 
 			$your_answer_status = '';
-			if( $prev_question['id'] && $prev_question['user_answer'] ) {
+			if ( $prev_question['id'] && $prev_question['user_answer'] ) {
 				// Get the choice text of what the user picked (and show how many points they got)
-				foreach( $prev_question['choices'] as $choice ) {
-					if( $choice['id'] == $prev_question['user_answer'] ) {
+				foreach ( $prev_question['choices'] as $choice ) {
+					if ( $choice['id'] == $prev_question['user_answer'] ) {
 						$your_answer = $choice['text'];
-						if( $choice['is_correct'] == 1 ) {
+						if ( $choice['is_correct'] == 1 ) {
 							$your_answer_status = '<div class="answer-status-correct">' .
 								$this->msg( 'quizgame-chose-correct', $prev_question['points'] )->parse() .
 							'</div>';
@@ -1132,7 +1132,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 							{$your_answer_status}
 						</div>";
 
-			foreach( $prev_question['choices'] as $choice ) {
+			foreach ( $prev_question['choices'] as $choice ) {
 				$bar_width = floor( 460 * ( $choice['percent'] / 100 ) );
 				if ( $choice['is_correct'] == 1 ) {
 					$answerClass = 'correct';
@@ -1251,34 +1251,34 @@ class QuizGameHome extends UnlistedSpecialPage {
 		$dbw = wfGetDB( DB_MASTER );
 		$dbw->insert(
 			'quizgame_questions',
-			array(
-				'q_user_id' => $user->getID(),
+			[
+				'q_user_id' => $user->getId(),
 				'q_user_name' => $user->getName(),
 				'q_text' => strip_tags( $question ), // make sure nobody inserts malicious code
 				'q_picture' => $imageName,
 				'q_date' => date( 'Y-m-d H:i:s' ),
 				'q_random' => wfRandom()
-			),
+			],
 			__METHOD__
 		);
 		$questionId = $dbw->insertId();
 
 		// Add Quiz Choices
-		for( $x = 1; $x <= $max_answers; $x++ ) {
-			if( $request->getVal( "quizgame-answer-{$x}" ) ) {
-				if( $request->getVal( "quizgame-isright-{$x}" ) == 'on' ) {
+		for ( $x = 1; $x <= $max_answers; $x++ ) {
+			if ( $request->getVal( "quizgame-answer-{$x}" ) ) {
+				if ( $request->getVal( "quizgame-isright-{$x}" ) == 'on' ) {
 					$is_correct = 1;
 				} else {
 					$is_correct = 0;
 				}
 				$dbw->insert(
 					'quizgame_choice',
-					array(
+					[
 						'choice_q_id' => $questionId,
 						'choice_text' => strip_tags( $request->getVal( "quizgame-answer-{$x}" ) ), // make sure nobody inserts malicious code
 						'choice_order' => $x,
 						'choice_is_correct' => $is_correct
-					),
+					],
 					__METHOD__
 				);
 			}
@@ -1293,9 +1293,9 @@ class QuizGameHome extends UnlistedSpecialPage {
 			$logEntry = new ManualLogEntry( 'quiz', 'create' );
 			$logEntry->setPerformer( $user );
 			$logEntry->setTarget( $this->getPageTitle( $questionId ) );
-			$logEntry->setParameters( array(
+			$logEntry->setParameters( [
 				'4::quizid' => $questionId
-			) );
+			] );
 
 			$logId = $logEntry->insert();
 			$logEntry->publish( $logId );
@@ -1316,28 +1316,28 @@ class QuizGameHome extends UnlistedSpecialPage {
 		$user = $this->getUser();
 
 		// No access for blocked users
-		if( $user->isBlocked() ) {
+		if ( $user->isBlocked() ) {
 			throw new UserBlockedError( $user->getBlock() );
 		}
 
 		/**
 		 * Create Quiz Thresholds based on User Stats
 		 */
-		if( is_array( $wgCreateQuizThresholds ) && count( $wgCreateQuizThresholds ) > 0 ) {
+		if ( is_array( $wgCreateQuizThresholds ) && count( $wgCreateQuizThresholds ) > 0 ) {
 			$can_create = true;
 
-			$stats = new UserStats( $user->getID(), $user->getName() );
+			$stats = new UserStats( $user->getId(), $user->getName() );
 			$stats_data = $stats->getUserStats();
 
 			$threshold_reason = '';
-			foreach( $wgCreateQuizThresholds as $field => $threshold ) {
+			foreach ( $wgCreateQuizThresholds as $field => $threshold ) {
 				if ( $stats_data[$field] < $threshold ) {
 					$can_create = false;
 					$threshold_reason .= ( ( $threshold_reason ) ? ', ' : '' ) . "$threshold $field";
 				}
 			}
 
-			if( $can_create == false ) {
+			if ( $can_create == false ) {
 				$out->setPageTitle( $this->msg( 'quizgame-create-threshold-title' )->text() );
 				$out->addHTML( $this->msg( 'quizgame-create-threshold-reason', $threshold_reason )->parse() );
 				return '';
@@ -1374,7 +1374,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 		// code block nearly identical to the below one elsewhere in this file,
 		// the only big difference being the hook handlers
 
-		for( $x = 1; $x <= $max_answers; $x++ ) {
+		for ( $x = 1; $x <= $max_answers; $x++ ) {
 			$output .= "<div id=\"quizgame-answer-container-{$x}\" class=\"quizgame-answer\"" .
 				( ( $x > 2 ) ? ' style="display:none;"' : '' ) . ">
 				<span class=\"quizgame-answer-number\">{$x}.</span>
