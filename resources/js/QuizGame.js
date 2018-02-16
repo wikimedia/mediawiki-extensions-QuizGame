@@ -5,38 +5,6 @@
  * @ingroup Extensions
  */
 
- /*
-	* That needs to be removed, when we drop support to MW 1.28. Modified copy pasta from OOjsUI windows.js
-	* @see https://gerrit.wikimedia.org/r/#/c/336008/
-	*/
-reasonPrompt = OO.ui.prompt || function ( text, options ) {
-	manager = new OO.ui.WindowManager();
-	textInput = new OO.ui.TextInputWidget( ( options && options.textInput ) || {} );
-	textField = new OO.ui.FieldLayout( textInput, {
-		align: 'top',
-		label: text
-	} );
-	$( 'body' ).append( manager.$element );
-	manager.addWindows( [ new OO.ui.MessageDialog() ] );
-
-	// TODO: This is a little hacky, and could be done by extending MessageDialog instead.
-
-	return manager.openWindow( 'message', $.extend( {
-		message: textField.$element
-	}, options ) ).then( function ( opened ) {
-		// After ready
-		textInput.on( 'enter', function () {
-			manager.getCurrentWindow().close( { action: 'accept' } );
-		} );
-		textInput.focus();
-		return opened.then( function ( closing ) {
-			return closing.then( function ( data ) {
-				return $.Deferred().resolve( data && data.action === 'accept' ? textInput.getValue() : null );
-			} );
-		} );
-	} );
-};
-
 window.QuizGame = {
 	continue_timer: '', // has to have an initial value...
 	voted: 0,
@@ -241,7 +209,7 @@ window.QuizGame = {
 			],
 			textInput: { placeholder: mw.msg( 'quizgame-flagged-reason' ) }
 		};
-		reasonPrompt( mw.msg( 'quizgame-flag-confirm' ), options ).done( function ( reason ) {
+		OO.ui.prompt( mw.msg( 'quizgame-flag-confirm' ), options ).done( function ( reason ) {
 			if ( reason !== null ) {
 				var gameId = document.getElementById( 'quizGameId' ).value;
 				( new mw.Api() ).postWithToken( 'csrf', {
