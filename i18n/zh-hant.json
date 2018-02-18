@@ -4,6 +4,7 @@
 			"Liuxinyu970226"
 		]
 	},
+	"quizgame-edit": "編輯",
 	"quizgame-delete": "刪除",
 	"quizgame-unprotect": "取消保護",
 	"quizgame-flagged-reason": "原因",
@@ -11,8 +12,10 @@
 	"quizgame-cancel-button": "取消",
 	"quizgame-main-page-button": "首頁",
 	"quizgame-login-button": "登入",
+	"quizgame-submit": "送出",
 	"quizgame-leaderboard-order-menu": "排序",
 	"quizgame-nav-next": "下一個",
 	"quizgame-permalink": "靜態連結",
-	"quizgame-time-ago": "$1 前"
+	"quizgame-time-ago": "$1 前",
+	"apihelp-quizgamevote-example-1": "投票。"
 }
