@@ -51,7 +51,7 @@ window.QuizGame = {
 	points: mw.config.get( '__quiz_js_points_value__' ),// 30,
 	next_level: 0, // has to have an initial value; introduced by Jack
 
-	deleteById: function( id, key ) {
+	deleteById: function( id ) {
 		var options = {
 			actions: [
 				{ label: mw.msg( 'cancel' ) },
@@ -63,23 +63,18 @@ window.QuizGame = {
 				document.getElementById( 'items[' + id + ']' ).style.display = 'none';
 				document.getElementById( 'items[' + id + ']' ).style.visibility = 'hidden';
 
-				jQuery.getJSON(
-					mw.util.wikiScript( 'api' ), {
-						format: 'json',
-						action: 'quizgame',
-						quizaction: 'deleteItem',
-						key: key,
-						id: id
-					},
-					function( data ) {
-						document.getElementById( 'ajax-messages' ).innerHTML = data.quizgame.output;
-					}
-				);
+				( new mw.Api() ).postWithToken( 'csrf', {
+					action: 'quizgame',
+					quizaction: 'deleteItem',
+					id: id
+				} ).done( function( data ) {
+					document.getElementById( 'ajax-messages' ).innerHTML = data.quizgame.output;
+				} );
 			}
 		} );
 	},
 
-	unflagById: function( id, key ) {
+	unflagById: function( id ) {
 		var options = {
 			actions: [
 				{ label: mw.msg( 'cancel' ) },
@@ -91,53 +86,38 @@ window.QuizGame = {
 				document.getElementById( 'items[' + id + ']' ).style.display = 'none';
 				document.getElementById( 'items[' + id + ']' ).style.visibility = 'hidden';
 
-				jQuery.getJSON(
-					mw.util.wikiScript( 'api' ), {
-						format: 'json',
-						action: 'quizgame',
-						quizaction: 'unflagItem',
-						key: key,
-						id: id
-					},
-					function( data ) {
-						document.getElementById( 'ajax-messages' ).innerHTML = data.quizgame.output;
-					}
-				);
+				( new mw.Api() ).postWithToken( 'csrf', {
+					action: 'quizgame',
+					quizaction: 'unflagItem',
+					id: id
+				} ).done( function( data ) {
+					document.getElementById( 'ajax-messages' ).innerHTML = data.quizgame.output;
+				} );
 			}
-		});
+		} );
 	},
 
-	unprotectById: function( id, key ) {
+	unprotectById: function( id ) {
 		document.getElementById( 'items[' + id + ']' ).style.display = 'none';
 		document.getElementById( 'items[' + id + ']' ).style.visibility = 'hidden';
 
-		jQuery.getJSON(
-			mw.util.wikiScript( 'api' ), {
-				format: 'json',
-				action: 'quizgame',
-				quizaction: 'unprotectItem',
-				key: key,
-				id: id
-			},
-			function( data ) {
-				document.getElementById( 'ajax-messages' ).innerHTML = data.quizgame.output;
-			}
-		);
+		( new mw.Api() ).postWithToken( 'csrf', {
+			action: 'quizgame',
+			quizaction: 'unprotectItem',
+			id: id
+		} ).done( function( data ) {
+			document.getElementById( 'ajax-messages' ).innerHTML = data.quizgame.output;
+		} );
 	},
 
-	protectById: function( id, key ) {
-		jQuery.getJSON(
-			mw.util.wikiScript( 'api' ), {
-				format: 'json',
-				action: 'quizgame',
-				quizaction: 'protectItem',
-				key: key,
-				id: id
-			},
-			function( data ) {
-				document.getElementById( 'ajax-messages' ).innerHTML = data.quizgame.output;
-			}
-		);
+	protectById: function( id ) {
+		( new mw.Api() ).postWithToken( 'csrf', {
+			action: 'quizgame',
+			quizaction: 'protectItem',
+			id: id
+		} ).done( function( data ) {
+			document.getElementById( 'ajax-messages' ).innerHTML = data.quizgame.output;
+		} );
 	},
 
 	toggleCheck: function( thisBox ) {
@@ -225,22 +205,16 @@ window.QuizGame = {
 		};
 		OO.ui.confirm( mw.msg( 'quizgame-delete-confirm' ), options ).done( function ( confirmed ) {
 			if ( confirmed ) {
-				var gameKey = document.getElementById( 'quizGameKey' ).value;
 				var gameId = document.getElementById( 'quizGameId' ).value;
-				jQuery.getJSON(
-					mw.util.wikiScript( 'api' ), {
-						format: 'json',
-						action: 'quizgame',
-						quizaction: 'deleteItem',
-						key: gameKey,
-						id: gameId
-					},
-					function( data ) {
-						document.getElementById( 'ajax-messages' ).innerHTML = data.quizgame.output + '<br />' + mw.msg( 'quizgame-js-reloading' );
-						document.location = mw.config.get( 'wgScriptPath' ) +
+				( new mw.Api() ).postWithToken( 'csrf', {
+					action: 'quizgame',
+					quizaction: 'deleteItem',
+					id: gameId
+				} ).done( function( data ) {
+					document.getElementById( 'ajax-messages' ).innerHTML = data.quizgame.output + '<br />' + mw.msg( 'quizgame-js-reloading' );
+					document.location = mw.config.get( 'wgScriptPath' ) +
 						'/index.php?title=Special:QuizGameHome&questionGameAction=launchGame';
-					}
-				);
+				} );
 			}
 		} );
 	},
@@ -249,8 +223,7 @@ window.QuizGame = {
 		document.location = mw.config.get( 'wgServer' ) +
 			mw.config.get( 'wgScriptPath' ) +
 			'/index.php?title=Special:QuizGameHome&questionGameAction=editItem&quizGameId=' +
-			document.getElementById( 'quizGameId' ).value + '&quizGameKey=' +
-			document.getElementById( 'quizGameKey' ).value;
+			document.getElementById( 'quizGameId' ).value;
 	},
 
 	/**
@@ -270,21 +243,15 @@ window.QuizGame = {
 		};
 		reasonPrompt( mw.msg( 'quizgame-flag-confirm' ), options ).done( function ( reason ) {
 			if ( reason !== null ) {
-				var gameKey = document.getElementById( 'quizGameKey' ).value;
 				var gameId = document.getElementById( 'quizGameId' ).value;
-				jQuery.getJSON(
-					mw.util.wikiScript( 'api' ), {
-						format: 'json',
-						action: 'quizgame',
-						quizaction: 'flagItem',
-						key: gameKey,
-						id: gameId,
-						comment: reason
-					},
-					function( data ) {
-						document.getElementById( 'ajax-messages' ).innerHTML = data.quizgame.output;
-					}
-				);
+				( new mw.Api() ).postWithToken( 'csrf', {
+					action: 'quizgame',
+					quizaction: 'flagItem',
+					id: gameId,
+					comment: reason
+				} ).done( function( data ) {
+					document.getElementById( 'ajax-messages' ).innerHTML = data.quizgame.output;
+				} );
 			}
 		} );
 	},
@@ -294,20 +261,14 @@ window.QuizGame = {
 	 * reporting back to the user.
 	 */
 	protectImage: function() {
-		var gameKey = document.getElementById( 'quizGameKey' ).value;
 		var gameId = document.getElementById( 'quizGameId' ).value;
-		jQuery.getJSON(
-			mw.util.wikiScript( 'api' ), {
-				format: 'json',
-				action: 'quizgame',
-				quizaction: 'protectItem',
-				key: gameKey,
-				id: gameId
-			},
-			function( data ) {
-				document.getElementById( 'ajax-messages' ).innerHTML = data.quizgame.output;
-			}
-		);
+		( new mw.Api() ).postWithToken( 'csrf', {
+			action: 'quizgame',
+			quizaction: 'protectItem',
+			id: gameId
+		} ).done( function( data ) {
+			document.getElementById( 'ajax-messages' ).innerHTML = data.quizgame.output;
+		} );
 	},
 
 	/**
@@ -487,21 +448,15 @@ window.QuizGame = {
 		LightBox.show( objLink );
 		QuizGame.setLightboxText( '' );
 
-		var gameKey = document.getElementById( 'quizGameKey' ).value;
 		var gameId = document.getElementById( 'quizGameId' ).value;
-		jQuery.getJSON(
-			mw.util.wikiScript( 'api' ), {
-				format: 'json',
-				action: 'quizgamevote',
-				answer: -1,
-				key: gameKey,
-				id: gameId,
-				points: 0
-			},
-			function( data ) {
-				QuizGame.goToNextQuiz( document.getElementById( 'quizGameId' ).value );
-			}
-		);
+		( new mw.Api() ).postWithToken( 'csrf', {
+			action: 'quizgamevote',
+			answer: -1,
+			id: gameId,
+			points: 0
+		} ).done( function( data ) {
+			QuizGame.goToNextQuiz( document.getElementById( 'quizGameId' ).value );
+		} );
 	},
 
 	/**
@@ -537,51 +492,45 @@ window.QuizGame = {
 			document.getElementById( 'quizGameId' ).value +
 			');" class="stop-button">' + mw.msg( 'quizgame-lightbox-breakdown' ) + '</a>';
 
-		var gameKey = document.getElementById( 'quizGameKey' ).value;
 		var gameId = document.getElementById( 'quizGameId' ).value;
 
-		jQuery.getJSON(
-			mw.util.wikiScript( 'api' ), {
-				format: 'json',
-				action: 'quizgamevote',
-				answer: id,
-				key: gameKey,
-				id: gameId,
-				points: QuizGame.points
-			},
-			function( payload ) {
-				var text;
+		( new mw.Api() ).postWithToken( 'csrf', {
+			action: 'quizgamevote',
+			answer: id,
+			id: gameId,
+			points: QuizGame.points
+		} ).done( function( payload ) {
+			var text;
 
-				QuizGame.continue_timer = setTimeout( 'QuizGame.goToNextQuiz()', 3000 );
+			QuizGame.continue_timer = setTimeout( 'QuizGame.goToNextQuiz()', 3000 );
 
-				// An unlikely edge case: someone tries to vote twice for some reason
-				if ( payload.error ) {
-					QuizGame.setLightboxText(
-						'<p class="quizgame-lightbox-wrongtext">' +
-						payload.error.info +
-						'</p>'
-					);
-				}
-
-				var percent_right = mw.msg( 'quizgame-lightbox-breakdown-percent', payload.quizgamevote.result.percentRight );
-				if ( payload.quizgamevote.result.isRight == 'true' ) {
-					text = '<p class="quizgame-lightbox-righttext">' +
-						mw.msg( 'quizgame-lightbox-correct' ) + '<br /><br />' +
-						mw.msg( 'quizgame-lightbox-correct-points', QuizGame.points ) +
-						'</p><br />' + percent_right +
-						'<br /><br />' + view_results_button + '<br /><br />' +
-						quiz_controls;
-				} else {
-					text = '<p class="quizgame-lightbox-wrongtext">' +
-						mw.msg( 'quizgame-lightbox-incorrect' ) + '<br />' +
-						mw.msg( 'quizgame-lightbox-incorrect-correct', payload.quizgamevote.result.rightAnswer ) +
-						'</p><br />' + percent_right +
-						'<br /><br />' + view_results_button + '<br /><br />' +
-						quiz_controls;
-				}
-				QuizGame.setLightboxText( text );
+			// An unlikely edge case: someone tries to vote twice for some reason
+			if ( payload.error ) {
+				QuizGame.setLightboxText(
+					'<p class="quizgame-lightbox-wrongtext">' +
+					payload.error.info +
+					'</p>'
+				);
 			}
-		);
+
+			var percent_right = mw.msg( 'quizgame-lightbox-breakdown-percent', payload.quizgamevote.result.percentRight );
+			if ( payload.quizgamevote.result.isRight == 'true' ) {
+				text = '<p class="quizgame-lightbox-righttext">' +
+					mw.msg( 'quizgame-lightbox-correct' ) + '<br /><br />' +
+					mw.msg( 'quizgame-lightbox-correct-points', QuizGame.points ) +
+					'</p><br />' + percent_right +
+					'<br /><br />' + view_results_button + '<br /><br />' +
+					quiz_controls;
+			} else {
+				text = '<p class="quizgame-lightbox-wrongtext">' +
+					mw.msg( 'quizgame-lightbox-incorrect' ) + '<br />' +
+					mw.msg( 'quizgame-lightbox-incorrect-correct', payload.quizgamevote.result.rightAnswer ) +
+					'</p><br />' + percent_right +
+					'<br /><br />' + view_results_button + '<br /><br />' +
+					quiz_controls;
+			}
+			QuizGame.setLightboxText( text );
+		} );
 	},
 
 	welcomePage_uploadError: function( message ) {
@@ -750,16 +699,16 @@ jQuery( function() {
 			.on( 'click', function() { QuizGame.deleteQuestion(); } );
 		jQuery( 'a.delete-by-id' )
 			.attr( 'href', '#' )
-			.on( 'click', function() { QuizGame.deleteById( jQuery( this ).data( 'quiz-id' ), jQuery( this ).data( 'key' ) ); } );
+			.on( 'click', function() { QuizGame.deleteById( jQuery( this ).data( 'quiz-id' ) ); } );
 		jQuery( 'a.protect-by-id' )
 			.attr( 'href', '#' )
-			.on( 'click', function() { QuizGame.protectById( jQuery( this ).data( 'quiz-id' ), jQuery( this ).data( 'key' ) ); } );
+			.on( 'click', function() { QuizGame.protectById( jQuery( this ).data( 'quiz-id' ) ); } );
 		jQuery( 'a.unflag-by-id' )
 			.attr( 'href', '#' )
-			.on( 'click', function() { QuizGame.unflagById( jQuery( this ).data( 'quiz-id' ), jQuery( this ).data( 'key' ) ); } );
+			.on( 'click', function() { QuizGame.unflagById( jQuery( this ).data( 'quiz-id' ) ); } );
 		jQuery( 'a.unprotect-by-id' )
 			.attr( 'href', '#' )
-			.on( 'click', function() { QuizGame.unprotectById( jQuery( this ).data( 'quiz-id' ), jQuery( this ).data( 'key' ) ); } );
+			.on( 'click', function() { QuizGame.unprotectById( jQuery( this ).data( 'quiz-id' ) ); } );
 
 		// Answer boxes on the quiz creation view (welcome page)
 		if ( jQuery( 'span#this-is-the-welcome-page' ).length > 0 ) {
@@ -797,7 +746,7 @@ jQuery( function() {
 	// Code specific to Special:ViewQuizzes
 	if ( mw.config.get( 'wgCanonicalSpecialPageName' ) == 'ViewQuizzes' ) {
 		jQuery( 'div.view-quizzes-row, div.view-quizzes-row-bottom' ).each( function( index ) {
-			jQuery( this ).on({
+			jQuery( this ).on( {
 				/* this has to stay on the PHP code for the time being...
 				'click': function() {
 				},
