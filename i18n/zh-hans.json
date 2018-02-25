@@ -117,7 +117,6 @@
 	"quizgame-time-hours": "{{PLURAL:$1|$1小时}}",
 	"quizgame-time-minutes": "{{PLURAL:$1|$1分钟}}",
 	"quizgame-time-seconds": "{{PLURAL:$1|$1秒}}",
-	"quizgame-ajax-invalid-key": "您需要有效的密钥来这样做。",
 	"quizgame-ajax-unprotected": "问题已取消保护。",
 	"quizgame-ajax-protected": "问题已被保护。",
 	"quizgame-ajax-unflagged": "问题已取消标记。",
@@ -141,7 +140,6 @@
 	"apihelp-quizgame-summary": "用于管理操作的问题游戏API。",
 	"apihelp-quizgame-param-comment": "标记的原因（只在标记项中使用）。",
 	"apihelp-quizgame-param-id": "问答ID号。",
-	"apihelp-quizgame-param-key": "salt和问答ID号的MD5哈希值。",
 	"apihelp-quizgame-param-quizaction": "要干什么+单词“Item”，也就是deleteItem。",
 	"apihelp-quizgame-example-1": "标记一个问答。",
 	"apihelp-quizgame-example-2": "删除一个问答。",
@@ -149,7 +147,6 @@
 	"apihelp-quizgamevote-summary": "用于投票的问题游戏API。",
 	"apihelp-quizgamevote-param-answer": "数字答案ID。",
 	"apihelp-quizgamevote-param-id": "问答ID号。",
-	"apihelp-quizgamevote-param-key": "salt和问答ID号的MD5哈希值。",
 	"apihelp-quizgamevote-param-points": "为正确答案提供多少得分。",
 	"apihelp-quizgamevote-example-1": "投票。"
 }

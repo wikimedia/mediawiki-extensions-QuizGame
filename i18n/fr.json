@@ -118,7 +118,6 @@
 	"quizgame-time-hours": "{{PLURAL:$1|une heure|$1 heures}}",
 	"quizgame-time-minutes": "{{PLURAL:$1|une minute|$1 minutes}}",
 	"quizgame-time-seconds": "{{PLURAL:$1|une seconde|$1 secondes}}",
-	"quizgame-ajax-invalid-key": "Vous avez besoin d'une clé valide pour faire cela.",
 	"quizgame-ajax-unprotected": "La question a été déprotégée.",
 	"quizgame-ajax-protected": "La question a été protégée.",
 	"quizgame-ajax-unflagged": "La question a été démarquée.",
@@ -142,7 +141,6 @@
 	"apihelp-quizgame-summary": "API de jeu de question pour les actions d’administration.",
 	"apihelp-quizgame-param-comment": "Motif du marquage (utilisé seulement dans flagItem).",
 	"apihelp-quizgame-param-id": "Numéro d'identification(ID) du Quiz.",
-	"apihelp-quizgame-param-key": "Hachage MD5 du sel et du numéro d'identification (ID) du quiz.",
 	"apihelp-quizgame-param-quizaction": "Action à faire suivie de \"Item\", par exemple deleteItem.",
 	"apihelp-quizgame-example-1": "Marquer un quiz.",
 	"apihelp-quizgame-example-2": "Supprimer un quiz.",
@@ -150,7 +148,6 @@
 	"apihelp-quizgamevote-summary": "API de jeu de question pour voter.",
 	"apihelp-quizgamevote-param-answer": "Identifiant numérique (ID) de la réponse.",
 	"apihelp-quizgamevote-param-id": "Numéro d'identification (ID) du Quiz.",
-	"apihelp-quizgamevote-param-key": "Hachage MD5 du sel et du numéro d'identification (ID) du quiz.",
 	"apihelp-quizgamevote-param-points": "Combien de points sont attibués pour la réponse correcte.",
 	"apihelp-quizgamevote-example-1": "Voter."
 }

@@ -110,7 +110,6 @@
 	"quizgame-time-hours": "{{PLURAL:$1|tunti|$1 tuntia}}",
 	"quizgame-time-minutes": "{{PLURAL:$1|minuutti|$1 minuuttia}}",
 	"quizgame-time-seconds": "{{PLURAL:$1|sekunti|$1 sekuntia}}",
-	"quizgame-ajax-invalid-key": "Tarvitset kelvollisen avaimen tehdäksesi tuon.",
 	"quizgame-ajax-unprotected": "Kysymyksen suojaus purettiin onnistuneesti.",
 	"quizgame-ajax-protected": "Kysymys suojattiin onnistuneesti.",
 	"quizgame-ajax-unflagged": "Kysymys palautettiin onnistuneesti.",

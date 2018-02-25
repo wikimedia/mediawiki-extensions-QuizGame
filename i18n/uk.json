@@ -117,7 +117,6 @@
 	"quizgame-time-hours": "{{PLURAL:$1|$1 година|$1 години|$1 годин}}",
 	"quizgame-time-minutes": "$1 {{PLURAL:$1|хвилину|хвилини|хвилин}}",
 	"quizgame-time-seconds": "$1 {{PLURAL:$1|секунду|секунди|секунд}}",
-	"quizgame-ajax-invalid-key": "Вам потрібен дійсний ключ для цього.",
 	"quizgame-ajax-unprotected": "Захист з цього запитання знято.",
 	"quizgame-ajax-protected": "Це запитання захищено.",
 	"quizgame-ajax-unflagged": "Позначку з цього запитання знято.",
@@ -141,7 +140,6 @@
 	"apihelp-quizgame-summary": "API вікторини для адміністративних дій.",
 	"apihelp-quizgame-param-comment": "Причина встановлення позначки (використовується лише у flagItem).",
 	"apihelp-quizgame-param-id": "Номер ідентифікатора вікторини.",
-	"apihelp-quizgame-param-key": "MD5-хеш солі і номер ідентифікатора вікторини.",
 	"apihelp-quizgame-param-quizaction": "Що робити + слово «Item», тобто deleteItem.",
 	"apihelp-quizgame-example-1": "Позначити вікторину.",
 	"apihelp-quizgame-example-2": "Вилучити вікторину.",
@@ -149,7 +147,6 @@
 	"apihelp-quizgamevote-summary": "API вікторини для голосування.",
 	"apihelp-quizgamevote-param-answer": "Числовий ідентифікатор відповіді.",
 	"apihelp-quizgamevote-param-id": "Номер ідентифікатора вікторини.",
-	"apihelp-quizgamevote-param-key": "MD5-хеш солі і номер ідентифікатора вікторини.",
 	"apihelp-quizgamevote-param-points": "Скільки балів можна отримати за правильну відповідь.",
 	"apihelp-quizgamevote-example-1": "Голосувати."
 }

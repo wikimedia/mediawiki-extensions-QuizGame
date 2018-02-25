@@ -113,7 +113,6 @@
 	"quizgame-time-hours": "{{PLURAL:$1|een uur|$1 uren}}",
 	"quizgame-time-minutes": "{{PLURAL:$1|een minuut|$1 minuten}}",
 	"quizgame-time-seconds": "{{PLURAL:$1|een seconde|$1 seconden}}",
-	"quizgame-ajax-invalid-key": "Er is een geldige sleutel nodig om dat te doen.",
 	"quizgame-ajax-unprotected": "De vraag is onbeschermd.",
 	"quizgame-ajax-protected": "De vraag is beschermd.",
 	"quizgame-ajax-unflagged": "De vraag is niet meer gemarkeerd.",

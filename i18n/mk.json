@@ -117,7 +117,6 @@
 	"quizgame-time-hours": "{{PLURAL:$1|еден час|$1 часа}}",
 	"quizgame-time-minutes": "{{PLURAL:$1|една минута|$1 минути}}",
 	"quizgame-time-seconds": "{{PLURAL:$1|една секунда|$1 секунди}}",
-	"quizgame-ajax-invalid-key": "Ви треба важечки клуч за да го направите тоа.",
 	"quizgame-ajax-unprotected": "Заштитата на прашањето е тргната.",
 	"quizgame-ajax-protected": "Прашањето е заштитено.",
 	"quizgame-ajax-unflagged": "Ознаката на прашањето е тргната.",
@@ -141,7 +140,6 @@
 	"apihelp-quizgame-summary": "Квизен прилог за административни дејства",
 	"apihelp-quizgame-param-comment": "Причина за означување (се користи смао со flagItem).",
 	"apihelp-quizgame-param-id": "Број на квизот.",
-	"apihelp-quizgame-param-key": "MD5-тараба на солта и број на квизот.",
 	"apihelp-quizgame-param-quizaction": "Постапка + зборот „Item“, т.е. deleteItem.",
 	"apihelp-quizgame-example-1": "Означи квиз.",
 	"apihelp-quizgame-example-2": "Избриши квиз.",
@@ -149,7 +147,6 @@
 	"apihelp-quizgamevote-summary": "Квизен прилог за гласање.",
 	"apihelp-quizgamevote-param-answer": "Назнака на бројчениот одговор.",
 	"apihelp-quizgamevote-param-id": "Назнака на квизот.",
-	"apihelp-quizgamevote-param-key": "MD5-тараба на солта и број на квизот.",
 	"apihelp-quizgamevote-param-points": "Колку бодови се добиваат за точен одговор.",
 	"apihelp-quizgamevote-example-1": "Гласајте."
 }

@@ -117,7 +117,6 @@
 	"quizgame-time-hours": "{{PLURAL:$1|una hora|$1 hores}}",
 	"quizgame-time-minutes": "{{PLURAL:$1|un minutu|$1 minutos}}",
 	"quizgame-time-seconds": "{{PLURAL:$1|un segundu|$1 segundos}}",
-	"quizgame-ajax-invalid-key": "Precises una clave válida para facer eso.",
 	"quizgame-ajax-unprotected": "La entruga desprotexóse.",
 	"quizgame-ajax-protected": "La entruga protexóse.",
 	"quizgame-ajax-unflagged": "La entruga desmarcóse.",

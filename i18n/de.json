@@ -119,7 +119,6 @@
 	"quizgame-time-hours": "{{PLURAL:$1|einer Stunde|$1 Stunden}}",
 	"quizgame-time-minutes": "{{PLURAL:$1|einer Minute|$1 Minuten}}",
 	"quizgame-time-seconds": "{{PLURAL:$1|einer Sekunde|$1 Sekunden}}",
-	"quizgame-ajax-invalid-key": "Du benötigst einen gültigen Schlüssel, um dies durchzuführen.",
 	"quizgame-ajax-unprotected": "Die Frage wurde freigegeben.",
 	"quizgame-ajax-protected": "Die Frage wurde geschützt.",
 	"quizgame-ajax-unflagged": "Die Markierung der Frage wurde zurückgenommen.",
@@ -142,14 +141,12 @@
 	"apihelp-quizgame-description": "Fragespiel-API für administrative Aktionen.",
 	"apihelp-quizgame-param-comment": "Grund für die Markierung (nur in flagItem verwendet).",
 	"apihelp-quizgame-param-id": "Quizkennung.",
-	"apihelp-quizgame-param-key": "MD5-Prüfsumme des Salzes und die Quizkennung.",
 	"apihelp-quizgame-param-quizaction": "Was zu tun ist und das Wort „Item“, z.&nbsp;B. „deleteItem“.",
 	"apihelp-quizgame-example-1": "Markiert ein Quiz.",
 	"apihelp-quizgame-example-2": "Löscht ein Quiz.",
 	"apihelp-quizgamevote-description": "Fragespiel-API zur Abstimmung.",
 	"apihelp-quizgamevote-param-answer": "Numerische Antwortkennung.",
 	"apihelp-quizgamevote-param-id": "Quizkennung.",
-	"apihelp-quizgamevote-param-key": "MD5-Prüfsumme des Salzes und die Quizkennung.",
 	"apihelp-quizgamevote-param-points": "Wie viele Punkte für die richtige Antwort vergeben werden.",
 	"apihelp-quizgamevote-example-1": "Stimmt ab."
 }

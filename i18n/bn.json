@@ -100,7 +100,6 @@
 	"quizgame-time-days": "{{PLURAL:$1|এক দিন|$1 দিন}}",
 	"quizgame-time-hours": "{{PLURAL:$1|এক ঘণ্টা|$1 ঘণ্টা}}",
 	"quizgame-time-seconds": "{{PLURAL:$1|এক সেকেন্ড|$1 সেকেন্ড}}",
-	"quizgame-ajax-invalid-key": "আপনার কাজটি করতে একটি বৈধ চাবি প্রয়োজন।",
 	"quizgame-ajax-unprotected": "প্রশ্নটি অরক্ষিত রয়েছে।",
 	"quizgame-ajax-deleted": "প্রশ্নটি অপসারিত হয়েছে।",
 	"quizgame-ajax-invalid-option": "অকার্যকর AJAX পছন্দ।",
