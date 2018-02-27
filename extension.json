@@ -11,6 +11,9 @@
 	"url": "https://www.mediawiki.org/wiki/Extension:QuizGame",
 	"descriptionmsg": "quizgame-desc",
 	"type": "specialpage",
+	"requires": {
+		"MediaWiki": ">= 1.31.0"
+	},
 	"config": {
 		"CreateQuizThresholds": [],
 		"QuizLogs": true
@@ -38,7 +41,6 @@
 	"AutoloadClasses": {
 		"ApiQuizGame": "includes/api/ApiQuizGame.php",
 		"ApiQuizGameVote": "includes/api/ApiQuizGameVote.php",
-		"QuizGameLogFormatter": "includes/QuizGameLogFormatter.class.php",
 		"QuizGameHome": "includes/specials/SpecialQuizGameHome.php",
 		"SpecialQuestionGameUpload": "includes/specials/SpecialQuestionGameUpload.php",
 		"QuestionGameUploadForm": "includes/upload/QuestionGameUploadForm.class.php",

@@ -110,9 +110,7 @@ class QuizGameHooks {
 		global $wgQuizLogs, $wgLogTypes, $wgLogActionsHandlers;
 		if ( $wgQuizLogs ) {
 			$wgLogTypes[] = 'quiz';
-			// default log formatter doesn't support wikilinks (?!?) so we have to have
-			// our own formatter here :-(
-			$wgLogActionsHandlers['quiz/*'] = 'QuizGameLogFormatter';
+			$wgLogActionsHandlers['quiz/*'] = 'WikitextLogFormatter';
 		}
 	}
 }
