@@ -26,7 +26,7 @@
 	"quizgame-submitted-by": "Title of a box (on Special:QuizGameHome, when viewing a question) which contains the quiz's author's avatar and some statistics about the author",
 	"quizgame-question": "Headline on Special:QuizGameHome\n{{Identical|Question}}",
 	"quizgame-answers": "Headline on Special:QuizGameHome, followed by the choice ballots (<code>&lt;input type=\"radio\"&;gt;</code>)\n{{Identical|Answer}}",
-	"quizgame-picture": "Headline on Special:QuizGameHome",
+	"quizgame-picture": "Headline on Special:QuizGameHome\n{{Identical|Picture}}",
 	"quizgame-correct-answer-checked": "Informational message shown when editing a question (as opposed to creating a new question)",
 	"quizgame-save-page-button": "Button text\n{{Identical|Save page}}",
 	"quizgame-cancel-button": "Button text\n{{Identical|Cancel}}",
