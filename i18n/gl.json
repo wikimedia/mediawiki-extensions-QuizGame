@@ -113,7 +113,7 @@
 	"quizgame-create-threshold-title": "Crear unha pregunta do concurso",
 	"quizgame-create-threshold-reason": "Sentímolo, non pode crear unha pregunta do concurso ata teña polo menos $1",
 	"quizgame-points": "$1 ptos",
-	"quizgame-time-ago": "fai $1",
+	"quizgame-time-ago": "hai $1",
 	"quizgame-time-days": "{{PLURAL:$1|un día|$1 días}}",
 	"quizgame-time-hours": "{{PLURAL:$1|unha hora|$1 horas}}",
 	"quizgame-time-minutes": "{{PLURAL:$1|un minuto|$1 minutos}}",
