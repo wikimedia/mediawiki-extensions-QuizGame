@@ -31,14 +31,6 @@
 	padding: 0 0 0 2px;
 }
 
-.quizgame-edit-question h1 {
-	font-size: 16px;
-	font-weight: bold;
-	border-bottom: none;
-	color: #333;
-	margin: 20px 0 10px 0 !important;
-}
-
 .quizgame-picture img {
 	border: 1px solid #dcdcdc;
 	padding: 3px;
@@ -106,13 +98,6 @@
 	padding: 10px 0 0 0;
 }
 
-.quizgame-admin h1 {
-	font-size: 18px;
-	color: #333;
-	font-weight: bold;
-	margin: 0 0 20px 0 !important;
-}
-
 .quizgame-admin-top-links {
 	margin: -10px 0 20px 0;
 }
@@ -127,13 +112,6 @@
 	margin: 0 0 20px 0;
 	padding: 0 0 20px 0;
 	width: 500px;
-}
-
-.quizgame-flagged-item h1 {
-	font-size: 14px;
-	font-weight: bold;
-	color: #333;
-	margin: 0 0 10px 0 !important;
 }
 
 .quizgame-flagged-picture img {
@@ -256,15 +234,6 @@ li:hover {
 	margin: 8px 0 0;
 	padding: 10px;
 	padding-bottom: 60px;
-}
-
-.credit-box h1 {
-	border-bottom: none;
-	color: #333;
-	font-size: 16px;
-	font-weight: bold;
-	padding: 0;
-	margin: 0 0 10px !important;
 }
 
 .last-game {
@@ -419,27 +388,6 @@ img.one-answer-width {
 	max-width: 100%;
 	padding: 9px;
 	width: 500px;
-}
-
-.create-message h1 {
-	font-size: 22px;
-	border-bottom: none;
-	font-weight: bold;
-	margin: 0 0 10px !important;
-}
-
-.quizgame-create-form h1 {
-	color: #333;
-	font-size: 16px;
-	font-weight: bold;
-	border-bottom: none;
-	margin: 20px 0 15px 0 !important;
-}
-
-h1.write-answer {
-	color: #333;
-	font-size: 16px;
-	margin: 20px 0 10px 0 !important;
 }
 
 .quizgame-answer-number {

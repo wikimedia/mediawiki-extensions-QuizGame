@@ -450,10 +450,10 @@ class QuizGameHome extends UnlistedSpecialPage {
 						$this->msg( 'quizgame-admin-back' )->escaped() . '</a>
 				</div>
 
-				<h1>' . $this->msg( 'quizgame-admin-flagged' )->escaped() . "</h1>
+				<h2>' . $this->msg( 'quizgame-admin-flagged' )->escaped() . "</h2>
 				{$flaggedQuestions}
 
-				<h1>" . $this->msg( 'quizgame-admin-protected' )->escaped() . "</h1>
+				<h2>" . $this->msg( 'quizgame-admin-protected' )->escaped() . "</h2>
 				{$protectedQuestions}
 
 			</div>";
@@ -709,7 +709,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 		$pictureStuff = '';
 		// Show the picture stuff only if we can upload files (T155448)
 		if ( UploadBase::isEnabled() ) {
-			$pictureStuff = '<h1>' . $this->msg( 'quizgame-picture' )->escaped() . "</h1>
+			$pictureStuff = '<h2>' . $this->msg( 'quizgame-picture' )->escaped() . "</h2>
 				<div class=\"quizgame-edit-picture\" id=\"quizgame-edit-picture\">
 					{$pictag}
 				</div>
@@ -725,7 +725,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 						'">
 
 						<div class="credit-box" id="creditBox">
-							<h1>' . $this->msg( 'quizgame-submitted-by' )->escaped() . "</h1>
+							<h2>' . $this->msg( 'quizgame-submitted-by' )->escaped() . "</h2>
 
 							<div id=\"submitted-by-image\" class=\"submitted-by-image\">
 								<a href=\"{$safeUserPageURL}\">
@@ -757,13 +757,15 @@ class QuizGameHome extends UnlistedSpecialPage {
 
 						<div class=\"ajax-messages\" id=\"ajax-messages\" style=\"margin:20px 0px 15px 0px;\"></div>
 
-						<h1>" . $this->msg( 'quizgame-question' )->escaped() . "</h1>
+						<h2>" . $this->msg( 'quizgame-question' )->escaped() . "</h2>
 						<input name=\"quizgame-question\" id=\"quizgame-question\" type=\"text\" value=\"" .
 							htmlspecialchars( $question['text'], ENT_QUOTES ) . "\" size=\"64\" />
-						<h1>" . $this->msg( 'quizgame-answers' )->escaped() . "</h1>
+
+						<h2>" . $this->msg( 'quizgame-answers' )->escaped() . "</h2>
 						<div style=\"margin:10px 0px;\">" . $this->msg( 'quizgame-correct-answer-checked' )->escaped() . "</div>
 						{$quizOptions}
 						{$pictureStuff}
+
 
 						<input id=\"quizGameId\" name=\"quizGameId\" type=\"hidden\" value=\"" . htmlspecialchars( $question['id'] ) . "\" />
 						<input name=\"choices_count\" type=\"hidden\" value=\"{$choices_count}\" />
@@ -1202,7 +1204,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 						"</a>
 					</div>
 					<div class=\"credit-box\" id=\"creditBox\">
-						<h1>" . $this->msg( 'quizgame-submitted-by' )->escaped() . "</h1>
+						<h2>" . $this->msg( 'quizgame-submitted-by' )->escaped() . "</h2>
 
 						<div id=\"submitted-by-image\" class=\"submitted-by-image\">
 							<a href=\"{$safeUserPageURL}\">
@@ -1397,9 +1399,9 @@ class QuizGameHome extends UnlistedSpecialPage {
 					htmlspecialchars( $this->getPageTitle()->getFullURL( 'questionGameAction=createGame' ) ) . '">
 				<div id="quiz-game-errors" style="color:red"></div>
 
-				<h1>' . $this->msg( 'quizgame-create-write-question' )->escaped() . '</h1>
+				<h2>' . $this->msg( 'quizgame-create-write-question' )->escaped() . '</h2>
 				<input name="quizgame-question" id="quizgame-question" type="text" value="" size="64" />
-				<h1 class="write-answer">' . $this->msg( 'quizgame-create-write-answers' )->escaped() . '</h1>
+				<h2 class="write-answer">' . $this->msg( 'quizgame-create-write-answers' )->escaped() . '</h2>
 				<span style="margin-top:10px;">' . $this->msg( 'quizgame-create-check-correct' )->escaped() . '</span>
 				<span style="display:none;" id="this-is-the-welcome-page"></span>';
 		// the span#this-is-the-welcome-page element is an epic hack for JS
@@ -1426,8 +1428,8 @@ class QuizGameHome extends UnlistedSpecialPage {
 		// Show the picture stuff only if we can upload files (T155448)
 		if ( UploadBase::isEnabled() ) {
 			$out->addModules( [ 'ext.quizGame.file-selector' ] );
-			$output .= '<h1 style="margin-top:20px">' .
-				$this->msg( 'quizgame-create-add-picture' )->escaped() . '</h1>
+			$output .= '<h2 style="margin-top:20px">' .
+				$this->msg( 'quizgame-create-add-picture' )->escaped() . '</h2>
 			<div id="quizgame-picture-upload">
 				<div id="real-form">
 					<iframe id="imageUpload-frame" class="imageUpload-frame" src="' .
