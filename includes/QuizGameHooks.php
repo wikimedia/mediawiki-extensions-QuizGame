@@ -11,38 +11,50 @@ class QuizGameHooks {
 	/**
 	 * Adds an "edit" tab to Special:QuizGameHome.
 	 *
-	 * @param Skin $skinTemplate
+	 * @param SkinTemplate $skinTemplate
 	 * @param array $links
 	 */
-	public static function addQuizContentActions( &$skinTemplate, &$links ) {
-		global $wgUser, $wgRequest, $wgQuizID;
+	public static function onSkinTemplateNavigationSpecialPage( &$skinTemplate, &$links ) {
+		global $wgQuizID;
+
+		$user = $skinTemplate->getUser();
+		$request = $skinTemplate->getRequest();
+
+		$action = $request->getVal( 'questionGameAction' );
+		$quiz = SpecialPage::getTitleFor( 'QuizGameHome' );
 
 		// Add edit tab to content actions for quiz admins
 		if (
 			$wgQuizID > 0 &&
-			$wgRequest->getVal( 'questionGameAction' ) != 'createForm' &&
-			$wgUser->isAllowed( 'quizadmin' )
+			$action != 'createForm' &&
+			$user->isAllowed( 'quizadmin' )
 		)
 		{
-			$quiz = SpecialPage::getTitleFor( 'QuizGameHome' );
 			$selected = false;
-			if ( $wgRequest->getVal( 'questionGameAction' ) == 'editItem' ) {
+			if ( $action == 'editItem' ) {
 				$selected = 'selected';
 			}
 			$links['views']['edit'] = [
 				'class' => $selected,
-				'text' => wfMessage( 'edit' )->plain(),
-				'href' => $quiz->getFullURL( 'questionGameAction=editItem&quizGameId=' . $wgQuizID ), // @bug 2457, 2510
+				'text' => $skinTemplate->msg( 'edit' )->plain(),
+				// @see https://phabricator.wikimedia.org/T4457
+				// @see https://phabricator.wikimedia.org/T4510
+				'href' => $quiz->getFullURL( [
+					'questionGameAction' => 'editItem',
+					'quizGameId' => $wgQuizID
+				] ),
 			];
 		}
 
 		// If editing, make special page go back to quiz question
-		if ( $wgRequest->getVal( 'questionGameAction' ) == 'editItem' ) {
-			$quiz = SpecialPage::getTitleFor( 'QuizGameHome' );
+		if ( $action == 'editItem' ) {
 			$links['views'][$skinTemplate->getTitle()->getNamespaceKey()] = [
 				'class' => 'selected',
-				'text' => wfMessage( 'nstab-special' )->plain(),
-				'href' => $quiz->getFullURL( 'questionGameAction=renderPermalink&permalinkID=' . $wgQuizID ),
+				'text' => $skinTemplate->msg( 'nstab-special' )->plain(),
+				'href' => $quiz->getFullURL( [
+					'questionGameAction' => 'renderPermalink',
+					'permalinkID' => $wgQuizID
+				] )
 			];
 		}
 	}
@@ -54,7 +66,7 @@ class QuizGameHooks {
 	 *
 	 * @param array $vars Array of pre-existing JS globals
 	 */
-	public static function addJSGlobals( $vars ) {
+	public static function onMakeGlobalVariablesScript( $vars ) {
 		global $wgUserStatsPointValues;
 		$vars['__quiz_js_points_value__'] = ( isset( $wgUserStatsPointValues['quiz_points'] ) ? $wgUserStatsPointValues['quiz_points'] : 0 );
 	}
@@ -65,7 +77,7 @@ class QuizGameHooks {
 	 *
 	 * @param DatabaseUpdater $updater
 	 */
-	public static function addTables( $updater ) {
+	public static function onLoadExtensionSchemaUpdates( $updater ) {
 		$file = __DIR__ . '/../sql/quizgame.sql';
 		$updater->addExtensionTable( 'quizgame_questions', $file );
 		$updater->addExtensionTable( 'quizgame_answers', $file );
@@ -78,7 +90,7 @@ class QuizGameHooks {
 	 *
 	 * @param RenameuserSQL $renameUserSQL
 	 */
-	public static function onUserRename( $renameUserSQL ) {
+	public static function onRenameUserSQL( $renameUserSQL ) {
 		$renameUserSQL->tables['quizgame_questions'] = [
 			'q_user_name', 'q_user_id'
 		];
@@ -94,7 +106,7 @@ class QuizGameHooks {
 	/**
 	 * If quiz logging is enabled, set up the new log type.
 	 */
-	public static function registerExtension() {
+	public static function onRegisterExtension() {
 		global $wgQuizLogs, $wgLogTypes, $wgLogActionsHandlers;
 		if ( $wgQuizLogs ) {
 			$wgLogTypes[] = 'quiz';

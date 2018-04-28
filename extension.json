@@ -15,7 +15,7 @@
 		"CreateQuizThresholds": [],
 		"QuizLogs": true
 	},
-	"callback": "QuizGameHooks::registerExtension",
+	"callback": "QuizGameHooks::onRegisterExtension",
 	"SpecialPages": {
 		"QuizGameHome": "QuizGameHome",
 		"QuestionGameUpload": "SpecialQuestionGameUpload",
@@ -46,21 +46,13 @@
 		"QuizLeaderboard": "includes/specials/SpecialQuizLeaderboard.php",
 		"QuizRecalcStats": "includes/specials/SpecialQuizRecalcStats.php",
 		"ViewQuizzes": "includes/specials/SpecialViewQuizzes.php",
-		"QuizGameHooks": "includes/QuizGame.hooks.php"
+		"QuizGameHooks": "includes/QuizGameHooks.php"
 	},
 	"Hooks": {
-		"SkinTemplateNavigation::SpecialPage": [
-			"QuizGameHooks::addQuizContentActions"
-		],
-		"MakeGlobalVariablesScript": [
-			"QuizGameHooks::addJSGlobals"
-		],
-		"LoadExtensionSchemaUpdates": [
-			"QuizGameHooks::addTables"
-		],
-		"RenameUserSQL": [
-			"QuizGameHooks::onUserRename"
-		]
+		"SkinTemplateNavigation::SpecialPage": "QuizGameHooks::onSkinTemplateNavigationSpecialPage",
+		"MakeGlobalVariablesScript": "QuizGameHooks::onMakeGlobalVariablesScript",
+		"LoadExtensionSchemaUpdates": "QuizGameHooks::onLoadExtensionSchemaUpdates",
+		"RenameUserSQL": "QuizGameHooks::onRenameUserSQL"
 	},
 	"ResourceFileModulePaths": {
 		"localBasePath": "",
