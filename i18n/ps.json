@@ -5,5 +5,7 @@
 		]
 	},
 	"quizgame-edit": "سمول",
-	"quizgame-time-days": "{{PLURAL:$1|يوه ورځ|$1 ورځې}}"
+	"quizgame-time-ago": "$1 مخکې",
+	"quizgame-time-days": "{{PLURAL:$1|يوه ورځ|$1 ورځې}}",
+	"quizgame-time-minutes": "{{PLURAL:$1|يوه دقيقه|$1 دقيقه}}"
 }
