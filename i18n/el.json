@@ -12,6 +12,7 @@
 	"quizgame-protect": "Προστασία",
 	"quizgame-unflag": "Ξε-αναφορά",
 	"quizgame-unprotect": "Άρση προστασίας",
+	"quizgame-error-socialprofile-title": "Η επέκταση SocialProfile δεν είναι εγκατεστημένη.",
 	"quizgame-admin-panel-title": "Πίνακας διαχειριστή",
 	"quizgame-admin-back": "< Πίσω στο κουίζ που δεν τελειώνει ποτέ",
 	"quizgame-admin-protected": "Προστατευμένες ερωτήσεις",
@@ -45,6 +46,9 @@
 	"quizgame-leaderboard-pctcorrect": "Ποσοστό σωστών απαντήσεων",
 	"quizgame-leaderboard-rank": "Συνολική κατάταξη",
 	"quizgame-leaderboard-link": "Λίστα κατάταξης",
+	"quizgame-leaderboard-most-correct": "Λίστα κατάταξης κουίζ - πιο σωστές απαντήσεις",
+	"quizgame-leaderboard-highest-percent": "Λίστα κατάταξης κουίζ - υψηλότερο ποσοστό σωστών (ελάχιστο 50 ερωτήσεις)",
+	"quizgame-leaderboard-most-points": "Λίστα κατάταξης κουίζ - περισσότεροι πόντοι",
 	"quizgame-leaderboard-order-menu": "Σειρά",
 	"quizgame-leaderboard-menu-points": "Πόντοι",
 	"quizgame-leaderboard-menu-correct": "Συνολικά σωστά",
@@ -63,6 +67,8 @@
 	"quizgame-js-points": "{{PLURAL:$1|1 βαθμός|$1 βαθμοί}}",
 	"quizgame-js-seconds": "δευτερόλεπτα",
 	"quizgame-lightbox-pause-quiz": "Παύση του κουίζ",
+	"quizgame-lightbox-breakdown-percent": "Το $1% των ανθρώπων που απάντησαν την ερώτηση την είχαν σωστή",
+	"quizgame-lightbox-correct": "Τέλεια δουλειά, απαντήσατε την ερώτηση σωστά!",
 	"quizgame-lightbox-correct-points": "Κερδίσατε $1 πόντους",
 	"quizgame-lightbox-incorrect": "Συγγνώμη, απαντήσατε την ερώτηση λάθος!",
 	"quizgame-lightbox-incorrect-correct": "Η σωστή απάντηση είναι: $1",
@@ -112,5 +118,6 @@
 	"apihelp-quizgame-example-1": "Αναφορά ενός κουίζ.",
 	"apihelp-quizgame-example-2": "Διαγράψτε ένα κουίζ.",
 	"apihelp-quizgamevote-param-id": "Αριθμός αναγνωριστικού κουίζ.",
+	"apihelp-quizgamevote-param-points": "Πόσοι πόντοι δίνονται για την σωστή απάντηση.",
 	"apihelp-quizgamevote-example-1": "Ψηφίστε."
 }
