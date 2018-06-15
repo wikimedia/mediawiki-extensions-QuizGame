@@ -142,7 +142,7 @@ class QuizLeaderboard extends UnlistedSpecialPage {
 		    $user_name = $row->stats_user_name;
 		    $user_title = Title::makeTitle( NS_USER, $row->stats_user_name );
 		    $avatar = new wAvatar( $row->stats_user_id, 'm' );
-			$user_name_short = $lang->truncate( $user_name, 18 );
+			$user_name_short = $lang->truncateForVisual( $user_name, 18 );
 
 		    $output .= "<div class=\"top-fan-row\">
 		 		   <span class=\"top-fan-num\">{$x}.</span>
