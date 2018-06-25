@@ -4,7 +4,8 @@
 			"Milicevic01",
 			"Zoranzoki21",
 			"Obsuser",
-			"Acamicamacaraca"
+			"Acamicamacaraca",
+			"BadDog"
 		]
 	},
 	"quizgame-edit": "Уреди",
@@ -42,7 +43,7 @@
 	"quizgame-lightbox-incorrect-correct": "Тачан одговор је: $1",
 	"quizgame-skip": "Прескочи",
 	"quizgame-next": "Следеће питање за квиз",
-	"quizgame-prev": "разл",
+	"quizgame-prev": "претх",
 	"quizgame-nav-next": "Следеће",
 	"quizgame-popular": "Популарно",
 	"quizgame-viewquizzes-create": "Креирајте питање за квиз",
