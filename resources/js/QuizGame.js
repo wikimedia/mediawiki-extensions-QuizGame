@@ -658,7 +658,12 @@ jQuery( function() {
 		// Various admin panel links all over the place
 		jQuery( 'a.flag-quiz-link' )
 			.attr( 'href', '#' )
-			.on( 'click', function() { QuizGame.flagQuestion(); } );
+			.on( 'click', function ( e ) {
+				// Prevent jumpiness on mobile
+				// @see https://phabricator.wikimedia.org/T155883
+				e.preventDefault();
+				QuizGame.flagQuestion();
+			} );
 		jQuery( 'a.protect-image-link' )
 			.attr( 'href', '#' )
 			.on( 'click', function() { QuizGame.protectImage(); } );
