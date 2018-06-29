@@ -32,6 +32,14 @@ class QuizRecalcStats extends UnlistedSpecialPage {
 			throw new UserBlockedError( $user->getBlock() );
 		}
 
+		// Set the correct robot policies, ensure that skins don't render a link to
+		// Special:WhatLinksHere on their toolboxes, etc.
+		$this->setHeaders();
+
+		// Empty page title for now. Literally better than showing ⧼quizrecalcstats⧽
+		// as the page title.
+		$out->setPageTitle( '' );
+
 		$dbw = wfGetDB( DB_MASTER );
 		$res = $dbw->select(
 			'user_stats',

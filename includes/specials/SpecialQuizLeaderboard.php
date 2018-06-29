@@ -23,6 +23,10 @@ class QuizLeaderboard extends UnlistedSpecialPage {
 			$input = 'points';
 		}
 
+		// Set the correct robot policies, ensure that skins don't render a link to
+		// Special:WhatLinksHere on their toolboxes, etc.
+		$this->setHeaders();
+
 		$out->addModuleStyles( 'ext.quizGame.css' );
 
 		$whereConds = [];

@@ -21,6 +21,10 @@ class ViewQuizzes extends UnlistedSpecialPage {
 		$request = $this->getRequest();
 		$title = $this->getPageTitle();
 
+		// Set the correct robot policies, ensure that skins don't render a link to
+		// Special:WhatLinksHere on their toolboxes, etc.
+		$this->setHeaders();
+
 		// Add CSS & JS
 		$out->addModuleStyles( 'ext.quizGame.css' );
 		$out->addModules( 'ext.quizGame' );
