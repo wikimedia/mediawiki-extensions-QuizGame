@@ -10,6 +10,7 @@
 .imageUpload-frame {
 	border: 0;
 	width: 650px;
+	max-width: 100%;
 	overflow: hidden;
 }
 
@@ -290,6 +291,15 @@ li:hover {
 	margin: 0 0 5px 0;
 }
 
+.one-answer-bar {
+	margin-bottom: 10px;
+}
+
+img.one-answer-width {
+	height: 9px;
+	max-width: 100%;
+}
+
 .answer-green img {
 	border-bottom: 2px solid #000;
 	border-right: 2px solid #000;
@@ -404,6 +414,7 @@ li:hover {
 .create-message {
 	background-color: #f2f4f7;
 	border: 1px solid #dcdcdc;
+	max-width: 100%;
 	padding: 9px;
 	width: 500px;
 }
@@ -434,6 +445,10 @@ h1.write-answer {
 	font-weight: bold;
 	color: #999;
 	margin: 0 10px 0 0;
+}
+
+#quizgame-question {
+	max-width: 100%;
 }
 
 .quizgame-answer {

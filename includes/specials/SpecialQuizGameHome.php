@@ -1043,8 +1043,8 @@ class QuizGameHome extends UnlistedSpecialPage {
 				$answers .= "<div id=\"{$x}\" class=\"answer-choice\">{$choice['text']}" .
 						$incorrectMsg . $correctMsg .
 					'</div>';
-				$answers .= "<div id=\"one-answer-bar\" style=\"margin-bottom:10px;\" class=\"answer-" . $barColor . "\">
-						<img border=\"0\" style=\"width:{$bar_width}px; height: 9px;\" id=\"one-answer-width\" src=\"{$wgExtensionAssetsPath}/SocialProfile/images/vote-bar-" . $barColorNumber . ".gif\"/>
+				$answers .= "<div class=\"one-answer-bar answer-" . $barColor . "\">
+						<img border=\"0\" style=\"width:{$bar_width}px;\" class=\"one-answer-width\" src=\"{$wgExtensionAssetsPath}/SocialProfile/images/vote-bar-" . $barColorNumber . ".gif\"/>
 						<span class=\"answer-percent\">{$choice['percent']}%</span>
 					</div>";
 				$x++;
@@ -1147,11 +1147,11 @@ class QuizGameHome extends UnlistedSpecialPage {
 					$answerColor = 'red';
 					$answerColorNumber = '2';
 				}
-				$output .= "<div class=\"answer-bar\" id=\"answer-bar-one\" style=\"display:block\">
-						<div id=\"one-answer\" class=\"small-answer-" . $answerClass . "\">{$choice['text']}</div>
-						<span id=\"one-answer-bar\" class=\"answer-" . $answerColor . "\">
-							<img border=\"0\" style=\"width:{$bar_width}px; height: 11px;\" id=\"one-answer-width\" src=\"{$wgExtensionAssetsPath}/SocialProfile/images/vote-bar-" . $answerColorNumber . ".gif\"/>
-							<span id=\"one-answer-percent\" class=\"answer-percent\">{$choice['percent']}%</span>
+				$output .= "<div class=\"answer-bar answer-bar-one\" style=\"display:block\">
+						<div class=\"one-answer small-answer-" . $answerClass . "\">{$choice['text']}</div>
+						<span class=\"one-answer-bar answer-" . $answerColor . "\">
+							<img border=\"0\" style=\"width:{$bar_width}px; height: 11px;\" class=\"one-answer-width\" src=\"{$wgExtensionAssetsPath}/SocialProfile/images/vote-bar-" . $answerColorNumber . ".gif\"/>
+							<span class=\"one-answer-percent answer-percent\">{$choice['percent']}%</span>
 						</span>
 					</div>";
 			}
