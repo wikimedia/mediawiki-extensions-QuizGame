@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Piramidion"
+			"Piramidion",
+			"Matěj Suchánek"
 		]
 	},
 	"quizgame-desc": "Додає інтерактивну [[Special:QuizGameHome|гру-опитування]]",
@@ -79,7 +80,7 @@
 	"quizgame-skip": "Пропустити",
 	"quizgame-next": "Наступне запитання вікторини",
 	"quizgame-times-answered": "({{PLURAL:$1|була вже $1 відповіді|було вже $1 відповіді|було вже $1 відповідей}})",
-	"quizgame-chose-correct": "Ви вибрали правильну відповідь на попереднє запитання! ($1 {{PLURA:$1|бал|бали|балів}})",
+	"quizgame-chose-correct": "Ви вибрали правильну відповідь на попереднє запитання! ($1 {{PLURAL:$1|бал|бали|балів}})",
 	"quizgame-chose-incorrect": "Ви вибрали неправильну відповідь на попереднє запитання! (0 балів)",
 	"quizgame-flag": "Позначити",
 	"quizgame-flag-confirm": "Поясніть, чому Ви встановлюєте позначку на це запитання.",
