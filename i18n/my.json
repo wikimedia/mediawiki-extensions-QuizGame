@@ -1,0 +1,26 @@
+{
+	"@metadata": {
+		"authors": [
+			"Dr Lotus Black"
+		]
+	},
+	"quizgame-edit": "ပြင်ဆင်",
+	"quizgame-delete": "ဖျက်​ပါ​",
+	"quizgame-protect": "ကာကွယ်ပါ",
+	"quizgame-unprotect": "မကာကွယ်တော့ရန်",
+	"quizgame-flagged-reason": "အကြောင်းပြချက်",
+	"quizgame-question": "မေးခွန်း",
+	"quizgame-answers": "အဖြေများ",
+	"quizgame-picture": "ရုပ်ပုံ",
+	"quizgame-save-page-button": "စာမျက်နှာကို သိမ်းရန်",
+	"quizgame-cancel-button": "မလုပ်တော့ပါ",
+	"quizgame-main-page-button": "ဗဟိုစာမျက်နှာ",
+	"quizgame-login-button": "အကောင့်ထဲဝင်ရန်",
+	"quizgame-submit": "ထည့်သွင်းရန်",
+	"quizgame-leaderboard-menu-points": "ရမှတ်များ",
+	"quizgame-js-seconds": "စက္ကန့်",
+	"quizgame-prev": "ယခုမတိုင်မီ",
+	"quizgame-nav-next": "နောက်တစ်ခု",
+	"quizgame-newest": "အသစ်ဆုံး",
+	"quizgame-popular": "လူကြိုက်များ"
+}
