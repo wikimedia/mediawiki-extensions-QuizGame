@@ -9,7 +9,7 @@
 		]
 	},
 	"quizgame-edit": "Уреди",
-	"quizgame-delete-confirm": "Да ли сте сигурни да желите да обришете овај квиз?",
+	"quizgame-delete-confirm": "Заиста желите да обришете овај квиз?",
 	"quizgame-protect": "Заштити",
 	"quizgame-unprotect": "Скини заштиту",
 	"quizgame-error-socialprofile": "[https://www.mediawiki.org/wiki/Extension:SocialProfile Екстензија SocialProfile] није инсталирана. Молимо Вас да инсталирате ову екстензију и покушате поново.",
