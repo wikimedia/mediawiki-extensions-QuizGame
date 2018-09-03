@@ -563,7 +563,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 	 * Shows the edit panel for a single question
 	 */
 	function editItem() {
-		global $wgExtensionAssetsPath, $wgUploadPath, $wgQuizID;
+		global $wgExtensionAssetsPath, $wgQuizID;
 
 		$lang = $this->getLanguage();
 		$out = $this->getOutput();
@@ -581,7 +581,6 @@ class QuizGameHome extends UnlistedSpecialPage {
 		$user_id = $question['user_id'];
 		$user_title = Title::makeTitle( NS_USER, $question['user_name'] );
 		$avatar = new wAvatar( $user_id, 'l' );
-		$avatarID = $avatar->getAvatarImage();
 		$stats = new UserStats( $user_id, $user_name );
 		$stats_data = $stats->getUserStats();
 
@@ -678,8 +677,9 @@ class QuizGameHome extends UnlistedSpecialPage {
 							<h1>' . $this->msg( 'quizgame-submitted-by' )->text() . "</h1>
 
 							<div id=\"submitted-by-image\" class=\"submitted-by-image\">
-							<a href=\"{$user_title->getFullURL()}\">
-								<img src=\"{$wgUploadPath}/avatars/{$avatarID}\" alt=\"\" /></a>
+								<a href=\"{$user_title->getFullURL()}\">
+									{$avatar->getAvatarURL()}
+								</a>
 							</div>
 
 							<div id=\"submitted-by-user\" class=\"submitted-by-user\">
@@ -796,7 +796,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 	 * Also handles rendering a permalink.
 	 */
 	function launchGame() {
-		global $wgUploadPath, $wgExtensionAssetsPath;
+		global $wgExtensionAssetsPath;
 
 		$lang = $this->getLanguage();
 		$out = $this->getOutput();
@@ -919,7 +919,6 @@ class QuizGameHome extends UnlistedSpecialPage {
 		$user_title = Title::makeTitle( NS_USER, $user_name );
 		$id = $question['user_id'];
 		$avatar = new wAvatar( $id, 'l' );
-		$avatarID = $avatar->getAvatarImage();
 		$stats = new UserStats( $id, $user_name );
 		$stats_data = $stats->getUserStats();
 
@@ -1178,7 +1177,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 
 						<div id=\"submitted-by-image\" class=\"submitted-by-image\">
 							<a href=\"{$user_title->getFullURL()}\">
-								<img src=\"{$wgUploadPath}/avatars/{$avatarID}\" alt=\"\" />
+								{$avatar->getAvatarURL()}
 							</a>
 						</div>
 
