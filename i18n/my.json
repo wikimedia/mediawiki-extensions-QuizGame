@@ -19,9 +19,17 @@
 	"quizgame-submit": "ထည့်သွင်းရန်",
 	"quizgame-leaderboard-menu-points": "ရမှတ်များ",
 	"quizgame-js-seconds": "စက္ကန့်",
+	"quizgame-lightbox-incorrect-correct": "အဖြေမှန်မှာ: $1",
+	"quizgame-skip": "ကျော်ရန်",
 	"quizgame-prev": "ယခုမတိုင်မီ",
 	"quizgame-nav-next": "နောက်တစ်ခု",
 	"quizgame-newest": "အသစ်ဆုံး",
 	"quizgame-popular": "လူကြိုက်များ",
-	"quizgame-permalink": "ပုံသေလိပ်စာ"
+	"quizgame-permalink": "ပုံသေလိပ်စာ",
+	"quizgame-pause-continue": "ဆက်လက်",
+	"quizgame-time-ago": "$1 အကြာက",
+	"quizgame-time-days": "{{PLURAL:$1|၁ ရက်|$1 ရက်}}",
+	"quizgame-time-hours": "{{PLURAL:$1|တစ်နာရီ|$1 နာရီ}}",
+	"quizgame-time-minutes": "{{PLURAL:$1|တစ်မိနစ်|$1 မိနစ်}}",
+	"quizgame-time-seconds": "{{PLURAL:$1|တစ်စက္ကန့်|$1 စက္ကန့်}}"
 }
