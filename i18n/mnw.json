@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Dr Lotus Black"
+			"Dr Lotus Black",
+			"Aue Nai"
 		]
 	},
 	"quizgame-edit": "တည်းဖြတ်ရန်",
@@ -24,7 +25,7 @@
 	"quizgame-leaderboard-menu-pct": "အမြင့်ဆုံး ရာခိုင်နှုန်း",
 	"quizgame-your-answer": "သင်၏ အဖြေ",
 	"quizgame-correct-answer": "အဖြေမှန်များ",
-	"quizgame-js-points": "$1 ရမှတ်များ",
+	"quizgame-js-points": "{{PLURAL:$1|၁ စၟတ်|$1 စၟတ်ဂမၠိုၚ်}}",
 	"quizgame-js-seconds": "စက္ကန့်များ",
 	"quizgame-lightbox-incorrect-correct": "အဖြေမှန်မှာ: $1",
 	"quizgame-skip": "ကျော်သွားမည်",
