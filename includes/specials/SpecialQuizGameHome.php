@@ -667,6 +667,16 @@ class QuizGameHome extends UnlistedSpecialPage {
 		$formattedVoteCount = $lang->formatNum( $stats_data['votes'] );
 		$formattedEditCount = $lang->formatNum( $stats_data['edits'] );
 		$formattedCommentCount = $lang->formatNum( $stats_data['comments'] );
+		$pictureStuff = '';
+		// Show the picture stuff only if we can upload files (T155448)
+		if ( UploadBase::isEnabled() ) {
+			$pictureStuff = '<h1>' . $this->msg( 'quizgame-picture' )->text() . "</h1>
+				<div class=\"quizgame-edit-picture\" id=\"quizgame-edit-picture\">
+					{$pictag}
+				</div>
+
+				<input id=\"quizGamePicture\" name=\"quizGamePicture\" type=\"hidden\" value=\"{$question['image']}\" />";
+		}
 		$output .= "
 				<div class=\"quizgame-edit-question\" id=\"quizgame-edit-question\">
 					<form name=\"quizGameEditForm\" id=\"quizGameEditForm\" method=\"post\" action=\"" .
@@ -712,12 +722,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 						<h1>" . $this->msg( 'quizgame-answers' )->text() . "</h1>
 						<div style=\"margin:10px 0px;\">" . $this->msg( 'quizgame-correct-answer-checked' )->text() . "</div>
 						{$quizOptions}
-						<h1>" . $this->msg( 'quizgame-picture' )->text() . "</h1>
-						<div class=\"quizgame-edit-picture\" id=\"quizgame-edit-picture\">
-							{$pictag}
-						</div>
-
-						<input id=\"quizGamePicture\" name=\"quizGamePicture\" type=\"hidden\" value=\"{$question['image']}\" />
+						{$pictureStuff}
 
 						<input id=\"quizGameId\" name=\"quizGameId\" type=\"hidden\" value=\"{$question['id']}\" />
 						<input name=\"choices_count\" type=\"hidden\" value=\"{$choices_count}\" />
@@ -1390,12 +1395,13 @@ class QuizGameHome extends UnlistedSpecialPage {
 				<input id="chain" name="chain" type="hidden" value="' . $chain . '" />' .
 				Html::hidden( 'wpEditToken', $user->getEditToken() ) .
 
-			'</form>
+			'</form>';
 
-			<h1 style="margin-top:20px">' .
+		// Show the picture stuff only if we can upload files (T155448)
+		if ( UploadBase::isEnabled() ) {
+			$output .= '<h1 style="margin-top:20px">' .
 				$this->msg( 'quizgame-create-add-picture' )->text() . '</h1>
 			<div id="quizgame-picture-upload">
-
 				<div id="real-form">
 					<iframe id="imageUpload-frame" class="imageUpload-frame" src="' .
 						htmlspecialchars( SpecialPage::getTitleFor( 'QuestionGameUpload' )->getFullURL( 'wpThumbWidth=75' ) ) . '">
@@ -1405,8 +1411,9 @@ class QuizGameHome extends UnlistedSpecialPage {
 			<div id="quizgame-picture-preview" class="quizgame-picture-preview"></div>
 			<!-- jQuery injects the link element into the next node, the p element -->
 			<p id="quizgame-picture-reupload" style="display:none">
-			</p>
-			</div>
+			</p>';
+		}
+		$output .= '</div>
 
 			<div id="startButton" class="startButton">
 				<input type="button" class="site-button" value="' . $this->msg( 'quizgame-create-play' )->text() . '" />
