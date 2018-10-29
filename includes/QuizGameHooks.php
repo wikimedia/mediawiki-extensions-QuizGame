@@ -78,11 +78,11 @@ class QuizGameHooks {
 	 * @param DatabaseUpdater $updater
 	 */
 	public static function onLoadExtensionSchemaUpdates( $updater ) {
-		$file = __DIR__ . '/../sql/quizgame.sql';
-		$updater->addExtensionTable( 'quizgame_questions', $file );
-		$updater->addExtensionTable( 'quizgame_answers', $file );
-		$updater->addExtensionTable( 'quizgame_choice', $file );
-		$updater->addExtensionTable( 'quizgame_user_view', $file );
+		$sqlDirectory = __DIR__ . '/../sql/';
+		$updater->addExtensionTable( 'quizgame_questions', $sqlDirectory . 'quizgame_questions.sql' );
+		$updater->addExtensionTable( 'quizgame_answers', $sqlDirectory . 'quizgame_answers.sql' );
+		$updater->addExtensionTable( 'quizgame_choice', $sqlDirectory . 'quizgame_choice.sql' );
+		$updater->addExtensionTable( 'quizgame_user_view', $sqlDirectory . 'quizgame_user_view.sql' );
 	}
 
 	/**
