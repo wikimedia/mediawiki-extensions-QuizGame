@@ -3,7 +3,8 @@
 		"authors": [
 			"Alex Great",
 			"Ivan-r",
-			"Kareyac"
+			"Kareyac",
+			"Nk88"
 		]
 	},
 	"quizgame-edit": "Править",
@@ -21,16 +22,21 @@
 	"quizgame-save-page-button": "Сохранить страницу",
 	"quizgame-cancel-button": "Отмена",
 	"quizgame-main-page-button": "Заглавная страница",
+	"quizgame-login-button": "Войти",
+	"quizgame-submit": "Отправить",
+	"quizgame-nomore-questions": "\nБольше вопросов нет!",
 	"quizgame-title": "Игра-опрос!",
 	"quizgame-leaderboard-scoretitle": "Ваша оценка",
 	"quizgame-leaderboard-pctcorrect": "Процент правильных",
 	"quizgame-leaderboard-rank": "Общий ранг",
+	"quizgame-leaderboard-menu-points": "Точки",
 	"quizgame-answered-correctly": "Вы ответили правильно",
 	"quizgame-skipped": "Вы пропустили этот вопрос",
 	"quizgame-answered-incorrectly": "Вы ответили неправильно",
 	"quizgame-your-answer": "Ваш ответ",
 	"quizgame-correct-answer": "Правильный ответ",
 	"quizgame-js-loading": "Загрузка…",
+	"quizgame-js-reloading": "\nПовторная загрузка ...",
 	"quizgame-js-seconds": "секунды",
 	"quizgame-skip": "Пропустить",
 	"quizgame-flag": "Флаг",
