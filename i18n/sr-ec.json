@@ -12,7 +12,7 @@
 	"quizgame-delete-confirm": "Заиста желите да обришете овај квиз?",
 	"quizgame-protect": "Заштити",
 	"quizgame-unprotect": "Скини заштиту",
-	"quizgame-error-socialprofile": "[https://www.mediawiki.org/wiki/Extension:SocialProfile Екстензија SocialProfile] није инсталирана. Молимо Вас да инсталирате ову екстензију и покушате поново.",
+	"quizgame-error-socialprofile": "[https://www.mediawiki.org/wiki/Extension:SocialProfile Додатак SocialProfile] није инсталиран. Инсталирајте овај додатак, па покушајте поново.",
 	"quizgame-error-socialprofile-title": "Екстензија SocialProfile није инсталирана.",
 	"quizgame-admin-protected": "Заштити питања",
 	"quizgame-admin-permission": "Немате дозволу да мењате ову страницу.",
