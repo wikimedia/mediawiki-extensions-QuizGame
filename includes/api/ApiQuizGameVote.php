@@ -28,11 +28,11 @@ class ApiQuizGameVote extends ApiBase {
 		// Check that all of the required parameters are present, and if it
 		// ain't so, don't go any further
 		if ( $answer === null || $id === null || $points === null ) {
-			$this->dieUsageMsg( 'missingparam' );
+			$this->dieWithError( 'apierror-missingparam', 'missingparam' );
 		}
 
 		if ( !is_numeric( $answer ) ) {
-			$this->dieUsage( wfMessage( 'quizgame-ajax-nonnumeric-answer' )->text(), 'nonnumericanswer' );
+			$this->dieWithError( 'quizgame-ajax-nonnumeric-answer', 'nonnumericanswer' );
 		}
 
 		$dbw = wfGetDB( DB_MASTER );
@@ -46,7 +46,7 @@ class ApiQuizGameVote extends ApiBase {
 		);
 
 		if ( $s !== false ) {
-			$this->dieUsage( wfMessage( 'quizgame-ajax-already-answered' )->text(), 'alreadyanswered' );
+			$this->dieWithError( 'quizgame-ajax-already-answered', 'alreadyanswered' );
 		}
 
 		// Add answer by user
@@ -165,7 +165,7 @@ class ApiQuizGameVote extends ApiBase {
 				[ 'result' => $data ]
 			);
 		} else {
-			$this->dieUsage( wfMessage( 'quizgame-ajax-invalid-id' )->text(), 'nosuchquestion' );
+			$this->dieWithError( 'quizgame-ajax-invalid-id', 'nosuchquestion' );
 		}
 	}
 
