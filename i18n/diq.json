@@ -7,5 +7,7 @@
 	"quizgame-protect": "Bısıtarne",
 	"quizgame-cancel-button": "Bıtexelne",
 	"quizgame-permalink": "Gıreyo daimi",
-	"quizgame-pause-continue": "Dewam ke"
+	"quizgame-pause-continue": "Dewam ke",
+	"quizgame-time-days": "{{PLURAL:$1|yew roce|$1 roci}}",
+	"quizgame-time-hours": "{{PLURAL:$1|yew saete|$1 saeti}}"
 }
