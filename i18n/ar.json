@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"ديفيد"
+			"ديفيد",
+			"Meno25"
 		]
 	},
 	"quizgame-desc": "يضيف [[Special:QuizGameHome|لعبة أسئلة]] تفاعلية",
@@ -27,7 +28,7 @@
 	"quizgame-answers": "الأجوبة",
 	"quizgame-picture": "صورة",
 	"quizgame-correct-answer-checked": "يتم فحص الإجابة الصحيحة.",
-	"quizgame-save-page-button": "احفظ الصفحة",
+	"quizgame-save-page-button": "حفظ الصفحة",
 	"quizgame-cancel-button": "إلغاء",
 	"quizgame-login-title": "يجب تسجيل الدخول لإنشاء مسابقة",
 	"quizgame-login-text": "تحتاج إلى تسجيل الدخول لإنشاء مسابقة!",
