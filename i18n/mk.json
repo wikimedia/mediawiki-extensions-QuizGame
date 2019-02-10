@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Bjankuloski06"
+			"Bjankuloski06",
+			"Vlad5250"
 		]
 	},
 	"quizgame-desc": "Додава [[Special:QuizGameHome|квиз]]",
@@ -123,7 +124,7 @@
 	"quizgame-ajax-flagged": "Прашањето е означено.",
 	"quizgame-ajax-deleted": "Прашањето е избришано.",
 	"quizgame-ajax-invalid-option": "Неважечка можност за AJAX.",
-	"quizgame-ajax-nonnumeric-answer": "Изборов не е бројчен.",
+	"quizgame-ajax-nonnumeric-answer": "Изборот на одговор не е бројчен.",
 	"quizgame-ajax-already-answered": "Веќе го одговоривте прашањево.",
 	"quizgame-ajax-invalid-id": "Нема прашање со таква назнака.",
 	"log-name-quiz": "Дневник на прашања во квиз",
