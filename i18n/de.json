@@ -145,6 +145,7 @@
 	"apihelp-quizgame-example-1": "Markiert ein Quiz.",
 	"apihelp-quizgame-example-2": "Löscht ein Quiz.",
 	"apihelp-quizgamevote-description": "Fragespiel-API zur Abstimmung.",
+	"apihelp-quizgamevote-summary": "Fragespiel-API zur Abstimmung.",
 	"apihelp-quizgamevote-param-answer": "Numerische Antwortkennung.",
 	"apihelp-quizgamevote-param-id": "Quizkennung.",
 	"apihelp-quizgamevote-param-points": "Wie viele Punkte für die richtige Antwort vergeben werden.",
