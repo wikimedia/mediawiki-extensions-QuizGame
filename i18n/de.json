@@ -139,6 +139,7 @@
 	"quizgame-images-category": "Quizspiel-Bilder",
 	"right-quizadmin": "Fragespiele verwalten",
 	"apihelp-quizgame-description": "Fragespiel-API für administrative Aktionen.",
+	"apihelp-quizgame-summary": "Fragespiel-API für administrative Aktionen.",
 	"apihelp-quizgame-param-comment": "Grund für die Markierung (nur in flagItem verwendet).",
 	"apihelp-quizgame-param-id": "Quizkennung.",
 	"apihelp-quizgame-param-quizaction": "Was zu tun ist und das Wort „Item“, z.&nbsp;B. „deleteItem“.",
