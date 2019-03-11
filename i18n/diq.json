@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Mirzali"
+			"Mirzali",
+			"Orbot707"
 		]
 	},
 	"quizgame-edit": "Bıvurne",
@@ -9,6 +10,7 @@
 	"quizgame-protect": "Bışevekne",
 	"quizgame-unprotect": "Nêşeveknaye",
 	"quizgame-flagged-reason": "Sebeb",
+	"quizgame-answers": "Cewabi",
 	"quizgame-save-page-button": "Pele qeyd ke",
 	"quizgame-cancel-button": "Bıtexelne",
 	"quizgame-login-button": "Cıkewtış",
