@@ -10,9 +10,7 @@
  * @ingroup SpecialPage
  * @ingroup Upload
  * @author Jack Phoenix
- * @date 26 June 2011
- * @note Based on 1.16 core SpecialUpload.php (GPL-licensed) by Bryan et al.
- * @see http://bugzilla.shoutwiki.com/show_bug.cgi?id=22
+ * @note Originally based on 1.16 core SpecialUpload.php (GPL-licensed) by Bryan et al.
  */
 class SpecialQuestionGameUpload extends SpecialUpload {
 	/**
@@ -206,13 +204,10 @@ class SpecialQuestionGameUpload extends SpecialUpload {
 	 * Do the upload.
 	 * Checks are made in SpecialQuestionGameUpload::execute()
 	 *
-	 * What was changed here: $wgContLang was added as a global,
-	 * one hook and the post-upload redirect were removed in favor of the code
-	 * below the $this->mUploadSuccessful = true; line
+	 * What was changed here: one hook and the post-upload redirect were removed
+	 * in favor of the code below the $this->mUploadSuccessful = true; line
 	 */
 	protected function processUpload() {
-		global $wgContLang;
-
 		// Fetch the file if required
 		$status = $this->mUpload->fetchFile();
 		if ( !$status->isOK() ) {
@@ -252,7 +247,8 @@ class SpecialQuestionGameUpload extends SpecialUpload {
 		// yes, I know that this is ugly as hell but Jedi can live with it and
 		// so can I. It's not my fault that loadRequest() is a useless piece of
 		// crap.
-		$localizedNS = $wgContLang->getNsText( NS_CATEGORY );
+		$contLang = MediaWiki\MediaWikiServices::getInstance()->getContentLanguage();
+		$localizedNS = $contLang->getNsText( NS_CATEGORY );
 		$categoriesText = '[[' . $localizedNS . ':' . wfMessage( 'quizgame-images-category' )->inContentLanguage()->plain() . ']]';
 
 		// Get the page text if this is not a reupload

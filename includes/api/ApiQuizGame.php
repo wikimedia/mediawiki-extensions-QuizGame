@@ -31,7 +31,7 @@ class ApiQuizGame extends ApiBase {
 		// Check that all of the required parameters are present, and if it
 		// ain't so, don't go any further
 		if ( $action === null || $id === null ) {
-			$this->dieUsageMsg( 'missingparam' );
+			$this->dieWithError( 'apierror-missingparam', 'missingparam' );
 		}
 
 		// ApiBase's getDB() supports only slave connections, lame...
@@ -46,7 +46,7 @@ class ApiQuizGame extends ApiBase {
 					__METHOD__
 				);
 
-				$output = wfMessage( 'quizgame-ajax-unprotected' )->text();
+				$output = $this->msg( 'quizgame-ajax-unprotected' )->text();
 
 				// Add a log entry if quiz logging is enabled
 				if ( $wgQuizLogs ) {
@@ -62,7 +62,7 @@ class ApiQuizGame extends ApiBase {
 					__METHOD__
 				);
 
-				$output = wfMessage( 'quizgame-ajax-protected' )->text();
+				$output = $this->msg( 'quizgame-ajax-protected' )->text();
 
 				// Add a log entry if quiz logging is enabled
 				if ( $wgQuizLogs ) {
@@ -95,7 +95,7 @@ class ApiQuizGame extends ApiBase {
 					__METHOD__
 				);
 
-				$output = wfMessage( 'quizgame-ajax-unflagged' )->text();
+				$output = $this->msg( 'quizgame-ajax-unflagged' )->text();
 
 				// Add a log entry if quiz logging is enabled
 				if ( $wgQuizLogs ) {
@@ -135,7 +135,7 @@ class ApiQuizGame extends ApiBase {
 					__METHOD__
 				);
 
-				$output = wfMessage( 'quizgame-ajax-flagged' )->text();
+				$output = $this->msg( 'quizgame-ajax-flagged' )->text();
 
 				// Add a log entry if quiz logging is enabled
 				if ( $wgQuizLogs ) {
@@ -211,7 +211,7 @@ class ApiQuizGame extends ApiBase {
 					__METHOD__
 				);
 
-				$output = wfMessage( 'quizgame-ajax-deleted' )->text();
+				$output = $this->msg( 'quizgame-ajax-deleted' )->text();
 
 				// Add a log entry if quiz logging is enabled
 				if ( $wgQuizLogs ) {
@@ -220,7 +220,7 @@ class ApiQuizGame extends ApiBase {
 
 				break;
 			default:
-				$output = wfMessage( 'quizgame-ajax-invalid-option' )->text();
+				$output = $this->msg( 'quizgame-ajax-invalid-option' )->text();
 				break;
 		} // switch() loop end
 
