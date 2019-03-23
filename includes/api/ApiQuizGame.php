@@ -25,14 +25,8 @@ class ApiQuizGame extends ApiBase {
 		$user = $this->getUser();
 
 		$action = $params['quizaction']; // what to do + the word "Item", i.e. deleteItem
-		$comment = ( isset( $params['comment'] ) ? $params['comment'] : '' ); // reason for flagging (used only in flagItem)
+		$comment = ( $params['comment'] ?? '' ); // reason for flagging (used only in flagItem)
 		$id = $params['id']; // quiz ID number
-
-		// Check that all of the required parameters are present, and if it
-		// ain't so, don't go any further
-		if ( $action === null || $id === null ) {
-			$this->dieWithError( 'apierror-missingparam', 'missingparam' );
-		}
 
 		// ApiBase's getDB() supports only slave connections, lame...
 		$dbw = wfGetDB( DB_MASTER );
@@ -227,10 +221,6 @@ class ApiQuizGame extends ApiBase {
 		// This is shown to the user via AJAX.
 		$data = [ 'output' => $output ];
 
-		// Dear API, Y U NO MAKE SENSE?
-		// The following, which is also used in the voting API, does NOT work:
-		//ApiResult::setContent( $data, '' );
-		// But this one, similar to what /includes/api/ApiBlock.php does, works:
 		$this->getResult()->addValue( null, $this->getModuleName(), $data );
 	}
 

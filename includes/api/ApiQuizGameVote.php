@@ -25,16 +25,6 @@ class ApiQuizGameVote extends ApiBase {
 		$id = $params['id']; // quiz ID number
 		$points = $params['points'];
 
-		// Check that all of the required parameters are present, and if it
-		// ain't so, don't go any further
-		if ( $answer === null || $id === null || $points === null ) {
-			$this->dieWithError( 'apierror-missingparam', 'missingparam' );
-		}
-
-		if ( !is_numeric( $answer ) ) {
-			$this->dieWithError( 'quizgame-ajax-nonnumeric-answer', 'nonnumericanswer' );
-		}
-
 		$dbw = wfGetDB( DB_MASTER );
 
 		// Check if they already answered
@@ -128,12 +118,7 @@ class ApiQuizGameVote extends ApiBase {
 				'rightAnswer' => addslashes( $s->choice_text ), // @todo FIXME/CHECKME: addslashes() still needed?
 				'percentRight' => $percent
 			];
-			if ( defined( 'ApiResult::META_CONTENT' ) ) {
-				// Why?
-				ApiResult::setContentValue( $data, 'content', '' );
-			} else {
-				ApiResult::setContent( $data, '' );
-			}
+			ApiResult::setContentValue( $data, 'content', '' );
 
 			if ( $s->choice_id == $answer ) {
 				// Update question answered correctly for entire question

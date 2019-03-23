@@ -34,8 +34,6 @@ class SpecialQuestionGameUpload extends SpecialUpload {
 	 * What was changed here: $this->mIgnoreWarning is now unconditionally true
 	 * and mUpload uses QuizFileUpload instead of UploadBase so that it can add
 	 * the timestamp to the filename.
-	 *
-	 * @param WebRequest $request The request to extract variables from
 	 */
 	protected function loadRequest() {
 		$this->mRequest = $request = $this->getRequest();
@@ -212,7 +210,7 @@ class SpecialQuestionGameUpload extends SpecialUpload {
 		$status = $this->mUpload->fetchFile();
 		if ( !$status->isOK() ) {
 			$this->showUploadError(
-				$this->getUploadForm( $this->getOutput()->parse( $status->getWikiText() ) )
+				$this->getOutput()->parse( $status->getWikiText() )
 			);
 			return;
 		}

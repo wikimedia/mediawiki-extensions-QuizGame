@@ -68,7 +68,7 @@ class QuizGameHooks {
 	 */
 	public static function onMakeGlobalVariablesScript( $vars ) {
 		global $wgUserStatsPointValues;
-		$vars['__quiz_js_points_value__'] = ( isset( $wgUserStatsPointValues['quiz_points'] ) ? $wgUserStatsPointValues['quiz_points'] : 0 );
+		$vars['__quiz_js_points_value__'] = ( $wgUserStatsPointValues['quiz_points'] ?? 0 );
 	}
 
 	/**

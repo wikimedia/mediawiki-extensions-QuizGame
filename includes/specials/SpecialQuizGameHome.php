@@ -20,6 +20,11 @@ class QuizGameHome extends UnlistedSpecialPage {
 	static $FLAG_PROTECT = 2;
 
 	/**
+	 * @var string $SALT
+	 */
+	private $SALT;
+
+	/**
 	 * Construct the MediaWiki special page
 	 */
 	public function __construct() {
@@ -1063,7 +1068,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 
 		if ( !$user_answer && $user->getName() != $question['user_name'] ) {
 			global $wgUserStatsPointValues;
-			$quizPoints = ( isset( $wgUserStatsPointValues['quiz_points'] ) ? $wgUserStatsPointValues['quiz_points'] : 0 );
+			$quizPoints = ( $wgUserStatsPointValues['quiz_points'] ?? 0 );
 			$output .= '<div class="time-box">
 					<div class="quiz-countdown">
 						<span id="time-countdown">-</span> ' . $this->msg( 'quizgame-js-seconds' )->text() .
