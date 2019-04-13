@@ -137,6 +137,7 @@
 	"logentry-quiz-unflag": "Log action; $1 is the username, $4 is the question ID number",
 	"logentry-quiz-unprotect": "Log action; $1 is the username, $4 is the question ID number",
 	"quizgame-images-category": "Category where all images uploaded via Special:QuestionGameUpload will be placed into",
+	"action-quizadmin": "{{doc-action|quizadmin}}",
 	"right-quizadmin": "{{doc-right|quizadmin}}",
 	"apihelp-quizgame-description": "{{doc-apihelp-description|quizgame}}",
 	"apihelp-quizgame-summary": "{{doc-apihelp-summary|quizgame}}",

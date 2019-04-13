@@ -137,6 +137,7 @@
 	"logentry-quiz-unflag": "$1 unflagged [[Special:QuizGameHome/$4|quiz question #$4]]",
 	"logentry-quiz-unprotect": "$1 unprotected [[Special:QuizGameHome/$4|quiz question #$4]]",
 	"quizgame-images-category": "QuizGame images",
+	"action-quizadmin": "administrate question games",
 	"right-quizadmin": "Administrate question games",
 	"apihelp-quizgame-description": "Question Game API for administrative actions.",
 	"apihelp-quizgame-summary": "Question Game API for administrative actions.",
