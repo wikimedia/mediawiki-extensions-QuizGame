@@ -136,6 +136,7 @@
 	"logentry-quiz-unflag": "$1 取消標記了[[Special:QuizGameHome/$4|問答題目 #$4]]",
 	"logentry-quiz-unprotect": "$1 取消保護了[[Special:QuizGameHome/$4|問答題目 #$4]]",
 	"quizgame-images-category": "問答遊戲圖片",
+	"action-quizadmin": "管理問題遊戲",
 	"right-quizadmin": "管理題目遊戲",
 	"apihelp-quizgame-description": "用於管理操作的問答遊戲 API。",
 	"apihelp-quizgame-summary": "用於管理操作的問答遊戲 API。",

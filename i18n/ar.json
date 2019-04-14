@@ -136,6 +136,7 @@
 	"logentry-quiz-unflag": "$1 أزال تعليم [[Special:QuizGameHome/$4|سؤال المسابقة #$4]]",
 	"logentry-quiz-unprotect": "$1 رفع الحماية عن [[Special:QuizGameHome/$4|سؤال المسابقة #$4]]",
 	"quizgame-images-category": "صور لعبة المسابقة",
+	"action-quizadmin": "إدارة ألعاب الأسئلة",
 	"right-quizadmin": "إدارة ألعاب الأسئلة",
 	"apihelp-quizgame-description": "API لعبة سؤال للإجراءات الإدارية.",
 	"apihelp-quizgame-summary": "API لعبة سؤال للإجراءات الإدارية.",
