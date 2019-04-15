@@ -136,6 +136,7 @@
 	"logentry-quiz-unflag": "$1 a démarqué [[Special:QuizGameHome/$4|la question de quiz  #$4]]",
 	"logentry-quiz-unprotect": "$1 a déprotégé [[Special:QuizGameHome/$4|la question de quiz #$4]]",
 	"quizgame-images-category": "Images du quiz",
+	"action-quizadmin": "gérer les jeux de questions",
 	"right-quizadmin": "Gérer les jeux de questions",
 	"apihelp-quizgame-description": "API de gestion des jeux de questions.",
 	"apihelp-quizgame-summary": "API de jeu de question pour les actions d’administration.",

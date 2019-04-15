@@ -56,6 +56,7 @@
 	"quizgame-leaderboard-menu-points": "النقاط",
 	"quizgame-leaderboard-menu-correct": "المجموع الصحيح",
 	"quizgame-leaderboard-menu-pct": "أعلى نسبة",
+	"quizgame-leaderboard-desc-pct": "$1%",
 	"quizgame-leaderboard-desc-correct": "$1 صحيح",
 	"quizgame-leaderboard-desc-points": "{{PLURAL:$1|نقطة واحدة|$1 نقطة}}",
 	"quizgame-login-or-create-to-climb": "[[Special:UserLogin|سجل الدخول]] أو [[Special:UserLogin/signup|أنشئ حسابا]] للمنافسة وتسلق المتصدرين!",

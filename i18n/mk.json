@@ -136,6 +136,7 @@
 	"logentry-quiz-unflag": "$1 ја тргна ознаката од [[Special:QuizGameHome/$4|прашањето бр. $4]]",
 	"logentry-quiz-unprotect": "$1 ја тргна заштитата на [[Special:QuizGameHome/$4|прашањето бр. $4]]",
 	"quizgame-images-category": "Слики за квизови",
+	"action-quizadmin": "раководење со прашални игри",
 	"right-quizadmin": "Раководење со квизови",
 	"apihelp-quizgame-description": "Приложник за администраторски постапки со квизови.",
 	"apihelp-quizgame-summary": "Квизен прилог за административни дејства",
