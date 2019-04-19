@@ -137,6 +137,7 @@
 	"logentry-quiz-unflag": "$1 hat die Markierung [[Special:QuizGameHome/$4|der Quizfrage $4]] zurückgenommen",
 	"logentry-quiz-unprotect": "$1 hat [[Special:QuizGameHome/$4|die Quizfrage $4]] freigegeben",
 	"quizgame-images-category": "Quizspiel-Bilder",
+	"action-quizadmin": "Fragespiele zu verwalten",
 	"right-quizadmin": "Fragespiele verwalten",
 	"apihelp-quizgame-description": "Fragespiel-API für administrative Aktionen.",
 	"apihelp-quizgame-summary": "Fragespiel-API für administrative Aktionen.",
