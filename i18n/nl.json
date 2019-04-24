@@ -64,7 +64,7 @@
 	"quizgame-js-loading": "Laden...",
 	"quizgame-js-reloading": "Herladen...",
 	"quizgame-js-timesup": "Tijd is om! Je krijgt geen punten meer, maar probeer hem toch te beantwoorden!",
-	"quizgame-js-points": "{{PLURAL:$2|1 punt|$2 punten}}",
+	"quizgame-js-points": "{{PLURAL:$1|1 punt|$1 punten}}",
 	"quizgame-js-seconds": "seconden",
 	"quizgame-lightbox-pause-quiz": "Pauzeer quiz",
 	"quizgame-lightbox-breakdown": "Bekijk breakdown voor deze vraag",
