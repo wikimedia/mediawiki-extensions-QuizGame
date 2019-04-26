@@ -135,6 +135,7 @@
 	"logentry-quiz-unflag": "$1 desmarcou [[Special:QuizGameHome/$4|a pergunta nº$4 do jogo]]",
 	"logentry-quiz-unprotect": "$1 desprotegeu [[Special:QuizGameHome/$4|a pergunta nº$4 do jogo]]",
 	"quizgame-images-category": "Imagens do jogo de perguntas",
+	"action-quizadmin": "administrar jogos de perguntas",
 	"right-quizadmin": "Administrar jogos de perguntas",
 	"apihelp-quizgame-description": "API do jogo de perguntas para ações administrativas.",
 	"apihelp-quizgame-summary": "API do jogo de perguntas para ações administrativas.",
