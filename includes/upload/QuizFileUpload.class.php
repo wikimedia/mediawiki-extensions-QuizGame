@@ -25,4 +25,8 @@ class QuizFileUpload extends UploadFromFile {
 
 		$this->initialize( $desiredDestName, $upload );
 	}
+
+	public function doStashFile( User $user = null ) {
+		return parent::doStashFile( $user );
+	}
 }

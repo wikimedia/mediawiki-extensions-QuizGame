@@ -11,6 +11,7 @@
  * @ingroup Upload
  * @author Jack Phoenix
  * @note Originally based on 1.16 core SpecialUpload.php (GPL-licensed) by Bryan et al.
+ * @property QuizFileUpload $mUpload
  */
 class SpecialQuestionGameUpload extends SpecialUpload {
 	/**
@@ -174,7 +175,7 @@ class SpecialQuestionGameUpload extends SpecialUpload {
 	 * @param string $message HTML message to be passed to mainUploadForm
 	 */
 	protected function showRecoverableUploadError( $message ) {
-		$sessionKey = $this->mUpload->stashSession();
+		$sessionKey = $this->mUpload->doStashFile( $this->getUser() )->getFileKey();
 		$message = '<h2>' . $this->msg( 'uploaderror' )->escaped() . "</h2>\n" .
 			'<div class="error">' . $message . "</div>\n";
 
