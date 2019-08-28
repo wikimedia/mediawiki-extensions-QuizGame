@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"ديفيد",
-			"Meno25"
+			"Meno25",
+			"Sonic N800"
 		]
 	},
 	"quizgame-desc": "يضيف [[Special:QuizGameHome|لعبة أسئلة]] تفاعلية",
@@ -114,7 +115,7 @@
 	"quizgame-create-threshold-title": "إنشاء سؤال مسابقة",
 	"quizgame-create-threshold-reason": "عذرا، لا يمكنك إنشاء سؤال مسابقة حتى تحصل على $1 على الأقل",
 	"quizgame-points": "$1 نقطة",
-	"quizgame-time-ago": "منذ $1",
+	"quizgame-time-ago": "قبل $1",
 	"quizgame-time-days": "{{PLURAL:$1||يوم واحد|$1 أيام}}",
 	"quizgame-time-hours": "{{PLURAL:$1||ساعة واحدة|$1 ساعات}}",
 	"quizgame-time-minutes": "{{PLURAL:$1|دقيقة واحدة|$1 دقائق}}",
