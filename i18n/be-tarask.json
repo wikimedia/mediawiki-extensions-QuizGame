@@ -1,0 +1,38 @@
+{
+	"@metadata": {
+		"authors": [
+			"Vlad5250"
+		]
+	},
+	"quizgame-edit": "Рэдагаваць",
+	"quizgame-delete": "Выдаліць",
+	"quizgame-protect": "Абараніць",
+	"quizgame-unprotect": "Зьняць абарону",
+	"quizgame-edit-title": "Рэдагаваньне - $1",
+	"quizgame-flagged-reason": "Прычына",
+	"quizgame-submitted-by": "Адпраўлены",
+	"quizgame-picture": "Выява",
+	"quizgame-save-page-button": "Захаваць старонку",
+	"quizgame-cancel-button": "Скасаваць",
+	"quizgame-main-page-button": "Галоўная старонка",
+	"quizgame-login-button": "Увайсьці",
+	"quizgame-submit": "Даслаць",
+	"quizgame-leaderboard-order-menu": "Парадак",
+	"quizgame-leaderboard-menu-points": "Пункты",
+	"quizgame-js-loading": "Загрузка...",
+	"quizgame-js-seconds": "сэкунд",
+	"quizgame-skip": "Прапусьціць",
+	"quizgame-flag": "Пазначыць",
+	"quizgame-prev": "папярэдняя",
+	"quizgame-nav-next": "наступная",
+	"quizgame-newest": "Найноўшыя",
+	"quizgame-popular": "Папулярныя",
+	"quizgame-permalink": "Сталая спасылка",
+	"quizgame-pause-continue": "Працягнуць",
+	"quizgame-time-ago": "$1 таму",
+	"quizgame-time-days": "$1 {{PLURAL:$1|дзень|дні|дзён}}",
+	"quizgame-time-hours": "$1 {{PLURAL:$1|гадзіну|гадзіны|гадзінаў}}",
+	"quizgame-time-minutes": "$1 {{PLURAL:$1|хвіліну|хвіліны|хвілінаў}}",
+	"quizgame-time-seconds": "$1 {{PLURAL:$1|сэкунду|сэкунды|сэкундаў}}",
+	"apihelp-quizgamevote-example-1": "Галасаваць."
+}
