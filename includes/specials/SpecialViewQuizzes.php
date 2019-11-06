@@ -48,6 +48,7 @@ class ViewQuizzes extends UnlistedSpecialPage {
 		$limit = $per_page;
 		$limitvalue = 0; // OFFSET for SQL queries
 
+		// @phan-suppress-next-line PhanSuspiciousValueComparison
 		if ( $limit > 0 && $page ) {
 			$limitvalue = $page * $limit - ( $limit );
 		}

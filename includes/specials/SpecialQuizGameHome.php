@@ -270,7 +270,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 	 *
 	 * @param int $questionId Question ID
 	 * @param int $question_answer_count Amount of answers on the question
-	 * @return array
+	 * @return array[]
 	 */
 	public function getQuestionChoices( $questionId, $question_answer_count = 0 ) {
 		$dbr = wfGetDB( DB_REPLICA );
