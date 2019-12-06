@@ -1,0 +1,41 @@
+{
+	"@metadata": {
+		"authors": [
+			"シュヴァルツ"
+		]
+	},
+	"quizgame-edit": "編集",
+	"quizgame-delete": "削除",
+	"quizgame-protect": "保護",
+	"quizgame-error-socialprofile": "[https://www.mediawiki.org/wiki/Extension:SocialProfile/ja SocialProfile拡張機能]がインストールされていません。インストールしてからもう一度お試しください。",
+	"quizgame-error-socialprofile-title": "SocialProfile拡張機能がインストールされていません。",
+	"quizgame-admin-protected": "保護された問題",
+	"quizgame-question": "問題",
+	"quizgame-answers": "解答",
+	"quizgame-cancel-button": "キャンセル",
+	"quizgame-login-title": "問題を作成するにはログインしてください",
+	"quizgame-login-button": "ログイン",
+	"quizgame-nomore-questions": "問題がありません!",
+	"quizgame-ohnoes": "これ以上問題がありません。下のボタンをクリックして問題を作成しましょう！",
+	"quizgame-create-button": "クイズを作成する!",
+	"quizgame-title": "クイズゲーム！",
+	"quizgame-leaderboard-scoretitle": "あなたの得点",
+	"quizgame-leaderboard-link": "リーダーボード",
+	"quizgame-login-or-create-to-climb": "[[Special:UserLogin|ログイン]]または[[Special:UserLogin/signup|アカウントを作成]]してリーダーボードの頂点へ登り詰めましょう！",
+	"quizgame-your-answer": "あなたの解答",
+	"quizgame-js-loading": "読み込み中…",
+	"quizgame-js-reloading": "再読み込み中…",
+	"quizgame-skip": "スキップ",
+	"quizgame-next": "次の問題",
+	"quizgame-prev": "前へ",
+	"quizgame-nav-next": "次へ",
+	"quizgame-newest": "最新",
+	"quizgame-create-title": "問題を作成する",
+	"quizgame-pause-view-leaderboard": "リーダーボードを見る",
+	"quizgame-ajax-unprotected": "問題の保護を解除しました。",
+	"quizgame-ajax-protected": "問題を保護しました。",
+	"quizgame-ajax-deleted": "問題を削除しました。",
+	"quizgame-ajax-already-answered": "この問題は解答済みです。",
+	"log-name-quiz": "クイズ作成記録",
+	"apihelp-quizgame-example-2": "クイズを削除します。"
+}

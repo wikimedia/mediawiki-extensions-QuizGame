@@ -135,6 +135,7 @@
 	"logentry-quiz-unflag": "$1 desmarcó [[Special:QuizGameHome/$4|la pregunta #$4 del xuegu]]",
 	"logentry-quiz-unprotect": "$1 desprotexó [[Special:QuizGameHome/$4|la pregunta #$4 del xuegu]]",
 	"quizgame-images-category": "Imaxes del xuegu de preguntes",
+	"action-quizadmin": "alministrar xuegos de preguntes",
 	"right-quizadmin": "Alministrar xuegos de preguntes",
 	"apihelp-quizgame-description": "API del xuegu de preguntes pa les aiciones alministratives.",
 	"apihelp-quizgame-summary": "API del xuegu de preguntes pa les aiciones alministratives.",
