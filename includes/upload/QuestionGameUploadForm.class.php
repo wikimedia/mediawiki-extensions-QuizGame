@@ -219,7 +219,7 @@ class QuestionGameUploadForm extends UploadForm {
 	 * Add the upload JS and show the form.
 	 */
 	public function show() {
-		HTMLForm::show();
+		return HTMLForm::show();
 	}
 
 	/**
