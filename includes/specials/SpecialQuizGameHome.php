@@ -825,8 +825,6 @@ class QuizGameHome extends UnlistedSpecialPage {
 		$request = $this->getRequest();
 		$user = $this->getUser();
 
-		$on_load = 'QuizGame.showAnswers();';
-
 		// controls the maximum length of the previous game bar graphs
 		$dbr = wfGetDB( DB_MASTER );
 
@@ -897,19 +895,12 @@ class QuizGameHome extends UnlistedSpecialPage {
 				// mark that they viewed for first time
 				$wgMemc->set( $key, time() );
 			}
-			$on_load .= "QuizGame.countDown({$timestampedViewed});";
+			$out->addJsConfigVars( 'wgQuizTimestampViewed', $timestampedViewed );
 		}
 
 		if ( is_numeric( $lastid ) ) {
 			$prev_question = $this->getQuestion( $lastid );
 		}
-
-		// @note This is an extremely filthy hack...but it seems to be working?
-		$out->addScript( '<script type="text/javascript">(window.RLQ = window.RLQ || []).push(function () {
-			jQuery( function() {
-				mw.loader.using( \'ext.quizGame\', function() { ' . $on_load . " } );
-			} );
-		} );</script>\n" );
 
 		$gameid = $question['id'];
 
