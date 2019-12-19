@@ -215,19 +215,7 @@ class QuestionGameUploadForm extends UploadForm {
 		return $descriptor;
 	}
 
-	/**
-	 * Add the upload JS and show the form.
-	 */
-	public function show() {
-		return HTMLForm::show();
-	}
-
-	/**
-	 * Empty function; submission is handled elsewhere.
-	 *
-	 * @return bool false
-	 */
-	function trySubmit() {
-		return false;
+	protected function addUploadJS() {
+		// Intentionally empty
 	}
 }
