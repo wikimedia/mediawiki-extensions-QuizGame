@@ -147,7 +147,7 @@ class ViewQuizzes extends UnlistedSpecialPage {
 			$user_id = $row->q_user_id;
 			$avatar = new wAvatar( $user_id, 'm' );
 			$quiz_title = $row->q_text;
-			$quiz_date = wfTimestamp( TS_UNIX, $row->q_date );
+			$quiz_date = (int)wfTimestamp( TS_UNIX, $row->q_date );
 			$quiz_answers = $row->q_answer_count;
 			$quiz_id = $row->q_id;
 			$row_id = "quizz-row-{$x}";
@@ -216,7 +216,7 @@ class ViewQuizzes extends UnlistedSpecialPage {
 					$linkQueryParameters['page'] = $i;
 					$output .= $linkRenderer->makeLink(
 						$title,
-						$i,
+						(string)$i,
 						[],
 						$linkQueryParameters
 					) . $this->msg( 'word-separator' )->text();

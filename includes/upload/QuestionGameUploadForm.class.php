@@ -24,7 +24,7 @@ class QuestionGameUploadForm extends UploadForm {
 			+ $this->getDescriptionSection()
 			+ $this->getOptionsSection();
 
-		HTMLForm::__construct( $descriptor, 'upload' );
+		HTMLForm::__construct( $descriptor, $this->getContext(), 'upload' );
 
 		# Set some form properties
 		$this->setSubmitText( $this->msg( 'uploadbtn' )->text() );
