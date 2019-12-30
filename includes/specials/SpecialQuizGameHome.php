@@ -503,37 +503,46 @@ class QuizGameHome extends UnlistedSpecialPage {
 		// Ruh roh rorge...we have to fix stats
 		if ( $new_correct_id != $old_correct_id ) {
 			// Those who had the old answer ID correct need their total to be decremented
-			$sql = "UPDATE {$dbw->tableName( 'user_stats' )}
-				SET stats_quiz_questions_correct=stats_quiz_questions_correct-1
-				WHERE stats_user_id IN
-				(
-					SELECT a_user_id
-					FROM {$dbw->tableName( 'quizgame_answers' )}
-					WHERE a_choice_id = {$old_correct_id}
-				)";
-			$res = $dbw->query( $sql, __METHOD__ );
+			$selectOld = $dbw->buildSelectSubquery(
+				'quizgame_answers',
+				'a_user_id',
+				[ 'a_choice_id' => $old_correct_id ],
+				__METHOD__
+			);
+			$dbw->update(
+				'user_stats',
+				[ 'stats_quiz_questions_correct=stats_quiz_questions_correct-1' ],
+				[ "stats_user_id IN $selectOld" ],
+				__METHOD__
+			);
 
 			// Those who had the new answer ID correct need their total to be increased
-			$sql = "UPDATE {$dbw->tableName( 'user_stats' )}
-				SET stats_quiz_questions_correct=stats_quiz_questions_correct+1
-				WHERE stats_user_id IN
-				(
-					SELECT a_user_id
-					FROM {$dbw->tableName( 'quizgame_answers' )}
-					WHERE a_choice_id = {$new_correct_id}
-				)";
-			$res = $dbw->query( $sql, __METHOD__ );
+			$selectNew = $dbw->buildSelectSubquery(
+				'quizgame_answers',
+				'a_user_id',
+				[ 'a_choice_id' => $new_correct_id ],
+				__METHOD__
+			);
+			$dbw->update(
+				'user_stats',
+				[ 'stats_quiz_questions_correct=stats_quiz_questions_correct+1' ],
+				[ "stats_user_id IN $selectNew" ],
+				__METHOD__
+			);
 
 			// Finally, we need to adjust everyone's %'s who have been affected by this switch
-			$sql = "UPDATE {$dbw->tableName( 'user_stats' )}
-				SET stats_quiz_questions_correct_percent=stats_quiz_questions_correct /stats_quiz_questions_answered
-				WHERE stats_user_id IN
-				(
-					SELECT a_user_id
-					FROM {$dbw->tableName( 'quizgame_answers' )}
-					WHERE a_choice_id = {$new_correct_id} OR a_choice_id = {$old_correct_id}
-				)";
-			$res = $dbw->query( $sql, __METHOD__ );
+			$selectBoth = $dbw->buildSelectSubquery(
+				'quizgame_answers',
+				'a_user_id',
+				[ 'a_choice_id' => [ $old_correct_id, $new_correct_id ] ],
+				__METHOD__
+			);
+			$dbw->update(
+				'user_stats',
+				[ 'stats_quiz_questions_correct_percent=stats_quiz_questions_correct /stats_quiz_questions_answered' ],
+				[ "stats_user_id IN $selectBoth" ],
+				__METHOD__
+			);
 
 			// Also, we need to adjust the question table and fix how many answered it correctly
 			/*
@@ -550,15 +559,18 @@ class QuizGameHome extends UnlistedSpecialPage {
 				__METHOD__
 			);
 			*/
-			$sql = "UPDATE {$dbw->tableName( 'quizgame_questions' )}
-				SET q_answer_correct_count=
-				(
-					SELECT COUNT(*)
-					FROM {$dbw->tableName( 'quizgame_answers' )}
-					WHERE a_choice_id = {$new_correct_id}
-				)
-				WHERE q_id={$id} ";
-			$res = $dbw->query( $sql, __METHOD__ );
+			$count = $dbw->buildSelectSubquery(
+				'quizgame_answers',
+				'COUNT(*)',
+				[ 'a_choice_id' => $new_correct_id ],
+				__METHOD__
+			);
+			$dbw->update(
+				'quizgame_questions',
+				[ "q_answer_correct_count = $count" ],
+				[ 'q_id' => $id ],
+				__METHOD__
+			);
 		}
 
 		header( 'Location: ' . $this->getPageTitle()->getFullURL( "renderPermalink&permalinkID={$id}" ) );
