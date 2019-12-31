@@ -83,6 +83,9 @@ class QuizGameHooks {
 		$updater->addExtensionTable( 'quizgame_answers', $sqlDirectory . 'quizgame_answers.sql' );
 		$updater->addExtensionTable( 'quizgame_choice', $sqlDirectory . 'quizgame_choice.sql' );
 		$updater->addExtensionTable( 'quizgame_user_view', $sqlDirectory . 'quizgame_user_view.sql' );
+
+		$updater->modifyExtensionField( 'quizgame_choice', 'choice_answer_count',
+ 			$sqlDirectory . "patches/patch-add-default-choice_answer_count.sql" );
 	}
 
 	/**
