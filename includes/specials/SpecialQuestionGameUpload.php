@@ -211,7 +211,7 @@ class SpecialQuestionGameUpload extends SpecialUpload {
 		$status = $this->mUpload->fetchFile();
 		if ( !$status->isOK() ) {
 			$this->showUploadError(
-				$this->getOutput()->parse( $status->getWikiText() )
+				$this->getOutput()->parseAsInterface( $status->getWikiText() )
 			);
 			return;
 		}
@@ -270,7 +270,7 @@ class SpecialQuestionGameUpload extends SpecialUpload {
 		);
 
 		if ( !$status->isGood() ) {
-			$this->showUploadError( $this->getOutput()->parse( $status->getWikiText() ) );
+			$this->showUploadError( $this->getOutput()->parseAsInterface( $status->getWikiText() ) );
 			return;
 		}
 
