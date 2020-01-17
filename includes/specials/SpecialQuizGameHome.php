@@ -830,16 +830,9 @@ class QuizGameHome extends UnlistedSpecialPage {
 		// controls the maximum length of the previous game bar graphs
 		$dbr = wfGetDB( DB_MASTER );
 
-		// previously this used to use addslashes + getVal and there was a var
-		// called $isPermalink which was just an is_numeric() on this var
-		// The if() loop around line 778 checked for $isPermalink instead of
-		// $permalinkID...which caused a bug (wrong msg) to be displayed when
-		// there were no questions *at all* in the DB (the permalink error msg
-		// does not have a link that allows you to *create* a quiz...)
-		$permalinkID = $request->getInt( 'permalinkID', 0 );
-
-		$lastid = addslashes( $request->getVal( 'lastid' ) );
-		$skipid = addslashes( $request->getVal( 'skipid' ) );
+		$permalinkID = $request->getInt( 'permalinkID' );
+		$lastid = $request->getInt( 'lastid' );
+		$skipid = $request->getInt( 'skipid' );
 
 		$isFixedlink = false;
 		$permalinkOptions = -1;
@@ -900,7 +893,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 			$on_load .= "QuizGame.countDown({$timestampedViewed});";
 		}
 
-		if ( is_numeric( $lastid ) ) {
+		if ( $lastid ) {
 			$prev_question = $this->getQuestion( $lastid );
 		}
 
