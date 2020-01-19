@@ -627,6 +627,23 @@ window.QuizGame = {
 jQuery( function() {
 	// Code specific to Special:QuizGameHome
 	if ( mw.config.get( 'wgCanonicalSpecialPageName' ) == 'QuizGameHome' ) {
+		// Well, this is one way to detect whether we're on the correct page...
+		if ( jQuery( '#quizgame-container' ).length > 0 ) {
+			// Main onload handler
+			QuizGame.showAnswers();
+			// Make sure that the countDown() function is always called;
+			// as for what value, if any, depends on several conditions.
+			// When it's called w/ no value, the countdown starts from 30 (seconds).
+			if (
+				mw.config.get( 'wgQuizTimestampViewed' ) !== null &&
+				mw.config.get( 'wgQuizTimestampViewed' ) > 0
+			) {
+				QuizGame.countDown( mw.config.get( 'wgQuizTimestampViewed' ) );
+			} else {
+				QuizGame.countDown();
+			}
+		}
+
 		// When editing a quiz game that has an image
 		jQuery( 'p#quizgame-editpicture-link' ).append(
 			jQuery( '<a>' )
