@@ -1,0 +1,1 @@
+ALTER TABLE /*_*/quizgame_user_view DROP COLUMN uv_user_id;

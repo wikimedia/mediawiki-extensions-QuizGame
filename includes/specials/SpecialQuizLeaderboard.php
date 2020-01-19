@@ -48,11 +48,11 @@ class QuizLeaderboard extends UnlistedSpecialPage {
 		}
 
 		$dbr = wfGetDB( DB_MASTER );
-		$whereConds[] = 'stats_user_id <> 0'; // Exclude anonymous users
+		$whereConds[] = 'stats_actor IS NULL'; // Exclude anonymous users
 		$res = $dbr->select(
 			'user_stats',
 			[
-				'stats_user_id', 'stats_user_name', 'stats_quiz_points',
+				'stats_actor', 'stats_quiz_points',
 				'stats_quiz_questions_correct',
 				'stats_quiz_questions_correct_percent'
 			],
@@ -69,7 +69,7 @@ class QuizLeaderboard extends UnlistedSpecialPage {
 			$stats = new UserStats( $user->getId(), $user->getName() );
 			$stats_data = $stats->getUserStats();
 
-			// Get users rank
+			// Get user's rank
 			$quiz_rank = 0;
 			$s = $dbr->selectRow(
 				'user_stats',
@@ -143,15 +143,18 @@ class QuizLeaderboard extends UnlistedSpecialPage {
 		$output .= '<div class="top-users">';
 
 		foreach ( $res as $row ) {
-		    $user_name = $row->stats_user_name;
-		    $user_title = Title::makeTitle( NS_USER, $row->stats_user_name );
-		    $avatar = new wAvatar( $row->stats_user_id, 'm' );
-			$user_name_short = $lang->truncateForVisual( $user_name, 18 );
+			$actor = User::newFromActorId( $row->stats_actor );
+			if ( !$actor || !$actor instanceof User ) {
+				continue;
+			}
+
+			$avatar = new wAvatar( $actor->getId(), 'm' );
+			$user_name_short = $lang->truncateForVisual( $actor->getName(), 18 );
 
 		    $output .= "<div class=\"top-fan-row\">
 		 		   <span class=\"top-fan-num\">{$x}.</span>
 				   <span class=\"top-fan\">{$avatar->getAvatarURL()}
-				   <a href=\"" . $user_title->getFullURL() . '">' . $user_name_short . '</a>
+				   <a href=\"" . htmlspecialchars( $actor->getUserPage()->getFullURL(), ENT_QUOTES ) . '">' . $user_name_short . '</a>
 				</span>';
 
 			switch ( $input ) {
@@ -171,6 +174,7 @@ class QuizLeaderboard extends UnlistedSpecialPage {
 		    $output .= '</div>';
 		    $x++;
 		}
+
 		$output .= '</div><div class="visualClear"></div>';
 
 		$out->addHTML( $output );

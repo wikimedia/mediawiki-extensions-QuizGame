@@ -125,14 +125,21 @@ class QuizGameHome extends UnlistedSpecialPage {
 		}
 	}
 
-	public function userAnswered( $user_name, $q_id ) {
+	/**
+	 * Has the given user answered the given question?
+	 *
+	 * @param User $user
+	 * @param int $q_id Question identifier
+	 * @return bool|int Boolean false if they haven't, answer choice identifier if they have
+	 */
+	public function userAnswered( $user, $q_id ) {
 		$dbr = wfGetDB( DB_REPLICA );
 		$s = $dbr->selectRow(
 			'quizgame_answers',
 			[ 'a_choice_id' ],
 			[
 				'a_q_id' => intval( $q_id ),
-				'a_user_name' => $user_name
+				'a_actor' => $user->getActorId()
 			],
 			__METHOD__
 		);
@@ -146,14 +153,22 @@ class QuizGameHome extends UnlistedSpecialPage {
 		return false;
 	}
 
-	public function getAnswerPoints( $user_name, $q_id ) {
+	/**
+	 * Get the amount of points the given user has received for answering the
+	 * given quiz.
+	 *
+	 * @param User $user
+	 * @param int $q_id Question identifier
+	 * @return bool|int Boolean false if they haven't gotten points, otherwise int (amount of points)
+	 */
+	public function getAnswerPoints( $user, $q_id ) {
 		$dbr = wfGetDB( DB_REPLICA );
 		$s = $dbr->selectRow(
 			'quizgame_answers',
 			[ 'a_points' ],
 			[
 				'a_q_id' => intval( $q_id ),
-				'a_user_name' => $user_name
+				'a_actor' => $user->getActorId()
 			],
 			__METHOD__
 		);
@@ -172,13 +187,12 @@ class QuizGameHome extends UnlistedSpecialPage {
 		$dbr = wfGetDB( DB_REPLICA );
 		$use_index = $dbr->useIndexClause( 'q_random' );
 		$randstr = wfRandom();
-		$userName = $this->getUser()->getName();
-		$userId = $this->getUser()->getId();
+		$actorId = (int)$this->getUser()->getActorId();
 
 		$q_id = 0;
 		$sql = "SELECT q_id FROM {$dbr->tableName( 'quizgame_questions' )} {$use_index} WHERE q_id NOT IN
-				(SELECT a_q_id FROM {$dbr->tableName( 'quizgame_answers' )} WHERE a_user_name = {$dbr->addQuotes( $userName )})
-				AND q_flag != " . QuizGameHome::$FLAG_FLAGGED . " AND q_user_id <> {$userId} AND q_random > $randstr ORDER by q_random LIMIT 1";
+				(SELECT a_q_id FROM {$dbr->tableName( 'quizgame_answers' )} WHERE a_actor = {$actorId})
+				AND q_flag != " . QuizGameHome::$FLAG_FLAGGED . " AND q_actor <> {$actorId} AND q_random > $randstr ORDER BY q_random LIMIT 1";
 		$res = $dbr->query( $sql, __METHOD__ );
 		$row = $dbr->fetchObject( $res );
 
@@ -188,8 +202,8 @@ class QuizGameHome extends UnlistedSpecialPage {
 
 		if ( $q_id == 0 ) {
 			$sql = "SELECT q_id FROM {$dbr->tableName( 'quizgame_questions' )} {$use_index} WHERE q_id NOT IN
-					(SELECT a_q_id FROM {$dbr->tableName( 'quizgame_answers' )} WHERE a_user_name = {$dbr->addQuotes( $userName )})
-					AND q_flag != " . QuizGameHome::$FLAG_FLAGGED . " AND q_user_id <> {$userId} AND q_random < $randstr ORDER by q_random LIMIT 1";
+					(SELECT a_q_id FROM {$dbr->tableName( 'quizgame_answers' )} WHERE a_actor = {$actorId})
+					AND q_flag != " . QuizGameHome::$FLAG_FLAGGED . " AND q_actor <> {$actorId} AND q_random < $randstr ORDER BY q_random LIMIT 1";
 			$res = $dbr->query( $sql, __METHOD__ );
 			$row = $dbr->fetchObject( $res );
 			if ( $row ) {
@@ -208,7 +222,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 	 * @return array
 	 */
 	public function getQuestion( $questionId, $skipId = 0 ) {
-		$userName = $this->getUser()->getName();
+		$user = $this->getUser();
 		$dbr = wfGetDB( DB_REPLICA );
 		$where = [];
 		$where['q_id'] = intval( $questionId );
@@ -218,7 +232,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 		$res = $dbr->select(
 			'quizgame_questions',
 			[
-				'q_id', 'q_user_id', 'q_user_name', 'q_text', 'q_flag',
+				'q_id', 'q_actor', 'q_text', 'q_flag',
 				'q_answer_count', 'q_answer_correct_count', 'q_picture',
 				'q_date'
 			],
@@ -233,8 +247,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 		if ( $row ) {
 			$quiz['text'] = $row->q_text;
 			$quiz['image'] = $row->q_picture;
-			$quiz['user_name'] = $row->q_user_name;
-			$quiz['user_id'] = $row->q_user_id;
+			$quiz['actor'] = $row->q_actor;
 			$quiz['answer_count'] = $row->q_answer_count;
 			$quiz['id'] = $row->q_id;
 			$quiz['status'] = $row->q_flag;
@@ -246,10 +259,10 @@ class QuizGameHome extends UnlistedSpecialPage {
 			}
 
 			$quiz['correct_percent'] = $correct_percent;
-			$quiz['user_answer'] = $this->userAnswered( $userName, $row->q_id );
+			$quiz['user_answer'] = $this->userAnswered( $user, $row->q_id );
 
 			if ( $quiz['user_answer'] ) {
-				$quiz['points'] = $this->getAnswerPoints( $userName, $questionId );
+				$quiz['points'] = $this->getAnswerPoints( $user, $questionId );
 			}
 
 			$choices = $this->getQuestionChoices( $questionId, $row->q_answer_count );
@@ -505,42 +518,42 @@ class QuizGameHome extends UnlistedSpecialPage {
 			// Those who had the old answer ID correct need their total to be decremented
 			$selectOld = $dbw->buildSelectSubquery(
 				'quizgame_answers',
-				'a_user_id',
+				'a_actor',
 				[ 'a_choice_id' => $old_correct_id ],
 				__METHOD__
 			);
 			$dbw->update(
 				'user_stats',
 				[ 'stats_quiz_questions_correct=stats_quiz_questions_correct-1' ],
-				[ "stats_user_id IN $selectOld" ],
+				[ "stats_actor IN $selectOld" ],
 				__METHOD__
 			);
 
 			// Those who had the new answer ID correct need their total to be increased
 			$selectNew = $dbw->buildSelectSubquery(
 				'quizgame_answers',
-				'a_user_id',
+				'a_actor',
 				[ 'a_choice_id' => $new_correct_id ],
 				__METHOD__
 			);
 			$dbw->update(
 				'user_stats',
 				[ 'stats_quiz_questions_correct=stats_quiz_questions_correct+1' ],
-				[ "stats_user_id IN $selectNew" ],
+				[ "stats_actor IN $selectNew" ],
 				__METHOD__
 			);
 
 			// Finally, we need to adjust everyone's %'s who have been affected by this switch
 			$selectBoth = $dbw->buildSelectSubquery(
 				'quizgame_answers',
-				'a_user_id',
+				'a_actor',
 				[ 'a_choice_id' => [ $old_correct_id, $new_correct_id ] ],
 				__METHOD__
 			);
 			$dbw->update(
 				'user_stats',
 				[ 'stats_quiz_questions_correct_percent=stats_quiz_questions_correct /stats_quiz_questions_answered' ],
-				[ "stats_user_id IN $selectBoth" ],
+				[ "stats_actor IN $selectBoth" ],
 				__METHOD__
 			);
 
@@ -594,11 +607,9 @@ class QuizGameHome extends UnlistedSpecialPage {
 
 		$out->setPageTitle( $this->msg( 'quizgame-edit-title', $question['text'] )->parse() );
 
-		$user_name = $question['user_name'];
-		$user_id = $question['user_id'];
-		$user_title = Title::makeTitle( NS_USER, $question['user_name'] );
-		$avatar = new wAvatar( $user_id, 'l' );
-		$stats = new UserStats( $user_id, $user_name );
+		$quizUser = User::newFromActorId( $question['actor'] );
+		$avatar = new wAvatar( $quizUser->getId(), 'l' );
+		$stats = new UserStats( $quizUser->getId(), $quizUser->getName() );
 		$stats_data = $stats->getUserStats();
 
 		$uploadPage = SpecialPage::getTitleFor( 'QuestionGameUpload' );
@@ -694,6 +705,8 @@ class QuizGameHome extends UnlistedSpecialPage {
 
 				<input id=\"quizGamePicture\" name=\"quizGamePicture\" type=\"hidden\" value=\"{$question['image']}\" />";
 		}
+		$safeUserPageURL = htmlspecialchars( $quizUser->getUserPage()->getFullURL(), ENT_QUOTES );
+		$safeUserName = htmlspecialchars( $quizUser->getName(), ENT_QUOTES );
 		$output .= "
 				<div class=\"quizgame-edit-question\" id=\"quizgame-edit-question\">
 					<form name=\"quizGameEditForm\" id=\"quizGameEditForm\" method=\"post\" action=\"" .
@@ -704,14 +717,14 @@ class QuizGameHome extends UnlistedSpecialPage {
 							<h1>' . $this->msg( 'quizgame-submitted-by' )->text() . "</h1>
 
 							<div id=\"submitted-by-image\" class=\"submitted-by-image\">
-								<a href=\"{$user_title->getFullURL()}\">
+								<a href=\"{$safeUserPageURL}\">
 									{$avatar->getAvatarURL()}
 								</a>
 							</div>
 
 							<div id=\"submitted-by-user\" class=\"submitted-by-user\">
 								<div id=\"submitted-by-user-text\">
-									<a href=\"{$user_title->getFullURL()}\">{$user_name}</a>
+									<a href=\"{$safeUserPageURL}\">{$safeUserName}</a>
 								</div>
 								<ul>
 									<li id=\"userstats-votes\">
@@ -877,7 +890,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 		$wgQuizID = $question['id'];
 
 		$timestampedViewed = 0;
-		if ( $user->getName() != $question['user_name'] ) {
+		if ( $user->getActorId() != $question['actor'] ) {
 			// check to see if the user already had viewed this question
 			global $wgMemc;
 			$key = $wgMemc->makeKey( 'quizgame-user-view', $user->getId(), $question['id'] );
@@ -921,18 +934,16 @@ class QuizGameHome extends UnlistedSpecialPage {
 			$imageTag = '';
 		}
 
-		$user_name = $question['user_name'];
-		$user_title = Title::makeTitle( NS_USER, $user_name );
-		$id = $question['user_id'];
-		$avatar = new wAvatar( $id, 'l' );
-		$stats = new UserStats( $id, $user_name );
+		$quizUser = User::newFromActorId( $question['actor'] );
+		$avatar = new wAvatar( $quizUser->getId(), 'l' );
+		$stats = new UserStats( $quizUser->getId(), $quizUser->getName() );
 		$stats_data = $stats->getUserStats();
 
-		$user_answer = $this->userAnswered( $user->getName(), $gameid );
+		$user_answer = $this->userAnswered( $user, $gameid );
 
 		global $wgUseEditButtonFloat;
 		if (
-			( $user->getId() == $question['user_id'] ||
+			( $user->getActorId() == $question['actor'] ||
 			( $user_answer && $user->isLoggedIn() && $user->isAllowed( 'quizadmin' ) ) ||
 			$user->isAllowed( 'quizadmin' ) ) && ( $wgUseEditButtonFloat == true )
 		) {
@@ -1015,7 +1026,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 
 		// User hasn't answered yet, so display the quiz options with the
 		// ability to play the question
-		if ( !$user_answer && $user->getName() != $question['user_name'] ) {
+		if ( !$user_answer && $user->getActorId() != $question['actor'] ) {
 			$answers .= '<ul>';
 			$x = 1;
 			foreach ( $question['choices'] as $choice ) {
@@ -1062,7 +1073,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 
 		$output .= '<div class="quizgame-left">';
 
-		if ( !$user_answer && $user->getName() != $question['user_name'] ) {
+		if ( !$user_answer && $user->getActorId() != $question['actor'] ) {
 			global $wgUserStatsPointValues;
 			$quizPoints = ( $wgUserStatsPointValues['quiz_points'] ?? 0 );
 			$output .= '<div class="time-box">
@@ -1095,7 +1106,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 					<div class=\"navigation-buttons\">
 						{$backButton}";
 
-		if ( !$user_answer && $user->getName() != $question['user_name'] ) {
+		if ( !$user_answer && $user->getActorId() != $question['actor'] ) {
 			$output .= '<a class="skip-question-link" href="javascript:void(0);">' .
 				$this->msg( 'quizgame-skip' )->text() . '</a>';
 		} else {
@@ -1168,6 +1179,8 @@ class QuizGameHome extends UnlistedSpecialPage {
 		$formattedVoteCount = $lang->formatNum( $stats_data['votes'] );
 		$formattedEditCount = $lang->formatNum( $stats_data['edits'] );
 		$formattedCommentCount = $lang->formatNum( $stats_data['comments'] );
+		$safeUserPageURL = htmlspecialchars( $quizUser->getUserPage()->getFullURL(), ENT_QUOTES );
+		$safeUserName = htmlspecialchars( $quizUser->getName(), ENT_QUOTES );
 		$output .= "</div>
 
 				<div class=\"quizgame-right\">
@@ -1182,14 +1195,14 @@ class QuizGameHome extends UnlistedSpecialPage {
 						<h1>" . $this->msg( 'quizgame-submitted-by' )->text() . "</h1>
 
 						<div id=\"submitted-by-image\" class=\"submitted-by-image\">
-							<a href=\"{$user_title->getFullURL()}\">
+							<a href=\"{$safeUserPageURL}\">
 								{$avatar->getAvatarURL()}
 							</a>
 						</div>
 
 						<div id=\"submitted-by-user\" class=\"submitted-by-user\">
 							<div id=\"submitted-by-user-text\">
-								<a href=\"" . htmlspecialchars( Title::makeTitle( NS_USER, $user_name )->getFullURL() ) . "\">{$user_name}</a>
+								<a href=\"{$safeUserPageURL}\">{$safeUserName}</a>
 							</div>
 							<ul>
 								<li id=\"userstats-votes\">
@@ -1261,8 +1274,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 		$dbw->insert(
 			'quizgame_questions',
 			[
-				'q_user_id' => $user->getId(),
-				'q_user_name' => $user->getName(),
+				'q_actor' => $user->getActorId(),
 				'q_text' => strip_tags( $question ), // make sure nobody inserts malicious code
 				'q_picture' => $imageName,
 				'q_date' => date( 'Y-m-d H:i:s' ),
@@ -1311,7 +1323,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 		}
 
 		// Delete memcached key
-		$key = $wgMemc->makeKey( 'user', 'profile', 'quiz', $user->getId() );
+		$key = $wgMemc->makeKey( 'user', 'profile', 'quiz', 'actor_id', $user->getActorId() );
 		$wgMemc->delete( $key );
 
 		// Redirect the user

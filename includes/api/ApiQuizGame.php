@@ -68,17 +68,17 @@ class ApiQuizGame extends ApiBase {
 				// Fix stats of those who answered the flagged question
 				/*
 				$sql = "UPDATE user_stats SET stats_quiz_questions_answered=stats_quiz_questions_answered+1
-				WHERE stats_user_id IN (SELECT a_user_id FROM quizgame_answers WHERE a_q_id = {$id})";
+				WHERE stats_actor IN (SELECT a_actor FROM quizgame_answers WHERE a_q_id = {$id})";
 				$res = $dbr->query( $sql, __METHOD__ );
 
 				// Fix Stats of those who answered the flagged question correctly
 				$sql = "UPDATE user_stats SET stats_quiz_questions_correct=stats_quiz_questions_correct+1
-				WHERE stats_user_id IN (SELECT a_user_id FROM quizgame_answers INNER JOIN quizgame_choice ON a_choice_id=choice_id WHERE a_q_id = {$id} AND choice_is_correct=1 )";
+				WHERE stats_actor IN (SELECT a_actor FROM quizgame_answers INNER JOIN quizgame_choice ON a_choice_id=choice_id WHERE a_q_id = {$id} AND choice_is_correct=1 )";
 				$res = $dbr->query( $sql, __METHOD__ );
 
 				// Update everyone's percentage who answered that question
 				$sql = "UPDATE user_stats SET stats_quiz_questions_correct_percent=stats_quiz_questions_correct /stats_quiz_questions_answered
-				WHERE stats_user_id IN (SELECT a_user_id FROM quizgame_answers WHERE a_q_id = {$id} )";
+				WHERE stats_actor IN (SELECT a_actor FROM quizgame_answers WHERE a_q_id = {$id} )";
 				$res = $dbr->query( $sql, __METHOD__ );
 				*/
 
@@ -101,17 +101,17 @@ class ApiQuizGame extends ApiBase {
 				/*
 				// Fix stats of those who answered the flagged question
 				$sql = "UPDATE user_stats SET stats_quiz_questions_answered=stats_quiz_questions_answered-1
-				WHERE stats_user_id IN (SELECT a_user_id FROM quizgame_answers WHERE a_q_id = {$id} )";
+				WHERE stats_actor IN (SELECT a_actor FROM quizgame_answers WHERE a_q_id = {$id} )";
 				$res = $dbr->query( $sql, __METHOD__ );
 
 				// Fix stats of those who answered the flagged question correctly
 				$sql = "UPDATE user_stats SET stats_quiz_questions_correct=stats_quiz_questions_correct-1
-				WHERE stats_user_id IN (SELECT a_user_id FROM quizgame_answers INNER JOIN quizgame_choice ON a_choice_id=choice_id WHERE a_q_id = {$id} AND choice_is_correct=1 )";
+				WHERE stats_actor IN (SELECT a_actor FROM quizgame_answers INNER JOIN quizgame_choice ON a_choice_id=choice_id WHERE a_q_id = {$id} AND choice_is_correct=1 )";
 				$res = $dbr->query( $sql, __METHOD__ );
 
 				// Update everyone's percentage who answered that question
 				$sql = "UPDATE user_stats SET stats_quiz_questions_correct_percent=stats_quiz_questions_correct /stats_quiz_questions_answered
-				WHERE stats_user_id IN (SELECT a_user_id FROM quizgame_answers WHERE a_q_id = {$id} )";
+				WHERE stats_actor IN (SELECT a_actor FROM quizgame_answers WHERE a_q_id = {$id} )";
 				$res = $dbr->query( $sql, __METHOD__ );
 				*/
 
@@ -140,7 +140,7 @@ class ApiQuizGame extends ApiBase {
 			case 'deleteItem':
 				$res = $dbw->select(
 					[ 'quizgame_answers', 'quizgame_choice' ],
-					[ 'a_user_id', 'a_points', 'choice_is_correct' ],
+					[ 'a_actor', 'a_points', 'choice_is_correct' ],
 					[ 'a_q_id' => intval( $id ) ],
 					__METHOD__,
 					'',
@@ -162,7 +162,7 @@ class ApiQuizGame extends ApiBase {
 							'stats_quiz_questions_answered = stats_quiz_questions_answered - 1',
 						],
 						/* WHERE */[
-							'stats_user_id' => $row->a_user_id
+							'stats_actor' => $row->a_actor
 						],
 						__METHOD__
 					);
@@ -176,14 +176,14 @@ class ApiQuizGame extends ApiBase {
 								'stats_quiz_points = stats_quiz_points-' . $row->a_points
 							],
 							/* WHERE */[
-								'stats_user_id' => $row->a_user_id
+								'stats_actor' => $row->a_actor
 							],
 							__METHOD__
 						);
 					}
 
 					global $wgMemc;
-					$key = $wgMemc->makeKey( 'user', 'stats', $row->a_user_id );
+					$key = $wgMemc->makeKey( 'user', 'stats', 'actor_id', $row->a_actor );
 					$wgMemc->delete( $key );
 				}
 

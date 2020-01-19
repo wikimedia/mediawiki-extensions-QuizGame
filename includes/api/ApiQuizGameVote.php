@@ -31,7 +31,7 @@ class ApiQuizGameVote extends ApiBase {
 		$s = $dbw->selectRow(
 			'quizgame_answers',
 			[ 'a_choice_id' ],
-			[ 'a_q_id' => intval( $id ), 'a_user_name' => $user->getName() ],
+			[ 'a_q_id' => intval( $id ), 'a_actor' => $user->getActorId() ],
 			__METHOD__
 		);
 
@@ -44,8 +44,7 @@ class ApiQuizGameVote extends ApiBase {
 			'quizgame_answers',
 			[
 				'a_q_id' => intval( $id ),
-				'a_user_id' => $user->getId(),
-				'a_user_name' => $user->getName(),
+				'a_actor' => $user->getActorId(),
 				'a_choice_id' => $answer,
 				'a_points' => $points,
 				'a_date' => date( 'Y-m-d H:i:s' )
@@ -61,7 +60,7 @@ class ApiQuizGameVote extends ApiBase {
 		// Clear out anti-cheating table
 		$dbw->delete(
 			'quizgame_user_view',
-			[ 'uv_user_id' => $user->getId(), 'uv_q_id' => intval( $id ) ],
+			[ 'uv_actor' => $user->getActorId(), 'uv_q_id' => intval( $id ) ],
 			__METHOD__
 		);
 
@@ -142,7 +141,7 @@ class ApiQuizGameVote extends ApiBase {
 			$dbw->update(
 				'user_stats',
 				[ 'stats_quiz_questions_correct_percent = stats_quiz_questions_correct/stats_quiz_questions_answered' ],
-				[ 'stats_user_id' => $user->getId() ],
+				[ 'stats_actor' => $user->getActorId() ],
 				__METHOD__
 			);
 

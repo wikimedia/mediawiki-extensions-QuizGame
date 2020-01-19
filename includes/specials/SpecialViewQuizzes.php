@@ -82,7 +82,10 @@ class ViewQuizzes extends UnlistedSpecialPage {
 		$user = $request->getVal( 'user' );
 		$linkQueryParameters = [];
 		if ( $user ) {
-			$where['q_user_name'] = $user;
+			$u = User::newFromName( $user );
+			if ( $u && $u instanceof User ) {
+				$where['q_actor'] = $u->getActorId();
+			}
 			$linkQueryParameters['user'] = $user;
 		}
 
@@ -117,7 +120,7 @@ class ViewQuizzes extends UnlistedSpecialPage {
 		$res = $dbr->select(
 			'quizgame_questions',
 			[
-				'q_id', 'q_user_id', 'q_user_name', 'q_text',
+				'q_id', 'q_actor', 'q_text',
 				'q_date', 'q_picture', 'q_answer_count'
 			],
 			$where,
@@ -143,9 +146,12 @@ class ViewQuizzes extends UnlistedSpecialPage {
 		$x = ( ( $page - 1 ) * $per_page ) + 1;
 
 		foreach ( $res as $row ) {
-			$user_create = $row->q_user_name;
-			$user_id = $row->q_user_id;
-			$avatar = new wAvatar( $user_id, 'm' );
+			$creator = User::newFromActorId( $row->q_actor );
+			if ( !$creator || !$creator instanceof User ) {
+				continue;
+			}
+			$safeUserName = htmlspecialchars( $creator->getName(), ENT_QUOTES );
+			$avatar = new wAvatar( $creator->getId(), 'm' );
 			$quiz_title = $row->q_text;
 			$quiz_date = wfTimestamp( TS_UNIX, $row->q_date );
 			$quiz_answers = $row->q_answer_count;
@@ -156,7 +162,6 @@ class ViewQuizzes extends UnlistedSpecialPage {
 				'questionGameAction' => 'renderPermalink',
 				'permalinkID' => $quiz_id
 			] ) );
-			// Hover support is done in /js/QuizGame.js
 			if ( ( $x < $total ) && ( $x % $per_page != 0 ) ) {
 				$output .= "<div class=\"view-quizzes-row\" id=\"{$row_id}\" onclick=\"window.location='" . $url . '\'">';
 			} else {
@@ -165,7 +170,7 @@ class ViewQuizzes extends UnlistedSpecialPage {
 
 			$output .= "<div class=\"view-quizzes-number\">{$x}.</div>
 				<div class=\"view-quizzes-user-image\">{$avatar->getAvatarURL()}</div>
-				<div class=\"view-quizzes-user-name\">{$user_create}</div>
+				<div class=\"view-quizzes-user-name\">{$safeUserName}</div>
 				<div class=\"view-quizzes-text\">
 					<p><b><u>{$quiz_title}</u></b></p>
 					<p class=\"view-quizzes-num-answers\">" .

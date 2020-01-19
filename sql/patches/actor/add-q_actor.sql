@@ -1,0 +1,1 @@
+ALTER TABLE /*_*/quizgame_questions ADD COLUMN q_actor bigint unsigned NOT NULL AFTER q_id;

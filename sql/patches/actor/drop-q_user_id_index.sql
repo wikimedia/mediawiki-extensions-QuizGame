@@ -1,0 +1,1 @@
+DROP INDEX /*i*/q_user_id ON /*_*/quizgame_questions;

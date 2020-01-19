@@ -79,6 +79,7 @@ class QuizGameHooks {
 	 */
 	public static function onLoadExtensionSchemaUpdates( $updater ) {
 		$sqlDirectory = __DIR__ . '/../sql/';
+
 		$updater->addExtensionTable( 'quizgame_questions', $sqlDirectory . 'quizgame_questions.sql' );
 		$updater->addExtensionTable( 'quizgame_answers', $sqlDirectory . 'quizgame_answers.sql' );
 		$updater->addExtensionTable( 'quizgame_choice', $sqlDirectory . 'quizgame_choice.sql' );
@@ -86,24 +87,81 @@ class QuizGameHooks {
 
 		$updater->modifyExtensionField( 'quizgame_choice', 'choice_answer_count',
  			$sqlDirectory . "patches/patch-add-default-choice_answer_count.sql" );
-	}
 
-	/**
-	 * For integration with the Renameuser extension.
-	 *
-	 * @param RenameuserSQL $renameUserSQL
-	 */
-	public static function onRenameUserSQL( $renameUserSQL ) {
-		$renameUserSQL->tables['quizgame_questions'] = [
-			'q_user_name', 'q_user_id'
-		];
-		$renameUserSQL->tables['quizgame_answers'] = [
-			'a_user_name', 'a_user_id'
-		];
-		// quizgame_choice table has no information related to the user
-		$renameUserSQL->tables['quizgame_user_view'] = [
-			'uv_user_name', 'uv_user_id'
-		];
+		// Actor support (T227345)
+		$db = $updater->getDB();
+
+		if ( !$db->fieldExists( 'quizgame_answers', 'a_actor', __METHOD__ ) ) {
+			// 1) add new actor column
+			$updater->addExtensionField( 'quizgame_answers', 'a_actor', $sqlDirectory . 'patches/actor/add-a_actor.sql' );
+
+			// 2) add the corresponding index
+			$updater->addExtensionIndex( 'quizgame_answers', 'a_actor', $sqlDirectory . 'patches/actor/add-a_actor_index.sql' );
+
+			// 3) populate the columns with correct values
+			// PITFALL WARNING! Do NOT change this to $updater->runMaintenance,
+			// THEY ARE NOT THE SAME THING and this MUST be using addExtensionUpdate
+			// instead for the code to work as desired!
+			// HT Skizzerz
+			$updater->addExtensionUpdate( [
+				'runMaintenance',
+				'MigrateOldQuizGameAnswersUserColumnsToActor',
+				'../maintenance/migrateOldQuizGameAnswersUserColumnsToActor.php'
+			] );
+
+			// 4) drop old columns + indexes
+			$updater->dropExtensionField( 'quizgame_answers', 'a_user_name', $sqlDirectory . 'patches/actor/drop-a_user_name.sql' );
+			$updater->dropExtensionField( 'quizgame_answers', 'a_user_id', $sqlDirectory . 'patches/actor/drop-a_user_id.sql' );
+			$updater->dropExtensionIndex( 'quizgame_answers', 'a_user_id', $sqlDirectory . 'patches/actor/drop-a_user_id_index.sql' );
+		}
+
+		if ( !$db->fieldExists( 'quizgame_questions', 'q_actor', __METHOD__ ) ) {
+			// 1) add new actor column
+			$updater->addExtensionField( 'quizgame_questions', 'q_actor', $sqlDirectory . 'patches/actor/add-q_actor.sql' );
+
+			// 2) add the corresponding index
+			$updater->addExtensionIndex( 'quizgame_questions', 'q_actor', $sqlDirectory . 'patches/actor/add-q_actor_index.sql' );
+
+			// 3) populate the columns with correct values
+			// PITFALL WARNING! Do NOT change this to $updater->runMaintenance,
+			// THEY ARE NOT THE SAME THING and this MUST be using addExtensionUpdate
+			// instead for the code to work as desired!
+			// HT Skizzerz
+			$updater->addExtensionUpdate( [
+				'runMaintenance',
+				'MigrateOldQuizGameQuestionsUserColumnsToActor',
+				'../maintenance/migrateOldQuizGameQuestionsUserColumnsToActor.php'
+			] );
+
+			// 4) drop old columns + indexes
+			$updater->dropExtensionField( 'quizgame_questions', 'q_user_name', $sqlDirectory . 'patches/actor/drop-q_user_name.sql' );
+			$updater->dropExtensionField( 'quizgame_questions', 'q_user_id', $sqlDirectory . 'patches/actor/drop-q_user_id.sql' );
+			$updater->dropExtensionIndex( 'quizgame_questions', 'q_user_id', $sqlDirectory . 'patches/actor/drop-q_user_id_index.sql' );
+		}
+
+		if ( !$db->fieldExists( 'quizgame_user_view', 'uv_actor', __METHOD__ ) ) {
+			// 1) add new actor column
+			$updater->addExtensionField( 'quizgame_user_view', 'uv_actor', $sqlDirectory . 'patches/actor/add-uv_actor.sql' );
+
+			// 2) add the corresponding index
+			$updater->addExtensionIndex( 'quizgame_user_view', 'uv_actor', $sqlDirectory . 'patches/actor/add-uv_actor_index.sql' );
+
+			// 3) populate the columns with correct values
+			// PITFALL WARNING! Do NOT change this to $updater->runMaintenance,
+			// THEY ARE NOT THE SAME THING and this MUST be using addExtensionUpdate
+			// instead for the code to work as desired!
+			// HT Skizzerz
+			$updater->addExtensionUpdate( [
+				'runMaintenance',
+				'MigrateOldQuizGameUserViewUserColumnsToActor',
+				'../maintenance/migrateOldQuizGameUserViewUserColumnsToActor.php'
+			] );
+
+			// 4) drop old columns + indexes
+			$updater->dropExtensionField( 'quizgame_user_view', 'uv_user_name', $sqlDirectory . 'patches/actor/drop-uv_user_name.sql' );
+			$updater->dropExtensionField( 'quizgame_user_view', 'uv_user_id', $sqlDirectory . 'patches/actor/drop-uv_user_id.sql' );
+			$updater->dropExtensionIndex( 'quizgame_user_view', 'uv_user_id', $sqlDirectory . 'patches/actor/drop-uv_user_id_index.sql' );
+		}
 	}
 
 	/**

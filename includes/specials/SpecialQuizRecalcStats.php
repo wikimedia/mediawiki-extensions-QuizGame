@@ -43,7 +43,7 @@ class QuizRecalcStats extends UnlistedSpecialPage {
 		$dbw = wfGetDB( DB_MASTER );
 		$res = $dbw->select(
 			'user_stats',
-			[ 'stats_user_name', 'stats_user_id' ],
+			[ 'stats_actor' ],
 			[ 'stats_quiz_questions_correct >= stats_quiz_questions_answered' ],
 			__METHOD__
 		);
@@ -55,17 +55,17 @@ class QuizRecalcStats extends UnlistedSpecialPage {
 			$sql = "UPDATE {$dbw->tableName( 'user_stats' )} SET stats_quiz_points = (
 				SELECT SUM(a_points) FROM {$dbw->tableName( 'quizgame_answers' )}
 				INNER JOIN {$dbw->tableName( 'quizgame_choice' )} ON a_choice_id=choice_id
-				WHERE a_user_id = {$row->stats_user_id} AND choice_is_correct=1),
+				WHERE a_actor = {$row->stats_actor} AND choice_is_correct=1),
 				stats_quiz_questions_correct = (
 				SELECT COUNT(*) FROM {$dbw->tableName( 'quizgame_answers' )}
 				INNER JOIN {$dbw->tableName( 'quizgame_choice' )} ON a_choice_id=choice_id
-				WHERE a_user_id = {$row->stats_user_id} AND choice_is_correct=1),
+				WHERE a_actor = {$row->stats_actor} AND choice_is_correct=1),
 
 				stats_quiz_questions_answered = (
 				SELECT COUNT(*) FROM {$dbw->tableName( 'quizgame_answers' )}
-				WHERE a_user_id = {$row->stats_user_id} )
+				WHERE a_actor = {$row->stats_actor} )
 
-				WHERE stats_user_id = '{$row->stats_user_id}'";
+				WHERE stats_actor = '{$row->stats_actor}'";
 
 			$res2 = $dbw->query( $sql, __METHOD__ );
 			/*
@@ -75,7 +75,7 @@ class QuizRecalcStats extends UnlistedSpecialPage {
 				[ 'quizgame_answers', 'quizgame_choice' ],
 				'SUM(a_points) AS sum',
 				[
-					'a_user_id' => $row->stats_user_id,
+					'a_actor' => $row->stats_actor,
 					'choice_is_correct' => 1
 				],
 				__METHOD__,
@@ -90,7 +90,7 @@ class QuizRecalcStats extends UnlistedSpecialPage {
 				[ 'quizgame_answers', 'quizgame_choice' ],
 				[ 'COUNT(*) AS count' ],
 				[
-					'a_user_id' => $row->stats_user_id,
+					'a_actor' => $row->stats_actor,
 					'choice_is_correct' => 1
 				],
 				__METHOD__,
@@ -104,7 +104,7 @@ class QuizRecalcStats extends UnlistedSpecialPage {
 			$answered = $dbw->selectField(
 				'quizgame_answers',
 				'COUNT(*)',
-				[ 'a_user_id' => $row->stats_user_id ],
+				[ 'a_actor' => $row->stats_actor ],
 				__METHOD__
 			);
 
@@ -115,7 +115,7 @@ class QuizRecalcStats extends UnlistedSpecialPage {
 					'stats_quiz_questions_correct' => intval( $correct->count ),
 					'stats_quiz_questions_answered' => intval( $answered )
 				],
-				[ 'stats_user_id' => $row->stats_user_id ],
+				[ 'stats_actor' => $row->stats_actor ],
 				__METHOD__
 			);
 			*/
@@ -123,7 +123,7 @@ class QuizRecalcStats extends UnlistedSpecialPage {
 			$dbw->update(
 				'user_stats',
 				[ 'stats_quiz_questions_correct_percent=stats_quiz_questions_correct/stats_quiz_questions_answered' ],
-				[ 'stats_user_id' => $row->stats_user_id ],
+				[ 'stats_actor' => $row->stats_actor ],
 				__METHOD__
 			);
 			$count++;
