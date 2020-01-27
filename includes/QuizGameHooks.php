@@ -80,17 +80,26 @@ class QuizGameHooks {
 	public static function onLoadExtensionSchemaUpdates( $updater ) {
 		$sqlDirectory = __DIR__ . '/../sql/';
 
+		$db = $updater->getDB();
+		$isPostgreSQL = ( $db->getType() === 'postgres' );
+		if ( $isPostgreSQL ) {
+			$sqlDirectory .= 'postgres/';
+		}
+
 		$updater->addExtensionTable( 'quizgame_questions', $sqlDirectory . 'quizgame_questions.sql' );
 		$updater->addExtensionTable( 'quizgame_answers', $sqlDirectory . 'quizgame_answers.sql' );
 		$updater->addExtensionTable( 'quizgame_choice', $sqlDirectory . 'quizgame_choice.sql' );
 		$updater->addExtensionTable( 'quizgame_user_view', $sqlDirectory . 'quizgame_user_view.sql' );
 
+		if ( $isPostgreSQL ) {
+			// Don't run the stuff below for Postgres, they're all MySQL/MariaDB-specific
+			return;
+		}
+
 		$updater->modifyExtensionField( 'quizgame_choice', 'choice_answer_count',
  			$sqlDirectory . "patches/patch-add-default-choice_answer_count.sql" );
 
 		// Actor support (T227345)
-		$db = $updater->getDB();
-
 		if ( !$db->fieldExists( 'quizgame_answers', 'a_actor', __METHOD__ ) ) {
 			// 1) add new actor column
 			$updater->addExtensionField( 'quizgame_answers', 'a_actor', $sqlDirectory . 'patches/actor/add-a_actor.sql' );
