@@ -234,7 +234,7 @@ class ApiQuizGame extends ApiBase {
 	private function createLogEntry( $what, $id, $comment = '' ) {
 		$logEntry = new ManualLogEntry( 'quiz', $what );
 		$logEntry->setPerformer( $this->getUser() );
-		$logEntry->setTarget( SpecialPage::getTitleFor( 'QuestionGameHome', $id ) );
+		$logEntry->setTarget( SpecialPage::getTitleFor( 'QuestionGameHome', (string)$id ) );
 		// Flagging reason, if any
 		if ( !empty( $comment ) ) {
 			$logEntry->setComment( $comment );

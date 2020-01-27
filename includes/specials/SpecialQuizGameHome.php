@@ -1313,7 +1313,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 		if( $wgQuizLogs ) {
 			$logEntry = new ManualLogEntry( 'quiz', 'create' );
 			$logEntry->setPerformer( $user );
-			$logEntry->setTarget( $this->getPageTitle( $questionId ) );
+			$logEntry->setTarget( $this->getPageTitle( (string)$questionId ) );
 			$logEntry->setParameters( [
 				'4::quizid' => $questionId
 			] );
