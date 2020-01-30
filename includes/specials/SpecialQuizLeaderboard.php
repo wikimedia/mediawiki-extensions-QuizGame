@@ -41,10 +41,9 @@ class QuizLeaderboard extends UnlistedSpecialPage {
 				$field = 'stats_quiz_questions_correct_percent';
 				$whereConds[] = 'stats_quiz_questions_answered >= 50';
 				break;
-			case 'points':
+			default:
 				$out->setPageTitle( $this->msg( 'quizgame-leaderboard-most-points' )->text() );
 				$field = 'stats_quiz_points';
-				break;
 		}
 
 		$dbr = wfGetDB( DB_MASTER );
@@ -167,6 +166,8 @@ class QuizLeaderboard extends UnlistedSpecialPage {
 				case 'points':
 					$stat = $this->msg( 'quizgame-leaderboard-desc-points', $lang->formatNum( $row->$field ) )->parse();
 					break;
+				default:
+					$stat = '';
 			}
 
 			$output .= "<span class=\"top-fan-points\"><b>{$stat}</b></span>";

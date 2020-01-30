@@ -91,9 +91,7 @@ class ApiQuizGameVote extends ApiBase {
 			[ 'q_id' => intval( $id ) ],
 			__METHOD__
 		);
-		if ( $s !== false ) {
-			$answer_count = $s->q_answer_count;
-		}
+		$answer_count = $s ? $s->q_answer_count : 0;
 
 		// Check if the answer was right
 		$s = $dbw->selectRow(

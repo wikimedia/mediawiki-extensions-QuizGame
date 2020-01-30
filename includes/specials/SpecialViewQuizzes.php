@@ -30,16 +30,8 @@ class ViewQuizzes extends UnlistedSpecialPage {
 		$out->addModules( 'ext.quizGame' );
 
 		// Page either most or newest for everyone
-		$type = $request->getVal( 'type' );
-		if ( !$type ) {
-			$type = 'newest';
-		}
-		if ( $type == 'newest' ) {
-			$order = 'q_date';
-		}
-		if ( $type == 'most' ) {
-			$order = 'q_answer_count';
-		}
+		$type = $request->getVal( 'type' ) ?: 'newest';
+		$order = $type === 'most' ? 'q_answer_count' : 'q_date';
 
 		// Pagination
 		$per_page = 20;

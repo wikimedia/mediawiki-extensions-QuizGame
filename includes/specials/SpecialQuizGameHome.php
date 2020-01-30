@@ -509,9 +509,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 			[ 'choice_q_id' => $id, 'choice_is_correct' => 1 ],
 			__METHOD__
 		);
-		if ( $s !== false ) {
-			$new_correct_id = $s->choice_id;
-		}
+		$new_correct_id = $s ? $s->choice_id : $old_correct_id;
 
 		// Ruh roh rorge...we have to fix stats
 		if ( $new_correct_id != $old_correct_id ) {
@@ -653,6 +651,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 		$x = 1;
 		$choices_count = count( $question['choices'] );
 		$quizOptions = '';
+		$old_correct = 0;
 		foreach ( $question['choices'] as $choice ) {
 			if ( $choice['is_correct'] ) {
 				$old_correct = $choice['id'];
