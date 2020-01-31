@@ -13,5 +13,6 @@
 	"quizgame-js-loading": "Yükleniyor...",
 	"quizgame-permalink": "Kalıcı bağlantı",
 	"quizgame-time-ago": "$1 önce",
-	"quizgame-time-days": "{{PLURAL:$1|bir gün|$1 gün}}"
+	"quizgame-time-days": "{{PLURAL:$1|bir gün|$1 gün}}",
+	"apihelp-quizgamevote-example-1": "Oyla."
 }
