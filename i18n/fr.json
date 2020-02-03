@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Wladek92",
-			"Gomoko"
+			"Gomoko",
+			"Derugon"
 		]
 	},
 	"quizgame-desc": "Ajoute un [[Special:QuizGameHome|jeu de questions]] interactif",
@@ -56,6 +57,7 @@
 	"quizgame-leaderboard-menu-points": "Points",
 	"quizgame-leaderboard-menu-correct": "Total des réponses correctes",
 	"quizgame-leaderboard-menu-pct": "Pourcentage le plus élevé",
+	"quizgame-leaderboard-desc-pct": "$1 %",
 	"quizgame-leaderboard-desc-correct": "$1 correct",
 	"quizgame-leaderboard-desc-points": "{{PLURAL:$1|1 point|$1 points}}",
 	"quizgame-login-or-create-to-climb": "[[Special:UserLogin|Connectez_vous]] ou [[Special:UserLogin/signup|créez un compte]] pour terminer et avancer dans le classement !",
