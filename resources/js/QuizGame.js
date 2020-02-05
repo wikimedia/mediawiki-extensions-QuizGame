@@ -16,7 +16,7 @@ window.QuizGame = {
 	points_array: [30, 20, 10, 0],
 	timer: 30,
 	count_second: '', // has to have an initial value...
-	points: mw.config.get( '__quiz_js_points_value__' ),// 30,
+	points: mw.config.get( '__quiz_js_points_value__' ), // 30,
 	next_level: 0, // has to have an initial value; introduced by Jack
 
 	deleteById: function( id ) {
@@ -205,7 +205,7 @@ window.QuizGame = {
 		var options = {
 			actions: [
 				{ label: mw.msg( 'cancel' ) },
-				{ label: mw.msg( 'quizgame-flag' ), action: 'accept', flags: ['destructive', 'primary'] },
+				{ label: mw.msg( 'quizgame-flag' ), action: 'accept', flags: ['destructive', 'primary'] }
 			],
 			textInput: { placeholder: mw.msg( 'quizgame-flagged-reason' ) }
 		};
@@ -307,13 +307,10 @@ window.QuizGame = {
 				( QuizGame.timer <= QuizGame.levels_array[x] && QuizGame.timer > QuizGame.levels_array[x + 1] )
 			)
 			{
-				//document.getElementById( 'quiz-level-' + ( x ) ).className = 'quiz-level-on';
 				QuizGame.points = QuizGame.points_array[x];
 				document.getElementById( 'quiz-points' ).innerHTML =
 					mw.message( 'quizgame-js-points', QuizGame.points ).text();
 				QuizGame.next_level = ( ( QuizGame.levels_array[x + 1] ) ? QuizGame.levels_array[x + 1] : 0 );
-			} else {
-				//document.getElementById( 'quiz-level-' + ( x ) ).className = 'quiz-level-off';
 			}
 		}
 	},
@@ -723,7 +720,10 @@ jQuery( function() {
 		jQuery( 'p#quizgame-picture-reupload' ).append(
 			jQuery( '<a>' )
 				.attr( 'href', '#' )
-				.on( 'click', function( event ) { event.preventDefault(); QuizGame.showAttachPicture(); } )
+				.on( 'click', function( event ) {
+					event.preventDefault();
+					QuizGame.showAttachPicture();
+				} )
 				.text( mw.msg( 'quizgame-create-edit-picture' ) )
 		);
 
