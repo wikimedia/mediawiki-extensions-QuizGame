@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Robby"
+			"Robby",
+			"Soued031"
 		]
 	},
 	"quizgame-edit": "Änneren",
@@ -29,11 +30,11 @@
 	"quizgame-login-button": "Aloggen",
 	"quizgame-submit": "Schécken",
 	"quizgame-nomore-questions": "Keng Froe méi!",
-	"quizgame-ohnoes": "Et gëtt soss keng Quizen, klickt w.e.g. hei drënner fir een unzeleeën!",
+	"quizgame-ohnoes": "Et gëtt soss keng Quizen, klickt wgl. hei drënner fir een unzeleeën!",
 	"quizgame-create-button": "Leet e Quiz un!",
 	"quizgame-unavailable": "Dës Fro ass leider net disponibel!\n\n[[Special:QuizGameHome|Klickt hei fir e puer aner Froen ze probéieren]]",
 	"quizgame-title": "Quiz!",
-	"quizgame-intro": "Wëllkomm beim Quiz. Hei sinn e puer Regelen.",
+	"quizgame-intro": "Wëllkomm beim Quiz. Hei sinn e puer Reegelen.",
 	"quizgame-introlink": "Klickt hei fir unzefänken",
 	"quizgame-leaderboard-scoretitle": "Äre Score",
 	"quizgame-leaderboard-quizpoints": "Quizpunkten",

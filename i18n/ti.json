@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			"Joanmp17"
+		]
+	},
+	"quizgame-edit": "የዐርይ",
+	"quizgame-delete": "ሰረዘ",
+	"quizgame-protect": "ተኸላኸለ",
+	"quizgame-flagged-reason": "ምኽንያት",
+	"quizgame-save-page-button": "ገጽ ኣቐምጥ",
+	"quizgame-cancel-button": "ኣትርፍ",
+	"quizgame-main-page-button": "መበገሲ ገጽ",
+	"quizgame-login-button": "ብመንነት እተው",
+	"quizgame-js-loading": "ጽዕነት..."
+}
