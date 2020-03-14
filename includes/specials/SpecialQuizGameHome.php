@@ -12,6 +12,8 @@
  * @link https://www.mediawiki.org/wiki/Extension:QuizGame Documentation
  */
 
+use MediaWiki\MediaWikiServices;
+
 class QuizGameHome extends UnlistedSpecialPage {
 
 	// quizgame_questions.q_flag used to be an enum() and that sucked, big time
@@ -339,6 +341,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 		// Define variables to avoid E_NOTICEs
 		$flaggedQuestions = '';
 		$protectedQuestions = '';
+		$repoGroup = MediaWikiServices::getInstance()->getRepoGroup();
 
 		foreach ( $res as $row ) {
 			$options = '<ul>';
@@ -352,7 +355,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 
 			$thumbnail = '';
 			if ( strlen( $row->q_picture ) > 0 ) {
-				$image = wfFindFile( $row->q_picture );
+				$image = $repoGroup->findFile( $row->q_picture );
 				// You know why this check is here, just grep for the function
 				// name (I'm too lazy to copypaste it here for the third time).
 				if ( is_object( $image ) ) {
@@ -613,7 +616,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 		$uploadPage = SpecialPage::getTitleFor( 'QuestionGameUpload' );
 
 		if ( strlen( $question['image'] ) > 0 ) {
-			$image = wfFindFile( $question['image'] );
+			$image = MediaWikiServices::getInstance()->getRepoGroup()->findFile( $question['image'] );
 			$thumbtag = '';
 			// If a file that is still being used on a quiz game is
 			// independently deleted from the quiz game, poor users will
@@ -912,7 +915,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 		$out->setPageTitle( $question['text'] );
 
 		if ( strlen( $question['image'] ) > 0 ) {
-			$image = wfFindFile( $question['image'] );
+			$image = MediaWikiServices::getInstance()->getRepoGroup()->findFile( $question['image'] );
 			$imageThumb = '';
 			$imgWidth = 0;
 			// If a file that is still being used on a quiz game is
