@@ -138,7 +138,7 @@
 	"logentry-quiz-unprotect": "$1 {{GENDER:$1|зняв|зняла}} захист із [[Special:QuizGameHome/$4|запитання вікторини #$4]]",
 	"quizgame-images-category": "Зображення QuizGame",
 	"action-quizadmin": "адміністрування вікторин",
-	"right-quizadmin": "адміністрування вікторин",
+	"right-quizadmin": "Адміністрування вікторин",
 	"apihelp-quizgame-description": "Question Game API для адміністративних дій.",
 	"apihelp-quizgame-summary": "API вікторини для адміністративних дій.",
 	"apihelp-quizgame-param-comment": "Причина встановлення позначки (використовується лише у flagItem).",
