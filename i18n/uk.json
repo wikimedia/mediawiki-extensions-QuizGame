@@ -1,9 +1,9 @@
 {
 	"@metadata": {
 		"authors": [
-			"Piramidion",
 			"Matěj Suchánek",
-			"Movses"
+			"Movses",
+			"Piramidion"
 		]
 	},
 	"quizgame-desc": "Додає інтерактивну [[Special:QuizGameHome|гру-опитування]]",
