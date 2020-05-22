@@ -13,7 +13,7 @@
 	"quizgame-unflag": "İşaretini kaldır",
 	"quizgame-unflag-confirm": "Bu test oyununun işaretini kaldırmak istediğinizden emin misiniz?",
 	"quizgame-unprotect": "Korumayı kaldır",
-	"quizgame-error-socialprofile": "[https://www.mediawiki.org/wiki/Extension:SocialProfile SocialProfile uzantısı] yüklü değil. Lütfen bu uzantıyı yükleyin ve tekrar deneyin.",
+	"quizgame-error-socialprofile": "[https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:SocialProfile SocialProfile uzantısı] yüklü değil. Lütfen bu uzantıyı yükleyin ve tekrar deneyin.",
 	"quizgame-error-socialprofile-title": "SocialProfile uzantısı yüklü değil.",
 	"quizgame-admin-panel-title": "Yönetim paneli",
 	"quizgame-admin-back": "< Hiç bitmeyen teste geri dön",

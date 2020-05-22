@@ -12,7 +12,7 @@
 	"quizgame-unflag": "取消标记",
 	"quizgame-unflag-confirm": "您确定要取消标记该问答游戏么?",
 	"quizgame-unprotect": "取消保护",
-	"quizgame-error-socialprofile": "[https://www.mediawiki.org/wiki/Extension:SocialProfile SocialProfile扩展]尚未安装。请安装该扩展并重试。",
+	"quizgame-error-socialprofile": "[https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:SocialProfile SocialProfile扩展]尚未安装。请安装该扩展并重试。",
 	"quizgame-error-socialprofile-title": "SocialProfile扩展未安装。",
 	"quizgame-admin-panel-title": "管理面板",
 	"quizgame-admin-back": "< 返回以永不结束问答",

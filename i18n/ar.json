@@ -14,7 +14,7 @@
 	"quizgame-unflag": "عدم التعليم",
 	"quizgame-unflag-confirm": "هل أنت متأكد من أنك تريد عدم التعليم على لعبة المسابقة هذه؟",
 	"quizgame-unprotect": "رفع الحماية",
-	"quizgame-error-socialprofile": "لم يتم تثبيت [https://www.mediawiki.org/wiki/Extension:SocialProfile SocialProfile extension]; الرجاء تثبيت هذا الملحق والمحاولة مرة أخرى.",
+	"quizgame-error-socialprofile": "لم يتم تثبيت [https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:SocialProfile SocialProfile extension]; الرجاء تثبيت هذا الملحق والمحاولة مرة أخرى.",
 	"quizgame-error-socialprofile-title": "امتداد SocialProfile غير مثبت.",
 	"quizgame-admin-panel-title": "لوحة الإدارة",
 	"quizgame-admin-back": "< العودة إلى مسابقة لا تنتهي أبدا",

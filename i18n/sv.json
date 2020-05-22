@@ -12,7 +12,7 @@
 	"quizgame-unflag": "Avflagga",
 	"quizgame-unflag-confirm": "Är du säker du vill avflagga denna frågesport?",
 	"quizgame-unprotect": "Ta bort skydd",
-	"quizgame-error-socialprofile": "[https://www.mediawiki.org/wiki/Extension:SocialProfile SocialProfile-tillägget] är inte installerat. Installera detta tillägg och försök igen.",
+	"quizgame-error-socialprofile": "[https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:SocialProfile SocialProfile-tillägget] är inte installerat. Installera detta tillägg och försök igen.",
 	"quizgame-error-socialprofile-title": "SocialProfile-tillägget är inte installerat.",
 	"quizgame-admin-panel-title": "Adminpanel",
 	"quizgame-admin-back": "< Tillbaka till den oändliga frågesporten",

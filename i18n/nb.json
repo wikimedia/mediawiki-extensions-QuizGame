@@ -12,7 +12,7 @@
 	"quizgame-unflag": "Fjern flagging",
 	"quizgame-unflag-confirm": "Er du sikker på at du vil fjerne flaggingen av denne kvissen?",
 	"quizgame-unprotect": "Avbeskytt",
-	"quizgame-error-socialprofile": "Utvidelsen [https://www.mediawiki.org/wiki/Extension:SocialProfile SocialProfile] er ikke installert. Installer denne utvidelsen og prøv igjen.",
+	"quizgame-error-socialprofile": "Utvidelsen [https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:SocialProfile SocialProfile] er ikke installert. Installer denne utvidelsen og prøv igjen.",
 	"quizgame-error-socialprofile-title": "Utvidelsen SocialProfile er ikke installert.",
 	"quizgame-admin-panel-title": "Administrasjonspanel",
 	"quizgame-admin-back": "< Tilbake til den uendelige kvissen",

@@ -14,7 +14,7 @@
 	"quizgame-unflag": "Markierung zurücknehmen",
 	"quizgame-unflag-confirm": "Bist du sicher, dass du die Markierung dieses Quizspiels zurücknehmen möchtest?",
 	"quizgame-unprotect": "Freigeben",
-	"quizgame-error-socialprofile": "Die Erweiterung „[https://www.mediawiki.org/wiki/Extension:SocialProfile SocialProfile]“ ist nicht installiert. Bitte installiere sie und versuche es erneut.",
+	"quizgame-error-socialprofile": "Die Erweiterung „[https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:SocialProfile SocialProfile]“ ist nicht installiert. Bitte installiere sie und versuche es erneut.",
 	"quizgame-error-socialprofile-title": "Die Erweiterung „SocialProfile“ ist nicht installiert.",
 	"quizgame-admin-panel-title": "Verwaltungsseite",
 	"quizgame-admin-back": "< Zurück zum nie endenden Quiz",

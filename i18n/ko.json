@@ -10,7 +10,7 @@
 	"quizgame-delete-confirm": "이 퀴즈 게임을 삭제하시겠습니까?",
 	"quizgame-protect": "보호",
 	"quizgame-unprotect": "보호 해제",
-	"quizgame-error-socialprofile": "[https://www.mediawiki.org/wiki/Extension:SocialProfile SocialProfile 확장 기능]이 설치되어 있지 않습니다. 이 확장 기능을 설치한 다음 다시 시도하십시오.",
+	"quizgame-error-socialprofile": "[https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:SocialProfile SocialProfile 확장 기능]이 설치되어 있지 않습니다. 이 확장 기능을 설치한 다음 다시 시도하십시오.",
 	"quizgame-error-socialprofile-title": "SocialProfile 확장 기능이 설치되어 있지 않습니다.",
 	"quizgame-admin-permission": "편집할 권한이 없습니다",
 	"quizgame-edit-title": "편집 중 - $1",

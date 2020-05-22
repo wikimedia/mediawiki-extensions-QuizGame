@@ -13,7 +13,7 @@
 	"quizgame-unflag": "取消標記",
 	"quizgame-unflag-confirm": "您確定您要取消標記此問答遊戲嗎？",
 	"quizgame-unprotect": "取消保護",
-	"quizgame-error-socialprofile": "[https://www.mediawiki.org/wiki/Extension:SocialProfile SocialProfile 擴充]尚未安裝。請安裝此擴充後再重試。",
+	"quizgame-error-socialprofile": "[https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:SocialProfile SocialProfile 擴充]尚未安裝。請安裝此擴充後再重試。",
 	"quizgame-error-socialprofile-title": "SocialProfile 擴充尚未安裝。",
 	"quizgame-admin-panel-title": "管理面板",
 	"quizgame-admin-back": "< 返回到無限問答",
