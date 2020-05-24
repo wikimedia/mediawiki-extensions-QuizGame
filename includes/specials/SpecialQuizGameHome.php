@@ -891,17 +891,19 @@ class QuizGameHome extends UnlistedSpecialPage {
 		global $wgQuizID;
 		$wgQuizID = $question['id'];
 
+		$services = MediaWikiServices::getInstance();
+
 		$timestampedViewed = 0;
 		if ( $user->getActorId() != $question['actor'] ) {
 			// check to see if the user already had viewed this question
-			global $wgMemc;
-			$key = $wgMemc->makeKey( 'quizgame-user-view', $user->getId(), $question['id'] );
-			$data = $wgMemc->get( $key );
+			$cache = $services->getMainWANObjectCache();
+			$key = $cache->makeKey( 'quizgame-user-view', $user->getId(), $question['id'] );
+			$data = $cache->get( $key );
 			if ( $data > 0 ) {
 				$timestampedViewed = $data;
 			} else {
 				// mark that they viewed for first time
-				$wgMemc->set( $key, time() );
+				$cache->set( $key, time() );
 			}
 			$out->addJsConfigVars( 'wgQuizTimestampViewed', $timestampedViewed );
 		}
@@ -915,7 +917,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 		$out->setPageTitle( $question['text'] );
 
 		if ( strlen( $question['image'] ) > 0 ) {
-			$image = MediaWikiServices::getInstance()->getRepoGroup()->findFile( $question['image'] );
+			$image = $services->getRepoGroup()->findFile( $question['image'] );
 			$imageThumb = '';
 			$imgWidth = 0;
 			// If a file that is still being used on a quiz game is
@@ -1256,7 +1258,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 
 	// Function that inserts questions into the database
 	function createQuizGame() {
-		global $wgMemc, $wgQuizLogs;
+		global $wgQuizLogs;
 
 		$request = $this->getRequest();
 		$user = $this->getUser();
@@ -1324,9 +1326,10 @@ class QuizGameHome extends UnlistedSpecialPage {
 			$logEntry->publish( $logId );
 		}
 
-		// Delete memcached key
-		$key = $wgMemc->makeKey( 'user', 'profile', 'quiz', 'actor_id', $user->getActorId() );
-		$wgMemc->delete( $key );
+		// Delete cache key
+		$cache = MediaWikiServices::getInstance()->getMainWANObjectCache();
+		$key = $cache->makeKey( 'user', 'profile', 'quiz', 'actor_id', $user->getActorId() );
+		$cache->delete( $key );
 
 		// Redirect the user
 		header( 'Location: ' . $this->getPageTitle()->getFullURL( "questionGameAction=renderPermalink&permalinkID={$questionId}" ) );

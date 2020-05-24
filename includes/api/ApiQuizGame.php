@@ -6,6 +6,9 @@
  * @file
  * @ingroup API
  */
+
+use MediaWiki\MediaWikiServices;
+
 class ApiQuizGame extends ApiBase {
 
 	/**
@@ -146,6 +149,7 @@ class ApiQuizGame extends ApiBase {
 					'',
 					[ 'quizgame_choice' => [ 'LEFT JOIN', 'choice_id = a_choice_id' ] ]
 				);
+				$cache = MediaWikiServices::getInstance()->getMainWANObjectCache();
 
 				foreach ( $res as $row ) {
 					if ( $row->choice_is_correct == 1 ) {
@@ -182,9 +186,8 @@ class ApiQuizGame extends ApiBase {
 						);
 					}
 
-					global $wgMemc;
-					$key = $wgMemc->makeKey( 'user', 'stats', 'actor_id', $row->a_actor );
-					$wgMemc->delete( $key );
+					$key = $cache->makeKey( 'user', 'stats', 'actor_id', $row->a_actor );
+					$cache->delete( $key );
 				}
 
 				$dbw->delete(
