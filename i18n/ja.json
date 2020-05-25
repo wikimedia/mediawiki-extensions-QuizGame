@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Shirayuki",
 			"シュヴァルツ"
 		]
 	},
@@ -11,7 +12,7 @@
 	"quizgame-unflag": "フラグ解除",
 	"quizgame-unflag-confirm": "このクイズのフラグを解除してもよろしいですか？",
 	"quizgame-unprotect": "保護解除",
-	"quizgame-error-socialprofile": "[https://www.mediawiki.org/wiki/Extension:SocialProfile/ja SocialProfile拡張機能]がインストールされていません。インストールしてからもう一度お試しください。",
+	"quizgame-error-socialprofile": "[https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:SocialProfile SocialProfile拡張機能]がインストールされていません。インストールしてからもう一度お試しください。",
 	"quizgame-error-socialprofile-title": "SocialProfile拡張機能がインストールされていません。",
 	"quizgame-admin-panel-title": "管理者用パネル",
 	"quizgame-admin-back": "< 終わらないクイズに戻る",

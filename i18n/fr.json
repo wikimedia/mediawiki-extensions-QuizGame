@@ -14,7 +14,7 @@
 	"quizgame-unflag": "Démarquer",
 	"quizgame-unflag-confirm": "Etes-vous sûr de vouloir démarquer ce jeu de questions ?",
 	"quizgame-unprotect": "Déprotéger",
-	"quizgame-error-socialprofile": "[https://www.mediawiki.org/wiki/Extension:SocialProfile L’extension SocialProfile] n’est pas installée. Veuillez l’installer puis réessayer.",
+	"quizgame-error-socialprofile": "[https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:SocialProfile L’extension SocialProfile] n’est pas installée. Veuillez l’installer puis réessayer.",
 	"quizgame-error-socialprofile-title": "L’extension SocialProfile n’est pas installée.",
 	"quizgame-admin-panel-title": "Fenêtre administrateur",
 	"quizgame-admin-back": "< Retour au quiz sans fin",
