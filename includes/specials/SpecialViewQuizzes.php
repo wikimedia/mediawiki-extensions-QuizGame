@@ -63,7 +63,7 @@ class ViewQuizzes extends UnlistedSpecialPage {
 		</div>
 
 		<div class="view-quizzes-navigation">
-			<h2>' . $this->msg( 'quizgame-leaderboard-order-menu' )->text() . '</h2>';
+			<h2>' . $this->msg( 'quizgame-leaderboard-order-menu' )->escaped() . '</h2>';
 
 		$dbr = wfGetDB( DB_MASTER );
 
@@ -83,7 +83,7 @@ class ViewQuizzes extends UnlistedSpecialPage {
 
 		if ( $type == 'newest' ) {
 			$linkQueryParameters['type'] = 'most';
-			$output .= '<p><b>' . $this->msg( 'quizgame-newest' )->text() . '</b></p>
+			$output .= '<p><b>' . $this->msg( 'quizgame-newest' )->escaped() . '</b></p>
 				<p>' . $linkRenderer->makeLink(
 					$title,
 					$this->msg( 'quizgame-popular' )->text(),
@@ -98,7 +98,7 @@ class ViewQuizzes extends UnlistedSpecialPage {
 				[],
 				$linkQueryParameters
 			) . '</p>
-				<p><b>' . $this->msg( 'quizgame-popular' )->text() . '</b></p>';
+				<p><b>' . $this->msg( 'quizgame-popular' )->escaped() . '</b></p>';
 		}
 
 		$output .= '</div>';
@@ -144,7 +144,7 @@ class ViewQuizzes extends UnlistedSpecialPage {
 			}
 			$safeUserName = htmlspecialchars( $creator->getName(), ENT_QUOTES );
 			$avatar = new wAvatar( $creator->getId(), 'm' );
-			$quiz_title = $row->q_text;
+			$quiz_title = htmlspecialchars( $row->q_text );
 			$quiz_date = (int)wfTimestamp( TS_UNIX, $row->q_date );
 			$quiz_answers = $row->q_answer_count;
 			$quiz_id = $row->q_id;
@@ -192,7 +192,7 @@ class ViewQuizzes extends UnlistedSpecialPage {
 					$this->msg( 'quizgame-prev' )->text(),
 					[],
 					$linkQueryParameters
-				) . $this->msg( 'word-separator' )->text();
+				) . $this->msg( 'word-separator' )->escaped();
 			}
 
 			if ( ( $total % $per_page ) != 0 ) {
@@ -216,14 +216,14 @@ class ViewQuizzes extends UnlistedSpecialPage {
 						(string)$i,
 						[],
 						$linkQueryParameters
-					) . $this->msg( 'word-separator' )->text();
+					) . $this->msg( 'word-separator' )->escaped();
 				}
 			}
 
 			if ( ( $total - ( $per_page * $page ) ) > 0 ) {
 				$linkQueryParameters['type'] = 'most';
 				$linkQueryParameters['page'] = ( $page + 1 );
-				$output .= $this->msg( 'word-separator' )->text() .
+				$output .= $this->msg( 'word-separator' )->escaped() .
 					$linkRenderer->makeLink(
 						$title,
 						$this->msg( 'quizgame-nav-next' )->text(),

@@ -177,7 +177,7 @@ class ApiQuizGame extends ApiBase {
 							'user_stats',
 							/* SET */[
 								'stats_quiz_questions_correct = stats_quiz_questions_correct - 1',
-								'stats_quiz_points = stats_quiz_points-' . $row->a_points
+								'stats_quiz_points = stats_quiz_points - ' . (int)$row->a_points
 							],
 							/* WHERE */[
 								'stats_actor' => $row->a_actor
