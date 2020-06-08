@@ -86,25 +86,25 @@ class QuizLeaderboard extends UnlistedSpecialPage {
 			$formattedAnswers = $lang->formatNum( $stats_data['quiz_answered'] );
 			// Display the current user's scorecard
 			$output .= "<div class=\"user-rank-lb\">
-				<h2>{$avatar->getAvatarURL()} " . $this->msg( 'quizgame-leaderboard-scoretitle' )->text() . '</h2>
+				<h2>{$avatar->getAvatarURL()} " . $this->msg( 'quizgame-leaderboard-scoretitle' )->escaped() . '</h2>
 
-					<p><b>' . $this->msg( 'quizgame-leaderboard-quizpoints' )->text() . "</b></p>
+					<p><b>' . $this->msg( 'quizgame-leaderboard-quizpoints' )->escaped() . "</b></p>
 					<p class=\"user-rank-points\">{$formattedTotalPoints}</p>
 					<div class=\"visualClear\"></div>
 
-					<p><b>" . $this->msg( 'quizgame-leaderboard-correct' )->text() . "</b></p>
+					<p><b>" . $this->msg( 'quizgame-leaderboard-correct' )->escaped() . "</b></p>
 					<p>{$formattedCorrectAnswers}</p>
 					<div class=\"visualClear\"></div>
 
-					<p><b>" . $this->msg( 'quizgame-leaderboard-answered' )->text() . "</b></p>
+					<p><b>" . $this->msg( 'quizgame-leaderboard-answered' )->escaped() . "</b></p>
 					<p>{$formattedAnswers}</p>
 					<div class=\"visualClear\"></div>
 
-					<p><b>" . $this->msg( 'quizgame-leaderboard-pctcorrect' )->text() . "</b></p>
+					<p><b>" . $this->msg( 'quizgame-leaderboard-pctcorrect' )->escaped() . "</b></p>
 					<p>{$stats_data['quiz_correct_percent']}%</p>
 					<div class=\"visualClear\"></div>
 
-					<p><b>" . $this->msg( 'quizgame-leaderboard-rank' )->text() . "</b></p>
+					<p><b>" . $this->msg( 'quizgame-leaderboard-rank' )->escaped() . "</b></p>
 					<p>{$quiz_rank}</p>
 					<div class=\"visualClear\"></div>
 
@@ -113,12 +113,12 @@ class QuizLeaderboard extends UnlistedSpecialPage {
 
 		// Build the "Order" navigation menu
 		$menu = [
-			$this->msg( 'quizgame-leaderboard-menu-points' )->text() => 'points',
-			$this->msg( 'quizgame-leaderboard-menu-correct' )->text() => 'correct',
-			$this->msg( 'quizgame-leaderboard-menu-pct' )->text() => 'percentage'
+			$this->msg( 'quizgame-leaderboard-menu-points' )->escaped() => 'points',
+			$this->msg( 'quizgame-leaderboard-menu-correct' )->escaped() => 'correct',
+			$this->msg( 'quizgame-leaderboard-menu-pct' )->escaped() => 'percentage'
 		];
 
-		$output .= '<h1>' . $this->msg( 'quizgame-leaderboard-order-menu' )->text() . '</h1>';
+		$output .= '<h1>' . $this->msg( 'quizgame-leaderboard-order-menu' )->escaped() . '</h1>';
 
 		foreach ( $menu as $title => $qs ) {
 			if ( $input != $qs ) {
