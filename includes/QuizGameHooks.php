@@ -14,11 +14,12 @@ class QuizGameHooks {
 	 * @param SkinTemplate $skinTemplate
 	 * @param array $links
 	 */
-	public static function onSkinTemplateNavigationSpecialPage( &$skinTemplate, &$links ) {
+	public static function onSkinTemplateNavigationUniversal( &$skinTemplate, &$links ) {
 		global $wgQuizID;
 
 		$user = $skinTemplate->getUser();
 		$request = $skinTemplate->getRequest();
+		$title = $skinTemplate->getTitle();
 
 		$action = $request->getVal( 'questionGameAction' );
 		$quiz = SpecialPage::getTitleFor( 'QuizGameHome' );
@@ -26,6 +27,7 @@ class QuizGameHooks {
 		// Add edit tab to content actions for quiz admins
 		if (
 			$wgQuizID > 0 &&
+			$title->isSpecial( 'QuizGameHome' ) &&
 			$action != 'createForm' &&
 			$user->isAllowed( 'quizadmin' )
 		)
@@ -48,7 +50,7 @@ class QuizGameHooks {
 
 		// If editing, make special page go back to quiz question
 		if ( $action == 'editItem' ) {
-			$links['views'][$skinTemplate->getTitle()->getNamespaceKey()] = [
+			$links['views'][$title->getNamespaceKey()] = [
 				'class' => 'selected',
 				'text' => $skinTemplate->msg( 'nstab-special' )->plain(),
 				'href' => $quiz->getFullURL( [

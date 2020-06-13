@@ -1,6 +1,6 @@
 {
 	"name": "QuizGame",
-	"version": "4.1",
+	"version": "4.2",
 	"author": [
 		"Aaron Wright",
 		"Ashish Datta",
@@ -54,7 +54,7 @@
 		"QuizGameHooks": "includes/QuizGameHooks.php"
 	},
 	"Hooks": {
-		"SkinTemplateNavigation::SpecialPage": "QuizGameHooks::onSkinTemplateNavigationSpecialPage",
+		"SkinTemplateNavigation::Universal": "QuizGameHooks::onSkinTemplateNavigationUniversal",
 		"MakeGlobalVariablesScript": "QuizGameHooks::onMakeGlobalVariablesScript",
 		"LoadExtensionSchemaUpdates": "QuizGameHooks::onLoadExtensionSchemaUpdates"
 	},
