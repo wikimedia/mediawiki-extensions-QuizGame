@@ -3,7 +3,8 @@
 		"authors": [
 			"Matěj Suchánek",
 			"Movses",
-			"Piramidion"
+			"Piramidion",
+			"Ата"
 		]
 	},
 	"quizgame-desc": "Додає інтерактивну [[Special:QuizGameHome|гру-опитування]]",
@@ -14,7 +15,7 @@
 	"quizgame-unflag": "Зняти позначку",
 	"quizgame-unflag-confirm": "Ви впевнені, що хочете зняти позначку з цієї вікторини?",
 	"quizgame-unprotect": "Зняти захист",
-	"quizgame-error-socialprofile": "[https://www.mediawiki.org/wiki/Extension:SocialProfile Розширення SocialProfile] не встановлено. Будь ласка, встановіть це розширення і спробуйте ще раз.",
+	"quizgame-error-socialprofile": "[https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:SocialProfile Розширення SocialProfile] не встановлено. Будь ласка, встановіть це розширення і спробуйте ще раз.",
 	"quizgame-error-socialprofile-title": "Розширення SocialProfile не встановлено.",
 	"quizgame-admin-panel-title": "Панель адміністратора",
 	"quizgame-admin-back": "< Назад до нескінченної вікторини",
