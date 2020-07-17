@@ -199,6 +199,7 @@ window.QuizGame = {
 	 * for administrator attention and temporarily
 	 * removes it from circulation by calling the API.
 	 * Once done, the status is reported to the user.
+	 *
 	 * @see https://phabricator.wikimedia.org/T156304
 	 */
 	flagQuestion: function() {
@@ -329,6 +330,7 @@ window.QuizGame = {
 
 	/**
 	 * Go to a quiz when we know its ID (which is used in the permalink)
+	 *
 	 * @param {number} id Quiz ID number
 	 */
 	goToQuiz: function( id ) {
