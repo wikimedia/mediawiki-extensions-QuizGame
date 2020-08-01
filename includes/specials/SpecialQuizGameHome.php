@@ -1282,7 +1282,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 				'q_actor' => $user->getActorId(),
 				'q_text' => strip_tags( $question ), // make sure nobody inserts malicious code
 				'q_picture' => $imageName,
-				'q_date' => date( 'Y-m-d H:i:s' ),
+				'q_date' => $dbw->timestamp( date( 'Y-m-d H:i:s' ) ),
 				'q_random' => wfRandom()
 			],
 			__METHOD__
