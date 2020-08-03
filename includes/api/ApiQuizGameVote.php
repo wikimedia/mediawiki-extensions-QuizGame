@@ -47,7 +47,7 @@ class ApiQuizGameVote extends ApiBase {
 				'a_actor' => $user->getActorId(),
 				'a_choice_id' => $answer,
 				'a_points' => $points,
-				'a_date' => date( 'Y-m-d H:i:s' )
+				'a_date' => $dbw->timestamp( date( 'Y-m-d H:i:s' ) )
 			],
 			__METHOD__
 		);
