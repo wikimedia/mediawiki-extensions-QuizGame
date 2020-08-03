@@ -122,7 +122,7 @@
 	"logentry-quiz-protect": "$1が[[Special:QuizGameHome/$4|クイズ #$4]]を保護しました",
 	"logentry-quiz-unflag": "$1が[[Special:QuizGameHome/$4|クイズ #$4]]のフラグを解除しました",
 	"logentry-quiz-unprotect": "$1が[[Special:QuizGameHome/$4|クイズ #$4]]の保護を解除しました",
-	"action-quizadmin": "クイズゲームを管理",
+	"action-quizadmin": "クイズゲームの管理",
 	"right-quizadmin": "クイズゲームを管理",
 	"apihelp-quizgame-example-1": "フラグを立てます。",
 	"apihelp-quizgame-example-2": "クイズを削除します。"
