@@ -57,6 +57,7 @@
 	"quizgame-leaderboard-menu-points": "Punkte",
 	"quizgame-leaderboard-menu-correct": "Insgesamt richtig",
 	"quizgame-leaderboard-menu-pct": "Höchster Prozentsatz",
+	"quizgame-leaderboard-desc-pct": "$1 %",
 	"quizgame-leaderboard-desc-correct": "$1 richtig",
 	"quizgame-leaderboard-desc-points": "{{PLURAL:$1|Ein Punkt|$1 Punkte}}",
 	"quizgame-login-or-create-to-climb": "[[Special:UserLogin|Melde dich an]] oder [[Special:UserLogin/signup|erstelle ein Benutzerkonto]], um auf der Bestenliste hochzuklettern!",

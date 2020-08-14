@@ -56,7 +56,7 @@
 	"quizgame-leaderboard-menu-points": "Navigation menu link title on Special:QuizLeaderboard\n{{Identical|Point}}",
 	"quizgame-leaderboard-menu-correct": "Navigation menu link title on Special:QuizLeaderboard",
 	"quizgame-leaderboard-menu-pct": "Navigation menu link title on Special:QuizLeaderboard",
-	"quizgame-leaderboard-desc-pct": "$1 is a number",
+	"quizgame-leaderboard-desc-pct": "{{optional}}\n$1 is a number",
 	"quizgame-leaderboard-desc-correct": "$1 is a number\n{{Identical|Correct}}",
 	"quizgame-leaderboard-desc-points": "$1 is a number\n{{Identical|Point}}",
 	"quizgame-login-or-create-to-climb": "Message shown to anonymous users viewing Special:QuizLeaderboard, prompting them to create an account and join the wiki",
