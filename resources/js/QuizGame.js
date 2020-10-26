@@ -612,14 +612,6 @@ window.QuizGame = {
 		document.getElementById( 'quizgame-picture-reupload' ).style.visibility = 'hidden';
 		document.getElementById( 'quizgame-picture-upload' ).style.display = 'block';
 		document.getElementById( 'quizgame-picture-upload' ).style.visibility = 'visible';
-	},
-
-	doHover: function( divID ) {
-		document.getElementById( divID ).style.backgroundColor = '#FFFCA9';
-	},
-
-	endHover: function( divID ) {
-		document.getElementById( divID ).style.backgroundColor = '';
 	}
 };
 
@@ -732,24 +724,6 @@ jQuery( function() {
 		// Handler for the "Create and Play!" button
 		jQuery( 'div#startButton > input[class="site-button"]' ).on( 'click', function() {
 			QuizGame.startGame();
-		} );
-	}
-
-	// Code specific to Special:ViewQuizzes
-	if ( mw.config.get( 'wgCanonicalSpecialPageName' ) == 'ViewQuizzes' ) {
-		jQuery( 'div.view-quizzes-row, div.view-quizzes-row-bottom' ).each( function( index ) {
-			jQuery( this ).on( {
-				/* this has to stay on the PHP code for the time being...
-				'click': function() {
-				},
-				*/
-				'mouseout': function() {
-					QuizGame.endHover( jQuery( this ).attr( 'id' ) );
-				},
-				'mouseover': function() {
-					QuizGame.doHover( jQuery( this ).attr( 'id' ) );
-				}
-			} );
 		} );
 	}
 } );

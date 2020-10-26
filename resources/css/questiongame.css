@@ -541,6 +541,11 @@ h1.write-answer {
 	cursor: pointer;
 }
 
+div.view-quizzes-row:hover,
+div.view-quizzes-row-bottom:hover {
+	background-color: #fffca9;
+}
+
 .view-quizzes-number {
 	color: #dcdcdc;
 	font-size: 18px;
