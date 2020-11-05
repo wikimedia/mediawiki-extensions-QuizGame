@@ -13,7 +13,7 @@
 	"quizgame-unflag": "Отстрани ознака",
 	"quizgame-unflag-confirm": "Дали сте сигурни дека сакате да ја отстраните ознаката од квизов?",
 	"quizgame-unprotect": "Тргни заштита",
-	"quizgame-error-socialprofile": "[https://www.mediawiki.org/wiki/Extension:SocialProfile додатокот „Друштвен профил“ (SocialProfile)] не е воспоставен. Воспоставете го, па обидете се повторно.",
+	"quizgame-error-socialprofile": "[https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:SocialProfile SocialProfile додатокот „Друштвен профил“ (SocialProfile)] не е воспоставен. Воспоставете го, па обидете се повторно.",
 	"quizgame-error-socialprofile-title": "Додатокот SocialProfile не е воспоставен.",
 	"quizgame-admin-panel-title": "Администраторска табла",
 	"quizgame-admin-back": "< Назад на бескрајниот квиз",
