@@ -4,6 +4,7 @@
 			"Alex Great",
 			"Ivan-r",
 			"Kareyac",
+			"MuratTheTurkish",
 			"Nk88",
 			"Pacha Tchernof",
 			"Stjn"
@@ -13,7 +14,7 @@
 	"quizgame-delete": "Удалить",
 	"quizgame-protect": "Защитить",
 	"quizgame-unprotect": "Снять защиту",
-	"quizgame-error-socialprofile": "[https://www.mediawiki.org/wiki/Extension:SocialProfile Расширение «SocialProfile»] не установлено. Пожалуйста, установите это расширение и попробуйте снова.",
+	"quizgame-error-socialprofile": "[https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:SocialProfile Расширение «SocialProfile»] не установлено. Пожалуйста, установите это расширение и попробуйте снова.",
 	"quizgame-error-socialprofile-title": "Расширение SocialProfile не установлено.",
 	"quizgame-admin-panel-title": "Панель администратора",
 	"quizgame-edit-picture-link": "Редактировать изображение",
