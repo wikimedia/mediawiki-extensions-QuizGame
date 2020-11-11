@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"ArenaL5",
 			"Banjo",
 			"Elisardojm"
 		]
@@ -13,7 +14,7 @@
 	"quizgame-unflag": "Desmarcar",
 	"quizgame-unflag-confirm": "Está seguro de querer desmarcar este xogo de preguntas?",
 	"quizgame-unprotect": "Desprotexer",
-	"quizgame-error-socialprofile": "[https://www.mediawiki.org/wiki/Extension:SocialProfile A extensión SocialProfile] non está instalada. Por favor, instale esta extensión e probe de novo.",
+	"quizgame-error-socialprofile": "[https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:SocialProfile A extensión SocialProfile] non está instalada. Por favor, instale esta extensión e probe de novo.",
 	"quizgame-error-socialprofile-title": "A extensión SocialProfile non está instalada.",
 	"quizgame-admin-panel-title": "Panel de administración",
 	"quizgame-admin-back": "< Volver ó concurso sen fin",
