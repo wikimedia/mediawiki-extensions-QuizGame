@@ -81,9 +81,9 @@ class QuizLeaderboard extends UnlistedSpecialPage {
 			}
 			$avatar = new wAvatar( $user->getId(), 'm' );
 
-			$formattedTotalPoints = $lang->formatNum( $stats_data['quiz_points'] );
-			$formattedCorrectAnswers = $lang->formatNum( $stats_data['quiz_correct'] );
-			$formattedAnswers = $lang->formatNum( $stats_data['quiz_answered'] );
+			$formattedTotalPoints = htmlspecialchars( $lang->formatNum( $stats_data['quiz_points'] ) );
+			$formattedCorrectAnswers = htmlspecialchars( $lang->formatNum( $stats_data['quiz_correct'] ) );
+			$formattedAnswers = htmlspecialchars( $lang->formatNum( $stats_data['quiz_answered'] ) );
 			// Display the current user's scorecard
 			$output .= "<div class=\"user-rank-lb\">
 				<h2>{$avatar->getAvatarURL()} " . $this->msg( 'quizgame-leaderboard-scoretitle' )->escaped() . '</h2>
