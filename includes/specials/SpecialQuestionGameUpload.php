@@ -17,11 +17,14 @@ class SpecialQuestionGameUpload extends SpecialUpload {
 	/**
 	 * Constructor: initialise object
 	 * Get data POSTed through the form and assign them to the object
-	 *
-	 * @param WebRequest $request Data posted.
 	 */
-	public function __construct( $request = null ) {
-		SpecialPage::__construct( 'QuestionGameUpload', 'upload', false );
+	public function __construct() {
+		parent::__construct();
+		$this->mName = 'QuestionGameUpload';
+	}
+
+	public function isListed() {
+		return false;
 	}
 
 	/**
