@@ -68,7 +68,7 @@
 	"quizgame-correct-answer": "Doğru cevap",
 	"quizgame-js-loading": "Yükleniyor...",
 	"quizgame-js-reloading": "Yeniden yükleniyor...",
-	"quizgame-js-timesup": "Süre doldu! Herhangi bir puan kazanamayacaksınız, ama yine de cevaplamaya çalışın!",
+	"quizgame-js-timesup": "Süre doldu! Herhangi bir puan kazanamayacaksınız, ancak yine de cevaplamaya çalışın!",
 	"quizgame-js-points": "{{PLURAL:$1|1 puan|$1 puan}}",
 	"quizgame-js-seconds": "saniye",
 	"quizgame-lightbox-pause-quiz": "Testi duraklat",
