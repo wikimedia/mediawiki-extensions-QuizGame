@@ -4,5 +4,7 @@
 			"Eleassar"
 		]
 	},
-	"quizgame-save-page-button": "Shrani stran"
+	"quizgame-flagged-reason": "Razlog",
+	"quizgame-save-page-button": "Shrani stran",
+	"quizgame-cancel-button": "Prekliči"
 }
