@@ -5,5 +5,12 @@
 		]
 	},
 	"quizgame-edit": "Redaktar",
-	"quizgame-cancel-button": "Anular"
+	"quizgame-edit-title": "Redaktanta - $1",
+	"quizgame-cancel-button": "Anular",
+	"quizgame-js-seconds": "sekundi",
+	"quizgame-time-ago": "$1 ante nun",
+	"quizgame-time-days": "{{PLURAL:$1|1 dio|$1 dii}}",
+	"quizgame-time-hours": "{{PLURAL:$1|1 horo|$1 hori}}",
+	"quizgame-time-minutes": "{{PLURAL:$1|un minuto|$1 minuti}}",
+	"quizgame-time-seconds": "{{PLURAL:$1|1 sekundo|$1 sekundi}}"
 }
