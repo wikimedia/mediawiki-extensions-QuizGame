@@ -189,7 +189,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 		$dbr = wfGetDB( DB_REPLICA );
 		$use_index = $dbr->useIndexClause( 'q_random' );
 		$randstr = wfRandom();
-		$actorId = (int)$this->getUser()->getActorId();
+		$actorId = $this->getUser()->getActorId();
 
 		$q_id = 0;
 		$sql = "SELECT q_id FROM {$dbr->tableName( 'quizgame_questions' )} {$use_index} WHERE q_id NOT IN
