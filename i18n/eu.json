@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Subi"
+			"Subi",
+			"Xabier Armendaritz"
 		]
 	},
 	"quizgame-pct-answered-correct": "Erabiltzaileen % $1(e)k ongi erantzun dute",
@@ -13,7 +14,7 @@
 	"quizgame-js-loading": "Kargatzen...",
 	"quizgame-js-reloading": "Birkargatzen...",
 	"quizgame-js-timesup": "Denbora amaitu da! Ez duzu punturik lortuko; dena dela, saia zaitez erantzuten!",
-	"quizgame-js-points": "{{PLURAL:$1|puntu 1|$1 puntu}}",
+	"quizgame-js-points": "{{PLURAL:$1|Puntu bat|$1 puntu}}",
 	"quizgame-js-seconds": "segundo",
 	"quizgame-lightbox-correct-points": "$1 puntu lortu dituzu",
 	"quizgame-create-write-question": "Idatz ezazu galdera",
