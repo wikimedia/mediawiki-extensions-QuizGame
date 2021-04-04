@@ -17,8 +17,8 @@ require_once "$IP/maintenance/Maintenance.php";
 class MigrateOldQuizGameAnswersUserColumnsToActor extends LoggedUpdateMaintenance {
 	public function __construct() {
 		parent::__construct();
-		// @codingStandardsIgnoreLine
-		$this->addDescription( 'Migrates data from old _user_id/_user_name columns in the quizgame_answers table to the new actor column.' );
+		$this->addDescription( 'Migrates data from old _user_id/_user_name columns in the quizgame_answers table ' .
+			' to the new actor column.' );
 	}
 
 	/**
@@ -52,8 +52,8 @@ class MigrateOldQuizGameAnswersUserColumnsToActor extends LoggedUpdateMaintenanc
 		}
 
 		$dbw->query(
-			// @codingStandardsIgnoreLine
-			"UPDATE {$dbw->tableName( 'quizgame_answers' )} SET a_actor=(SELECT actor_id FROM {$dbw->tableName( 'actor' )} WHERE actor_name=a_user_name AND actor_user=a_user_id)",
+			"UPDATE {$dbw->tableName( 'quizgame_answers' )} " .
+			"SET a_actor=(SELECT actor_id FROM {$dbw->tableName( 'actor' )} WHERE actor_name=a_user_name AND actor_user=a_user_id)",
 			__METHOD__
 		);
 
