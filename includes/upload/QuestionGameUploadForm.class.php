@@ -42,9 +42,8 @@ class QuestionGameUploadForm extends UploadForm {
 	}
 
 	function displayForm( $submitResult ) {
-		global $wgOut;
 		parent::displayForm( $submitResult );
-		$wgOut->allowClickjacking();
+		$this->getContext()->getOutput()->allowClickjacking();
 	}
 
 	/**
@@ -92,9 +91,20 @@ class QuestionGameUploadForm extends UploadForm {
 			}
 			return true;
 		} else {
-			// textError method is gone and I can't find it anywhere...
-			alert( '" . str_replace( "\n", ' ', wfMessage( 'emptyfile' )->plain() ) . "' );
-			return false;
+			if ( !( document.getElementById( 'wpSourceTypeurl' ) && document.getElementById( 'wpSourceTypeurl' ).checked ) ) {
+				// textError method is gone and I can't find it anywhere...
+				alert( '" . str_replace( "\n", ' ', wfMessage( 'emptyfile' )->plain() ) . "' );
+				return false;
+			} else {
+				// wpSourceTypeurl *is* set, so we must be trying to use the upload-by-URL feature
+				if ( window.parent.document.getElementById( 'old_correct' ) ) {
+					window.parent.QuizGame.completeImageUpload();
+				} else {
+					// This is what we want to call when we're creating a brand
+					// new quiz
+					window.parent.QuizGame.welcomePage_completeImageUpload();
+				}
+			}
 		}
 	}
 </script>\n" . Html::rawElement( 'form', $attribs, $html );
@@ -141,6 +151,7 @@ class QuestionGameUploadForm extends UploadForm {
 				'class' => 'UploadSourceField',
 				'section' => 'source',
 				'id' => 'wpUploadFileURL',
+				'radio-id' => 'wpSourceTypeurl',
 				'label-message' => 'sourceurl',
 				'upload-type' => 'url',
 				'radio' => &$radio,

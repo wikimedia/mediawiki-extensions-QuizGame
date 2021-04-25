@@ -11,7 +11,7 @@
  * @ingroup Upload
  * @author Jack Phoenix
  * @note Originally based on 1.16 core SpecialUpload.php (GPL-licensed) by Bryan et al.
- * @property QuizFileUpload $mUpload
+ * @property QuizFileUpload|QuizFileUploadFromUrl $mUpload
  */
 class SpecialQuestionGameUpload extends SpecialUpload {
 	/**
@@ -42,7 +42,11 @@ class SpecialQuestionGameUpload extends SpecialUpload {
 	protected function loadRequest() {
 		$this->mRequest = $request = $this->getRequest();
 		$this->mSourceType        = $request->getVal( 'wpSourceType', 'file' );
-		$this->mUpload            = QuizFileUpload::createFromRequest( $request );
+		if ( $this->mSourceType === 'url' ) {
+			$this->mUpload            = QuizFileUploadFromUrl::createFromRequest( $request );
+		} else {
+			$this->mUpload            = QuizFileUpload::createFromRequest( $request );
+		}
 		$this->mUploadClicked     = $request->wasPosted()
 			&& ( $request->getCheck( 'wpUpload' )
 				|| $request->getCheck( 'wpUploadIgnoreWarning' ) );
@@ -270,7 +274,8 @@ class SpecialQuestionGameUpload extends SpecialUpload {
 		$status = $this->mUpload->performUpload(
 			$categoriesText,//$this->mComment, // upload summary (shown on RecentChanges etc.)
 			$pageText, // text inserted on the page
-			$this->mWatchthis, $this->getUser()
+			$this->mWatchthis,
+			$this->getUser()
 		);
 
 		if ( !$status->isGood() ) {
@@ -316,7 +321,8 @@ class SpecialQuestionGameUpload extends SpecialUpload {
 		// If we don't pass the correct (timestamped) image name here, we will
 		// end up with fatals that are pretty damn tricky to fix.
 		$imgName = $img->getTitle()->getDBkey();
-		echo "<script language=\"javascript\">
+		$this->getOutput()->addHTML(
+			"<script language=\"javascript\">
 			/*<![CDATA[*/
 			// This element only exists when we're editing a pre-existing quiz
 			var oldCorrect = window.parent.document.getElementById( 'old_correct' );
@@ -327,6 +333,7 @@ class SpecialQuestionGameUpload extends SpecialUpload {
 				// new quiz
 				window.parent.QuizGame.welcomePage_uploadComplete(\"{$slashedImgTag}\", \"{$imgName}\", '');
 			}
-			/*]]>*/</script>";
+			/*]]>*/</script>"
+		);
 	}
 }

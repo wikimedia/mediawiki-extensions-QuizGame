@@ -48,6 +48,7 @@
 		"SpecialQuestionGameUpload": "includes/specials/SpecialQuestionGameUpload.php",
 		"QuestionGameUploadForm": "includes/upload/QuestionGameUploadForm.class.php",
 		"QuizFileUpload": "includes/upload/QuizFileUpload.class.php",
+		"QuizFileUploadFromUrl": "includes/upload/QuizFileUploadFromUrl.php",
 		"QuizLeaderboard": "includes/specials/SpecialQuizLeaderboard.php",
 		"QuizRecalcStats": "includes/specials/SpecialQuizRecalcStats.php",
 		"ViewQuizzes": "includes/specials/SpecialViewQuizzes.php",

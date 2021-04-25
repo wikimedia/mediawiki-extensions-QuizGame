@@ -102,15 +102,32 @@ window.QuizGame = {
 		thisBox.checked = true;
 	},
 
+	/**
+	 * This function gets called from the ugly inline JS (!) in QuestionGameUploadForm
+	 * if a user tries to submit an empty file, for example.
+	 *
+	 * While the aforementioned mess uses alert() to get the user's attention, this
+	 * function renders the error in the error container below the "Play the quiz game"
+	 * CTA box and above the "Write a question" text on the "create a new quiz" form.
+	 *
+	 * Wrapping almost everything in existence checks feels wrong but at the same time
+	 * it appears to be necessary, unfortunately.
+	 */
 	uploadError: function( message ) {
-		document.getElementById( 'ajax-messages' ).innerHTML = message;
-		document.getElementById( 'quizgame-picture' ).innerHTML = '';
+		document.getElementById( 'quiz-game-errors' ).innerHTML = message;
+		if ( document.getElementById( 'quizgame-picture' ) ) {
+			document.getElementById( 'quizgame-picture' ).innerHTML = '';
+		}
 
-		document.getElementById( 'imageUpload-frame' ).src = mw.config.get( 'wgScriptPath' ) +
-			'/index.php?title=Special:QuestionGameUpload&wpThumbWidth=80&wpOverwriteFile=true&wpDestFile=' +
-			document.getElementById( 'quizGamePicture' ).value;
-		document.getElementById( 'quizgame-upload' ).style.display = 'block';
-		document.getElementById( 'quizgame-upload' ).style.visibility = 'visible';
+		if ( document.getElementById( 'quizGamePicture' ) ) {
+			document.getElementById( 'imageUpload-frame' ).src = mw.config.get( 'wgScriptPath' ) +
+				'/index.php?title=Special:QuestionGameUpload&wpThumbWidth=80&wpOverwriteFile=true&wpDestFile=' +
+				document.getElementById( 'quizGamePicture' ).value;
+		}
+		if ( document.getElementById( 'quizgame-upload' ) ) {
+			document.getElementById( 'quizgame-upload' ).style.display = 'block';
+			document.getElementById( 'quizgame-upload' ).style.visibility = 'visible';
+		}
 	},
 
 	completeImageUpload: function() {
