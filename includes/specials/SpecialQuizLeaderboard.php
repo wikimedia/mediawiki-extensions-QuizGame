@@ -47,7 +47,7 @@ class QuizLeaderboard extends UnlistedSpecialPage {
 		}
 
 		$dbr = wfGetDB( DB_MASTER );
-		$whereConds[] = 'stats_actor IS NULL'; // Exclude anonymous users
+		$whereConds[] = 'stats_actor IS NOT NULL'; // Exclude anonymous users
 		$res = $dbr->select(
 			'user_stats',
 			[
@@ -73,7 +73,7 @@ class QuizLeaderboard extends UnlistedSpecialPage {
 			$s = $dbr->selectRow(
 				'user_stats',
 				[ 'COUNT(*) AS count' ],
-				[ 'stats_quiz_points > ' . $stats_data['quiz_points'] ],
+				[ 'stats_quiz_points > ' . (int)$stats_data['quiz_points'] ],
 				__METHOD__
 			);
 			if ( $s !== false ) {
@@ -81,9 +81,9 @@ class QuizLeaderboard extends UnlistedSpecialPage {
 			}
 			$avatar = new wAvatar( $user->getId(), 'm' );
 
-			$formattedTotalPoints = htmlspecialchars( $lang->formatNum( $stats_data['quiz_points'] ) );
-			$formattedCorrectAnswers = htmlspecialchars( $lang->formatNum( $stats_data['quiz_correct'] ) );
-			$formattedAnswers = htmlspecialchars( $lang->formatNum( $stats_data['quiz_answered'] ) );
+			$formattedTotalPoints = htmlspecialchars( $lang->formatNum( (int)$stats_data['quiz_points'] ) );
+			$formattedCorrectAnswers = htmlspecialchars( $lang->formatNum( (int)$stats_data['quiz_correct'] ) );
+			$formattedAnswers = htmlspecialchars( $lang->formatNum( (int)$stats_data['quiz_answered'] ) );
 			// Display the current user's scorecard
 			$output .= "<div class=\"user-rank-lb\">
 				<h2>{$avatar->getAvatarURL()} " . $this->msg( 'quizgame-leaderboard-scoretitle' )->escaped() . '</h2>
@@ -144,6 +144,10 @@ class QuizLeaderboard extends UnlistedSpecialPage {
 		foreach ( $res as $row ) {
 			$actor = User::newFromActorId( $row->stats_actor );
 			if ( !$actor || !$actor instanceof User ) {
+				continue;
+			}
+
+			if ( empty( $row->$field ) ) {
 				continue;
 			}
 
