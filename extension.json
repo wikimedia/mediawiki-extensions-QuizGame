@@ -79,7 +79,8 @@
 				"quizgame-ajax-nonnumeric-answer", "quizgame-ajax-already-answered",
 				"quizgame-ajax-invalid-id", "quizgame-delete-confirm", "quizgame-delete",
 				"cancel", "quizgame-unflag", "quizgame-unflag-confirm", "quizgame-flag-confirm",
-				"quizgame-flag", "quizgame-flagged-reason"
+				"quizgame-flag", "quizgame-flagged-reason",
+				"quizgame-edit-picture-link"
 			],
 			"dependencies": [
 				"ext.socialprofile.flash",
