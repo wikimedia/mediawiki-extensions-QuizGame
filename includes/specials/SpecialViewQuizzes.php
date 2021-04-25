@@ -26,7 +26,10 @@ class ViewQuizzes extends UnlistedSpecialPage {
 		$this->setHeaders();
 
 		// Add CSS & JS
-		$out->addModuleStyles( 'ext.quizGame.css' );
+		$out->addModuleStyles( [
+			'ext.quizGame.css',
+			'ext.quizGame.viewquizzes.css'
+		] );
 		$out->addModules( 'ext.quizGame' );
 
 		// Page either most or newest for everyone

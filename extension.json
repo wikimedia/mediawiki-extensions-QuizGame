@@ -94,6 +94,12 @@
 		},
 		"ext.quizGame.css": {
 			"styles": "resources/css/questiongame.css"
+		},
+		"ext.quizGame.leaderboard.css": {
+			"styles": "resources/css/leaderboard.css"
+		},
+		"ext.quizGame.viewquizzes.css": {
+			"styles": "resources/css/viewquizzes.css"
 		}
 	},
 	"AvailableRights": [

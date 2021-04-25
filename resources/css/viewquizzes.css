@@ -1,0 +1,116 @@
+/* View Quizzes */
+.view-quizzes {
+	float: left;
+	width: 600px;
+}
+
+.view-quizzes-navigation {
+	float: right;
+	width: 180px;
+}
+
+.view-quizzes-navigation h2 {
+	font-size: 16px;
+	color: #333;
+	border-bottom: 1px solid #dcdcdc;
+	padding: 0 0 3px 0;
+	margin: 0 0 10px 0 !important;
+}
+
+.view-quizzes-navigation a {
+	font-weight: bold;
+	text-decoration: none;
+}
+
+.view-quizzes-top-links {
+	margin: 10px 0 0 0;
+}
+
+.view-quizzes-top-links a {
+	color: #002bb8;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+.view-quizzes-navigation p {
+	margin: 0 0 3px 0;
+}
+
+.view-quizzes-row {
+	border-bottom: 1px solid #dcdcdc;
+	height: 60px;
+	padding: 15px 0 15px 5px;
+	width: 600px;
+	cursor: pointer;
+}
+
+.view-quizzes-row-bottom {
+	padding: 15px 0 15px 5px;
+	height: 60px;
+	width: 600px;
+	cursor: pointer;
+}
+
+div.view-quizzes-row:hover,
+div.view-quizzes-row-bottom:hover {
+	background-color: #fffca9;
+}
+
+.view-quizzes-number {
+	color: #dcdcdc;
+	font-size: 18px;
+	font-weight: bold;
+	float: left;
+	margin: 0 25px 0 0;
+}
+
+.view-quizzes-user-image {
+	float: left;
+	margin: 0 15px 0 0;
+}
+
+.view-quizzes-user-name {
+	float: left;
+	/* looks bad with usernames > 10 characters
+	width: 70px;
+	*/
+	font-size: 14px;
+	color: #002bb8;
+	font-weight: bold;
+	margin: 0 65px 0 0;
+}
+
+.view-quizzes-text {
+	float: left;
+	font-size: 16px;
+	color: #002bb8;
+	font-weight: bold;
+	width: 365px;
+}
+
+.view-quizzes-num-answers {
+	font-size: 13px !important;
+	color: #797979 !important;
+}
+
+.view-quizzes-time {
+	font-size: 11px !important;
+	color: #797979 !important;
+	font-weight: normal !important;
+}
+
+.view-quizzes-text p {
+	margin: 0 0 3px 0 !important;
+}
+
+.view-quizzes-user-image img {
+	border: 1px solid #dcdcdc;
+}
+
+.view-quizzes-page-nav {
+	margin: 15px 0 0 0;
+}
+
+.view-quizzes-page-nav a {
+	font-weight: bold;
+}

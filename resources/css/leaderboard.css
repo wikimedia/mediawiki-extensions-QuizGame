@@ -1,0 +1,97 @@
+.top-users {
+	float: left;
+	margin: 10px 0 0 0;
+}
+
+.top-fan {
+	width: 250px;
+	padding-right: 10px;
+	font-weight: bold;
+	font-size: 90%;
+	float: left;
+}
+
+.top-fan a {
+	font-size: 13px;
+	text-decoration: none;
+}
+
+.top-fan img {
+	vertical-align: middle;
+	padding-right: 4px;
+}
+
+.top-fan-num {
+	font-weight: bold;
+	font-size: 18px;
+	color: #dcdcdc;
+	float: left;
+	width: 45px;
+	padding: 5px 0 0 0;
+	margin: 0 0 0 5px;
+}
+
+.top-fan-points {
+	float: left;
+	font-size: 13px;
+	color: #797979;
+	height: 30px;
+	padding-top: 5px;
+}
+
+.top-fan-row {
+	margin: 0 0 10px 0;
+	clear: both;
+}
+
+/* Quizboard */
+.quiz-leaderboard-nav {
+	float: right;
+	width: 25%;
+	margin: 15px 0 0 0;
+}
+
+.quiz-leaderboard-nav h1 {
+	font-size: 16px;
+	color: #333;
+	padding: 0 0 3px 0;
+	border-bottom: 1px solid #dcdcdc;
+	margin: 0 0 5px 0 !important;
+}
+
+.quiz-leaderboard-nav a,
+.quiz-leaderboard-top-links a {
+	font-weight: bold;
+	text-decoration: none;
+}
+
+.quiz-leaderboard-nav p {
+	margin: 0 0 2px 0 !important;
+}
+
+.quiz-leaderboard-top-links {
+	margin: 10px 0;
+}
+
+/* User Rank */
+.user-rank-lb {
+	background-color: #f2f4f7;
+	border: 1px solid #dcdcdc;
+	margin: 0 0 20px;
+	padding: 10px;
+}
+
+.user-rank-lb h2 {
+	border-bottom: none;
+	color: #333;
+	font-size: 18px;
+	font-weight: bold;
+	padding: 0;
+	margin: 0 0 10px 0 !important;
+}
+
+.user-rank-lb img {
+	border: 1px solid #dcdcdc;
+	padding: 2px;
+	background-color: #fff;
+}

@@ -27,7 +27,10 @@ class QuizLeaderboard extends UnlistedSpecialPage {
 		// Special:WhatLinksHere on their toolboxes, etc.
 		$this->setHeaders();
 
-		$out->addModuleStyles( 'ext.quizGame.css' );
+		$out->addModuleStyles( [
+			'ext.quizGame.css',
+			'ext.quizGame.leaderboard.css'
+		] );
 
 		$whereConds = [];
 
