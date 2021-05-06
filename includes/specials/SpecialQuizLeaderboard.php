@@ -67,7 +67,7 @@ class QuizLeaderboard extends UnlistedSpecialPage {
 
 		$output = '<div class="quiz-leaderboard-nav">';
 
-		if ( $user->isLoggedIn() ) {
+		if ( $user->isRegistered() ) {
 			$stats = new UserStats( $user->getId(), $user->getName() );
 			$stats_data = $stats->getUserStats();
 

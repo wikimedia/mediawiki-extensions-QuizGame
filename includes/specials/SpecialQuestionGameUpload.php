@@ -61,7 +61,7 @@ class SpecialQuestionGameUpload extends SpecialUpload {
 
 		$this->mDestWarningAck    = $request->getText( 'wpDestFileWarningAck' );
 		$this->mIgnoreWarning     = true;//$request->getCheck( 'wpIgnoreWarning' ) || $request->getCheck( 'wpUploadIgnoreWarning' );
-		$this->mWatchthis         = $request->getBool( 'wpWatchthis' ) && $this->getUser()->isLoggedIn();
+		$this->mWatchthis         = $request->getBool( 'wpWatchthis' ) && $this->getUser()->isRegistered();
 		$this->mCopyrightStatus   = $request->getText( 'wpUploadCopyStatus' );
 		$this->mCopyrightSource   = $request->getText( 'wpUploadSource' );
 

@@ -85,21 +85,21 @@ class QuizGameHome extends UnlistedSpecialPage {
 
 		switch ( $action ) {
 			case 'adminPanel':
-				if ( $user->isLoggedIn() && $user->isAllowed( 'quizadmin' ) ) {
+				if ( $user->isRegistered() && $user->isAllowed( 'quizadmin' ) ) {
 					$this->adminPanel();
 				} else {
 					$this->renderWelcomePage();
 				}
 				break;
 			case 'completeEdit':
-				if ( $user->isLoggedIn() && $user->isAllowed( 'quizadmin' ) ) {
+				if ( $user->isRegistered() && $user->isAllowed( 'quizadmin' ) ) {
 					$this->completeEdit();
 				} else {
 					$this->renderWelcomePage();
 				}
 				break;
 			case 'createForm':
-				if ( !$user->isLoggedIn() ) {
+				if ( !$user->isRegistered() ) {
 					$this->renderLoginPage();
 					return;
 				}
@@ -109,7 +109,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 				$this->createQuizGame();
 				break;
 			case 'editItem':
-				if ( $user->isLoggedIn() && $user->isAllowed( 'quizadmin' ) ) {
+				if ( $user->isRegistered() && $user->isAllowed( 'quizadmin' ) ) {
 					$this->editItem();
 				} else {
 					$this->renderWelcomePage();
@@ -949,7 +949,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 		global $wgUseEditButtonFloat;
 		if (
 			( $user->getActorId() == $question['actor'] ||
-			( $user_answer && $user->isLoggedIn() && $user->isAllowed( 'quizadmin' ) ) ||
+			( $user_answer && $user->isRegistered() && $user->isAllowed( 'quizadmin' ) ) ||
 			$user->isAllowed( 'quizadmin' ) ) && ( $wgUseEditButtonFloat == true )
 		) {
 			$editMenu = "
@@ -972,7 +972,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 
 		// For registered users, display their personal scorecard; for anons,
 		// encourage them to join the site to play quizzes.
-		if ( $user->isLoggedIn() ) {
+		if ( $user->isRegistered() ) {
 			$leaderboard_title = SpecialPage::getTitleFor( 'QuizLeaderboard' );
 			$formattedQuizPoints = htmlspecialchars( $lang->formatNum( $current_user_stats['quiz_points'] ) );
 			$formattedCorrectAnswers = htmlspecialchars( $lang->formatNum( $current_user_stats['quiz_correct'] ) );
