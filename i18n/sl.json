@@ -10,6 +10,7 @@
 	"quizgame-save-page-button": "Shrani stran",
 	"quizgame-cancel-button": "Prekliči",
 	"quizgame-login-button": "Prijava",
+	"quizgame-submit": "Objavi",
 	"quizgame-js-loading": "Nalaganje ...",
 	"quizgame-nav-next": "naprej",
 	"quizgame-time-minutes": "{{PLURAL:$1|ena minuta|dve minuti|$1 minute|$1 minut}}"
