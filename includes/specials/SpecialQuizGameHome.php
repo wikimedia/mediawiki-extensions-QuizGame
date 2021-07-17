@@ -55,8 +55,9 @@ class QuizGameHome extends UnlistedSpecialPage {
 		}
 
 		// Blocked through Special:Block? No access for you either!
-		if ( $user->isBlocked() ) {
-			throw new UserBlockedError( $user->getBlock() );
+		$block = $user->getBlock();
+		if ( $block ) {
+			throw new UserBlockedError( $block );
 		}
 
 		// If a parameter was passed to the special page, assume that it's the
@@ -1343,8 +1344,9 @@ class QuizGameHome extends UnlistedSpecialPage {
 		$user = $this->getUser();
 
 		// No access for blocked users
-		if ( $user->isBlocked() ) {
-			throw new UserBlockedError( $user->getBlock() );
+		$block = $user->getBlock();
+		if ( $block ) {
+			throw new UserBlockedError( $block );
 		}
 
 		/**
