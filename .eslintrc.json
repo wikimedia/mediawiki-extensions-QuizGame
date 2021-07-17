@@ -17,7 +17,6 @@
 		"no-unused-vars": "off",
 		"no-implied-eval": "off",
 		"quote-props": "off",
-		"one-var": "off",
 		"space-before-function-paren": "off",
 		"valid-jsdoc": "off",
 		"vars-on-top": "off",
