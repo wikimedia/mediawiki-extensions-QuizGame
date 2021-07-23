@@ -5,6 +5,7 @@
 		]
 	},
 	"quizgame-edit": "Cancia",
+	"quizgame-delete": "Cancella",
 	"quizgame-cancel-button": "Annulla",
 	"quizgame-main-page-button": "Pàggina principali",
 	"quizgame-time-days": "{{PLURAL:$1|nu jornu|$1 jorna}}"
