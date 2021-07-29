@@ -10,5 +10,6 @@
 	"quizgame-cancel-button": "Annulla",
 	"quizgame-main-page-button": "Pàggina principali",
 	"quizgame-login-button": "Trasi",
+	"quizgame-time-ago": "$1 fa",
 	"quizgame-time-days": "{{PLURAL:$1|nu jornu|$1 jorna}}"
 }
