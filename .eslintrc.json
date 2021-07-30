@@ -19,7 +19,6 @@
 		"quote-props": "off",
 		"space-before-function-paren": "off",
 		"valid-jsdoc": "off",
-		"vars-on-top": "off",
 		"block-scoped-var": "warn"
 	}
 }
