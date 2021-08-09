@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"DDPAT",
 			"Matěj Suchánek",
 			"Movses",
 			"Piramidion",
@@ -58,6 +59,7 @@
 	"quizgame-leaderboard-menu-points": "Бали",
 	"quizgame-leaderboard-menu-correct": "Загальна кількість правильних",
 	"quizgame-leaderboard-menu-pct": "Найвищий відсоток",
+	"quizgame-leaderboard-desc-pct": "$1%",
 	"quizgame-leaderboard-desc-correct": "$1 {{PLURAL:$1|правильна|правильні|правильних}}",
 	"quizgame-leaderboard-desc-points": "{{PLURAL:$1|$1 бал|$1 бали|$1 балів}}",
 	"quizgame-login-or-create-to-climb": "[[Special:UserLogin|Увійдіть]] або [[Special:UserLogin/signup|створіть обліковий запис]] для участі в змаганні та спробуйте дістатись до верхівки таблиці лідерів!",

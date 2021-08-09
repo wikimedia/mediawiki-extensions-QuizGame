@@ -11,5 +11,6 @@
 	"quizgame-main-page-button": "Pàggina principali",
 	"quizgame-login-button": "Trasi",
 	"quizgame-time-ago": "$1 fa",
-	"quizgame-time-days": "{{PLURAL:$1|nu jornu|$1 jorna}}"
+	"quizgame-time-days": "{{PLURAL:$1|nu jornu|$1 jorna}}",
+	"quizgame-time-minutes": "{{PLURAL:$1|nu minutu|$1 minuti}}"
 }
