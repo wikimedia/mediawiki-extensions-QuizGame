@@ -6,11 +6,13 @@
 	},
 	"quizgame-edit": "Cancia",
 	"quizgame-delete": "Cancella",
+	"quizgame-flagged-reason": "Mutivu",
 	"quizgame-answers": "Risposti",
 	"quizgame-cancel-button": "Annulla",
 	"quizgame-main-page-button": "Pàggina principali",
 	"quizgame-login-button": "Trasi",
 	"quizgame-time-ago": "$1 fa",
 	"quizgame-time-days": "{{PLURAL:$1|nu jornu|$1 jorna}}",
+	"quizgame-time-hours": "{{PLURAL:$1|na ura|$1 uri}}",
 	"quizgame-time-minutes": "{{PLURAL:$1|nu minutu|$1 minuti}}"
 }
