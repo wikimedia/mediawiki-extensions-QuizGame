@@ -21,7 +21,6 @@ class QuizRecalcStats extends UnlistedSpecialPage {
 		// Only Quiz Administrators should be allowed to access this page
 		if ( !$user->isAllowed( 'quizadmin' ) ) {
 			throw new ErrorPageError( 'error', 'badaccess-group0' );
-			return '';
 		}
 
 		// Show a message if the database is in read-only mode

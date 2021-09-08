@@ -1366,7 +1366,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 				}
 			}
 
-			if ( $can_create == false ) {
+			if ( !$can_create ) {
 				$out->setPageTitle( $this->msg( 'quizgame-create-threshold-title' )->text() );
 				$out->addHTML( $this->msg( 'quizgame-create-threshold-reason', $threshold_reason )->parse() );
 				return '';
