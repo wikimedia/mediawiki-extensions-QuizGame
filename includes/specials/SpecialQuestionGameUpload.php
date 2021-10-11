@@ -43,16 +43,16 @@ class SpecialQuestionGameUpload extends SpecialUpload {
 		$this->mRequest = $request = $this->getRequest();
 		$this->mSourceType        = $request->getVal( 'wpSourceType', 'file' );
 		if ( $this->mSourceType === 'url' ) {
-			$this->mUpload            = QuizFileUploadFromUrl::createFromRequest( $request );
+			$this->mUpload = QuizFileUploadFromUrl::createFromRequest( $request );
 		} else {
-			$this->mUpload            = QuizFileUpload::createFromRequest( $request );
+			$this->mUpload = QuizFileUpload::createFromRequest( $request );
 		}
-		$this->mUploadClicked     = $request->wasPosted()
+		$this->mUploadClicked = $request->wasPosted()
 			&& ( $request->getCheck( 'wpUpload' )
 				|| $request->getCheck( 'wpUploadIgnoreWarning' ) );
 
 		// Guess the desired name from the filename if not provided
-		$this->mDesiredDestName   = $request->getText( 'wpDestFile' );
+		$this->mDesiredDestName = $request->getText( 'wpDestFile' );
 		if ( !$this->mDesiredDestName && $request->getFileName( 'wpUploadFile' ) !== null ) {
 			$this->mDesiredDestName = $request->getFileName( 'wpUploadFile' );
 		}
@@ -60,14 +60,14 @@ class SpecialQuestionGameUpload extends SpecialUpload {
 		$this->mLicense           = $request->getText( 'wpLicense' );
 
 		$this->mDestWarningAck    = $request->getText( 'wpDestFileWarningAck' );
-		$this->mIgnoreWarning     = true;//$request->getCheck( 'wpIgnoreWarning' ) || $request->getCheck( 'wpUploadIgnoreWarning' );
+		$this->mIgnoreWarning     = true;// $request->getCheck( 'wpIgnoreWarning' ) || $request->getCheck( 'wpUploadIgnoreWarning' );
 		$this->mWatchthis         = $request->getBool( 'wpWatchthis' ) && $this->getUser()->isRegistered();
 		$this->mCopyrightStatus   = $request->getText( 'wpUploadCopyStatus' );
 		$this->mCopyrightSource   = $request->getText( 'wpUploadSource' );
 
 		$this->mForReUpload       = $request->getBool( 'wpForReUpload' ); // updating a file
 		$this->mCancelUpload      = $request->getCheck( 'wpCancelUpload' )
-		                         || $request->getCheck( 'wpReUpload' ); // b/w compat
+						|| $request->getCheck( 'wpReUpload' ); // b/w compat
 
 		// If it was posted check for the token (no remote POST'ing with user credentials)
 		$token = $request->getVal( 'wpEditToken' );
@@ -262,18 +262,18 @@ class SpecialQuestionGameUpload extends SpecialUpload {
 		// Get the page text if this is not a reupload
 		//if( !$this->mForReUpload ) {
 			$pageText = self::getInitialPageText(
-				//$this->mComment, // text to be inserted on the file page
+				// $this->mComment, // text to be inserted on the file page
 				$categoriesText,
 				$this->mLicense,
 				$this->mCopyrightStatus,
 				$this->mCopyrightSource
 			);
-		//} else {
+		// } else {
 			//$pageText = false;
 		//}
 
 		$status = $this->mUpload->performUpload(
-			$categoriesText,//$this->mComment, // upload summary (shown on RecentChanges etc.)
+			$categoriesText, // $this->mComment, // upload summary (shown on RecentChanges etc.)
 			$pageText, // text inserted on the page
 			$this->mWatchthis,
 			$this->getUser()

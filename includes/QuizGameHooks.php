@@ -11,8 +11,8 @@ class QuizGameHooks {
 	/**
 	 * Adds an "edit" tab to Special:QuizGameHome.
 	 *
-	 * @param SkinTemplate $skinTemplate
-	 * @param array $links
+	 * @param SkinTemplate &$skinTemplate
+	 * @param array &$links
 	 */
 	public static function onSkinTemplateNavigationUniversal( &$skinTemplate, &$links ) {
 		global $wgQuizID;
@@ -30,8 +30,7 @@ class QuizGameHooks {
 			$title->isSpecial( 'QuizGameHome' ) &&
 			$action != 'createForm' &&
 			$user->isAllowed( 'quizadmin' )
-		)
-		{
+		) {
 			$selected = false;
 			if ( $action == 'editItem' ) {
 				$selected = 'selected';
@@ -99,7 +98,7 @@ class QuizGameHooks {
 		}
 
 		$updater->modifyExtensionField( 'quizgame_choice', 'choice_answer_count',
- 			$sqlDirectory . "patches/patch-add-default-choice_answer_count.sql" );
+			$sqlDirectory . "patches/patch-add-default-choice_answer_count.sql" );
 
 		// Actor support (T227345)
 		if ( !$db->fieldExists( 'quizgame_answers', 'a_actor', __METHOD__ ) ) {

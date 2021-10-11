@@ -8,7 +8,7 @@
  * @author Ashish Datta <ashish@setfive.com>
  * @author David Pean <david.pean@gmail.com>
  * @author Jack Phoenix
- * @license http://www.gnu.org/copyleft/gpl.html GNU General Public License 2.0 or later
+ * @license GPL-2.0-or-later
  * @link https://www.mediawiki.org/wiki/Extension:QuizGame Documentation
  */
 
@@ -22,7 +22,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 	static $FLAG_PROTECT = 2;
 
 	/**
-	 * @var string $SALT
+	 * @var string
 	 */
 	private $SALT;
 
@@ -195,7 +195,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 		$q_id = 0;
 		$sql = "SELECT q_id FROM {$dbr->tableName( 'quizgame_questions' )} {$use_index} WHERE q_id NOT IN
 				(SELECT a_q_id FROM {$dbr->tableName( 'quizgame_answers' )} WHERE a_actor = {$actorId})
-				AND q_flag != " . QuizGameHome::$FLAG_FLAGGED . " AND q_actor <> {$actorId} AND q_random > $randstr ORDER BY q_random LIMIT 1";
+				AND q_flag != " . self::$FLAG_FLAGGED . " AND q_actor <> {$actorId} AND q_random > $randstr ORDER BY q_random LIMIT 1";
 		$res = $dbr->query( $sql, __METHOD__ );
 		$row = $dbr->fetchObject( $res );
 
@@ -206,7 +206,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 		if ( $q_id == 0 ) {
 			$sql = "SELECT q_id FROM {$dbr->tableName( 'quizgame_questions' )} {$use_index} WHERE q_id NOT IN
 					(SELECT a_q_id FROM {$dbr->tableName( 'quizgame_answers' )} WHERE a_actor = {$actorId})
-					AND q_flag != " . QuizGameHome::$FLAG_FLAGGED . " AND q_actor <> {$actorId} AND q_random < $randstr ORDER BY q_random LIMIT 1";
+					AND q_flag != " . self::$FLAG_FLAGGED . " AND q_actor <> {$actorId} AND q_random < $randstr ORDER BY q_random LIMIT 1";
 			$res = $dbr->query( $sql, __METHOD__ );
 			$row = $dbr->fetchObject( $res );
 			if ( $row ) {
@@ -333,8 +333,8 @@ class QuizGameHome extends UnlistedSpecialPage {
 				// Database::makeList() has a tendency of making the world
 				// explode (see my notes on VideoHooks::onVideoDelete to find
 				// out what I mean)
-				'q_flag = ' . QuizGameHome::$FLAG_FLAGGED . ' OR q_flag = ' .
-					QuizGameHome::$FLAG_PROTECT
+				'q_flag = ' . self::$FLAG_FLAGGED . ' OR q_flag = ' .
+					self::$FLAG_PROTECT
 			],
 			__METHOD__
 		);
@@ -378,7 +378,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 					<a class=\"delete-by-id\" href=\"#\" data-quiz-id=\"{$safeQid}\">" .
 					$this->msg( 'quizgame-delete' )->escaped() . '</a> - ';
 
-			if ( $row->q_flag == QuizGameHome::$FLAG_FLAGGED ) {
+			if ( $row->q_flag == self::$FLAG_FLAGGED ) {
 				$buttons .= "<a class=\"protect-by-id\" href=\"#\" data-quiz-id=\"{$safeQid}\">" .
 					$this->msg( 'quizgame-protect' )->escaped() . "</a>
 						 - <a class=\"unflag-by-id\" href=\"#\" data-quiz-id=\"{$safeQid}\">" .
@@ -388,7 +388,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 					$this->msg( 'quizgame-unprotect' )->escaped() . '</a>';
 			}
 
-			if ( $row->q_flag == QuizGameHome::$FLAG_FLAGGED ) {
+			if ( $row->q_flag == self::$FLAG_FLAGGED ) {
 				$reason = '';
 				if ( $row->q_comment != '' ) {
 					$reason = "<div class=\"quizgame-flagged-answers\" id=\"quizgame-flagged-reason-{$safeQid}\">
@@ -1316,7 +1316,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 		$stats->incStatField( 'quiz_created' );
 
 		// Add a log entry if quiz logging is enabled
-		if( $wgQuizLogs ) {
+		if ( $wgQuizLogs ) {
 			$logEntry = new ManualLogEntry( 'quiz', 'create' );
 			$logEntry->setPerformer( $user );
 			$logEntry->setTarget( $this->getPageTitle( (string)$questionId ) );

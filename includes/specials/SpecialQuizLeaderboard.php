@@ -157,8 +157,8 @@ class QuizLeaderboard extends UnlistedSpecialPage {
 			$avatar = new wAvatar( $actor->getId(), 'm' );
 			$user_name_short = $lang->truncateForVisual( $actor->getName(), 18 );
 
-		    $output .= "<div class=\"top-fan-row\">
-		 		   <span class=\"top-fan-num\">{$x}.</span>
+			$output .= "<div class=\"top-fan-row\">
+				   <span class=\"top-fan-num\">{$x}.</span>
 				   <span class=\"top-fan\">{$avatar->getAvatarURL()}
 				   <a href=\"" . htmlspecialchars( $actor->getUserPage()->getFullURL(), ENT_QUOTES ) . '">' . $user_name_short . '</a>
 				</span>';
@@ -178,9 +178,9 @@ class QuizLeaderboard extends UnlistedSpecialPage {
 			}
 
 			$output .= "<span class=\"top-fan-points\"><b>{$stat}</b></span>";
-		    $output .= '<div class="visualClear"></div>';
-		    $output .= '</div>';
-		    $x++;
+			$output .= '<div class="visualClear"></div>';
+			$output .= '</div>';
+			$x++;
 		}
 
 		$output .= '</div><div class="visualClear"></div>';
