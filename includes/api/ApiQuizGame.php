@@ -32,7 +32,7 @@ class ApiQuizGame extends ApiBase {
 		$id = $params['id']; // quiz ID number
 
 		// ApiBase's getDB() supports only slave connections, lame...
-		$dbw = wfGetDB( DB_MASTER );
+		$dbw = wfGetDB( DB_PRIMARY );
 
 		switch ( $action ) {
 			case 'unprotectItem':

@@ -40,7 +40,7 @@ class QuizRecalcStats extends UnlistedSpecialPage {
 		// as the page title.
 		$out->setPageTitle( '' );
 
-		$dbw = wfGetDB( DB_MASTER );
+		$dbw = wfGetDB( DB_PRIMARY );
 		$res = $dbw->select(
 			'user_stats',
 			[ 'stats_actor' ],

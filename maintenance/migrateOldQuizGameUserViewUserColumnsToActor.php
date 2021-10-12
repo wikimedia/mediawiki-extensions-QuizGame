@@ -45,7 +45,7 @@ class MigrateOldQuizGameUserViewUserColumnsToActor extends LoggedUpdateMaintenan
 	 * @return bool True to log the update as done
 	 */
 	protected function doDBUpdates() {
-		$dbw = $this->getDB( DB_MASTER );
+		$dbw = $this->getDB( DB_PRIMARY );
 
 		if ( !$dbw->fieldExists( 'quizgame_user_view', 'uv_user_id', __METHOD__ ) ) {
 			return true;

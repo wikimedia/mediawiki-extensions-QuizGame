@@ -49,7 +49,7 @@ class QuizLeaderboard extends UnlistedSpecialPage {
 				$field = 'stats_quiz_points';
 		}
 
-		$dbr = wfGetDB( DB_MASTER );
+		$dbr = wfGetDB( DB_PRIMARY );
 		$whereConds[] = 'stats_actor IS NOT NULL'; // Exclude anonymous users
 		$res = $dbr->select(
 			'user_stats',

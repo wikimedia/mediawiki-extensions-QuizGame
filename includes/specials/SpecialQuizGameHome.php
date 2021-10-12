@@ -478,7 +478,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 		$picture = $request->getVal( 'quizGamePicture' );
 
 		// Updated quiz choices
-		$dbw = wfGetDB( DB_MASTER );
+		$dbw = wfGetDB( DB_PRIMARY );
 		for ( $x = 1; $x <= $choices_count; $x++ ) {
 			if ( $request->getVal( "quizgame-answer-{$x}" ) ) {
 				if ( $request->getVal( "quizgame-isright-{$x}" ) == 'on' ) {
@@ -843,7 +843,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 		$user = $this->getUser();
 
 		// controls the maximum length of the previous game bar graphs
-		$dbr = wfGetDB( DB_MASTER );
+		$dbr = wfGetDB( DB_PRIMARY );
 
 		$permalinkID = $request->getInt( 'permalinkID' );
 		$lastid = $request->getInt( 'lastid' );
@@ -1276,7 +1276,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 		$imageName = $request->getText( 'quizGamePictureName' );
 
 		// Add quiz question
-		$dbw = wfGetDB( DB_MASTER );
+		$dbw = wfGetDB( DB_PRIMARY );
 		$dbw->insert(
 			'quizgame_questions',
 			[
