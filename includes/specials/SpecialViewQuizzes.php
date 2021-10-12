@@ -15,8 +15,6 @@ class ViewQuizzes extends UnlistedSpecialPage {
 	 * @param string|null $par Parameter passed to the page
 	 */
 	public function execute( $par ) {
-		global $wgUploadPath;
-
 		$out = $this->getOutput();
 		$request = $this->getRequest();
 		$title = $this->getPageTitle();
@@ -244,7 +242,7 @@ class ViewQuizzes extends UnlistedSpecialPage {
 	 * The following three functions are borrowed
 	 * from includes/wikia/GlobalFunctionsNY.php
 	 */
-	static function dateDiff( $date1, $date2 ) {
+	private static function dateDiff( $date1, $date2 ) {
 		$dtDiff = $date1 - $date2;
 
 		$totalDays = intval( $dtDiff / ( 24 * 60 * 60 ) );
@@ -259,7 +257,7 @@ class ViewQuizzes extends UnlistedSpecialPage {
 		return $dif;
 	}
 
-	static function getTimeOffset( $time, $timeabrv, $timename ) {
+	private static function getTimeOffset( $time, $timeabrv, $timename ) {
 		$timeStr = '';
 		if ( $time[$timeabrv] > 0 ) {
 			$timeStr = wfMessage( "quizgame-time-{$timename}", $time[$timeabrv] )->parse();
@@ -270,7 +268,7 @@ class ViewQuizzes extends UnlistedSpecialPage {
 		return $timeStr;
 	}
 
-	static function getTimeAgo( $time ) {
+	private static function getTimeAgo( $time ) {
 		$timeArray = self::dateDiff( time(), $time );
 		$timeStr = '';
 		$timeStrD = self::getTimeOffset( $timeArray, 'd', 'days' );

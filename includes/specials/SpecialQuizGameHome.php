@@ -17,9 +17,9 @@ use MediaWiki\MediaWikiServices;
 class QuizGameHome extends UnlistedSpecialPage {
 
 	// quizgame_questions.q_flag used to be an enum() and that sucked, big time
-	static $FLAG_NONE = 0;
-	static $FLAG_FLAGGED = 1;
-	static $FLAG_PROTECT = 2;
+	public static $FLAG_NONE = 0;
+	public static $FLAG_FLAGGED = 1;
+	public static $FLAG_PROTECT = 2;
 
 	/**
 	 * @var string
@@ -322,7 +322,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 		return $choices;
 	}
 
-	function adminPanel() {
+	private function adminPanel() {
 		$dbr = wfGetDB( DB_REPLICA );
 
 		$res = $dbr->select(
@@ -460,7 +460,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 	 * Completes an edit of a question
 	 * Updates the SQL and then forwards to the permalink
 	 */
-	function completeEdit() {
+	private function completeEdit() {
 		$request = $this->getRequest();
 
 		$id = $request->getInt( 'quizGameId' );
@@ -595,7 +595,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 	/**
 	 * Shows the edit panel for a single question
 	 */
-	function editItem() {
+	private function editItem() {
 		global $wgExtensionAssetsPath, $wgQuizID;
 
 		$lang = $this->getLanguage();
@@ -781,7 +781,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 	/**
 	 * Present a "log in" message
 	 */
-	function renderLoginPage() {
+	private function renderLoginPage() {
 		$this->getOutput()->setPageTitle( $this->msg( 'quizgame-login-title' )->text() );
 
 		$output = $this->msg( 'quizgame-login-text' )->escaped() . '<p>';
@@ -799,7 +799,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 	/**
 	 * Present "No more quizzes" message to the user
 	 */
-	function renderQuizOver() {
+	private function renderQuizOver() {
 		$this->getOutput()->setPageTitle( $this->msg( 'quizgame-nomore-questions' )->text() );
 
 		$output = $this->msg( 'quizgame-ohnoes' )->parse();
@@ -817,12 +817,12 @@ class QuizGameHome extends UnlistedSpecialPage {
 	/**
 	 * Renders the "permalink is not available" error message.
 	 */
-	function renderPermalinkError() {
+	private function renderPermalinkError() {
 		$this->getOutput()->setPageTitle( $this->msg( 'quizgame-title' )->text() );
 		$this->getOutput()->addWikiMsg( 'quizgame-unavailable' );
 	}
 
-	function renderStart() {
+	private function renderStart() {
 		$this->getOutput()->setPageTitle( $this->msg( 'quizgame-title' )->text() );
 		$url = htmlspecialchars( $this->getPageTitle()->getFullURL( 'questionGameAction=launchGame' ) );
 		$output = $this->msg( 'quizgame-intro' )->parse() . '  <a href="' . $url . '">' .
@@ -834,7 +834,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 	 * Main function to render a quiz game.
 	 * Also handles rendering a permalink.
 	 */
-	function launchGame() {
+	private function launchGame() {
 		global $wgExtensionAssetsPath;
 
 		$lang = $this->getLanguage();
@@ -1259,7 +1259,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 	}
 
 	// Function that inserts questions into the database
-	function createQuizGame() {
+	private function createQuizGame() {
 		global $wgQuizLogs;
 
 		$request = $this->getRequest();
@@ -1337,7 +1337,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 		header( 'Location: ' . $this->getPageTitle()->getFullURL( "questionGameAction=renderPermalink&permalinkID={$questionId}" ) );
 	}
 
-	function renderWelcomePage() {
+	private function renderWelcomePage() {
 		global $wgCreateQuizThresholds;
 
 		$out = $this->getOutput();

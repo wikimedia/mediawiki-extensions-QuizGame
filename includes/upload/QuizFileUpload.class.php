@@ -14,7 +14,7 @@ class QuizFileUpload extends UploadFromFile {
 		return $handler;
 	}
 
-	function initializeFromRequest( &$request ) {
+	public function initializeFromRequest( &$request ) {
 		$upload = $request->getUpload( 'wpUploadFile' );
 
 		$desiredDestName = $request->getText( 'wpDestFile' );
