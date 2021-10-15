@@ -41,7 +41,7 @@ class QuestionGameUploadForm extends UploadForm {
 		}
 	}
 
-	function displayForm( $submitResult ) {
+	public function displayForm( $submitResult ) {
 		parent::displayForm( $submitResult );
 		$this->getContext()->getOutput()->allowClickjacking();
 	}
@@ -56,7 +56,7 @@ class QuestionGameUploadForm extends UploadForm {
 	 * @param string $html HTML contents to wrap.
 	 * @return string Wrapped HTML.
 	 */
-	function wrapForm( $html ) {
+	public function wrapForm( $html ) {
 		# Include a <fieldset> wrapper for style, if requested.
 		if ( $this->mWrapperLegend !== false ) {
 			$html = Xml::fieldset( $this->mWrapperLegend, $html );

@@ -12,7 +12,7 @@ class QuizFileUploadFromUrl extends UploadFromUrl {
 		return $handler;
 	}
 
-	function initializeFromRequest( &$request ) {
+	public function initializeFromRequest( &$request ) {
 		$desiredDestName = $request->getText( 'wpDestFile' );
 		if ( !$desiredDestName ) {
 			$desiredDestName = $request->getText( 'wpUploadFileURL' );
