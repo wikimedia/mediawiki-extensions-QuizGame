@@ -130,7 +130,7 @@ class ApiQuizGameVote extends ApiBase {
 				$stats->incStatField( 'quiz_correct' );
 
 				// Add to point total
-				if ( !$user->isBlocked() && is_numeric( $points ) ) {
+				if ( !$user->getBlock() && is_numeric( $points ) ) {
 					$stats->incStatField( 'quiz_points', $points );
 				}
 			}
