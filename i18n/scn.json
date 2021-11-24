@@ -6,13 +6,17 @@
 	},
 	"quizgame-edit": "Cancia",
 	"quizgame-delete": "Cancella",
+	"quizgame-protect": "Pruteggi",
 	"quizgame-flagged-reason": "Mutivu",
 	"quizgame-answers": "Risposti",
+	"quizgame-save-page-button": "Sarva la pàggina",
 	"quizgame-cancel-button": "Annulla",
 	"quizgame-main-page-button": "Pàggina principali",
 	"quizgame-login-button": "Trasi",
+	"quizgame-js-seconds": "sicunni",
 	"quizgame-time-ago": "$1 fa",
 	"quizgame-time-days": "{{PLURAL:$1|nu jornu|$1 jorna}}",
 	"quizgame-time-hours": "{{PLURAL:$1|na ura|$1 uri}}",
-	"quizgame-time-minutes": "{{PLURAL:$1|nu minutu|$1 minuti}}"
+	"quizgame-time-minutes": "{{PLURAL:$1|nu minutu|$1 minuti}}",
+	"apihelp-quizgame-example-2": "Cancella nu quiz."
 }

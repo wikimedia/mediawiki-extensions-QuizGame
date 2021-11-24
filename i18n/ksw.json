@@ -1,8 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"Rul1902"
+			"Rul1902",
+			"SawJaemin"
 		]
 	},
-	"quizgame-main-page-button": "ကဘျံးပၤဒိၣ်"
+	"quizgame-main-page-button": "ကဘျံးပၤဒိၣ်",
+	"quizgame-prev": "လၢညါ"
 }
