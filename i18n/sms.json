@@ -8,5 +8,6 @@
 	"quizgame-save-page-button": "Ruõkk seeid",
 	"quizgame-main-page-button": "Ouddseidd",
 	"quizgame-login-button": "Ǩeeʹrjtõõđ sizz",
-	"quizgame-permalink": "Põõšši liŋkk"
+	"quizgame-permalink": "Põõšši liŋkk",
+	"quizgame-time-days": "{{PLURAL:$1|õhtt peiʹvv|$1 peeiʹv|$1 peiʹvved}}"
 }
