@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Robby",
-			"Soued031"
+			"Soued031",
+			"Les Meloures"
 		]
 	},
 	"quizgame-edit": "Änneren",
@@ -91,7 +92,7 @@
 	"quizgame-create-write-question": "Eng Fro schreiwen",
 	"quizgame-create-write-answers": "D'Äntwerte schreiwen",
 	"quizgame-create-check-correct": "Sicht déi richteg Äntwert eraus.",
-	"quizgame-create-add-picture": "E Bild dobäisetzen",
+	"quizgame-create-add-picture": "E Bild derbäisetzen",
 	"quizgame-create-edit-picture": "Bild änneren",
 	"quizgame-create-play": "Uleeën a spillen!",
 	"quizgame-pause-continue": "Virufueren",

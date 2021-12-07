@@ -12,7 +12,7 @@
 	"quizgame-unflag": "Desmarcar",
 	"quizgame-unflag-confirm": "Tem a certeza de que quer desmarcar este jogo de perguntas?",
 	"quizgame-unprotect": "Desproteger",
-	"quizgame-error-socialprofile": "A [https://www.mediawiki.org/wiki/Extension:SocialProfile extensão SocialProfile] não está instalada. Instale-a e tente novamente, por favor.",
+	"quizgame-error-socialprofile": "A [https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:SocialProfile extensão SocialProfile] não está instalada. Instale-a e tente novamente, por favor.",
 	"quizgame-error-socialprofile-title": "A extensão SocialProfile não está instalada.",
 	"quizgame-admin-panel-title": "Painel de administração",
 	"quizgame-admin-back": "< Voltar ao jogo sem fim",
