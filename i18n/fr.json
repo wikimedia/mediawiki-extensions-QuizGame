@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Ajeje Brazorf",
 			"Derugon",
 			"Gomoko",
 			"Wladek92"
@@ -33,7 +34,7 @@
 	"quizgame-cancel-button": "Annuler",
 	"quizgame-login-title": "Vous devez être connecté pour créer un quiz",
 	"quizgame-login-text": "Vous devez vous connecter pour créer un quiz!",
-	"quizgame-main-page-button": "Page principale :",
+	"quizgame-main-page-button": "Page principale",
 	"quizgame-login-button": "Se connecter",
 	"quizgame-submit": "Soumettre",
 	"quizgame-nomore-questions": "Plus de questions!",
