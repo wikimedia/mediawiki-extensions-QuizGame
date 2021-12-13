@@ -4,5 +4,19 @@
 			"Joao Xavier"
 		]
 	},
-	"quizgame-cancel-button": "Anular"
+	"quizgame-edit": "Redaktar",
+	"quizgame-edit-title": "Redaktanta - $1",
+	"quizgame-cancel-button": "Anular",
+	"quizgame-submit": "Sendez",
+	"quizgame-leaderboard-link": "maxim frequa partoprenanti",
+	"quizgame-leaderboard-order-menu": "Ordineso",
+	"quizgame-js-loading": "Karganta...",
+	"quizgame-js-seconds": "sekundi",
+	"quizgame-permalink": "Permananta ligilo",
+	"quizgame-pause-continue": "Durigar",
+	"quizgame-time-ago": "$1 ante nun",
+	"quizgame-time-days": "{{PLURAL:$1|1 dio|$1 dii}}",
+	"quizgame-time-hours": "{{PLURAL:$1|1 horo|$1 hori}}",
+	"quizgame-time-minutes": "{{PLURAL:$1|un minuto|$1 minuti}}",
+	"quizgame-time-seconds": "{{PLURAL:$1|1 sekundo|$1 sekundi}}"
 }

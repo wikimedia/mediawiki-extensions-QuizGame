@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Veeven"
+			"Veeven",
+			"Chaduvari"
 		]
 	},
 	"quizgame-delete": "తొలగించు",
@@ -11,6 +12,7 @@
 	"quizgame-save-page-button": "పేజీని భద్రపరచు",
 	"quizgame-cancel-button": "రద్దుచేయి",
 	"quizgame-nomore-questions": "ఇక ప్రశ్నలేమీ లేవు!",
+	"quizgame-intro": "క్విజ్ ఆటకు స్వాగతం. కొన్ని నిబంధనలు ఇవిగో చూడండి.",
 	"quizgame-leaderboard-correct": "సరి జవాబులు",
 	"quizgame-leaderboard-pctcorrect": "ఒప్పు శాతం",
 	"quizgame-leaderboard-order-menu": "క్రమం",

@@ -1,0 +1,30 @@
+{
+	"@metadata": {
+		"authors": [
+			"ಮಲ್ನಾಡಾಚ್ ಕೊಂಕ್ಣೊ"
+		]
+	},
+	"quizgame-edit": "ಸಂಪಾದಿಸಿ",
+	"quizgame-delete": "ಅಳಿಸು",
+	"quizgame-protect": "ಸಂರಕ್ಷಿಸು",
+	"quizgame-flagged-reason": "ಕಾರಣ",
+	"quizgame-question": "ಪ್ರಶ್ನೆ",
+	"quizgame-answers": "ಉತ್ತರಗಳು",
+	"quizgame-picture": "ಚಿತ್ರ",
+	"quizgame-save-page-button": "ಪುಟವನ್ನು ಉಳಿಸಿ",
+	"quizgame-cancel-button": "ರದ್ದುಮಾಡಿ",
+	"quizgame-main-page-button": "ಮುಖ್ಯ ಪುಟ",
+	"quizgame-login-button": "ಲಾಗಿನ್",
+	"quizgame-submit": "ಸಲ್ಲಿಸಿ",
+	"quizgame-introlink": "ಆರಂಭಿಸಲು ಇಲ್ಲಿ ಒತ್ತಿ",
+	"quizgame-leaderboard-correct": "ಸರಿಯಾದ ಉತ್ತರಗಳು",
+	"quizgame-leaderboard-menu-points": "ಅಂಕಗಳು",
+	"quizgame-leaderboard-menu-pct": "ಗರಿಷ್ಠ ಪ್ರತಿಶತ",
+	"quizgame-leaderboard-desc-points": "{{PLURAL:$1|೧ ಅಂಕ|$1 ಅಂಕಗಳು}}",
+	"quizgame-your-answer": "ನಿಮ್ಮ ಉತ್ತರ",
+	"quizgame-correct-answer": "ಉತ್ತರ ಸರಿಪಡಿಸಿ",
+	"quizgame-js-points": "{{PLURAL:$1|೧ ಅಂಕ|$1 ಅಂಕಗಳು}}",
+	"quizgame-js-seconds": "ಸೆಕೆಂಡುಗಳು",
+	"quizgame-lightbox-correct-points": "ನೀವು $1 ಅಂಕಗಳನ್ನು ಪಡೆದಿದ್ದೀರಿ",
+	"quizgame-popular": "ಜನಪ್ರಿಯ"
+}

@@ -1,9 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"চাণক্য কুমাৰ দাস"
+			"চাণক্য কুমাৰ দাস",
+			"Simbu123"
 		]
 	},
 	"quizgame-question": "প্ৰশ্ন",
+	"quizgame-main-page-button": "বেটুপাত",
 	"apihelp-quizgame-example-1": "প্ৰথম উদাহৰণ"
 }

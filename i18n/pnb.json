@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Abbas dhothar"
+		]
+	},
+	"quizgame-cancel-button": "رد کرو",
+	"quizgame-js-seconds": "سیکنٹ",
+	"quizgame-time-days": "{{PLURAL:$1|اک دن|$1 دناں}}",
+	"quizgame-time-seconds": "$1 {{PLURAL:$1|سکنٹ}}"
+}

@@ -3,7 +3,8 @@
 		"authors": [
 			"Beta16",
 			"Margherita.mignanelli",
-			"Valeria Spalla"
+			"Valeria Spalla",
+			"Ajeje Brazorf"
 		]
 	},
 	"quizgame-edit": "Modifica",
@@ -11,7 +12,10 @@
 	"quizgame-protect": "Proteggi",
 	"quizgame-error-socialprofile-title": "L'estensione SocialProfile non è installata.",
 	"quizgame-submitted-by": "Inviato il",
+	"quizgame-cancel-button": "Annulla",
 	"quizgame-login-text": "Devi essere registrato per creare un quiz!",
+	"quizgame-main-page-button": "Pagina principale",
+	"quizgame-login-button": "Entra",
 	"quizgame-submit": "Invia",
 	"quizgame-intro": "Benvenuti al gioco a quiz. Qui ci sono alcune regole.",
 	"quizgame-leaderboard-desc-correct": "$1 corretto",

@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Liuxinyu970226"
+			"Liuxinyu970226",
+			"Lakejason0"
 		]
 	},
 	"quizgame-desc": "添加交互式[[Special:QuizGameHome|问题游戏]]",
@@ -135,6 +136,7 @@
 	"logentry-quiz-unflag": "$1取消了[[Special:QuizGameHome/$4|问答游戏问题#$4]]的标记",
 	"logentry-quiz-unprotect": "$1取消了[[Special:QuizGameHome/$4|问答游戏问题#$4]]的保护",
 	"quizgame-images-category": "问答游戏图片",
+	"action-quizadmin": "管理问题游戏",
 	"right-quizadmin": "管理问题游戏",
 	"apihelp-quizgame-description": "用于管理操作的问题游戏API。",
 	"apihelp-quizgame-summary": "用于管理操作的问题游戏API。",

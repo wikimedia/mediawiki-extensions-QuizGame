@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Aue Nai",
-			"Dr Lotus Black"
+			"Dr Lotus Black",
+			"咽頭べさ"
 		]
 	},
 	"quizgame-edit": "တည်းဖြတ်ရန်",
@@ -30,7 +31,7 @@
 	"quizgame-lightbox-incorrect-correct": "အဖြေမှန်မှာ: $1",
 	"quizgame-skip": "ကျော်သွားမည်",
 	"quizgame-nav-next": "နောက်ထပ်",
-	"quizgame-newest": "အသစ်ဆုံး",
+	"quizgame-newest": "တၟိအိုတ်",
 	"quizgame-create-error-numcorrect": "အဖြေမှန်တစ်ခု ရှိရပါမည်",
 	"quizgame-create-write-question": "မေးခွန်း ရေးမည်",
 	"quizgame-create-write-answers": "အဖြေများကို ရေးပါ",
