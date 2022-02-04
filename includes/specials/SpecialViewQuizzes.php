@@ -125,13 +125,12 @@ class ViewQuizzes extends UnlistedSpecialPage {
 			]
 		);
 
-		$res_total = $dbr->select(
+		$row_total = $dbr->selectRow(
 			'quizgame_questions',
 			'COUNT(*) AS total_quizzes',
 			$where,
 			__METHOD__
 		);
-		$row_total = $dbr->fetchObject( $res_total );
 		$total = $row_total->total_quizzes;
 
 		$output .= '<div class="view-quizzes">';

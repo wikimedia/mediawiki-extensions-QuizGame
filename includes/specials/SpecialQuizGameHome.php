@@ -197,7 +197,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 				(SELECT a_q_id FROM {$dbr->tableName( 'quizgame_answers' )} WHERE a_actor = {$actorId})
 				AND q_flag != " . self::$FLAG_FLAGGED . " AND q_actor <> {$actorId} AND q_random > $randstr ORDER BY q_random LIMIT 1";
 		$res = $dbr->query( $sql, __METHOD__ );
-		$row = $dbr->fetchObject( $res );
+		$row = $res->fetchObject();
 
 		if ( $row ) {
 			$q_id = $row->q_id;
@@ -208,7 +208,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 					(SELECT a_q_id FROM {$dbr->tableName( 'quizgame_answers' )} WHERE a_actor = {$actorId})
 					AND q_flag != " . self::$FLAG_FLAGGED . " AND q_actor <> {$actorId} AND q_random < $randstr ORDER BY q_random LIMIT 1";
 			$res = $dbr->query( $sql, __METHOD__ );
-			$row = $dbr->fetchObject( $res );
+			$row = $res->fetchObject();
 			if ( $row ) {
 				$q_id = $row->q_id;
 			}
@@ -232,7 +232,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 		if ( $skipId > 0 ) {
 			$where[] = "q_id <> {$skipId}";
 		}
-		$res = $dbr->select(
+		$row = $dbr->selectRow(
 			'quizgame_questions',
 			[
 				'q_id', 'q_actor', 'q_text', 'q_flag',
@@ -244,7 +244,6 @@ class QuizGameHome extends UnlistedSpecialPage {
 			[ 'LIMIT' => 1 ]
 		);
 
-		$row = $dbr->fetchObject( $res );
 		$quiz = [];
 
 		if ( $row ) {
