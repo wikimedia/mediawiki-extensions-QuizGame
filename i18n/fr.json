@@ -4,7 +4,8 @@
 			"Derugon",
 			"Gomoko",
 			"Wladek92",
-			"Ajeje Brazorf"
+			"Ajeje Brazorf",
+			"Verdy p"
 		]
 	},
 	"quizgame-desc": "Ajoute un [[Special:QuizGameHome|jeu de questions]] interactif",
@@ -68,7 +69,7 @@
 	"quizgame-answered-incorrectly": "Vous n'avez pas répondu correctment",
 	"quizgame-your-answer": "Votre réponse",
 	"quizgame-correct-answer": "Bonne réponse",
-	"quizgame-js-loading": "Chargement...",
+	"quizgame-js-loading": "Chargement en cours...",
 	"quizgame-js-reloading": "Rechargement...",
 	"quizgame-js-timesup": "C'est terminé! Vous ne gagnerez pas de points, mais essayez néanmoins de répondre !",
 	"quizgame-js-points": "{{PLURAL:$1|1 point|$1 points}}",
