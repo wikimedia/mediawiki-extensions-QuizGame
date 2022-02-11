@@ -87,9 +87,9 @@ class QuizRecalcStats extends UnlistedSpecialPage {
 				]
 			);
 
-			$correct = $dbw->select(
+			$correctCount = $dbw->selectRowCount(
 				[ 'quizgame_answers', 'quizgame_choice' ],
-				[ 'COUNT(*) AS count' ],
+				'*',
 				[
 					'a_actor' => $row->stats_actor,
 					'choice_is_correct' => 1
@@ -102,9 +102,9 @@ class QuizRecalcStats extends UnlistedSpecialPage {
 				]
 			);
 
-			$answered = $dbw->selectField(
+			$answeredCount = $dbw->selectRowCount(
 				'quizgame_answers',
-				'COUNT(*)',
+				'*',
 				[ 'a_actor' => $row->stats_actor ],
 				__METHOD__
 			);
@@ -113,8 +113,8 @@ class QuizRecalcStats extends UnlistedSpecialPage {
 				'user_stats',
 				[
 					'stats_quiz_points' => intval( $quizPoints->sum ),
-					'stats_quiz_questions_correct' => intval( $correct->count ),
-					'stats_quiz_questions_answered' => intval( $answered )
+					'stats_quiz_questions_correct' => $correctCount,
+					'stats_quiz_questions_answered' => $answeredCount,
 				],
 				[ 'stats_actor' => $row->stats_actor ],
 				__METHOD__

@@ -561,15 +561,15 @@ class QuizGameHome extends UnlistedSpecialPage {
 
 			// Also, we need to adjust the question table and fix how many answered it correctly
 			/*
-			$howMany = $dbw->selectField(
+			$howMany = $dbw->selectRowCount(
 				'quizgame_answers',
-				'COUNT(*)',
+				'*',
 				[ 'a_choice_id' => $new_correct_id ],
 				__METHOD__
 			);
 			$res = $dbw->update(
 				'quizgame_questions',
-				[ 'q_answer_correct_count' => intval( $howMany ) ],
+				[ 'q_answer_correct_count' => $howMany ],
 				[ 'q_id' => $id ],
 				__METHOD__
 			);
@@ -862,16 +862,13 @@ class QuizGameHome extends UnlistedSpecialPage {
 		}
 
 		// Get users rank
-		$quiz_rank = 0;
-		$s = $dbr->selectRow(
+		$count = $dbr->selectRowCount(
 			'user_stats',
-			[ 'COUNT(*) AS count' ],
+			'*',
 			[ 'stats_quiz_points > ' . (int)$current_user_stats['quiz_points'] ],
 			__METHOD__
 		);
-		if ( $s !== false ) {
-			$quiz_rank = $s->count + 1;
-		}
+		$quiz_rank = $count + 1;
 
 		// This is assuming that lastId and permalinkId
 		// are mutually exclusive

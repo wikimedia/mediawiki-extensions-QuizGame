@@ -72,16 +72,13 @@ class QuizLeaderboard extends UnlistedSpecialPage {
 			$stats_data = $stats->getUserStats();
 
 			// Get user's rank
-			$quiz_rank = 0;
-			$s = $dbr->selectRow(
+			$count = $dbr->selectRowCount(
 				'user_stats',
-				[ 'COUNT(*) AS count' ],
+				'*',
 				[ 'stats_quiz_points > ' . (int)$stats_data['quiz_points'] ],
 				__METHOD__
 			);
-			if ( $s !== false ) {
-				$quiz_rank = $s->count + 1;
-			}
+			$quiz_rank = $count + 1;
 			$avatar = new wAvatar( $user->getId(), 'm' );
 
 			$formattedTotalPoints = htmlspecialchars( $lang->formatNum( (int)$stats_data['quiz_points'] ) );
