@@ -123,9 +123,11 @@ class QuizLeaderboard extends UnlistedSpecialPage {
 
 		$output .= '<h1>' . $this->msg( 'quizgame-leaderboard-order-menu' )->escaped() . '</h1>';
 
+		$pt = $this->getPageTitle();
 		foreach ( $menu as $title => $qs ) {
 			if ( $input != $qs ) {
-				$output .= "<p><a href=\"{$this->getPageTitle()->getFullURL()}/{$qs}\">{$title}</a><p>";
+				$escapedURL = htmlspecialchars( $pt->getFullURL(), ENT_QUOTES );
+				$output .= "<p><a href=\"{$escapedURL}/{$qs}\">{$title}</a><p>";
 			} else {
 				$output .= "<p><b>{$title}</b></p>";
 			}
@@ -160,7 +162,8 @@ class QuizLeaderboard extends UnlistedSpecialPage {
 			$output .= "<div class=\"top-fan-row\">
 				   <span class=\"top-fan-num\">{$x}.</span>
 				   <span class=\"top-fan\">{$avatar->getAvatarURL()}
-				   <a href=\"" . htmlspecialchars( $actor->getUserPage()->getFullURL(), ENT_QUOTES ) . '">' . $user_name_short . '</a>
+				   <a href=\"" . htmlspecialchars( $actor->getUserPage()->getFullURL(), ENT_QUOTES ) . '">' .
+					   htmlspecialchars( $user_name_short, ENT_QUOTES ) . '</a>
 				</span>';
 
 			switch ( $input ) {

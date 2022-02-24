@@ -866,7 +866,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 		$s = $dbr->selectRow(
 			'user_stats',
 			[ 'COUNT(*) AS count' ],
-			[ 'stats_quiz_points > ' . $current_user_stats['quiz_points'] ],
+			[ 'stats_quiz_points > ' . (int)$current_user_stats['quiz_points'] ],
 			__METHOD__
 		);
 		if ( $s !== false ) {
