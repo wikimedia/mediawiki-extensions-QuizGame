@@ -34,6 +34,19 @@ class ApiQuizGame extends ApiBase {
 		// ApiBase's getDB() supports only slave connections, lame...
 		$dbw = wfGetDB( DB_PRIMARY );
 
+		// Fail early if the user is sitewide blocked.
+		// (This snippet copied from MW core /includes/api/ApiTag.php)
+		$block = $user->getBlock();
+		if ( $block && $block->isSitewide() ) {
+			$this->dieBlocked( $block );
+		}
+
+		// Allow non-quizadmins to use the flagging feature but require quizadmin
+		// rights for all other stuff
+		if ( $action !== 'flagItem' && !$user->isAllowed( 'quizadmin' ) ) {
+			$this->dieWithError( 'badaccess-group0' );
+		}
+
 		switch ( $action ) {
 			case 'unprotectItem':
 				$dbw->update(
