@@ -5,6 +5,8 @@
 		]
 	},
 	"quizgame-edit": "Redaktar",
+	"quizgame-protect": "Protektar",
+	"quizgame-unprotect": "Desprotektar",
 	"quizgame-edit-title": "Redaktanta - $1",
 	"quizgame-flagged-reason": "Motivo",
 	"quizgame-cancel-button": "Anular",
