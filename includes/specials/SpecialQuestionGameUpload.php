@@ -77,7 +77,6 @@ class SpecialQuestionGameUpload extends SpecialUpload {
 			// with their submissions, as that's new in 1.16.
 			$this->mTokenOk = true;
 		} else {
-			// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
 			$this->mTokenOk = $this->getUser()->matchEditToken( $token );
 		}
 	}
