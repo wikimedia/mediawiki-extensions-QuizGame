@@ -8,5 +8,5 @@
 	"quizgame-flagged-reason": "Suijâ",
 	"quizgame-main-page-button": "Ovdâsijđo",
 	"quizgame-nav-next": "čuávuvâš",
-	"quizgame-time-days": "{{PLURAL:$1|ohtâ peivi|$1 peivid}}"
+	"quizgame-time-days": "{{PLURAL:$1|ohtâ peivi|$1 peeivi|$1 peeivi|$1 peivid}}"
 }
