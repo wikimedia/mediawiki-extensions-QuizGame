@@ -1,8 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"Jeeputer"
+			"Jeeputer",
+			"Mohammad ebz"
 		]
 	},
+	"quizgame-edit": "ویرایش",
 	"quizgame-prev": "قبلی"
 }
