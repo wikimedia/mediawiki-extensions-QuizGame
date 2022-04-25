@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Jack Phoenix",
 			"Vlad5250"
 		]
 	},
@@ -12,7 +13,7 @@
 	"quizgame-unflag": "Ukloni oznaku",
 	"quizgame-unflag-confirm": "Želite li da ukloniti oznaku s ovog kviza?",
 	"quizgame-unprotect": "Skini zaštitu",
-	"quizgame-error-socialprofile": "[https://www.mediawiki.org/wiki/Extension:SocialProfile dodatak \"Društveni profil\" (SocialProfile)] nije instaliran. Instalirajte, pa pokušajte ponovno.",
+	"quizgame-error-socialprofile": "[https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:SocialProfile dodatak \"Društveni profil\" (SocialProfile)] nije instaliran. Instalirajte, pa pokušajte ponovno.",
 	"quizgame-error-socialprofile-title": "Dodatak SocialProfile nije instaliran.",
 	"quizgame-admin-panel-title": "Administratorska ploča",
 	"quizgame-admin-back": "< Nazad na beskrajni kviz",
