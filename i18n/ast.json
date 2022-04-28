@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Xuacu"
+			"Xuacu",
+			"Jack Phoenix"
 		]
 	},
 	"quizgame-desc": "Añade un [[Special:QuizGameHome|xuegu de preguntes]] interactivu",
@@ -12,7 +13,7 @@
 	"quizgame-unflag": "Desmarcar",
 	"quizgame-unflag-confirm": "¿Seguro que quies desmarcar esti xuegu de preguntes?",
 	"quizgame-unprotect": "Desprotexer",
-	"quizgame-error-socialprofile": "La [https://www.mediawiki.org/wiki/Extension:SocialProfile estensión SocialProfile] nun ta instalada. Instala esta estensión y tenta otra vuelta.",
+	"quizgame-error-socialprofile": "La [https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:SocialProfile estensión SocialProfile] nun ta instalada. Instala esta estensión y tenta otra vuelta.",
 	"quizgame-error-socialprofile-title": "La estensión SocialProfile nun ta instalada.",
 	"quizgame-admin-panel-title": "Tableru d'alministración",
 	"quizgame-admin-back": "< Volver al xuegu sin fin",
