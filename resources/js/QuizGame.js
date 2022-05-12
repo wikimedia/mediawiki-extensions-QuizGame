@@ -656,7 +656,8 @@ jQuery( function() {
 		jQuery( 'p#quizgame-editpicture-link' ).append(
 			jQuery( '<a>' )
 				.attr( 'href', '#' )
-				.on( 'click', function() { QuizGame.showUpload(); } )
+				// eslint-disable-next-line max-statements-per-line
+				.on( 'click', function( e ) { e.preventDefault(); QuizGame.showUpload(); } )
 				.text( mw.msg( 'quizgame-edit-picture-link' ) )
 		);
 
