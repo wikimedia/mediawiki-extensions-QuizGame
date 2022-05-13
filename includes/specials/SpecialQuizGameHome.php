@@ -609,6 +609,8 @@ class QuizGameHome extends UnlistedSpecialPage {
 
 		$out->setPageTitle( $this->msg( 'quizgame-edit-title', $question['text'] )->parse() );
 
+		$out->addModules( [ 'ext.quizGame.file-selector' ] );
+
 		$quizUser = User::newFromActorId( $question['actor'] );
 		$avatar = new wAvatar( $quizUser->getId(), 'l' );
 		$stats = new UserStats( $quizUser->getId(), $quizUser->getName() );
@@ -1416,6 +1418,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 
 		// Show the picture stuff only if we can upload files (T155448)
 		if ( UploadBase::isEnabled() ) {
+			$out->addModules( [ 'ext.quizGame.file-selector' ] );
 			$output .= '<h1 style="margin-top:20px">' .
 				$this->msg( 'quizgame-create-add-picture' )->escaped() . '</h1>
 			<div id="quizgame-picture-upload">

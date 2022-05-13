@@ -1,6 +1,6 @@
 {
 	"name": "QuizGame",
-	"version": "4.2",
+	"version": "4.3",
 	"author": [
 		"Aaron Wright",
 		"Ashish Datta",
@@ -90,6 +90,24 @@
 				"mediawiki.jqueryMsg",
 				"oojs-ui-core",
 				"oojs-ui-windows"
+			]
+		},
+		"ext.quizGame.file-selector": {
+			"scripts": "resources/js/file-selector.js",
+			"dependencies": [
+				"oojs-ui",
+				"oojs-ui.styles.icons-media",
+				"mediawiki.widgets",
+				"mediawiki.widgets.UserInputWidget",
+				"mediawiki.widgets.MediaSearch",
+				"mediawiki.api",
+				"mediawiki.user"
+			],
+			"messages": [
+				"cancel",
+				"quizgame-image-picker",
+				"quizgame-image-picker-launch-button",
+				"quizgame-image-picker-select"
 			]
 		},
 		"ext.quizGame.css": {

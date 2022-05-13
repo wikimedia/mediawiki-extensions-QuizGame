@@ -19,6 +19,14 @@
 	margin: 0 0 10px 0;
 }
 
+/* Prevent the image from being repeated a gazillion times when using the MediaSearchWidget
+ * to select an existing image */
+#quizgame-picture,
+#quizgame-picture-preview {
+	/* The !important is sadly needed... */
+	background-repeat: no-repeat !important;
+}
+
 .quizgame-edit-question input {
 	padding: 0 0 0 2px;
 }
