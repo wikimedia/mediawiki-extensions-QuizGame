@@ -1,11 +1,18 @@
 {
 	"@metadata": {
 		"authors": [
+			"Amire80",
 			"Ex-Diktator"
 		]
 	},
+	"quizgame-edit": "עריכה",
 	"quizgame-delete": "מחיקה",
-	"quizgame-submitted-by": "נשלח על ידי",
+	"quizgame-admin-permission": "אין לך הרשאה לערוך.",
+	"quizgame-edit-picture-link": "עריכת תמונה",
+	"quizgame-flagged-reason": "סיבה",
+	"quizgame-submitted-by": "נשלח על־ידי",
 	"quizgame-cancel-button": "ביטול",
-	"quizgame-submit": "שליחה"
+	"quizgame-submit": "שליחה",
+	"quizgame-create-edit-picture": "עריכת תמונה",
+	"apihelp-quizgame-param-comment": "סיבה לסימון (משמש רק ב־flagItem)."
 }
