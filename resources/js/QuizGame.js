@@ -10,7 +10,7 @@ window.QuizGame = {
 	voted: 0,
 	// time() JS function from http://phpjs.org/functions/time:562
 	// This used to use the __quiz_time__ variable in the past
-	current_timestamp: Math.floor( new Date().getTime() / 1000 ),
+	current_timestamp: Math.floor( Date.now() / 1000 ),
 	current_level: 0,
 	levels_array: [30, 19, 9, 0],
 	points_array: [30, 20, 10, 0],
@@ -112,6 +112,8 @@ window.QuizGame = {
 	 *
 	 * Wrapping almost everything in existence checks feels wrong but at the same time
 	 * it appears to be necessary, unfortunately.
+	 *
+	 * @param message
 	 */
 	uploadError: function( message ) {
 		document.getElementById( 'quiz-game-errors' ).innerHTML = message;
