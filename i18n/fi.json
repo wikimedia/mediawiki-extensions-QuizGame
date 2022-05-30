@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Jack Phoenix",
+			"MITO",
 			"Pyscowicz"
 		]
 	},
@@ -97,6 +98,7 @@
 	"quizgame-create-title": "Luo kysymys",
 	"quizgame-create-message": "Kirjoita kysymys ja lisää joitakin vastausvaihtoehtoja lisätäksesi kysymyksen loppumattomaan tietovisaan.",
 	"quizgame-play-quiz": "Pelaa loputonta tietovisaa",
+	"quizgame-image-picker-select": "Valitse",
 	"quizgame-create-write-question": "Kirjoita kysymys",
 	"quizgame-create-write-answers": "Kirjoita vastaukset",
 	"quizgame-create-check-correct": "Rastita oikea vastausvaihtoehto.",

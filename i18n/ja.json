@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"MathXplore",
 			"Shirayuki",
 			"シュヴァルツ"
 		]
@@ -88,6 +89,8 @@
 	"quizgame-create-title": "問題を作成する",
 	"quizgame-create-message": "問題を終わらないクイズに追加するには、問題文といくつかの選択肢を加えてください。",
 	"quizgame-play-quiz": "終わらないクイズをプレイ",
+	"quizgame-image-picker-launch-button": "既存の画像を使う",
+	"quizgame-image-picker-select": "選択",
 	"quizgame-create-write-question": "問題を書く",
 	"quizgame-create-write-answers": "答えを書く",
 	"quizgame-create-check-correct": "正解の選択肢にチェックを入れてください。",
