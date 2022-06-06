@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Asma",
 			"Meno25",
 			"Sonic N800",
 			"ديفيد"
@@ -102,6 +103,8 @@
 	"quizgame-create-title": "أنشئ سؤال مسابقة",
 	"quizgame-create-message": "لإضافة سؤال مسابقة إلى المسابقة الذي لا تنتهي; اكتب سؤالا وأضف بعض خيارات الإجابة.",
 	"quizgame-play-quiz": "العب مسابقة لا تنتهي",
+	"quizgame-image-picker-launch-button": "استخدم صورة موجودة",
+	"quizgame-image-picker-select": "اختر",
 	"quizgame-create-write-question": "اكتب سؤالا",
 	"quizgame-create-write-answers": "اكتب الإجابات",
 	"quizgame-create-check-correct": "يُرجَى التحقق من الإجابة الصحيحة.",
