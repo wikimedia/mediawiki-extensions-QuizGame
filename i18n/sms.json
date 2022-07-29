@@ -38,6 +38,9 @@
 	"quizgame-last-question": "Mââimõs kõõččmõš",
 	"quizgame-create-threshold-title": "Raaj kõõččmõõžž",
 	"quizgame-time-days": "{{PLURAL:$1|õhtt peiʹvv|$1 peeiʹv|$1 peiʹvved}}",
+	"quizgame-time-hours": "{{PLURAL:$1|õhtt čiâss|$1 čiâss|$1 čiâssâd}}",
+	"quizgame-time-minutes": "{{PLURAL:$1|õhtt minutt|$1 minuutt|$1 minuttâd}}",
+	"quizgame-time-seconds": "{{PLURAL:$1|õhtt sekuntt|$1 sekuunt|$1 sekunttâd}}",
 	"logentry-quiz-create": "$1 raaji [[Special:QuizGameHome/$4|ođđ kõõččmõõžž]]",
 	"logentry-quiz-delete": "$1 jaukkii [[Special:QuizGameHome/$4|$4. kõõččmõõžž]]",
 	"apihelp-quizgamevote-example-1": "Jiõnâst."
