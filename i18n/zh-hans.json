@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Lakejason0",
-			"Liuxinyu970226"
+			"Liuxinyu970226",
+			"Stang"
 		]
 	},
 	"quizgame-desc": "添加交互式[[Special:QuizGameHome|问题游戏]]",
@@ -65,8 +66,8 @@
 	"quizgame-answered-incorrectly": "您回答的不正确",
 	"quizgame-your-answer": "您的答案",
 	"quizgame-correct-answer": "正确答案",
-	"quizgame-js-loading": "正在载入...",
-	"quizgame-js-reloading": "正在重新载入...",
+	"quizgame-js-loading": "正在加载...",
+	"quizgame-js-reloading": "正在重新加载...",
 	"quizgame-js-timesup": "时间到！您无法赚得任何得分，但请继续回答它！",
 	"quizgame-js-points": "{{PLURAL:$1|$1个得分}}",
 	"quizgame-js-seconds": "秒",
