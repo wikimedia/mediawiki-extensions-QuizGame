@@ -13,6 +13,9 @@
 	"quizgame-submitted-by": "נשלח על־ידי",
 	"quizgame-cancel-button": "ביטול",
 	"quizgame-submit": "שליחה",
+	"quizgame-playneverending": "לשחק בשעשועון ידע שאין לו סוף",
+	"quizgame-play-quiz": "לשחק בשעשועון ידע שאין לו סוף",
 	"quizgame-create-edit-picture": "עריכת תמונה",
+	"quizgame-create-play": "ליצור ולשחק!",
 	"apihelp-quizgame-param-comment": "סיבה לסימון (משמש רק ב־flagItem)."
 }
