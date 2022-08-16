@@ -1,8 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"פוילישער"
+			"פוילישער",
+			"Pacha Tchernof"
 		]
 	},
-	"quizgame-protect": "שיצן"
+	"quizgame-protect": "שיצן",
+	"quizgame-cancel-button": "אַנולירן"
 }

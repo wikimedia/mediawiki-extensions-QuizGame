@@ -14,5 +14,6 @@
 	"quizgame-submit": "Objavi",
 	"quizgame-js-loading": "Nalaganje ...",
 	"quizgame-nav-next": "naprej",
+	"quizgame-pause-continue": "Nadaljuj",
 	"quizgame-time-minutes": "{{PLURAL:$1|ena minuta|dve minuti|$1 minute|$1 minut}}"
 }
