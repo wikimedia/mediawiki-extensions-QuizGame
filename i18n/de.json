@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Brettchenweber",
 			"Eddie",
 			"Metalhead64",
 			"Umherirrender"
@@ -102,6 +103,7 @@
 	"quizgame-create-title": "Eine Quizfrage erstellen",
 	"quizgame-create-message": "Um eine Quizfrage zu dem nie endenden Quiz hinzuzufügen, verfasse eine Frage und füge einige Antwortmöglichkeiten hinzu.",
 	"quizgame-play-quiz": "Spiel das nie endende Quiz",
+	"quizgame-image-picker-launch-button": "Ein bereits vorhandenes Bild verwenden",
 	"quizgame-create-write-question": "Eine Frage verfassen",
 	"quizgame-create-write-answers": "Die Antworten verfassen",
 	"quizgame-create-check-correct": "Bitte wähle die richtige Antwort.",
