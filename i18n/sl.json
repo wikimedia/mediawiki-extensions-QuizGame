@@ -14,8 +14,12 @@
 	"quizgame-login-button": "Prijava",
 	"quizgame-submit": "Objavi",
 	"quizgame-js-loading": "Nalaganje ...",
+	"quizgame-js-seconds": "sekunde",
 	"quizgame-nav-next": "naprej",
 	"quizgame-pause-continue": "Nadaljuj",
+	"quizgame-time-ago": "pred $1",
+	"quizgame-time-days": "{{PLURAL:$1|en dan|$1 dneva|$1 dnevi|$1 dnevov}}",
 	"quizgame-time-hours": "{{PLURAL:$1|ena ura|$1 uri|$1 ure|$1 ur}}",
-	"quizgame-time-minutes": "{{PLURAL:$1|ena minuta|dve minuti|$1 minute|$1 minut}}"
+	"quizgame-time-minutes": "{{PLURAL:$1|ena minuta|dve minuti|$1 minute|$1 minut}}",
+	"quizgame-time-seconds": "{{PLURAL:$1|ena sekunda|$1 sekundi|$1 sekunde|$1 sekund}}"
 }
