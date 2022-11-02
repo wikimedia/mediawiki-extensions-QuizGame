@@ -1,11 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"Kareyac"
+			"Kareyac",
+			"Սերգեյ Սաֆարյան"
 		]
 	},
 	"quizgame-answers": "Պարասխաններ",
 	"quizgame-cancel-button": "Չեղարկել",
 	"quizgame-main-page-button": "Գլխավոր էջ",
+	"quizgame-js-loading": "Բեռնվում է...",
 	"quizgame-time-ago": "$1 առաջ"
 }
