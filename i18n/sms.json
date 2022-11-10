@@ -45,5 +45,6 @@
 	"quizgame-time-seconds": "{{PLURAL:$1|õhtt sekuntt|$1 sekuunt|$1 sekunttâd}}",
 	"logentry-quiz-create": "$1 raaji [[Special:QuizGameHome/$4|ođđ kõõččmõõžž]]",
 	"logentry-quiz-delete": "$1 jaukkii [[Special:QuizGameHome/$4|$4. kõõččmõõžž]]",
+	"quizgame-images-category": "Kõõččâmspeâll kaart da snimldõõǥǥ",
 	"apihelp-quizgamevote-example-1": "Jiõnâst."
 }
