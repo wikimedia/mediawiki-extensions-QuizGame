@@ -18,6 +18,7 @@
 	"quizgame-js-seconds": "sekunde",
 	"quizgame-prev": "prej",
 	"quizgame-nav-next": "naprej",
+	"quizgame-image-picker-select": "Izberi",
 	"quizgame-pause-continue": "Nadaljuj",
 	"quizgame-time-ago": "pred $1",
 	"quizgame-time-days": "{{PLURAL:$1|en dan|$1 dneva|$1 dnevi|$1 dnevov}}",
