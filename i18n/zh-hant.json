@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Kly",
-			"Liuxinyu970226"
+			"Liuxinyu970226",
+			"捍粵者"
 		]
 	},
 	"quizgame-desc": "添加互動的[[Special:QuizGameHome|題目遊戲]]",
@@ -122,7 +123,7 @@
 	"quizgame-time-minutes": "{{PLURAL:$1|1 分鐘|$1 分鐘}}",
 	"quizgame-time-seconds": "{{PLURAL:$1|1 秒|$1 秒}}",
 	"quizgame-ajax-unprotected": "題目已被取消保護。",
-	"quizgame-ajax-protected": "題目已被保護。",
+	"quizgame-ajax-protected": "題目受保護。",
 	"quizgame-ajax-unflagged": "題目已被取消標記。",
 	"quizgame-ajax-flagged": "題目已被標記。",
 	"quizgame-ajax-deleted": "題目已被刪除。",
