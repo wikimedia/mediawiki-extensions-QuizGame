@@ -50,7 +50,7 @@
 	"quizgame-leaderboard-pctcorrect": "正確百分比",
 	"quizgame-leaderboard-rank": "整體排行",
 	"quizgame-leaderboard-link": "排行榜",
-	"quizgame-leaderboard-most-correct": "問答排行榜 - 最多正確答案",
+	"quizgame-leaderboard-most-correct": "問答排行榜最多人答對的問題",
 	"quizgame-leaderboard-highest-percent": "問答排行榜 - 最高答對百分比（至少要有 50 個題目）",
 	"quizgame-leaderboard-most-points": "問答排行榜 - 最多得分",
 	"quizgame-leaderboard-order-menu": "排序",
