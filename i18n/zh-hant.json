@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Kly",
-			"Liuxinyu970226"
+			"Liuxinyu970226",
+			"捍粵者"
 		]
 	},
 	"quizgame-desc": "添加互動的[[Special:QuizGameHome|題目遊戲]]",
@@ -49,7 +50,7 @@
 	"quizgame-leaderboard-pctcorrect": "正確百分比",
 	"quizgame-leaderboard-rank": "整體排行",
 	"quizgame-leaderboard-link": "排行榜",
-	"quizgame-leaderboard-most-correct": "問答排行榜 - 最多正確答案",
+	"quizgame-leaderboard-most-correct": "問答排行榜最多人答對的問題",
 	"quizgame-leaderboard-highest-percent": "問答排行榜 - 最高答對百分比（至少要有 50 個題目）",
 	"quizgame-leaderboard-most-points": "問答排行榜 - 最多得分",
 	"quizgame-leaderboard-order-menu": "排序",
@@ -109,7 +110,7 @@
 	"quizgame-pause-continue": "繼續",
 	"quizgame-pause-view-leaderboard": "檢視排行榜",
 	"quizgame-pause-create-question": "建立問題",
-	"quizgame-last-question": "上一個題目",
+	"quizgame-last-question": "上題",
 	"quizgame-create-threshold-title": "建立問答題目",
 	"quizgame-create-threshold-reason": "很抱歉，您不可建立問答題目，除非您至少要有$1權限",
 	"quizgame-points": "$1 分",
@@ -119,10 +120,10 @@
 	"quizgame-time-minutes": "{{PLURAL:$1|1 分鐘|$1 分鐘}}",
 	"quizgame-time-seconds": "{{PLURAL:$1|1 秒|$1 秒}}",
 	"quizgame-ajax-unprotected": "題目已被取消保護。",
-	"quizgame-ajax-protected": "題目已被保護。",
+	"quizgame-ajax-protected": "題目受保護。",
 	"quizgame-ajax-unflagged": "題目已被取消標記。",
-	"quizgame-ajax-flagged": "題目已被標記。",
-	"quizgame-ajax-deleted": "題目已被刪除。",
+	"quizgame-ajax-flagged": "題目已標記。",
+	"quizgame-ajax-deleted": "題目已刪除。",
 	"quizgame-ajax-invalid-option": "無效的 AJAX 選項。",
 	"quizgame-ajax-nonnumeric-answer": "答案的選項不是數字。",
 	"quizgame-ajax-already-answered": "您已經回答了此問題。",
