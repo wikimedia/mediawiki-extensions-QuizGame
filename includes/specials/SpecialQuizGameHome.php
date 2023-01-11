@@ -188,7 +188,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 	 */
 	public function getNextQuestion() {
 		$dbr = wfGetDB( DB_REPLICA );
-		$use_index = $dbr->useIndexClause( 'q_random' );
+		$use_index = 'FORCE INDEX (q_random)';
 		$randstr = wfRandom();
 		$actorId = $this->getUser()->getActorId();
 
