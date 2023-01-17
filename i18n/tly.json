@@ -1,8 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"Patriot Kur"
+			"Patriot Kur",
+			"Patriot Kor"
 		]
 	},
-	"quizgame-cancel-button": "Ləğv karde"
+	"quizgame-cancel-button": "Ləğv karde",
+	"quizgame-main-page-button": "Sərlohə"
 }
