@@ -5,7 +5,8 @@
 			"Eddie",
 			"Metalhead64",
 			"Umherirrender",
-			"TMg"
+			"TMg",
+			"Justman10000"
 		]
 	},
 	"quizgame-desc": "Ergänzt ein interaktives [[Special:QuizGameHome|Fragespiel]]",
@@ -105,6 +106,7 @@
 	"quizgame-create-message": "Um eine Quizfrage zu dem nie endenden Quiz hinzuzufügen, verfasse eine Frage und füge einige Antwortmöglichkeiten hinzu.",
 	"quizgame-play-quiz": "Spiel das nie endende Quiz",
 	"quizgame-image-picker-launch-button": "Ein bereits vorhandenes Bild verwenden",
+	"quizgame-image-picker": "Bildauswähler",
 	"quizgame-image-picker-select": "Auswählen",
 	"quizgame-create-write-question": "Eine Frage verfassen",
 	"quizgame-create-write-answers": "Die Antworten verfassen",
