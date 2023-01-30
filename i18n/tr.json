@@ -3,11 +3,12 @@
 		"authors": [
 			"BaRaN6161 TURK",
 			"Vito Genovese",
-			"MuratTheTurkish"
+			"MuratTheTurkish",
+			"Rapsar"
 		]
 	},
 	"quizgame-desc": "İnteraktif [[Special:QuizGameHome|soru oyunu]] ekler",
-	"quizgame-edit": "Düzenle",
+	"quizgame-edit": "Değiştir",
 	"quizgame-delete": "Sil",
 	"quizgame-delete-confirm": "Bu test oyununu silmek istediğinizden emin misiniz?",
 	"quizgame-protect": "Koru",
