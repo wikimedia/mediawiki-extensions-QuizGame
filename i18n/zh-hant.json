@@ -3,6 +3,7 @@
 		"authors": [
 			"Kly",
 			"Liuxinyu970226",
+			"Winston Sung",
 			"捍粵者"
 		]
 	},
@@ -94,7 +95,7 @@
 	"quizgame-viewquizzes-create": "建立問答題目",
 	"quizgame-viewquizzes-title": "檢視問答題目",
 	"quizgame-viewquizzes-title-by-user": "檢視 $1 的問答題目",
-	"quizgame-permalink": "靜態連結",
+	"quizgame-permalink": "固定連結",
 	"quizgame-create-error-numanswers": "您必須至少要有兩個答案選項",
 	"quizgame-create-error-noquestion": "您必須填寫題目",
 	"quizgame-create-error-numcorrect": "您必須只能有一個正確答案",

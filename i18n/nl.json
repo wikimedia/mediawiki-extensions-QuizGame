@@ -3,6 +3,7 @@
 		"authors": [
 			"Mainframe98",
 			"Mark van Alphen",
+			"McDutchie",
 			"Mitchel Corstjens"
 		]
 	},
@@ -123,7 +124,7 @@
 	"quizgame-ajax-already-answered": "U hebt deze vraag al beantwoord.",
 	"quizgame-ajax-invalid-id": "Er is geen vraag met deze ID.",
 	"log-name-quiz": "Quiz vraag logboek",
-	"log-description-quiz": "Dit is een logboek van quiz vraag acties.",
+	"log-description-quiz": "Dit is een logboek van quizvraag-handelingen.",
 	"logentry-quiz-create": "$1 gecreëerd [[Special:QuizGameHome/$4|een nieuwe quizvraag]]",
 	"logentry-quiz-delete": "$1 verwijderd [[Special:QuizGameHome/$4|quizvraag #$4]]",
 	"logentry-quiz-flag": "$1 gemarkeerd [[Special:QuizGameHome/$4|quizvraag #$4]]",
