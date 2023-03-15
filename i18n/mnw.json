@@ -7,14 +7,14 @@
 		]
 	},
 	"quizgame-edit": "တည်းဖြတ်ရန်",
-	"quizgame-delete": "ဖျက်",
+	"quizgame-delete": "ဇိုတ်",
 	"quizgame-protect": "ကာကွယ်",
 	"quizgame-unprotect": "ကာကွယ်ခြင်းမှ ပယ်ဖျက်",
 	"quizgame-admin-protected": "ကာကွယ်ထားသော မေးခွန်းများ",
 	"quizgame-edit-title": "တည်းဖြတ်နေသည် - $1",
 	"quizgame-flagged-reason": "အကြောင်းပြချက်",
 	"quizgame-question": "မေးခွန်း",
-	"quizgame-answers": "အဖြေများ",
+	"quizgame-answers": "သွဟ်ဂမၠိုၚ်",
 	"quizgame-cancel-button": "ပယ်ဖျက်",
 	"quizgame-main-page-button": "ဗဟိုစာမျက်နှာ",
 	"quizgame-login-button": "ဝင်မည်",
@@ -38,6 +38,6 @@
 	"quizgame-pause-continue": "ဆက်သွားမည်",
 	"quizgame-pause-create-question": "မေးခွန်း ဖန်တီးမည်",
 	"quizgame-last-question": "နောက်ဆုံး မေးခွန်း",
-	"quizgame-time-ago": "$1 အကြာက",
+	"quizgame-time-ago": "$1 တုဲကၠုၚ်",
 	"apihelp-quizgamevote-example-1": "မဲပေး"
 }
