@@ -1,0 +1,18 @@
+{
+	"@metadata": {
+		"authors": [
+			"MRidhaAJ"
+		]
+	},
+	"quizgame-desc": "يضيف [[Special:QuizGameHome|لعبة أسئلة]] تفاعلية",
+	"quizgame-edit": "تعديل",
+	"quizgame-delete": "حذف",
+	"quizgame-delete-confirm": "صدك تريد تحذف المسابقة؟",
+	"quizgame-protect": "إحمي",
+	"quizgame-unflag": "شيل العلم",
+	"quizgame-unflag-confirm": "صدك تريد تشيل العلم من هاي المسابقة؟",
+	"quizgame-unprotect": "لا تحمي",
+	"quizgame-error-socialprofile": "[https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:SocialProfile SocialProfile extension] ما محملة. حمل الملحق وعيد مرة ثانية",
+	"quizgame-error-socialprofile-title": "امتداد SocialProfile مو مثبت.",
+	"quizgame-admin-panel-title": "لوحة الإدارة"
+}
