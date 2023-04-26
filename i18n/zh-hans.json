@@ -3,7 +3,8 @@
 		"authors": [
 			"Lakejason0",
 			"Liuxinyu970226",
-			"Stang"
+			"Stang",
+			"YanGyanSan"
 		]
 	},
 	"quizgame-desc": "添加交互式[[Special:QuizGameHome|问题游戏]]",
@@ -101,6 +102,9 @@
 	"quizgame-create-title": "创建一个问答游戏问题",
 	"quizgame-create-message": "要添加问答游戏问题至永不结束的问答，写一个问题并添加一些回答选择。",
 	"quizgame-play-quiz": "玩永不结束的问答游戏",
+	"quizgame-image-picker-launch-button": "使用现有图片",
+	"quizgame-image-picker": "图像选择器",
+	"quizgame-image-picker-select": "选择",
 	"quizgame-create-write-question": "写一个问题",
 	"quizgame-create-write-answers": "写下答案",
 	"quizgame-create-check-correct": "请检查正确答案。",
