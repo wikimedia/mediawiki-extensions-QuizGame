@@ -13,6 +13,7 @@
 	"quizgame-submitted-by": "נשלח על־ידי",
 	"quizgame-save-page-button": "שמירת הדף",
 	"quizgame-cancel-button": "ביטול",
+	"quizgame-main-page-button": "עמוד ראשי",
 	"quizgame-submit": "שליחה",
 	"quizgame-prev": "הקודם",
 	"quizgame-nav-next": "הבא",
@@ -20,5 +21,11 @@
 	"quizgame-play-quiz": "לשחק בשעשועון ידע שאין לו סוף",
 	"quizgame-create-edit-picture": "עריכת תמונה",
 	"quizgame-create-play": "ליצור ולשחק!",
+	"quizgame-points": "נקודות: $1",
+	"quizgame-time-ago": "לפני $1",
+	"quizgame-time-days": "{{PLURAL:$1|יום|יומיים|$1 ימים}}",
+	"quizgame-time-hours": "{{PLURAL:$1|שעה|שעתיים|$1 שעות}}",
+	"quizgame-time-minutes": "{{PLURAL:$1|דקה|$1 דקות}}",
+	"quizgame-time-seconds": "{{PLURAL:$1|שנייה|$1 שניות}}",
 	"apihelp-quizgame-param-comment": "סיבה לסימון (משמש רק ב־flagItem)."
 }
