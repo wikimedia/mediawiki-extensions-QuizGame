@@ -59,7 +59,7 @@
 	"quizgame-leaderboard-menu-points": "Points",
 	"quizgame-leaderboard-menu-correct": "Total des réponses correctes",
 	"quizgame-leaderboard-menu-pct": "Pourcentage le plus élevé",
-	"quizgame-leaderboard-desc-pct": "$1 %",
+	"quizgame-leaderboard-desc-pct": "$1 %",
 	"quizgame-leaderboard-desc-correct": "$1 correcte{{PLURAL:$1||s}}",
 	"quizgame-leaderboard-desc-points": "$1 point{{PLURAL:$1||s}}",
 	"quizgame-login-or-create-to-climb": "[[Special:UserLogin|Connectez-vous]] ou [[Special:UserLogin/signup|créez un compte]] pour terminer et avancer dans le classement !",
