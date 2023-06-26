@@ -126,7 +126,6 @@
 	"quizgame-images-category": "క్విజ్ ఆటల బొమ్మలు",
 	"action-quizadmin": "ప్రశ్నల ఆటలను నిర్వహించే",
 	"right-quizadmin": "ప్రశ్నల ఆటలను నిర్వహించడం",
-	"apihelp-quizgame-description": "నిర్వాహక చర్యల కోసం ప్రశ్నల ఆట API.",
 	"apihelp-quizgame-summary": "నిర్వాహక చర్యల కోసం ప్రశ్నల ఆట API.",
 	"apihelp-quizgame-param-comment": "ఫ్లాగు పెట్టడానికి కారణం (flagItem లో మాత్రమే వాడాలి).",
 	"apihelp-quizgame-param-id": "క్విజ్ ఐడీ సంఖ్య.",
