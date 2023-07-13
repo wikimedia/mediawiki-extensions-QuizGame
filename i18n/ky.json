@@ -4,5 +4,7 @@
 			"Bosogo"
 		]
 	},
-	"quizgame-cancel-button": "Жокко чыгаруу"
+	"quizgame-edit-title": "«‎$1» түзөтүлүүдө",
+	"quizgame-cancel-button": "Жокко чыгаруу",
+	"quizgame-login-button": "Кирүү"
 }
