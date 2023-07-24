@@ -6,5 +6,6 @@
 	},
 	"quizgame-edit-title": "«‎$1» түзөтүлүүдө",
 	"quizgame-cancel-button": "Жокко чыгаруу",
-	"quizgame-login-button": "Кирүү"
+	"quizgame-login-button": "Кирүү",
+	"quizgame-js-loading": "Жүктөлүүдө..."
 }
