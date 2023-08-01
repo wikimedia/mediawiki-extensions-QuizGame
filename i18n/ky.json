@@ -8,5 +8,6 @@
 	"quizgame-flagged-reason": "Себеп",
 	"quizgame-cancel-button": "Жокко чыгаруу",
 	"quizgame-login-button": "Кирүү",
-	"quizgame-js-loading": "Жүктөлүүдө..."
+	"quizgame-js-loading": "Жүктөлүүдө...",
+	"quizgame-time-days": "{{PLURAL:$1|бир күн|$1 күн}}"
 }
