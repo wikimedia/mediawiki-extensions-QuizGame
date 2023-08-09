@@ -4,5 +4,6 @@
 			"Ajiniyaz Nurniyazov"
 		]
 	},
-	"quizgame-edit-title": "$1 beti redaktorlanıp atır"
+	"quizgame-edit-title": "$1 beti redaktorlanıp atır",
+	"quizgame-time-days": "{{PLURAL:$1|bir kún|$1 kún}}"
 }
