@@ -5,10 +5,13 @@
 			"Ex-Diktator"
 		]
 	},
+	"quizgame-desc": "הוספת [[Special:QuizGameHome|משחק שאלות]] אינטראקטיבי",
 	"quizgame-edit": "עריכה",
 	"quizgame-delete": "מחיקה",
+	"quizgame-delete-confirm": "האם ברצונך באמת למחוק את משחק השאלות הזה?",
 	"quizgame-protect": "הגנה",
 	"quizgame-unflag": "ביטול סימון",
+	"quizgame-unflag-confirm": "האם ברצונך באמת לבטל את הסימון של משחק השאלות הזה?",
 	"quizgame-unprotect": "הסרת הגנה",
 	"quizgame-admin-panel-title": "חלונית ניהול",
 	"quizgame-admin-flagged": "שאלות מסומנות",
