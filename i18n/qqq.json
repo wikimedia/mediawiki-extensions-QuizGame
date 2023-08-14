@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Amire80",
 			"Liuxinyu970226",
 			"Umherirrender"
 		]
@@ -80,7 +81,7 @@
 	"quizgame-lightbox-incorrect-correct": "$1 is the correct answer (user-supplied text); this is displayed in a lightbox after the user has picked one of the available answer options",
 	"quizgame-skip": "Link title\n{{Identical|Skip}}",
 	"quizgame-next": "Link title",
-	"quizgame-times-answered": "$1 is the number of amount of times a question has been answered by different users; this is shown on Special:QuizGameHome after the user has answered a question and they've been taken to a new question",
+	"quizgame-times-answered": "$1 is the number of times a question has been answered by different users; this is shown on Special:QuizGameHome after the user has answered a question and they've been taken to a new question",
 	"quizgame-chose-correct": "Displayed to the user if they picked the correct answer for the question. $1 is the amount of points they got from answering",
 	"quizgame-chose-incorrect": "Displayed to the user if they picked the wrong answer for the question",
 	"quizgame-flag": "Link title; flagging a question temporarily removes it from circulation until an admin has reviewed it and either approved it or deleted it\n{{Identical|Flag}}",
