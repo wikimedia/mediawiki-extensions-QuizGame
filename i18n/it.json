@@ -37,6 +37,6 @@
 	"quizgame-time-ago": "$1 fa",
 	"quizgame-time-hours": "{{PLURAL:$1|un'ora|$1 ore}}",
 	"quizgame-time-seconds": "{{PLURAL:$1|one second|$1 seconds}}",
-	"logentry-quiz-delete": "$1 ha cancellato la [[Special:QuizGameHome/$4|domanda #$4 del quiz]]",
+	"logentry-quiz-delete": "$1 {{GENDER:$2|ha cancellato}} la [[Special:QuizGameHome/$4|domanda #$4 del quiz]]",
 	"apihelp-quizgamevote-param-answer": "Risposta numerica ID."
 }
