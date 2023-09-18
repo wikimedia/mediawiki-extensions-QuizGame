@@ -125,12 +125,12 @@
 	"quizgame-ajax-invalid-id": "Er is geen vraag met deze ID.",
 	"log-name-quiz": "Quiz vraag logboek",
 	"log-description-quiz": "Dit is een logboek van quizvraag-handelingen.",
-	"logentry-quiz-create": "$1 gecreëerd [[Special:QuizGameHome/$4|een nieuwe quizvraag]]",
-	"logentry-quiz-delete": "$1 verwijderd [[Special:QuizGameHome/$4|quizvraag #$4]]",
-	"logentry-quiz-flag": "$1 gemarkeerd [[Special:QuizGameHome/$4|quizvraag #$4]]",
-	"logentry-quiz-protect": "$1 beschermde [[Special:QuizGameHome/$4|quizvraag #$4]]",
-	"logentry-quiz-unflag": "$1 ongemarkeerde [[Special:QuizGameHome/$4|quizvraag #$4]]",
-	"logentry-quiz-unprotect": "$1 onbeschermde [[Special:QuizGameHome/$4|quizvraag #$4]]",
+	"logentry-quiz-create": "$1 {{GENDER:$2|heeft}} [[Special:QuizGameHome/$4|een nieuwe quizvraag]] aangemaakt",
+	"logentry-quiz-delete": "$1 {{GENDER:$2|heeft}} [[Special:QuizGameHome/$4|quizvraag #$4]] verwijderd",
+	"logentry-quiz-flag": "$1 {{GENDER:$2|heeft}} [[Special:QuizGameHome/$4|quizvraag #$4]] gemarkeerd",
+	"logentry-quiz-protect": "$1 {{GENDER:$2|heeft}} [[Special:QuizGameHome/$4|quizvraag #$4]] beschermd",
+	"logentry-quiz-unflag": "$1 {{GENDER:$2|heeft}} de markering van [[Special:QuizGameHome/$4|quizvraag #$4]] verwijderd",
+	"logentry-quiz-unprotect": "$1 {{GENDER:$2|heeft}} de bescherming van [[Special:QuizGameHome/$4|quizvraag #$4]] verwijderd",
 	"quizgame-images-category": "QuizGame afbeeldingen",
 	"right-quizadmin": "Administreer quiz vragen"
 }
