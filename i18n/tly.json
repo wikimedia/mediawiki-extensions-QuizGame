@@ -2,10 +2,11 @@
 	"@metadata": {
 		"authors": [
 			"Patriot Kur",
-			"Patriot Kor"
+			"Patriot Kor",
+			"Гусейн"
 		]
 	},
 	"quizgame-picture": "Şəkl",
 	"quizgame-cancel-button": "Ləğv karde",
-	"quizgame-main-page-button": "Sərlohə"
+	"quizgame-main-page-button": "Sərnom"
 }
