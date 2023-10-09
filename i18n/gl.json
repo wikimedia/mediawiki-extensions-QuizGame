@@ -3,7 +3,8 @@
 		"authors": [
 			"ArenaL5",
 			"Banjo",
-			"Elisardojm"
+			"Elisardojm",
+			"Toliño"
 		]
 	},
 	"quizgame-desc": "Engade un [[Special:QuizGameHome|xogo de preguntas]] interactivo",
@@ -130,12 +131,12 @@
 	"quizgame-ajax-invalid-id": "Non hai ningunha pregunta con ese identificador.",
 	"log-name-quiz": "Rexistro das preguntas do concurso",
 	"log-description-quiz": "Este é un rexistro das accións asociadas ás preguntas do concurso.",
-	"logentry-quiz-create": "$1 creou [[Special:QuizGameHome/$4|unha nova pregunta do concurso]]",
-	"logentry-quiz-delete": "$1 borrou [[Special:QuizGameHome/$4|a pregunta do concurso #$4]]",
-	"logentry-quiz-flag": "$1 marcou [[Special:QuizGameHome/$4|a pregunta do concurso #$4]]",
-	"logentry-quiz-protect": "$1 protexeu [[Special:QuizGameHome/$4|a pregunta do concurso #$4]]",
-	"logentry-quiz-unflag": "$1 desmarcou [[Special:QuizGameHome/$4|a pregunta do concurso  #$4]]",
-	"logentry-quiz-unprotect": "$1 desprotexeu [[Special:QuizGameHome/$4|a pregunta do concurso #$4]]",
+	"logentry-quiz-create": "$1 {{GENDER:$2|creou}} [[Special:QuizGameHome/$4|unha nova pregunta do concurso]]",
+	"logentry-quiz-delete": "$1 {{GENDER:$2|borrou}} [[Special:QuizGameHome/$4|a pregunta #$4 do concurso]]",
+	"logentry-quiz-flag": "$1 {{GENDER:$2|marcou}} [[Special:QuizGameHome/$4|a pregunta #$4 do concurso]]",
+	"logentry-quiz-protect": "$1 {{GENDER:$2|protexeu}} [[Special:QuizGameHome/$4|a pregunta #$4 do concurso]]",
+	"logentry-quiz-unflag": "$1 {{GENDER:$2|desmarcou}} [[Special:QuizGameHome/$4|a pregunta #$4 do concurso]]",
+	"logentry-quiz-unprotect": "$1 {{GENDER:$2|desprotexeu}} [[Special:QuizGameHome/$4|a pregunta #$4 do concurso]]",
 	"quizgame-images-category": "Imaxes do concurso",
 	"right-quizadmin": "Administrar xogos de preguntas",
 	"apihelp-quizgame-param-comment": "Motivo do marcado (só usado en flagItem).",
