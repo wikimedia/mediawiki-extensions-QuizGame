@@ -4,9 +4,11 @@
 			"Dgstranz",
 			"DiegoAmbrocio",
 			"Fitoschido",
-			"Macofe"
+			"Macofe",
+			"No se"
 		]
 	},
+	"quizgame-desc": "Agregar un [[Special:QuizGameHome|juego de preguntas]] interactivo",
 	"quizgame-edit": "Editar",
 	"quizgame-delete": "Borrar",
 	"quizgame-protect": "Proteger",
@@ -33,6 +35,7 @@
 	"quizgame-login-button": "Iniciar sesión",
 	"quizgame-submit": "Enviar",
 	"quizgame-nomore-questions": "¡No quedan más preguntas!",
+	"quizgame-ohnoes": "No hay más juegos de preguntas, ¡haga clic a continuación para crear uno!",
 	"quizgame-create-button": "Crear una prueba",
 	"quizgame-unavailable": "Esta pregunta no está disponible.\n\n[[Special:QuizGameHome|Pulsa aquí para probar con otras preguntas]]",
 	"quizgame-title": "Juego de preguntas.",
@@ -50,6 +53,7 @@
 	"quizgame-leaderboard-most-points": "Tabla de clasificación del concurso - más puntos",
 	"quizgame-leaderboard-order-menu": "Orden",
 	"quizgame-leaderboard-menu-points": "Puntos",
+	"quizgame-leaderboard-menu-correct": "Total de correctos",
 	"quizgame-leaderboard-menu-pct": "Porcentaje más alto",
 	"quizgame-leaderboard-desc-correct": "$1 correcta",
 	"quizgame-leaderboard-desc-points": "{{PLURAL:$1|1 punto|$1 puntos}}",
