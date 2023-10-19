@@ -3,7 +3,8 @@
 		"authors": [
 			"ArenaL5",
 			"Banjo",
-			"Elisardojm"
+			"Elisardojm",
+			"Toliño"
 		]
 	},
 	"quizgame-desc": "Engade un [[Special:QuizGameHome|xogo de preguntas]] interactivo",
@@ -101,6 +102,9 @@
 	"quizgame-create-title": "Crear unha pregunta do concurso",
 	"quizgame-create-message": "Para engadir unha pregunta ó concurso sen fin, escriba unha pregunta e engada algunhas respostas para escoller.",
 	"quizgame-play-quiz": "Xogar ó concurso sen fin",
+	"quizgame-image-picker-launch-button": "Usar unha imaxe existente",
+	"quizgame-image-picker": "Selector de imaxes",
+	"quizgame-image-picker-select": "Seleccionar",
 	"quizgame-create-write-question": "Escriba unha pregunta",
 	"quizgame-create-write-answers": "Escriba as respostas",
 	"quizgame-create-check-correct": "Por favor, marque a resposta correcta.",
@@ -137,14 +141,17 @@
 	"logentry-quiz-unflag": "$1 desmarcou [[Special:QuizGameHome/$4|a pregunta do concurso  #$4]]",
 	"logentry-quiz-unprotect": "$1 desprotexeu [[Special:QuizGameHome/$4|a pregunta do concurso #$4]]",
 	"quizgame-images-category": "Imaxes do concurso",
+	"action-quizadmin": "administrar xogos de preguntas",
 	"right-quizadmin": "Administrar xogos de preguntas",
 	"apihelp-quizgame-description": "API de xestión dos xogos de preguntas.",
+	"apihelp-quizgame-summary": "API de xestión dos xogos de preguntas para accións administrativas.",
 	"apihelp-quizgame-param-comment": "Motivo do marcado (só usado en flagItem).",
 	"apihelp-quizgame-param-id": "Número de identificación (ID) do concurso.",
 	"apihelp-quizgame-param-quizaction": "Acción a realizar seguida de \"Item\", p. ex. deleteItem.",
 	"apihelp-quizgame-example-1": "Marcar un concurso.",
 	"apihelp-quizgame-example-2": "Borrar un concurso.",
 	"apihelp-quizgamevote-description": "API de xogo de preguntas para votar.",
+	"apihelp-quizgamevote-summary": "API de xogo de preguntas para votar.",
 	"apihelp-quizgamevote-param-answer": "Identificador de resposta numérico.",
 	"apihelp-quizgamevote-param-id": "Número de identificación (ID) do concurso.",
 	"apihelp-quizgamevote-param-points": "Cantos puntos se consiguen por cada resposta correcta.",
