@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Jack Phoenix",
-			"Xuacu"
+			"Xuacu",
+			"YoaR"
 		]
 	},
 	"quizgame-desc": "Añade un [[Special:QuizGameHome|xuegu de preguntes]] interactivu",
@@ -29,7 +30,7 @@
 	"quizgame-picture": "Semeya",
 	"quizgame-correct-answer-checked": "La respuesta correuta ta marcada.",
 	"quizgame-save-page-button": "Guardar la páxina",
-	"quizgame-cancel-button": "Encaboxar",
+	"quizgame-cancel-button": "Zarrar",
 	"quizgame-login-title": "Tienes d'aniciar sesión pa crear un xuegu de preguntes",
 	"quizgame-login-text": "¡Anicia sesión pa crear un xuegu de preguntes!",
 	"quizgame-main-page-button": "Portada",
