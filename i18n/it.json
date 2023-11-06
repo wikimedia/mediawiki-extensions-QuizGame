@@ -36,7 +36,7 @@
 	"quizgame-create-threshold-reason": "Mi dispiace, non è possibile creare un quiz di domande fino a quando si dispone di almeno $1",
 	"quizgame-time-ago": "$1 fa",
 	"quizgame-time-hours": "{{PLURAL:$1|un'ora|$1 ore}}",
-	"quizgame-time-seconds": "{{PLURAL:$1|one second|$1 seconds}}",
+	"quizgame-time-seconds": "{{PLURAL:$1|un secondo|$1 secondi}}",
 	"logentry-quiz-delete": "$1 ha cancellato la [[Special:QuizGameHome/$4|domanda #$4 del quiz]]",
 	"apihelp-quizgamevote-param-answer": "Risposta numerica ID."
 }
