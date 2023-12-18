@@ -4,7 +4,8 @@
 			"Asma",
 			"Meno25",
 			"Sonic N800",
-			"ديفيد"
+			"ديفيد",
+			"علاء"
 		]
 	},
 	"quizgame-desc": "يضيف [[Special:QuizGameHome|لعبة أسئلة]] تفاعلية",
@@ -21,7 +22,7 @@
 	"quizgame-admin-back": "< العودة إلى مسابقة لا تنتهي أبدا",
 	"quizgame-admin-flagged": "الأسئلة المعلمة",
 	"quizgame-admin-protected": "أسئلة محمية",
-	"quizgame-admin-permission": "ليست لديك صلاحية التعديل.",
+	"quizgame-admin-permission": "ليس لديك صلاحية التعديل.",
 	"quizgame-edit-title": "تحرير - $1",
 	"quizgame-edit-picture-link": "تحرير الصورة",
 	"quizgame-flagged-reason": "السبب",
