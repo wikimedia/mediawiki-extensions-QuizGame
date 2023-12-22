@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Aftabuzzaman",
+			"Aishik Rehman",
 			"Elias Ahmmad",
 			"আফতাবুজ্জামান"
 		]
@@ -31,7 +32,7 @@
 	"quizgame-main-page-button": "প্রধান পাতা",
 	"quizgame-login-button": "প্রবেশ",
 	"quizgame-submit": "জমা দিন",
-	"quizgame-nomore-questions": "আর কোন প্রশ্ন নয়!",
+	"quizgame-nomore-questions": "আর কোনো প্রশ্ন নয়!",
 	"quizgame-create-button": "একটি কুইজ তৈরি করুন!",
 	"quizgame-unavailable": "দুঃখিত, এই প্রশ্ন অনুপলব্ধ!\n\n[[Special:QuizGameHome|অন্য কিছু প্রশ্ন চেষ্টা করার জন্য এখানে ক্লিক করুন]]",
 	"quizgame-title": "কুইজ গেম!",
@@ -106,7 +107,7 @@
 	"quizgame-ajax-invalid-option": "অকার্যকর AJAX পছন্দ।",
 	"quizgame-ajax-nonnumeric-answer": "উত্তর পছন্দ সাংখ্যিক নয়।",
 	"quizgame-ajax-already-answered": "আপনি ইতিমধ্যে এই প্রশ্নের উত্তর দিয়েছেন।",
-	"quizgame-ajax-invalid-id": "এই আইডি দ্বারা কোন প্রশ্ন নেই।",
+	"quizgame-ajax-invalid-id": "এই আইডি দ্বারা কোনো প্রশ্ন নেই।",
 	"log-name-quiz": "কুইজ প্রশ্ন লগ",
 	"logentry-quiz-delete": "$1 [[Special:QuizGameHome/$4|কুইজ প্রশ্ন নং #$4]] অপসারণ করেছেন",
 	"logentry-quiz-protect": "$1 [[Special:QuizGameHome/$4|কুইজের প্রশ্ন নং #$4]] সুরক্ষিত করেছেন",
