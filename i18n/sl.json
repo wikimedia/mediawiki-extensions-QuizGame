@@ -134,7 +134,7 @@
 	"log-name-quiz": "Dnevnik vprašanj kviza",
 	"log-description-quiz": "To je dnevnik dejanj v zvezi z vrašanji kviza.",
 	"logentry-quiz-create": "$1 je {{GENDER:$2|ustvaril|ustvarila|ustvaril_a}} [[Special:QuizGameHome/$4|novo vprašanje kviza]]",
-	"logentry-quiz-delete": "$1 je {{GENDER:$2|izbrisal|izbrisala|izbrisal/a}} [[Special:QuizGameHome/$4|vprašanje kviza št. $4]]",
+	"logentry-quiz-delete": "$1 je {{GENDER:$2|izbrisal|izbrisala|izbrisal_a}} [[Special:QuizGameHome/$4|vprašanje kviza št. $4]]",
 	"logentry-quiz-flag": "$1 je {{GENDER:$2|označil|označila|označil_a}} [[Special:QuizGameHome/$4|vprašanje kviza št. $4]]",
 	"logentry-quiz-protect": "$1 je {{GENDER:$2|zaščitil|zaščitila|zaščitil_a}} [[Special:QuizGameHome/$4|vprašanje kviza št. $4]]",
 	"logentry-quiz-unflag": "$1 je {{GENDER:$2|odoznačil|odoznačila|odoznačil_a}} [[Special:QuizGameHome/$4|vprašanje kviza št. $4]]",
