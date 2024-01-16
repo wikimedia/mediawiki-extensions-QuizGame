@@ -3,7 +3,8 @@
 		"authors": [
 			"Eduardo Addad de Oliveira",
 			"Eduardoaddad",
-			"Warley Felipe C."
+			"Warley Felipe C.",
+			"Fúlvio"
 		]
 	},
 	"quizgame-desc": "Adiciona um [[Special:QuizGameHome|jogo de perguntas]] interativo",
@@ -101,6 +102,9 @@
 	"quizgame-create-title": "Criar uma pergunta do jogo",
 	"quizgame-create-message": "Para acrescentar uma pergunta ao jogo sem fim, escreva uma pergunta e adicione algumas opções de resposta.",
 	"quizgame-play-quiz": "Jogar o jogo sem fim",
+	"quizgame-image-picker-launch-button": "Usar uma imagem existente",
+	"quizgame-image-picker": "Seletor de imagens",
+	"quizgame-image-picker-select": "Selecionar",
 	"quizgame-create-write-question": "Escreva uma pergunta",
 	"quizgame-create-write-answers": "Escreva as respostas",
 	"quizgame-create-check-correct": "Marque a resposta correta, por favor.",
