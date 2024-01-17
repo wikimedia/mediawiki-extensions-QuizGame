@@ -3,7 +3,8 @@
 		"authors": [
 			"Eduardo Addad de Oliveira",
 			"Eduardoaddad",
-			"Warley Felipe C."
+			"Warley Felipe C.",
+			"Fúlvio"
 		]
 	},
 	"quizgame-desc": "Adiciona um [[Special:QuizGameHome|jogo de perguntas]] interativo",
@@ -101,6 +102,9 @@
 	"quizgame-create-title": "Criar uma pergunta do jogo",
 	"quizgame-create-message": "Para acrescentar uma pergunta ao jogo sem fim, escreva uma pergunta e adicione algumas opções de resposta.",
 	"quizgame-play-quiz": "Jogar o jogo sem fim",
+	"quizgame-image-picker-launch-button": "Usar uma imagem existente",
+	"quizgame-image-picker": "Seletor de imagens",
+	"quizgame-image-picker-select": "Selecionar",
 	"quizgame-create-write-question": "Escreva uma pergunta",
 	"quizgame-create-write-answers": "Escreva as respostas",
 	"quizgame-create-check-correct": "Marque a resposta correta, por favor.",
@@ -130,12 +134,12 @@
 	"quizgame-ajax-invalid-id": "Não há nenhuma pergunta com esse identificador.",
 	"log-name-quiz": "Registo das perguntas do jogo",
 	"log-description-quiz": "Este é um registo das ações associadas às perguntas do jogo.",
-	"logentry-quiz-create": "$1 criou [[Special:QuizGameHome/$4|uma nova pergunta do jogo]]",
-	"logentry-quiz-delete": "$1 eliminou [[Special:QuizGameHome/$4|a pergunta nº$4 do jogo]]",
-	"logentry-quiz-flag": "$1 marcou [[Special:QuizGameHome/$4|a pergunta nº$4 do jogo]]",
-	"logentry-quiz-protect": "$1 protegeu [[Special:QuizGameHome/$4|a pergunta nº$4 do jogo]]",
-	"logentry-quiz-unflag": "$1 desmarcou [[Special:QuizGameHome/$4|a pergunta nº$4 do jogo]]",
-	"logentry-quiz-unprotect": "$1 desprotegeu [[Special:QuizGameHome/$4|a pergunta nº$4 do jogo]]",
+	"logentry-quiz-create": "$1 {{GENDER:$2|criou}} [[Special:QuizGameHome/$4|uma nova pergunta do jogo]]",
+	"logentry-quiz-delete": "$1 {{GENDER:$2|eliminou}} [[Special:QuizGameHome/$4|a pergunta nº$4 do jogo]]",
+	"logentry-quiz-flag": "$1 {{GENDER:$2|marcou}} [[Special:QuizGameHome/$4|a pergunta nº$4 do jogo]]",
+	"logentry-quiz-protect": "$1 {{GENDER:$2|protegeu}} [[Special:QuizGameHome/$4|a pergunta nº$4 do jogo]]",
+	"logentry-quiz-unflag": "$1 {{GENDER:$2|desmarcou}} [[Special:QuizGameHome/$4|a pergunta nº$4 do jogo]]",
+	"logentry-quiz-unprotect": "$1 {{GENDER:$2|desprotegeu}} [[Special:QuizGameHome/$4|a pergunta nº$4 do jogo]]",
 	"quizgame-images-category": "Imagens do jogo de perguntas",
 	"action-quizadmin": "administrar jogos de perguntas",
 	"right-quizadmin": "Administrar jogos de perguntas",
