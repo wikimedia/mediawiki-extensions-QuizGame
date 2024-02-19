@@ -1,0 +1,13 @@
+{
+	"@metadata": {
+		"authors": [
+			"Stefán Örvar Sigmundsson"
+		]
+	},
+	"quizgame-unflag": "Ómarka",
+	"quizgame-admin-flagged": "Markaðar spurningar",
+	"quizgame-flag": "Marka",
+	"quizgame-flag-confirm": "Útskýrðu af hverju þú markar þessa spurningu.",
+	"quizgame-ajax-unflagged": "Spurningin hefur verið ómörkuð.",
+	"quizgame-ajax-flagged": "Spurningin hefur verið mörkuð."
+}
