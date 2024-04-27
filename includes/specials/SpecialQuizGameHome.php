@@ -122,9 +122,9 @@ class QuizGameHome extends UnlistedSpecialPage {
 			case 'renderPermalink':
 				$this->launchGame();
 				break;
-		default:
-			$this->launchGame();
-			break;
+			default:
+				$this->launchGame();
+				break;
 		}
 	}
 
