@@ -15,6 +15,7 @@
 	"quizgame-login-button": "Кирүү",
 	"quizgame-js-loading": "Жүктөлүүдө...",
 	"quizgame-nav-next": "кийинки",
+	"quizgame-permalink": "Туруктуу шилтеме",
 	"quizgame-pause-continue": "Улантуу",
 	"quizgame-time-days": "{{PLURAL:$1|бир күн|$1 күн}}"
 }
