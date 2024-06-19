@@ -109,14 +109,9 @@ class QuizGameHooks {
 			$updater->addExtensionIndex( 'quizgame_answers', 'a_actor', $sqlDirectory . 'patches/actor/add-a_actor_index.sql' );
 
 			// 3) populate the columns with correct values
-			// PITFALL WARNING! Do NOT change this to $updater->runMaintenance,
-			// THEY ARE NOT THE SAME THING and this MUST be using addExtensionUpdate
-			// instead for the code to work as desired!
-			// HT Skizzerz
 			$updater->addExtensionUpdate( [
 				'runMaintenance',
 				'MigrateOldQuizGameAnswersUserColumnsToActor',
-				'../maintenance/migrateOldQuizGameAnswersUserColumnsToActor.php'
 			] );
 
 			// 4) drop old columns + indexes
@@ -133,14 +128,9 @@ class QuizGameHooks {
 			$updater->addExtensionIndex( 'quizgame_questions', 'q_actor', $sqlDirectory . 'patches/actor/add-q_actor_index.sql' );
 
 			// 3) populate the columns with correct values
-			// PITFALL WARNING! Do NOT change this to $updater->runMaintenance,
-			// THEY ARE NOT THE SAME THING and this MUST be using addExtensionUpdate
-			// instead for the code to work as desired!
-			// HT Skizzerz
 			$updater->addExtensionUpdate( [
 				'runMaintenance',
 				'MigrateOldQuizGameQuestionsUserColumnsToActor',
-				'../maintenance/migrateOldQuizGameQuestionsUserColumnsToActor.php'
 			] );
 
 			// 4) drop old columns + indexes
@@ -157,14 +147,9 @@ class QuizGameHooks {
 			$updater->addExtensionIndex( 'quizgame_user_view', 'uv_actor', $sqlDirectory . 'patches/actor/add-uv_actor_index.sql' );
 
 			// 3) populate the columns with correct values
-			// PITFALL WARNING! Do NOT change this to $updater->runMaintenance,
-			// THEY ARE NOT THE SAME THING and this MUST be using addExtensionUpdate
-			// instead for the code to work as desired!
-			// HT Skizzerz
 			$updater->addExtensionUpdate( [
 				'runMaintenance',
 				'MigrateOldQuizGameUserViewUserColumnsToActor',
-				'../maintenance/migrateOldQuizGameUserViewUserColumnsToActor.php'
 			] );
 
 			// 4) drop old columns + indexes
