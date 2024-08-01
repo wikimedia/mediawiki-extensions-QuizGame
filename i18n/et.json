@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"Jack Phoenix"
+		]
+	},
+	"quizgame-flagged-reason": "Põhjus",
+	"quizgame-cancel-button": "Loobu",
+	"quizgame-main-page-button": "Esileht",
+	"quizgame-login-button": "Logi sisse",
+	"quizgame-leaderboard-menu-points": "Punktid",
+	"quizgame-leaderboard-desc-points": "{{PLURAL:$1|1 punkt|$1 punkti}}",
+	"quizgame-js-points": "{{PLURAL:$1|1 punkt|$1 punkti}}",
+	"quizgame-permalink": "Püsilink"
+}

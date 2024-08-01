@@ -5,7 +5,8 @@
 			"DiegoAmbrocio",
 			"Fitoschido",
 			"Macofe",
-			"No se"
+			"No se",
+			"Jack Phoenix"
 		]
 	},
 	"quizgame-desc": "Agregar un [[Special:QuizGameHome|juego de preguntas]] interactivo",
@@ -96,6 +97,7 @@
 	"quizgame-create-title": "Crear una pregunta del cuestionario",
 	"quizgame-create-message": "Para añadir una pregunta al cuestionario interminable, escriba una pregunta y añada algunas opciones de respuesta.",
 	"quizgame-play-quiz": "Juega al concurso interminable",
+	"quizgame-image-picker-select": "Seleccionar",
 	"quizgame-create-write-question": "Escribe una pregunta",
 	"quizgame-create-write-answers": "Escribe las respuestas",
 	"quizgame-create-check-correct": "Por favor, marque la respuesta correcta.",
