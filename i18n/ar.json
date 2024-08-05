@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Asma",
+			"FiberAhmed",
 			"Meno25",
 			"Sonic N800",
 			"ديفيد",
@@ -35,7 +36,7 @@
 	"quizgame-cancel-button": "إلغاء",
 	"quizgame-login-title": "يجب تسجيل الدخول لإنشاء مسابقة",
 	"quizgame-login-text": "تحتاج إلى تسجيل الدخول لإنشاء مسابقة!",
-	"quizgame-main-page-button": "الصفحة الرئيسية",
+	"quizgame-main-page-button": "الصفحة الرئيسة",
 	"quizgame-login-button": "تسجيل الدخول",
 	"quizgame-submit": "إرسال",
 	"quizgame-nomore-questions": "لا يوجد المزيد من الأسئلة!",
