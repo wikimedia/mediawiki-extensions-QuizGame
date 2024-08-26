@@ -4,12 +4,24 @@
 			"Yupik"
 		]
 	},
+	"quizgame-edit": "Rievdat",
 	"quizgame-delete": "Sihko",
+	"quizgame-protect": "Suodjal",
+	"quizgame-admin-permission": "Dus ii leat vuoigatvuohta rievdadit skovi.",
+	"quizgame-edit-picture-link": "Rievdat gova",
+	"quizgame-flagged-reason": "Sivva",
+	"quizgame-answers": "Vástádusat",
+	"quizgame-picture": "Govva",
 	"quizgame-save-page-button": "Vurke siiddu",
 	"quizgame-cancel-button": "Gaskkalduhte",
 	"quizgame-main-page-button": "Váldosiidu",
 	"quizgame-login-button": "Čálit sisa",
+	"quizgame-submit": "Sádde",
+	"quizgame-your-answer": "Du vástádus",
 	"quizgame-nav-next": "čuovvovaš",
 	"quizgame-image-picker-select": "Vállje",
+	"quizgame-create-write-answers": "Čále vástádusaid",
+	"quizgame-create-add-picture": "Lasit gova",
+	"quizgame-create-edit-picture": "Rievdat gova",
 	"quizgame-pause-continue": "Joatkke"
 }
