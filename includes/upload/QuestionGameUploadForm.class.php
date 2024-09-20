@@ -144,7 +144,7 @@ class QuestionGameUploadForm extends UploadForm {
 
 		$descriptor = [];
 		$descriptor['UploadFile'] = [
-			'class' => 'UploadSourceField',
+			'class' => UploadSourceField::class,
 			'section' => 'source',
 			'type' => 'file',
 			'id' => 'wpUploadFile',
@@ -156,7 +156,7 @@ class QuestionGameUploadForm extends UploadForm {
 		];
 		if ( $canUploadByUrl ) {
 			$descriptor['UploadFileURL'] = [
-				'class' => 'UploadSourceField',
+				'class' => UploadSourceField::class,
 				'section' => 'source',
 				'id' => 'wpUploadFileURL',
 				'radio-id' => 'wpSourceTypeurl',
