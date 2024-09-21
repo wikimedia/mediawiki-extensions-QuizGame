@@ -1,5 +1,7 @@
 <?php
 
+use MediaWiki\MediaWikiServices;
+
 class ViewQuizzes extends UnlistedSpecialPage {
 
 	/**
@@ -66,7 +68,7 @@ class ViewQuizzes extends UnlistedSpecialPage {
 		<div class="view-quizzes-navigation">
 			<h2>' . $this->msg( 'quizgame-leaderboard-order-menu' )->escaped() . '</h2>';
 
-		$dbr = wfGetDB( DB_PRIMARY );
+		$dbr = MediaWikiServices::getInstance()->getDBLoadBalancer()->getConnection( DB_PRIMARY );
 
 		$where = [];
 		$where[] = 'q_flag <> ' . QuizGameHome::$FLAG_FLAGGED;

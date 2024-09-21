@@ -136,7 +136,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 	 * @return bool|int Boolean false if they haven't, answer choice identifier if they have
 	 */
 	public function userAnswered( $user, $q_id ) {
-		$dbr = wfGetDB( DB_REPLICA );
+		$dbr = MediaWikiServices::getInstance()->getDBLoadBalancer()->getConnection( DB_REPLICA );
 		$s = $dbr->selectRow(
 			'quizgame_answers',
 			[ 'a_choice_id' ],
@@ -165,7 +165,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 	 * @return bool|int Boolean false if they haven't gotten points, otherwise int (amount of points)
 	 */
 	public function getAnswerPoints( $user, $q_id ) {
-		$dbr = wfGetDB( DB_REPLICA );
+		$dbr = MediaWikiServices::getInstance()->getDBLoadBalancer()->getConnection( DB_REPLICA );
 		$s = $dbr->selectRow(
 			'quizgame_answers',
 			[ 'a_points' ],
@@ -187,7 +187,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 	 * @return int ID of the next unanswered question (or 0)
 	 */
 	public function getNextQuestion() {
-		$dbr = wfGetDB( DB_REPLICA );
+		$dbr = MediaWikiServices::getInstance()->getDBLoadBalancer()->getConnection( DB_REPLICA );
 		$use_index = 'FORCE INDEX (q_random)';
 		$randstr = wfRandom();
 		$actorId = $this->getUser()->getActorId();
@@ -226,7 +226,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 	 */
 	public function getQuestion( $questionId, $skipId = 0 ) {
 		$user = $this->getUser();
-		$dbr = wfGetDB( DB_REPLICA );
+		$dbr = MediaWikiServices::getInstance()->getDBLoadBalancer()->getConnection( DB_REPLICA );
 		$where = [];
 		$where['q_id'] = intval( $questionId );
 		if ( $skipId > 0 ) {
@@ -288,7 +288,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 	 * @return array[]
 	 */
 	public function getQuestionChoices( $questionId, $question_answer_count = 0 ) {
-		$dbr = wfGetDB( DB_REPLICA );
+		$dbr = MediaWikiServices::getInstance()->getDBLoadBalancer()->getConnection( DB_REPLICA );
 
 		$res = $dbr->select(
 			'quizgame_choice',
@@ -322,7 +322,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 	}
 
 	private function adminPanel() {
-		$dbr = wfGetDB( DB_REPLICA );
+		$dbr = MediaWikiServices::getInstance()->getDBLoadBalancer()->getConnection( DB_REPLICA );
 
 		$res = $dbr->select(
 			'quizgame_questions',
@@ -477,7 +477,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 		$picture = $request->getVal( 'quizGamePicture' );
 
 		// Updated quiz choices
-		$dbw = wfGetDB( DB_PRIMARY );
+		$dbw = MediaWikiServices::getInstance()->getDBLoadBalancer()->getConnection( DB_PRIMARY );
 		for ( $x = 1; $x <= $choices_count; $x++ ) {
 			if ( $request->getVal( "quizgame-answer-{$x}" ) ) {
 				if ( $request->getVal( "quizgame-isright-{$x}" ) == 'on' ) {
@@ -844,7 +844,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 		$user = $this->getUser();
 
 		// controls the maximum length of the previous game bar graphs
-		$dbr = wfGetDB( DB_PRIMARY );
+		$dbr = MediaWikiServices::getInstance()->getDBLoadBalancer()->getConnection( DB_PRIMARY );
 
 		$permalinkID = $request->getInt( 'permalinkID' );
 		$lastid = $request->getInt( 'lastid' );
@@ -1274,7 +1274,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 		$imageName = $request->getText( 'quizGamePictureName' );
 
 		// Add quiz question
-		$dbw = wfGetDB( DB_PRIMARY );
+		$dbw = MediaWikiServices::getInstance()->getDBLoadBalancer()->getConnection( DB_PRIMARY );
 		$dbw->insert(
 			'quizgame_questions',
 			[

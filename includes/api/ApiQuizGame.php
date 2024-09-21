@@ -32,7 +32,7 @@ class ApiQuizGame extends ApiBase {
 		$id = $params['id']; // quiz ID number
 
 		// ApiBase's getDB() supports only slave connections, lame...
-		$dbw = wfGetDB( DB_PRIMARY );
+		$dbw = MediaWikiServices::getInstance()->getDBLoadBalancer()->getConnection( DB_PRIMARY );
 
 		// Fail early if the user is sitewide blocked.
 		// (This snippet copied from MW core /includes/api/ApiTag.php)

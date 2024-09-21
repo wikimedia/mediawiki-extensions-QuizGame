@@ -1,5 +1,7 @@
 <?php
 
+use MediaWiki\MediaWikiServices;
+
 class QuizRecalcStats extends UnlistedSpecialPage {
 
 	/**
@@ -40,7 +42,7 @@ class QuizRecalcStats extends UnlistedSpecialPage {
 		// as the page title.
 		$out->setPageTitle( '' );
 
-		$dbw = wfGetDB( DB_PRIMARY );
+		$dbw = MediaWikiServices::getInstance()->getDBLoadBalancer()->getConnection( DB_PRIMARY );
 		$res = $dbw->select(
 			'user_stats',
 			[ 'stats_actor' ],

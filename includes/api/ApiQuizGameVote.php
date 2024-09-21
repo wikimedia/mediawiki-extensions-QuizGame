@@ -1,4 +1,7 @@
 <?php
+
+use MediaWiki\MediaWikiServices;
+
 /**
  * QuizGame voting API
  *
@@ -25,7 +28,7 @@ class ApiQuizGameVote extends ApiBase {
 		$id = $params['id']; // quiz ID number
 		$points = $params['points'];
 
-		$dbw = wfGetDB( DB_PRIMARY );
+		$dbw = MediaWikiServices::getInstance()->getDBLoadBalancer()->getConnection( DB_PRIMARY );
 
 		// Check if they already answered
 		$s = $dbw->selectRow(

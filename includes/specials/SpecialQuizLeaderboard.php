@@ -1,5 +1,7 @@
 <?php
 
+use MediaWiki\MediaWikiServices;
+
 class QuizLeaderboard extends UnlistedSpecialPage {
 
 	/**
@@ -49,7 +51,7 @@ class QuizLeaderboard extends UnlistedSpecialPage {
 				$field = 'stats_quiz_points';
 		}
 
-		$dbr = wfGetDB( DB_PRIMARY );
+		$dbr = MediaWikiServices::getInstance()->getDBLoadBalancer()->getConnection( DB_PRIMARY );
 		$whereConds[] = 'stats_actor IS NOT NULL'; // Exclude anonymous users
 		$res = $dbr->select(
 			'user_stats',
