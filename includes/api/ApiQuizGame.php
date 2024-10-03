@@ -252,7 +252,7 @@ class ApiQuizGame extends ApiBase {
 		$logEntry->setPerformer( $this->getUser() );
 		$logEntry->setTarget( SpecialPage::getTitleFor( 'QuestionGameHome', (string)$id ) );
 		// Flagging reason, if any
-		if ( !empty( $comment ) ) {
+		if ( $comment ) {
 			$logEntry->setComment( $comment );
 		}
 		$logEntry->setParameters( [
