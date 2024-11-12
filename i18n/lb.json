@@ -3,7 +3,8 @@
 		"authors": [
 			"Les Meloures",
 			"Robby",
-			"Soued031"
+			"Soued031",
+			"Volvox"
 		]
 	},
 	"quizgame-edit": "Änneren",
@@ -107,6 +108,7 @@
 	"quizgame-time-days": "{{PLURAL:$1|een Dag|$1 Deeg}}",
 	"quizgame-time-hours": "{{PLURAL:$1|eng Stonn|$1 Stonnen}}",
 	"quizgame-time-minutes": "{{PLURAL:$1|eng Minutt|$1 Minutten}}",
+	"quizgame-time-seconds": "{{PLURAL:$1|eng Sekonn|$1 Sekonnen}}",
 	"quizgame-ajax-unprotected": "D'Spär vun der Fro gouf opgehuewen.",
 	"quizgame-ajax-protected": "D'Fro gouf gespaart.",
 	"quizgame-ajax-flagged": "D'Fro gouf markéiert.",
