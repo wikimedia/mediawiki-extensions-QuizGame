@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Ajeje Brazorf"
+			"Ajeje Brazorf",
+			"GianAntonucci"
 		]
 	},
 	"quizgame-edit": "Cancia",
@@ -12,7 +13,7 @@
 	"quizgame-picture": "Mmàggini",
 	"quizgame-save-page-button": "Sarva la pàggina",
 	"quizgame-cancel-button": "Annulla",
-	"quizgame-main-page-button": "Pàggina principali",
+	"quizgame-main-page-button": "Pàggina mastra",
 	"quizgame-login-button": "Trasi",
 	"quizgame-submit": "Manna",
 	"quizgame-js-seconds": "sicunni",
