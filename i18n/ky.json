@@ -17,5 +17,6 @@
 	"quizgame-nav-next": "кийинки",
 	"quizgame-permalink": "Туруктуу шилтеме",
 	"quizgame-pause-continue": "Улантуу",
-	"quizgame-time-days": "{{PLURAL:$1|бир күн|$1 күн}}"
+	"quizgame-time-days": "{{PLURAL:$1|бир күн|$1 күн}}",
+	"quizgame-time-minutes": "{{PLURAL:$1|бир мүнөт|$1 мүнөт}}"
 }
