@@ -17,7 +17,7 @@
 	"quizgame-login-button": "Trasi",
 	"quizgame-submit": "Manna",
 	"quizgame-js-seconds": "sicunni",
-	"quizgame-time-ago": "$1 fa",
+	"quizgame-time-ago": "$1 arrè",
 	"quizgame-time-days": "{{PLURAL:$1|nu jornu|$1 jorna}}",
 	"quizgame-time-hours": "{{PLURAL:$1|na ura|$1 uri}}",
 	"quizgame-time-minutes": "{{PLURAL:$1|nu minutu|$1 minuti}}",
