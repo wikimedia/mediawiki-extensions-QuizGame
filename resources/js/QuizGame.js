@@ -383,25 +383,6 @@ window.QuizGame = {
 	},
 
 	/**
-	 * Get the HTML for the "Loading..." animation.
-	 *
-	 * @return {string} "Loading" animation HTML
-	 */
-	getLoader: function() {
-		var loader = '';
-		loader += '<div id="lightbox-loader">';
-		if ( window.isFlashSupported() ) {
-			loader += '<embed src="' + mw.config.get( 'wgExtensionAssetsPath' ) +
-			'/SocialProfile/images/ajax-loading.swf" quality="high" wmode="transparent" bgcolor="#ffffff"' +
-			'pluginspage="http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash"' +
-			'type="application/x-shockwave-flash" width="100" height="100"></embed></div>';
-		} else {
-			loader += '<img src="' + mw.config.get( 'wgExtensionAssetsPath' ) + '/SocialProfile/images/ajax-loader-white.gif" alt="" />';
-		}
-		return loader;
-	},
-
-	/**
 	 * Sets the given string as the text for the lightbox.
 	 *
 	 * @param {string} txt Text to output in the lightbox
@@ -412,7 +393,9 @@ window.QuizGame = {
 			textForLightBox = '<br /><br />' + txt;
 		}
 		if ( !QuizGame.detectMacXFF() ) {
-			loader = QuizGame.getLoader();
+			loader = '<div id="lightbox-loader">';
+			loader += '<img src="' + mw.config.get( 'wgExtensionAssetsPath' ) + '/SocialProfile/images/ajax-loader-white.gif" alt="" />';
+			loader += '</div>';
 		} else {
 			loader = mw.msg( 'quizgame-js-loading' );
 		}

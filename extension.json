@@ -84,7 +84,6 @@
 				"quizgame-edit-picture-link"
 			],
 			"dependencies": [
-				"ext.socialprofile.flash",
 				"ext.socialprofile.LightBox",
 				"mediawiki.api",
 				"mediawiki.jqueryMsg",
