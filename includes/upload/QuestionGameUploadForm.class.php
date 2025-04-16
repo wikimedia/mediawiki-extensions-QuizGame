@@ -96,7 +96,7 @@ class QuestionGameUploadForm extends UploadForm {
 		} else {
 			if ( !( document.getElementById( 'wpSourceTypeurl' ) && document.getElementById( 'wpSourceTypeurl' ).checked ) ) {
 				// textError method is gone and I can't find it anywhere...
-				alert( '" . str_replace( "\n", ' ', wfMessage( 'emptyfile' )->plain() ) . "' );
+				alert( '" . str_replace( "\n", ' ', wfMessage( 'emptyfile' )->escaped() ) . "' );
 				return false;
 			} else {
 				// wpSourceTypeurl *is* set, so we must be trying to use the upload-by-URL feature
