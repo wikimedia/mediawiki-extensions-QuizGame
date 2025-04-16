@@ -13,6 +13,10 @@
  * @note Originally based on 1.16 core SpecialUpload.php (GPL-licensed) by Bryan et al.
  * @property QuizFileUpload|QuizFileUploadFromUrl $mUpload
  */
+
+use MediaWiki\MediaWikiServices;
+use MediaWiki\Specials\SpecialUpload;
+
 class SpecialQuestionGameUpload extends SpecialUpload {
 	/**
 	 * Constructor: initialise object
@@ -95,14 +99,7 @@ class SpecialQuestionGameUpload extends SpecialUpload {
 
 		// Allow framing so that after uploading an image, we can actually show
 		// it to the user :)
-		if ( method_exists( $out, 'allowClickjacking' ) ) {
-			// Up to MW 1.41
-			// @phan-suppress-next-line PhanUndeclaredMethod
-			$out->allowClickjacking();
-		} else {
-			// MW 1.41+
-			$out->setPreventClickjacking( false );
-		}
+		$out->setPreventClickjacking( false );
 
 		# Check that uploading is enabled
 		if ( !UploadBase::isEnabled() ) {
@@ -263,7 +260,7 @@ class SpecialQuestionGameUpload extends SpecialUpload {
 		// yes, I know that this is ugly as hell but Jedi can live with it and
 		// so can I. It's not my fault that loadRequest() is a useless piece of
 		// crap.
-		$contLang = MediaWiki\MediaWikiServices::getInstance()->getContentLanguage();
+		$contLang = MediaWikiServices::getInstance()->getContentLanguage();
 		$localizedNS = $contLang->getNsText( NS_CATEGORY );
 		$categoriesText = '[[' . $localizedNS . ':' . wfMessage( 'quizgame-images-category' )->inContentLanguage()->plain() . ']]';
 

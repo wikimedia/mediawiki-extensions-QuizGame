@@ -12,7 +12,12 @@
  * @link https://www.mediawiki.org/wiki/Extension:QuizGame Documentation
  */
 
+use MediaWiki\Html\Html;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\SpecialPage\SpecialPage;
+use MediaWiki\SpecialPage\UnlistedSpecialPage;
+use MediaWiki\Title\Title;
+use MediaWiki\User\User;
 
 class QuizGameHome extends UnlistedSpecialPage {
 
@@ -160,7 +165,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 	 * Get the amount of points the given user has received for answering the
 	 * given quiz.
 	 *
-	 * @param User $user
+	 * @param MediaWiki\User\User $user
 	 * @param int $q_id Question identifier
 	 * @return bool|int Boolean false if they haven't gotten points, otherwise int (amount of points)
 	 */
@@ -322,7 +327,8 @@ class QuizGameHome extends UnlistedSpecialPage {
 	}
 
 	private function adminPanel() {
-		$dbr = MediaWikiServices::getInstance()->getDBLoadBalancer()->getConnection( DB_REPLICA );
+		$services = MediaWikiServices::getInstance();
+		$dbr = $services->getDBLoadBalancer()->getConnection( DB_REPLICA );
 
 		$res = $dbr->select(
 			'quizgame_questions',
@@ -341,7 +347,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 		// Define variables to avoid E_NOTICEs
 		$flaggedQuestions = '';
 		$protectedQuestions = '';
-		$repoGroup = MediaWikiServices::getInstance()->getRepoGroup();
+		$repoGroup = $services->getRepoGroup();
 
 		foreach ( $res as $row ) {
 			$options = '<ul>';
@@ -843,8 +849,10 @@ class QuizGameHome extends UnlistedSpecialPage {
 		$request = $this->getRequest();
 		$user = $this->getUser();
 
+		$services = MediaWikiServices::getInstance();
+
 		// controls the maximum length of the previous game bar graphs
-		$dbr = MediaWikiServices::getInstance()->getDBLoadBalancer()->getConnection( DB_PRIMARY );
+		$dbr = $services->getDBLoadBalancer()->getConnection( DB_PRIMARY );
 
 		$permalinkID = $request->getInt( 'permalinkID' );
 		$lastid = $request->getInt( 'lastid' );
@@ -890,8 +898,6 @@ class QuizGameHome extends UnlistedSpecialPage {
 
 		global $wgQuizID;
 		$wgQuizID = $question['id'];
-
-		$services = MediaWikiServices::getInstance();
 
 		$timestampedViewed = 0;
 		if ( $user->getActorId() != $question['actor'] ) {
@@ -1274,7 +1280,8 @@ class QuizGameHome extends UnlistedSpecialPage {
 		$imageName = $request->getText( 'quizGamePictureName' );
 
 		// Add quiz question
-		$dbw = MediaWikiServices::getInstance()->getDBLoadBalancer()->getConnection( DB_PRIMARY );
+		$services = MediaWikiServices::getInstance();
+		$dbw = $services->getDBLoadBalancer()->getConnection( DB_PRIMARY );
 		$dbw->insert(
 			'quizgame_questions',
 			[
@@ -1327,7 +1334,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 		}
 
 		// Delete cache key
-		$cache = MediaWikiServices::getInstance()->getMainWANObjectCache();
+		$cache = $services->getMainWANObjectCache();
 		$key = $cache->makeKey( 'user', 'profile', 'quiz', 'actor_id', $user->getActorId() );
 		$cache->delete( $key );
 

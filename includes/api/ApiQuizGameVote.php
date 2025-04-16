@@ -1,6 +1,8 @@
 <?php
 
+use MediaWiki\Api\ApiResult;
 use MediaWiki\MediaWikiServices;
+use Wikimedia\ParamValidator\ParamValidator;
 
 /**
  * QuizGame voting API
@@ -8,7 +10,7 @@ use MediaWiki\MediaWikiServices;
  * @file
  * @ingroup API
  */
-class ApiQuizGameVote extends ApiBase {
+class ApiQuizGameVote extends MediaWiki\Api\ApiBase {
 
 	/**
 	 * Constructor
@@ -173,16 +175,16 @@ class ApiQuizGameVote extends ApiBase {
 	public function getAllowedParams() {
 		return [
 			'answer' => [
-				ApiBase::PARAM_TYPE => 'integer',
-				ApiBase::PARAM_REQUIRED => true
+				ParamValidator::PARAM_TYPE => 'integer',
+				ParamValidator::PARAM_REQUIRED => true
 			],
 			'id' => [
-				ApiBase::PARAM_TYPE => 'integer',
-				ApiBase::PARAM_REQUIRED => true
+				ParamValidator::PARAM_TYPE => 'integer',
+				ParamValidator::PARAM_REQUIRED => true
 			],
 			'points' => [
-				ApiBase::PARAM_TYPE => 'integer',
-				ApiBase::PARAM_REQUIRED => true
+				ParamValidator::PARAM_TYPE => 'integer',
+				ParamValidator::PARAM_REQUIRED => true
 			]
 		];
 	}

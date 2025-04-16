@@ -1,6 +1,7 @@
 <?php
 
 use MediaWiki\MediaWikiServices;
+use MediaWiki\SpecialPage\UnlistedSpecialPage;
 
 class QuizRecalcStats extends UnlistedSpecialPage {
 

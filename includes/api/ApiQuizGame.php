@@ -8,8 +8,10 @@
  */
 
 use MediaWiki\MediaWikiServices;
+use MediaWiki\SpecialPage\SpecialPage;
+use Wikimedia\ParamValidator\ParamValidator;
 
-class ApiQuizGame extends ApiBase {
+class ApiQuizGame extends MediaWiki\Api\ApiBase {
 
 	/**
 	 * Constructor
@@ -282,15 +284,15 @@ class ApiQuizGame extends ApiBase {
 	public function getAllowedParams() {
 		return [
 			'comment' => [
-				ApiBase::PARAM_TYPE => 'string'
+				ParamValidator::PARAM_TYPE => 'string'
 			],
 			'id' => [
-				ApiBase::PARAM_TYPE => 'integer',
-				ApiBase::PARAM_REQUIRED => true
+				ParamValidator::PARAM_TYPE => 'integer',
+				ParamValidator::PARAM_REQUIRED => true
 			],
 			'quizaction' => [
-				ApiBase::PARAM_TYPE => 'string',
-				ApiBase::PARAM_REQUIRED => true
+				ParamValidator::PARAM_TYPE => 'string',
+				ParamValidator::PARAM_REQUIRED => true
 			]
 		];
 	}

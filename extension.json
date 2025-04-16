@@ -1,6 +1,6 @@
 {
 	"name": "QuizGame",
-	"version": "4.3",
+	"version": "4.4",
 	"author": [
 		"Aaron Wright",
 		"Ashish Datta",
@@ -12,7 +12,7 @@
 	"descriptionmsg": "quizgame-desc",
 	"type": "specialpage",
 	"requires": {
-		"MediaWiki": ">= 1.35.3"
+		"MediaWiki": ">= 1.43.0"
 	},
 	"config": {
 		"CreateQuizThresholds": [],

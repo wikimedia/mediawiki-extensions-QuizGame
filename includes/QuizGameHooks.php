@@ -6,6 +6,9 @@
  * @file
  * @ingroup Extensions
  */
+
+use MediaWiki\SpecialPage\SpecialPage;
+
 class QuizGameHooks {
 
 	/**
@@ -76,7 +79,7 @@ class QuizGameHooks {
 	 * Creates the necessary database tables when the user runs
 	 * maintenance/update.php.
 	 *
-	 * @param DatabaseUpdater $updater
+	 * @param MediaWiki\Installer\DatabaseUpdater $updater
 	 */
 	public static function onLoadExtensionSchemaUpdates( $updater ) {
 		$sqlDirectory = __DIR__ . '/../sql/';

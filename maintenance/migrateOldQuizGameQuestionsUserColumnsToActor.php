@@ -14,7 +14,7 @@ require_once "$IP/maintenance/Maintenance.php";
  *
  * @since January 2020
  */
-class MigrateOldQuizGameQuestionsUserColumnsToActor extends LoggedUpdateMaintenance {
+class MigrateOldQuizGameQuestionsUserColumnsToActor extends MediaWiki\Maintenance\LoggedUpdateMaintenance {
 	public function __construct() {
 		parent::__construct();
 		$this->addDescription( 'Migrates data from old _user_id/_user_name columns in the quizgame_questions ' .
