@@ -292,14 +292,23 @@ window.QuizGame = {
 		}
 
 		if ( ( QuizGame.timer - QuizGame.next_level ) == 3 ) {
-			/* @todo FIXME: get rid of YUI and use jQuery instead
-			var options = {
-				ease: YAHOO.util.Easing.easeOut,
-				seconds: .5,
-				maxcount: 4
+			// AI-generated :)
+			// eslint-disable-next-line no-inner-declarations
+			var pulse = function( element, times ) {
+				if ( times <= 0 ) {
+					// Stop if no more pulses are needed
+					return;
+				}
+
+				$( element ).css( 'transform', 'scale(1.1)' ).animate( { opacity: 0.5 }, 500 )
+					.animate( { opacity: 1 }, 500, function() {
+						$( element ).css( 'transform', 'scale(1)' ); // Reset scale
+						pulse( element, times - 1 ); // Call pulse again, decrementing the count
+					} );
 			};
-			new YAHOO.widget.Effects.Pulse( 'quiz-points', options );
-			*/
+			// End AI-generated method
+
+			pulse( '#quiz-points', 4 );
 		}
 
 		if ( jQuery( '#time-countdown' ).length > 0 ) {
