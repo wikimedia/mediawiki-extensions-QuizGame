@@ -1,7 +1,7 @@
 {
 	"root": true,
 	"extends": [
-		"wikimedia/client-es5",
+		"wikimedia/client",
 		"wikimedia/mediawiki"
 	],
 	"globals": {
@@ -19,6 +19,8 @@
 		"quote-props": "off",
 		"space-before-function-paren": "off",
 		"valid-jsdoc": "off",
-		"block-scoped-var": "warn"
+		"block-scoped-var": "warn",
+		"no-var": "warn",
+		"prefer-const": "warn"
 	}
 }

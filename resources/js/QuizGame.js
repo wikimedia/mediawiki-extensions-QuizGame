@@ -20,13 +20,13 @@ window.QuizGame = {
 	next_level: 0, // has to have an initial value; introduced by Jack
 
 	deleteById: function( id ) {
-		var options = {
+		const options = {
 			actions: [
 				{ label: mw.msg( 'cancel' ) },
 				{ label: mw.msg( 'quizgame-delete' ), action: 'accept', flags: ['destructive', 'primary'] }
 			]
 		};
-		OO.ui.confirm( mw.msg( 'quizgame-delete-confirm' ), options ).done( function ( confirmed ) {
+		OO.ui.confirm( mw.msg( 'quizgame-delete-confirm' ), options ).done( ( confirmed ) => {
 			if ( confirmed ) {
 				document.getElementById( 'items[' + id + ']' ).style.display = 'none';
 				document.getElementById( 'items[' + id + ']' ).style.visibility = 'hidden';
@@ -35,7 +35,7 @@ window.QuizGame = {
 					action: 'quizgame',
 					quizaction: 'deleteItem',
 					id: id
-				} ).done( function( data ) {
+				} ).done( ( data ) => {
 					document.getElementById( 'ajax-messages' ).innerHTML = data.quizgame.output;
 				} );
 			}
@@ -43,13 +43,13 @@ window.QuizGame = {
 	},
 
 	unflagById: function( id ) {
-		var options = {
+		const options = {
 			actions: [
 				{ label: mw.msg( 'cancel' ) },
 				{ label: mw.msg( 'quizgame-unflag' ), action: 'accept', flags: ['progressive', 'primary'] }
 			]
 		};
-		OO.ui.confirm( mw.msg( 'quizgame-unflag-confirm' ), options ).done( function ( confirmed ) {
+		OO.ui.confirm( mw.msg( 'quizgame-unflag-confirm' ), options ).done( ( confirmed ) => {
 			if ( confirmed ) {
 				document.getElementById( 'items[' + id + ']' ).style.display = 'none';
 				document.getElementById( 'items[' + id + ']' ).style.visibility = 'hidden';
@@ -58,7 +58,7 @@ window.QuizGame = {
 					action: 'quizgame',
 					quizaction: 'unflagItem',
 					id: id
-				} ).done( function( data ) {
+				} ).done( ( data ) => {
 					document.getElementById( 'ajax-messages' ).innerHTML = data.quizgame.output;
 				} );
 			}
@@ -73,7 +73,7 @@ window.QuizGame = {
 			action: 'quizgame',
 			quizaction: 'unprotectItem',
 			id: id
-		} ).done( function( data ) {
+		} ).done( ( data ) => {
 			document.getElementById( 'ajax-messages' ).innerHTML = data.quizgame.output;
 		} );
 	},
@@ -83,20 +83,20 @@ window.QuizGame = {
 			action: 'quizgame',
 			quizaction: 'protectItem',
 			id: id
-		} ).done( function( data ) {
+		} ).done( ( data ) => {
 			document.getElementById( 'ajax-messages' ).innerHTML = data.quizgame.output;
 		} );
 	},
 
 	toggleCheck: function( thisBox ) {
-		var nameOfOurCountableVariable;
+		let nameOfOurCountableVariable;
 		// Different loop variable when we're on the welcome page
 		if ( jQuery( 'span#this-is-the-welcome-page' ).length > 0 ) {
 			nameOfOurCountableVariable = 8 - 1;
 		} else {
 			nameOfOurCountableVariable = __choices_count__;
 		}
-		for ( var x = 1; x <= ( nameOfOurCountableVariable ); x++ ) {
+		for ( let x = 1; x <= ( nameOfOurCountableVariable ); x++ ) {
 			document.getElementById( 'quizgame-isright-' + x ).checked = false;
 		}
 		thisBox.checked = true;
@@ -177,27 +177,27 @@ window.QuizGame = {
 	 * @return {boolean}
 	 */
 	detectMacXFF: function() {
-		var userAgent = navigator.userAgent.toLowerCase();
-		if ( userAgent.indexOf( 'mac' ) != -1 && userAgent.indexOf( 'firefox' ) != -1 ) {
+		const userAgent = navigator.userAgent.toLowerCase();
+		if ( userAgent.includes( 'mac' ) && userAgent.includes( 'firefox' ) ) {
 			return true;
 		}
 	},
 
 	deleteQuestion: function() {
-		var options = {
+		const options = {
 			actions: [
 				{ label: mw.msg( 'cancel' ) },
 				{ label: mw.msg( 'quizgame-delete' ), action: 'accept', flags: ['destructive', 'primary'] }
 			]
 		};
-		OO.ui.confirm( mw.msg( 'quizgame-delete-confirm' ), options ).done( function ( confirmed ) {
+		OO.ui.confirm( mw.msg( 'quizgame-delete-confirm' ), options ).done( ( confirmed ) => {
 			if ( confirmed ) {
-				var gameId = document.getElementById( 'quizGameId' ).value;
+				const gameId = document.getElementById( 'quizGameId' ).value;
 				( new mw.Api() ).postWithToken( 'csrf', {
 					action: 'quizgame',
 					quizaction: 'deleteItem',
 					id: gameId
-				} ).done( function( data ) {
+				} ).done( ( data ) => {
 					document.getElementById( 'ajax-messages' ).innerHTML = data.quizgame.output + '<br />' + mw.msg( 'quizgame-js-reloading' );
 					document.location = mw.config.get( 'wgScriptPath' ) +
 						'/index.php?title=Special:QuizGameHome&questionGameAction=launchGame';
@@ -222,22 +222,22 @@ window.QuizGame = {
 	 * @see https://phabricator.wikimedia.org/T156304
 	 */
 	flagQuestion: function() {
-		var options = {
+		const options = {
 			actions: [
 				{ label: mw.msg( 'cancel' ) },
 				{ label: mw.msg( 'quizgame-flag' ), action: 'accept', flags: ['destructive', 'primary'] }
 			],
 			textInput: { placeholder: mw.msg( 'quizgame-flagged-reason' ) }
 		};
-		OO.ui.prompt( mw.msg( 'quizgame-flag-confirm' ), options ).done( function ( reason ) {
+		OO.ui.prompt( mw.msg( 'quizgame-flag-confirm' ), options ).done( ( reason ) => {
 			if ( reason !== null ) {
-				var gameId = document.getElementById( 'quizGameId' ).value;
+				const gameId = document.getElementById( 'quizGameId' ).value;
 				( new mw.Api() ).postWithToken( 'csrf', {
 					action: 'quizgame',
 					quizaction: 'flagItem',
 					id: gameId,
 					comment: reason
-				} ).done( function( data ) {
+				} ).done( ( data ) => {
 					document.getElementById( 'ajax-messages' ).innerHTML = data.quizgame.output;
 				} );
 			}
@@ -249,12 +249,12 @@ window.QuizGame = {
 	 * reporting back to the user.
 	 */
 	protectImage: function() {
-		var gameId = document.getElementById( 'quizGameId' ).value;
+		const gameId = document.getElementById( 'quizGameId' ).value;
 		( new mw.Api() ).postWithToken( 'csrf', {
 			action: 'quizgame',
 			quizaction: 'protectItem',
 			id: gameId
-		} ).done( function( data ) {
+		} ).done( ( data ) => {
 			document.getElementById( 'ajax-messages' ).innerHTML = data.quizgame.output;
 		} );
 	},
@@ -293,15 +293,15 @@ window.QuizGame = {
 
 		if ( ( QuizGame.timer - QuizGame.next_level ) == 3 ) {
 			// AI-generated :)
-			// eslint-disable-next-line no-inner-declarations
-			var pulse = function( element, times ) {
+
+			const pulse = function( element, times ) {
 				if ( times <= 0 ) {
 					// Stop if no more pulses are needed
 					return;
 				}
 
 				$( element ).css( 'transform', 'scale(1.1)' ).animate( { opacity: 0.5 }, 500 )
-					.animate( { opacity: 1 }, 500, function() {
+					.animate( { opacity: 1 }, 500, () => {
 						$( element ).css( 'transform', 'scale(1)' ); // Reset scale
 						pulse( element, times - 1 ); // Call pulse again, decrementing the count
 					} );
@@ -330,7 +330,7 @@ window.QuizGame = {
 	},
 
 	setLevel: function() {
-		for ( var x = 0; x <= QuizGame.levels_array.length - 1; x++ ) {
+		for ( let x = 0; x <= QuizGame.levels_array.length - 1; x++ ) {
 			if (
 				( QuizGame.timer === 0 && x == QuizGame.levels_array.length - 1 ) ||
 				( QuizGame.timer <= QuizGame.levels_array[x] && QuizGame.timer > QuizGame.levels_array[x + 1] )
@@ -345,7 +345,7 @@ window.QuizGame = {
 	},
 
 	adjustTimer: function( timeViewed ) {
-		var timeDiff = QuizGame.current_timestamp - timeViewed;
+		const timeDiff = QuizGame.current_timestamp - timeViewed;
 		if ( timeDiff > 30 ) {
 			QuizGame.timer = 0;
 		} else {
@@ -397,7 +397,7 @@ window.QuizGame = {
 	 * @param {string} txt Text to output in the lightbox
 	 */
 	setLightboxText: function( txt ) {
-		var textForLightBox = '', loader = '';
+		let textForLightBox = '', loader = '';
 		if ( txt ) {
 			textForLightBox = '<br /><br />' + txt;
 		}
@@ -417,7 +417,7 @@ window.QuizGame = {
 	 * question.
 	 */
 	skipQuestion: function() {
-		var objLink = {};
+		const objLink = {};
 
 		objLink.href = '';
 		objLink.title = mw.msg( 'quizgame-js-loading' );
@@ -426,13 +426,13 @@ window.QuizGame = {
 		LightBox.show( objLink );
 		QuizGame.setLightboxText( '' );
 
-		var gameId = document.getElementById( 'quizGameId' ).value;
+		const gameId = document.getElementById( 'quizGameId' ).value;
 		( new mw.Api() ).postWithToken( 'csrf', {
 			action: 'quizgamevote',
 			answer: -1,
 			id: gameId,
 			points: 0
-		} ).done( function( data ) {
+		} ).done( ( data ) => {
 			QuizGame.goToNextQuiz( document.getElementById( 'quizGameId' ).value );
 		} );
 	},
@@ -455,7 +455,7 @@ window.QuizGame = {
 
 		document.getElementById( 'ajax-messages' ).innerHTML = '';
 
-		var objLink = {};
+		const objLink = {};
 
 		objLink.href = '';
 		objLink.title = '';
@@ -463,22 +463,22 @@ window.QuizGame = {
 		LightBox.init();
 		LightBox.show( objLink );
 
-		var quiz_controls = '<div id="quiz-controls"><a href="javascript:void(0)" onclick="QuizGame.pauseQuiz()" class="stop-button">' +
+		const quiz_controls = '<div id="quiz-controls"><a href="javascript:void(0)" onclick="QuizGame.pauseQuiz()" class="stop-button">' +
 			mw.msg( 'quizgame-lightbox-pause-quiz' ) + '</a></div>';
 
-		var view_results_button = '<a href="javascript:QuizGame.goToQuiz(' +
+		const view_results_button = '<a href="javascript:QuizGame.goToQuiz(' +
 			document.getElementById( 'quizGameId' ).value +
 			');" class="stop-button">' + mw.msg( 'quizgame-lightbox-breakdown' ) + '</a>';
 
-		var gameId = document.getElementById( 'quizGameId' ).value;
+		const gameId = document.getElementById( 'quizGameId' ).value;
 
 		( new mw.Api() ).postWithToken( 'csrf', {
 			action: 'quizgamevote',
 			answer: id,
 			id: gameId,
 			points: QuizGame.points
-		} ).done( function( payload ) {
-			var text;
+		} ).done( ( payload ) => {
+			let text;
 
 			QuizGame.continue_timer = setTimeout( 'QuizGame.goToNextQuiz()', 3000 );
 
@@ -491,7 +491,7 @@ window.QuizGame = {
 				);
 			}
 
-			var percent_right = mw.msg( 'quizgame-lightbox-breakdown-percent', payload.quizgamevote.result.percentRight );
+			const percent_right = mw.msg( 'quizgame-lightbox-breakdown-percent', payload.quizgamevote.result.percentRight );
 			if ( payload.quizgamevote.result.isRight == 'true' ) {
 				text = '<p class="quizgame-lightbox-righttext">' +
 					mw.msg( 'quizgame-lightbox-correct' ) + '<br /><br />' +
@@ -514,7 +514,7 @@ window.QuizGame = {
 	welcomePage_uploadError: function( message ) {
 		document.getElementById( 'imageUpload-frame' ).src = mw.config.get( 'wgScriptPath' ) +
 			'/index.php?title=Special:QuestionGameUpload&wpThumbWidth=75';
-		var uploadElement = document.getElementById( 'quizgame-picture-upload' );
+		const uploadElement = document.getElementById( 'quizgame-picture-upload' );
 		if ( uploadElement ) {
 			uploadElement.style.display = 'block';
 			uploadElement.style.visibility = 'visible';
@@ -522,12 +522,12 @@ window.QuizGame = {
 	},
 
 	welcomePage_completeImageUpload: function() {
-		var uploadElement = document.getElementById( 'quizgame-picture-upload' );
+		const uploadElement = document.getElementById( 'quizgame-picture-upload' );
 		if ( uploadElement ) {
 			uploadElement.style.display = 'none';
 			uploadElement.style.visibility = 'hidden';
 		}
-		var preview = document.getElementById( 'quizgame-picture-preview' );
+		const preview = document.getElementById( 'quizgame-picture-preview' );
 		if ( preview ) {
 			preview.innerHTML = '<img src="' + mw.config.get( 'wgExtensionAssetsPath' ) +
 				'/SocialProfile/images/ajax-loader-white.gif" alt="" />';
@@ -544,7 +544,7 @@ window.QuizGame = {
 	 * @param {string} imgDesc Unused, consider removing this useless parameter
 	 */
 	welcomePage_uploadComplete: function( imgSrc, imgName, imgDesc ) {
-		var previewElement = document.getElementById( 'quizgame-picture-preview' );
+		const previewElement = document.getElementById( 'quizgame-picture-preview' );
 		if ( previewElement ) {
 			previewElement.innerHTML = imgSrc;
 			// Show the image after reupload (i.e. user uploads an image, then
@@ -566,7 +566,7 @@ window.QuizGame = {
 	 * them visible on the welcome page.
 	 */
 	updateAnswerBoxes: function() {
-		for ( var x = 1; x <= ( 8 - 1 ); x++ ) {
+		for ( let x = 1; x <= ( 8 - 1 ); x++ ) {
 			if ( document.getElementById( 'quizgame-answer-' + x ).value ) {
 				document.getElementById( 'quizgame-answer-container-' + ( x + 1 ) ).style.display = 'block';
 				document.getElementById( 'quizgame-answer-container-' + ( x + 1 ) ).style.visibility = 'visible';
@@ -582,7 +582,7 @@ window.QuizGame = {
 	 * Otherwise an error message is displayed to the user.
 	 */
 	startGame: function() {
-		var errorText = '',
+		let errorText = '',
 			answers = 0,
 			right = 0;
 
@@ -626,7 +626,7 @@ window.QuizGame = {
 	}
 };
 
-jQuery( function() {
+jQuery( () => {
 	// Code specific to Special:QuizGameHome
 	if ( mw.config.get( 'wgCanonicalSpecialPageName' ) == 'QuizGameHome' ) {
 		// Well, this is one way to detect whether we're on the correct page...
@@ -651,7 +651,7 @@ jQuery( function() {
 			jQuery( '<a>' )
 				.attr( 'href', '#' )
 				// eslint-disable-next-line max-statements-per-line
-				.on( 'click', function( e ) { e.preventDefault(); QuizGame.showUpload(); } )
+				.on( 'click', ( e ) => { e.preventDefault(); QuizGame.showUpload(); } )
 				.text( mw.msg( 'quizgame-edit-picture-link' ) )
 		);
 
@@ -659,7 +659,7 @@ jQuery( function() {
 		jQuery( 'div.edit-button-quiz-game' ).append(
 			jQuery( '<a>' )
 				.attr( 'href', '#' )
-				.on( 'click', function() { QuizGame.showEditMenu(); } )
+				.on( 'click', () => { QuizGame.showEditMenu(); } )
 				.text( mw.msg( 'quizgame-edit' ) )
 		);
 
@@ -671,14 +671,14 @@ jQuery( function() {
 		} );
 
 		// "Skip this question" link
-		jQuery( 'a.skip-question-link' ).on( 'click', function() {
+		jQuery( 'a.skip-question-link' ).on( 'click', () => {
 			QuizGame.skipQuestion();
 		} );
 
 		// Various admin panel links all over the place
 		jQuery( 'a.flag-quiz-link' )
 			.attr( 'href', '#' )
-			.on( 'click', function ( e ) {
+			.on( 'click', ( e ) => {
 				// Prevent jumpiness on mobile
 				// @see https://phabricator.wikimedia.org/T155883
 				e.preventDefault();
@@ -686,10 +686,10 @@ jQuery( function() {
 			} );
 		jQuery( 'a.protect-image-link' )
 			.attr( 'href', '#' )
-			.on( 'click', function() { QuizGame.protectImage(); } );
+			.on( 'click', () => { QuizGame.protectImage(); } );
 		jQuery( 'a.delete-quiz-link' )
 			.attr( 'href', '#' )
-			.on( 'click', function() { QuizGame.deleteQuestion(); } );
+			.on( 'click', () => { QuizGame.deleteQuestion(); } );
 		jQuery( 'a.delete-by-id' )
 			.attr( 'href', '#' )
 			.on( 'click', function() { QuizGame.deleteById( jQuery( this ).data( 'quiz-id' ) ); } );
@@ -726,7 +726,7 @@ jQuery( function() {
 		jQuery( 'p#quizgame-picture-reupload' ).append(
 			jQuery( '<a>' )
 				.attr( 'href', '#' )
-				.on( 'click', function( event ) {
+				.on( 'click', ( event ) => {
 					event.preventDefault();
 					QuizGame.showAttachPicture();
 				} )
@@ -734,7 +734,7 @@ jQuery( function() {
 		);
 
 		// Handler for the "Create and Play!" button
-		jQuery( 'div#startButton > input[class="site-button"]' ).on( 'click', function() {
+		jQuery( 'div#startButton > input[class="site-button"]' ).on( 'click', () => {
 			QuizGame.startGame();
 		} );
 	}

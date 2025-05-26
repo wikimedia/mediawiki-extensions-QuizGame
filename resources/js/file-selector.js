@@ -16,7 +16,7 @@
 ( function ( $, mw, OO ) {
 	'use strict';
 
-	var getThumbnail, ImageProcessDialog, openImageBrowser, setupPage;
+	let getThumbnail, ImageProcessDialog, openImageBrowser, setupPage;
 
 	/**
 	 * Get an image thumbnail with 80px width
@@ -62,7 +62,7 @@
 	 * to initialize widgets, and to set up event handlers.
 	 */
 	ImageProcessDialog.prototype.initialize = function () {
-		var defaultSearchTerm;
+		let defaultSearchTerm;
 
 		ImageProcessDialog.super.prototype.initialize.apply( this, arguments );
 
@@ -79,21 +79,21 @@
 	 * @param action
 	 */
 	ImageProcessDialog.prototype.getActionProcess = function ( action ) {
-		var dialog, fileTitle;
+		let dialog, fileTitle;
 
 		dialog = this;
 		dialog.pushPending();
 
 		if ( action ) {
-			return new OO.ui.Process( function () {
-				var fileObj, fileUrl, fileTitleObj, hiddenValueFieldID, imageHeight, previewElementID;
+			return new OO.ui.Process( () => {
+				let fileObj, fileUrl, fileTitleObj, hiddenValueFieldID, imageHeight, previewElementID;
 
 				fileObj = dialog.content.getResults().findSelectedItem();
 				if ( fileObj === null ) {
 					return dialog.close().closed;
 				}
 				getThumbnail( fileObj.getData().title )
-					.done( function ( data ) {
+					.done( ( data ) => {
 						fileUrl = data.query.pages[ 0 ].imageinfo[ 0 ].thumburl;
 						// fileHeight = data.query.pages[ 0 ].imageinfo[ 0 ].thumbheight;
 						fileTitleObj = new mw.Title( fileObj.getData().title );
@@ -146,7 +146,7 @@
 	 * Create and append the window manager.
 	 */
 	openImageBrowser = function () {
-		var windowManager, processDialog;
+		let windowManager, processDialog;
 
 		windowManager = new OO.ui.WindowManager();
 		$( 'body' ).append( windowManager.$element );
@@ -167,7 +167,7 @@
 	 * Initial setup function run when DOM loaded.
 	 */
 	setupPage = function () {
-		var imageBrowserButton, $selectorWidget;
+		let imageBrowserButton, $selectorWidget;
 
 		// Defining the button
 		imageBrowserButton = new OO.ui.ButtonWidget( {
