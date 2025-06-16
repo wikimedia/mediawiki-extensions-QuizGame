@@ -4,7 +4,8 @@
 			"BaRaN6161 TURK",
 			"MuratTheTurkish",
 			"Vito Genovese",
-			"Rapsar"
+			"Rapsar",
+			"ToprakM"
 		]
 	},
 	"quizgame-desc": "İnteraktif [[Special:QuizGameHome|soru oyunu]] ekler",
@@ -24,7 +25,7 @@
 	"quizgame-admin-permission": "Değiştirme izniniz yok",
 	"quizgame-edit-title": "Düzenleniyor - $1",
 	"quizgame-edit-picture-link": "Resmi düzenle",
-	"quizgame-flagged-reason": "Sebep",
+	"quizgame-flagged-reason": "Gerekçe",
 	"quizgame-submitted-by": "Gönderen",
 	"quizgame-question": "Soru",
 	"quizgame-answers": "Cevaplar",
