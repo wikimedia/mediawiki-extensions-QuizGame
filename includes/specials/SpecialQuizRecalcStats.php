@@ -53,11 +53,10 @@ class QuizRecalcStats extends UnlistedSpecialPage {
 
 		$count = 0;
 
-		// @todo FIXME: SELECT SUM(a_points) ... query below *can* return NULL
 		foreach ( $res as $row ) {
 			$stats_actor = $dbw->addQuotes( $row->stats_actor );
 			$sql = "UPDATE {$dbw->tableName( 'user_stats' )} SET stats_quiz_points = (
-				SELECT SUM(a_points) FROM {$dbw->tableName( 'quizgame_answers' )}
+				SELECT COALESCE(SUM(a_points), 0) FROM {$dbw->tableName( 'quizgame_answers' )}
 				INNER JOIN {$dbw->tableName( 'quizgame_choice' )} ON a_choice_id=choice_id
 				WHERE a_actor = {$stats_actor} AND choice_is_correct=1),
 				stats_quiz_questions_correct = (
