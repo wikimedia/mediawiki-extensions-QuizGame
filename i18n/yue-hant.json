@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Yueman"
+		]
+	},
+	"quizgame-protect": "保護",
+	"quizgame-cancel-button": "取消",
+	"quizgame-login-button": "簽到",
+	"quizgame-submit": "遞交"
+}
