@@ -36,7 +36,7 @@ window.QuizGame = {
 					quizaction: 'deleteItem',
 					id: id
 				} ).done( function( data ) {
-					document.getElementById( 'ajax-messages' ).innerHTML = data.quizgame.output;
+					document.getElementById( 'ajax-messages' ).innerText = data.quizgame.output;
 				} );
 			}
 		} );
@@ -59,7 +59,7 @@ window.QuizGame = {
 					quizaction: 'unflagItem',
 					id: id
 				} ).done( function( data ) {
-					document.getElementById( 'ajax-messages' ).innerHTML = data.quizgame.output;
+					document.getElementById( 'ajax-messages' ).innerText = data.quizgame.output;
 				} );
 			}
 		} );
@@ -74,7 +74,7 @@ window.QuizGame = {
 			quizaction: 'unprotectItem',
 			id: id
 		} ).done( function( data ) {
-			document.getElementById( 'ajax-messages' ).innerHTML = data.quizgame.output;
+			document.getElementById( 'ajax-messages' ).innerText = data.quizgame.output;
 		} );
 	},
 
@@ -84,7 +84,7 @@ window.QuizGame = {
 			quizaction: 'protectItem',
 			id: id
 		} ).done( function( data ) {
-			document.getElementById( 'ajax-messages' ).innerHTML = data.quizgame.output;
+			document.getElementById( 'ajax-messages' ).innerText = data.quizgame.output;
 		} );
 	},
 
@@ -198,7 +198,8 @@ window.QuizGame = {
 					quizaction: 'deleteItem',
 					id: gameId
 				} ).done( function( data ) {
-					document.getElementById( 'ajax-messages' ).innerHTML = data.quizgame.output + '<br />' + mw.msg( 'quizgame-js-reloading' );
+					document.getElementById( 'ajax-messages' ).innerHTML = mw.html.escape( data.quizgame.output ) +
+						'<br />' + mw.message( 'quizgame-js-reloading' ).escaped();
 					document.location = mw.config.get( 'wgScriptPath' ) +
 						'/index.php?title=Special:QuizGameHome&questionGameAction=launchGame';
 				} );
@@ -238,7 +239,7 @@ window.QuizGame = {
 					id: gameId,
 					comment: reason
 				} ).done( function( data ) {
-					document.getElementById( 'ajax-messages' ).innerHTML = data.quizgame.output;
+					document.getElementById( 'ajax-messages' ).innerText = data.quizgame.output;
 				} );
 			}
 		} );
@@ -255,7 +256,7 @@ window.QuizGame = {
 			quizaction: 'protectItem',
 			id: gameId
 		} ).done( function( data ) {
-			document.getElementById( 'ajax-messages' ).innerHTML = data.quizgame.output;
+			document.getElementById( 'ajax-messages' ).innerText = data.quizgame.output;
 		} );
 	},
 
@@ -303,14 +304,14 @@ window.QuizGame = {
 		}
 
 		if ( jQuery( '#time-countdown' ).length > 0 ) {
-			document.getElementById( 'time-countdown' ).innerHTML = QuizGame.timer;
+			document.getElementById( 'time-countdown' ).innerText = QuizGame.timer;
 		}
 
 		QuizGame.timer--;
 
 		if ( QuizGame.timer == -1 ) {
 			if ( jQuery( '#quiz-notime' ).length > 0 ) { // this one's pure paranoia
-				document.getElementById( 'quiz-notime' ).innerHTML = mw.msg( 'quizgame-js-timesup' );
+				document.getElementById( 'quiz-notime' ).innerText = mw.msg( 'quizgame-js-timesup' );
 			}
 			if ( QuizGame.count_second ) {
 				clearTimeout( QuizGame.count_second );
@@ -328,8 +329,7 @@ window.QuizGame = {
 			)
 			{
 				QuizGame.points = QuizGame.points_array[x];
-				document.getElementById( 'quiz-points' ).innerHTML =
-					mw.message( 'quizgame-js-points', QuizGame.points ).text();
+				document.getElementById( 'quiz-points' ).innerText = mw.msg( 'quizgame-js-points', QuizGame.points );
 				QuizGame.next_level = ( ( QuizGame.levels_array[x + 1] ) ? QuizGame.levels_array[x + 1] : 0 );
 			}
 		}
@@ -372,13 +372,13 @@ window.QuizGame = {
 		}
 		document.getElementById( 'quiz-controls' ).innerHTML =
 			'<a href="javascript:QuizGame.goToNextQuiz();" class="stop-button">' +
-			mw.msg( 'quizgame-pause-continue' ) + '</a> - <a href="' +
+			mw.message( 'quizgame-pause-continue' ).escaped() + '</a> - <a href="' +
 			mw.config.get( 'wgScriptPath' ) + '/index.php?title=Special:QuizLeaderboard" class="stop-button">' +
-			mw.msg( 'quizgame-pause-view-leaderboard' ) + '</a> - <a href="' +
+			mw.message( 'quizgame-pause-view-leaderboard' ).escaped() + '</a> - <a href="' +
 			mw.config.get( 'wgScriptPath' ) + '/index.php?title=Special:QuizGameHome&questionGameAction=createForm" class="stop-button">' +
-			mw.msg( 'quizgame-pause-create-question' ) + '</a><br /><br /><a href="' +
+			mw.message( 'quizgame-pause-create-question' ).escaped() + '</a><br /><br /><a href="' +
 			mw.config.get( 'wgServer' ) + mw.config.get( 'wgScriptPath' ) + '" class="stop-button">' +
-			mw.msg( 'quizgame-main-page-button' ) +
+			mw.message( 'quizgame-main-page-button' ).escaped() +
 			'</a>';
 	},
 
@@ -414,7 +414,7 @@ window.QuizGame = {
 		if ( !QuizGame.detectMacXFF() ) {
 			loader = QuizGame.getLoader();
 		} else {
-			loader = mw.msg( 'quizgame-js-loading' );
+			loader = mw.message( 'quizgame-js-loading' ).escaped();
 		}
 		LightBox.init();
 		LightBox.setText( loader + textForLightBox );
@@ -472,11 +472,11 @@ window.QuizGame = {
 		LightBox.show( objLink );
 
 		var quiz_controls = '<div id="quiz-controls"><a href="javascript:void(0)" onclick="QuizGame.pauseQuiz()" class="stop-button">' +
-			mw.msg( 'quizgame-lightbox-pause-quiz' ) + '</a></div>';
+			mw.message( 'quizgame-lightbox-pause-quiz' ).escaped() + '</a></div>';
 
 		var view_results_button = '<a href="javascript:QuizGame.goToQuiz(' +
 			document.getElementById( 'quizGameId' ).value +
-			');" class="stop-button">' + mw.msg( 'quizgame-lightbox-breakdown' ) + '</a>';
+			');" class="stop-button">' + mw.message( 'quizgame-lightbox-breakdown' ).escaped() + '</a>';
 
 		var gameId = document.getElementById( 'quizGameId' ).value;
 
@@ -494,23 +494,26 @@ window.QuizGame = {
 			if ( payload.error ) {
 				QuizGame.setLightboxText(
 					'<p class="quizgame-lightbox-wrongtext">' +
-					payload.error.info +
+					mw.html.escape( payload.error.info ) +
 					'</p>'
 				);
 			}
 
-			var percent_right = mw.msg( 'quizgame-lightbox-breakdown-percent', payload.quizgamevote.result.percentRight );
+			var percent_right = mw.message(
+				'quizgame-lightbox-breakdown-percent',
+				payload.quizgamevote.result.percentRight
+			).escaped();
 			if ( payload.quizgamevote.result.isRight == 'true' ) {
 				text = '<p class="quizgame-lightbox-righttext">' +
-					mw.msg( 'quizgame-lightbox-correct' ) + '<br /><br />' +
-					mw.msg( 'quizgame-lightbox-correct-points', QuizGame.points ) +
+					mw.message( 'quizgame-lightbox-correct' ).escaped() + '<br /><br />' +
+					mw.message( 'quizgame-lightbox-correct-points', QuizGame.points ).escaped() +
 					'</p><br />' + percent_right +
 					'<br /><br />' + view_results_button + '<br /><br />' +
 					quiz_controls;
 			} else {
 				text = '<p class="quizgame-lightbox-wrongtext">' +
-					mw.msg( 'quizgame-lightbox-incorrect' ) + '<br />' +
-					mw.msg( 'quizgame-lightbox-incorrect-correct', payload.quizgamevote.result.rightAnswer ) +
+					mw.message( 'quizgame-lightbox-incorrect' ).escaped() + '<br />' +
+					mw.message( 'quizgame-lightbox-incorrect-correct', payload.quizgamevote.result.rightAnswer ).escaped() +
 					'</p><br />' + percent_right +
 					'<br /><br />' + view_results_button + '<br /><br />' +
 					quiz_controls;
@@ -601,10 +604,10 @@ window.QuizGame = {
 		}
 
 		if ( answers < 2 ) {
-			errorText += mw.msg( 'quizgame-create-error-numanswers' ) + '<p>';
+			errorText += mw.message( 'quizgame-create-error-numanswers' ).escaped() + '<p>';
 		}
 		if ( !document.getElementById( 'quizgame-question' ).value ) {
-			errorText += mw.msg( 'quizgame-create-error-noquestion' ) + '<p>';
+			errorText += mw.message( 'quizgame-create-error-noquestion' ).escaped() + '<p>';
 		}
 
 		for ( x = 1; x <= 8; x++ ) {
@@ -614,7 +617,7 @@ window.QuizGame = {
 		}
 
 		if ( right != 1 ) {
-			errorText += mw.msg( 'quizgame-create-error-numcorrect' ) + '<p>';
+			errorText += mw.message( 'quizgame-create-error-numcorrect' ).escaped() + '<p>';
 		}
 
 		if ( !errorText ) {
