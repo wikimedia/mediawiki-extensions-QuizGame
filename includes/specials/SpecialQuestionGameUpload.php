@@ -16,6 +16,7 @@
 
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Specials\SpecialUpload;
+use MediaWiki\Status\Status;
 
 class SpecialQuestionGameUpload extends SpecialUpload {
 	/**
@@ -238,10 +239,13 @@ class SpecialQuestionGameUpload extends SpecialUpload {
 		}
 
 		// Verify permissions for this title
-		$permErrors = $this->mUpload->verifyTitlePermissions( $this->getUser() );
-		if ( $permErrors !== true ) {
-			$code = array_shift( $permErrors[0] );
-			$this->showRecoverableUploadError( $this->msg( $code, $permErrors[0] )->parse() );
+		$status = $this->mUpload->authorizeUpload( $this->getUser() );
+		if ( !$status->isGood() ) {
+			$this->showRecoverableUploadError(
+				$this->getOutput()->parseAsInterface(
+					Status::wrap( $status )->getWikiText( false, false, $this->getLanguage() )
+				)
+			);
 			return;
 		}
 

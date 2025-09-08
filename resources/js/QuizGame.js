@@ -198,8 +198,8 @@ window.QuizGame = {
 					quizaction: 'deleteItem',
 					id: gameId
 				} ).done( ( data ) => {
-					document.getElementById( 'ajax-messages' ).innerHTML = mw.html.escape( data.quizgame.output )
-						+ '<br />' + mw.message( 'quizgame-js-reloading' ).escaped();
+					document.getElementById( 'ajax-messages' ).innerHTML = mw.html.escape( data.quizgame.output ) +
+						'<br />' + mw.message( 'quizgame-js-reloading' ).escaped();
 					document.location = mw.config.get( 'wgScriptPath' ) +
 						'/index.php?title=Special:QuizGameHome&questionGameAction=launchGame';
 				} );
