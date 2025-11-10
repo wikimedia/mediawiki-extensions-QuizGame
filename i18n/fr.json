@@ -84,7 +84,7 @@
 	"quizgame-skip": "Sauter",
 	"quizgame-next": "Question suivante du quiz",
 	"quizgame-times-answered": "(répondu {{PLURAL:$1|une|$1}} fois)",
-	"quizgame-chose-correct": "Vous avez choisi la bonne réponse pour la question précédente ! ($1 point{{PLURAL||s}})",
+	"quizgame-chose-correct": "Vous avez choisi la bonne réponse pour la question précédente ! ($1 {{PLURAL:$1|point|points}})",
 	"quizgame-chose-incorrect": "Vous avez choisi la mauvaise réponse pour la question précédente ! (0 point)",
 	"quizgame-flag": "Marquer",
 	"quizgame-flag-confirm": "Expliquez pourquoi vous marquez cette question.",
