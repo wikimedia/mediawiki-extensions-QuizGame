@@ -5,7 +5,8 @@
 			"MuratTheTurkish",
 			"Rapsar",
 			"ToprakM",
-			"Vito Genovese"
+			"Vito Genovese",
+			"SaldırganSincap"
 		]
 	},
 	"quizgame-desc": "İnteraktif [[Special:QuizGameHome|soru oyunu]] ekler",
@@ -132,12 +133,12 @@
 	"quizgame-ajax-invalid-id": "Bu kimlikle ilgili bir soru yok.",
 	"log-name-quiz": "Sınav soru günlüğü",
 	"log-description-quiz": "Bu sınav soru eylemleri bir günlük.",
-	"logentry-quiz-create": "$1, [[Special:QuizGameHome/$4|yeni bir test sorusu]] oluşturdu",
-	"logentry-quiz-delete": "$1, [[Special:QuizGameHome/$4|$4. test sorusu]] sildi",
-	"logentry-quiz-flag": "$1, [[Special:QuizGameHome/$4|$4. test sorusu]] işaretledi",
-	"logentry-quiz-protect": "$1, [[Special:QuizGameHome/$4|$4. test sorusu]] korudu",
-	"logentry-quiz-unflag": "$1, [[Special:QuizGameHome/$4|$4. test sorusu]] işareti kaldırdı",
-	"logentry-quiz-unprotect": "$1, [[Special:QuizGameHome/$4|$4. test sorusu]] korumayı kaldırdı",
+	"logentry-quiz-create": "$1, [[Special:QuizGameHome/$4|yeni bir test sorusu]] {{GENDER:$2|oluşturdu}}",
+	"logentry-quiz-delete": "$1, [[Special:QuizGameHome/$4|$4. test sorusunu]] {{GENDER:$2|sildi}}",
+	"logentry-quiz-flag": "$1, [[Special:QuizGameHome/$4|$4. test sorusunu]] {{GENDER:$2|işaretledi}}",
+	"logentry-quiz-protect": "$1, [[Special:QuizGameHome/$4|$4. test sorusunu]] {{GENDER:$2|korudu}}",
+	"logentry-quiz-unflag": "$1, [[Special:QuizGameHome/$4|$4. test sorusu]] {{GENDER:$2|işareti kaldırdı}}",
+	"logentry-quiz-unprotect": "$1, [[Special:QuizGameHome/$4|$4. test sorusunu]] {{GENDER:$2|korumayı kaldırdı}}",
 	"quizgame-images-category": "QuizGame resimleri",
 	"action-quizadmin": "soru oyunlarını yönet",
 	"right-quizadmin": "Soru oyunlarını yönet",
