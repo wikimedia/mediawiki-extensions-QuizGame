@@ -1,11 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"BHARATHESHA ALASANDEMAJALU"
+			"BHARATHESHA ALASANDEMAJALU",
+			"ChiK"
 		]
 	},
 	"quizgame-edit": "ಸೇರ್ಸಲೇ",
 	"quizgame-delete": "ಮಾಜಾಲೆ",
+	"quizgame-protect": "ಸಂರಕ್ಷಿಸಾಲೆ",
 	"quizgame-answers": "ಉತ್ತರೊ",
 	"quizgame-picture": "ಚಿತ್ರೊ",
 	"quizgame-cancel-button": "ವಜಾ ಮಲ್ಪುಲೆ",
