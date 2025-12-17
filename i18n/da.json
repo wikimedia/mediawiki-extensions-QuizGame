@@ -1,0 +1,24 @@
+{
+	"@metadata": {
+		"authors": [
+			"Jack Phoenix"
+		]
+	},
+	"quizgame-edit": "Rediger",
+	"quizgame-delete": "Slet",
+	"quizgame-protect": "Beskyt",
+	"quizgame-question": "Spørgsmål",
+	"quizgame-picture": "Billede",
+	"quizgame-save-page-button": "Gem side",
+	"quizgame-cancel-button": "Afbryd",
+	"quizgame-main-page-button": "Forside",
+	"quizgame-js-loading": "Indlæser...",
+	"quizgame-skip": "Spring over",
+	"quizgame-newest": "Nyeste",
+	"quizgame-popular": "Populær",
+	"quizgame-image-picker-select": "Vælg",
+	"quizgame-create-write-question": "Skriv et spørgsmål",
+	"quizgame-create-add-picture": "Tilføj et billede",
+	"quizgame-create-edit-picture": "Rediger billede",
+	"quizgame-pause-continue": "Fortsæt"
+}
