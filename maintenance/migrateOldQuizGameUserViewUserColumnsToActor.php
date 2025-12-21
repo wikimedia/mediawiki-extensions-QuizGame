@@ -35,7 +35,7 @@ class MigrateOldQuizGameUserViewUserColumnsToActor extends MediaWiki\Maintenance
 	 *
 	 * @return string
 	 */
-	protected function updateSkippedMessage() {
+	public function updateSkippedMessage() {
 		return 'quizgame_user_view has already been migrated to use the actor column.';
 	}
 
