@@ -62,7 +62,10 @@ class QuestionGameUploadForm extends UploadForm {
 	public function wrapForm( $html ) {
 		# Include a <fieldset> wrapper for style, if requested.
 		if ( $this->mWrapperLegend !== false ) {
-			$html = Xml::fieldset( $this->mWrapperLegend, $html );
+			$html = Html::openElement( 'fieldset' ) . "\n" .
+				Html::element( 'legend', [], $this->mWrapperLegend ) . "\n" .
+				$html . "\n" .
+				Html::closeElement( 'fieldset' ) . "\n";
 		}
 		# Use multipart/form-data
 		$encType = $this->mUseMultipart
