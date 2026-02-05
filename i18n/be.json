@@ -1,8 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"Artsiom91"
+			"Artsiom91",
+			"Ucukor"
 		]
 	},
-	"quizgame-flagged-reason": "Прычына"
+	"quizgame-flagged-reason": "Прычына",
+	"quizgame-cancel-button": "Скасаваць"
 }
