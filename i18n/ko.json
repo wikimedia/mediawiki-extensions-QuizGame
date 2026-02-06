@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Bisang",
 			"Jerrykim306",
 			"YeBoy371",
 			"Ykhwong"
@@ -42,7 +43,7 @@
 	"quizgame-leaderboard-rank": "전체 순위",
 	"quizgame-leaderboard-order-menu": "순서",
 	"quizgame-leaderboard-menu-points": "점수",
-	"quizgame-leaderboard-desc-correct": "$1 문제 정답",
+	"quizgame-leaderboard-desc-correct": "$1번 문제 정답",
 	"quizgame-leaderboard-desc-points": "{{PLURAL:$1|1점|$1점}}",
 	"quizgame-login-or-create-to-climb": "[[Special:UserLogin|로그인]] 또는 [[Special:UserLogin/signup|계정 생성]]을 사용하여 경쟁하고 순위표에서 상위권에 오르세요!",
 	"quizgame-answered-correctly": "정답입니다",
