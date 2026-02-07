@@ -7,7 +7,6 @@ $cfg['directory_list'] = array_merge(
 	[
 		'.', // our dir
 		'../../extensions/SocialProfile',
-		'../../extensions/Renameuser',
 	]
 );
 
@@ -16,8 +15,6 @@ $cfg['exclude_analysis_directory_list'] = array_merge(
 	[
 		'vendor', // dear gods just no
 		'../../extensions/SocialProfile',
-		// We don't actually *depend on* Renameuser, we merely *support* it, but phan cannot tell the difference.
-		'../../extensions/Renameuser',
 	]
 );
 
