@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Ucukor",
 			"Vlad5250"
 		]
 	},
@@ -20,6 +21,7 @@
 	"quizgame-leaderboard-order-menu": "Парадак",
 	"quizgame-leaderboard-menu-points": "Пункты",
 	"quizgame-js-loading": "Загрузка...",
+	"quizgame-js-reloading": "Паўтор ладаваньня...",
 	"quizgame-js-seconds": "сэкунд",
 	"quizgame-skip": "Прапусьціць",
 	"quizgame-flag": "Пазначыць",
