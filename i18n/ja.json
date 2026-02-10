@@ -4,7 +4,8 @@
 			"MathXplore",
 			"Shirayuki",
 			"Sou0012",
-			"シュヴァルツ"
+			"シュヴァルツ",
+			"YeBoy371"
 		]
 	},
 	"quizgame-edit": "編集",
@@ -120,12 +121,12 @@
 	"quizgame-ajax-invalid-id": "そのIDのクイズはありません。",
 	"log-name-quiz": "クイズ作成記録",
 	"log-description-quiz": "これはクイズゲームに関する動作の記録です。",
-	"logentry-quiz-create": "$1が[[Special:QuizGameHome/$4|新しいクイズ]]を作成しました",
-	"logentry-quiz-delete": "$1が[[Special:QuizGameHome/$4|クイズ #$4]]を削除しました",
-	"logentry-quiz-flag": "$1が[[Special:QuizGameHome/$4|クイズ #$4]]にフラグを立てました",
-	"logentry-quiz-protect": "$1が[[Special:QuizGameHome/$4|クイズ #$4]]を保護しました",
-	"logentry-quiz-unflag": "$1が[[Special:QuizGameHome/$4|クイズ #$4]]のフラグを解除しました",
-	"logentry-quiz-unprotect": "$1が[[Special:QuizGameHome/$4|クイズ #$4]]の保護を解除しました",
+	"logentry-quiz-create": "$1が[[Special:QuizGameHome/$4|新しいクイズ]]を{{GENDER:$2|作成しました}}",
+	"logentry-quiz-delete": "$1が[[Special:QuizGameHome/$4|クイズ #$4]]を{{GENDER:$2|削除しました}}",
+	"logentry-quiz-flag": "$1が[[Special:QuizGameHome/$4|クイズ #$4]]に{{GENDER:$2|フラグを立てました}}",
+	"logentry-quiz-protect": "$1が[[Special:QuizGameHome/$4|クイズ #$4]]を{{GENDER:$2|保護しました}}",
+	"logentry-quiz-unflag": "$1が[[Special:QuizGameHome/$4|クイズ #$4]]の{{GENDER:$2|フラグを解除しました}}",
+	"logentry-quiz-unprotect": "$1が[[Special:QuizGameHome/$4|クイズ #$4]]の{{GENDER:$2|保護を解除しました}}",
 	"action-quizadmin": "クイズゲームの管理",
 	"right-quizadmin": "クイズゲームを管理",
 	"apihelp-quizgame-example-1": "フラグを立てます。",
