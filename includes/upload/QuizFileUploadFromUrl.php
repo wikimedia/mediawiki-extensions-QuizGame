@@ -6,7 +6,7 @@ class QuizFileUploadFromUrl extends UploadFromUrl {
 	/**
 	 * Create a form of UploadBase depending on wpSourceType and initializes it
 	 */
-	public static function createFromRequest( &$request, $type = null ) {
+	public static function createFromRequest( &$request, $type = null ): self {
 		$handler = new self;
 		$handler->initializeFromRequest( $request );
 		return $handler;
