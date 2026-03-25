@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Winston Sung"
+			"Winston Sung",
+			"Aca"
 		]
 	},
 	"quizgame-desc": "Dodaje [[Special:QuizGameHome|kviz]]",
@@ -19,7 +20,7 @@
 	"quizgame-admin-flagged": "Označena pitanja",
 	"quizgame-admin-protected": "Zaštićena pitanja",
 	"quizgame-admin-permission": "Nemate dozvolu uređivati",
-	"quizgame-edit-title": "Uređujete „$1“",
+	"quizgame-edit-title": "Uređujete \"$1\"",
 	"quizgame-edit-picture-link": "Uredi sliku",
 	"quizgame-flagged-reason": "Razlog",
 	"quizgame-submitted-by": "Podano od",
@@ -65,7 +66,7 @@
 	"quizgame-your-answer": "Tvoj odgovor",
 	"quizgame-correct-answer": "Ispravan odgovor",
 	"quizgame-js-loading": "Učitavanje...",
-	"quizgame-js-reloading": "Preučitavanje...",
+	"quizgame-js-reloading": "Ponovno učitavanje...",
 	"quizgame-js-timesup": "Vrijeme istjeklo! Nema da osvojite bodove, no ipak probajte da odgovorite!",
 	"quizgame-js-points": "{{PLURAL:$1|1 bod|$1 bodova}}",
 	"quizgame-js-seconds": "sekundi",
@@ -74,7 +75,7 @@
 	"quizgame-lightbox-breakdown-percent": "$1% ispravno su odgovorili ovo pitanje",
 	"quizgame-lightbox-correct": "Lijepo — dali ste ispravan odgovor!",
 	"quizgame-lightbox-correct-points": "Osvojili ste $1 bodova",
-	"quizgame-lightbox-incorrect": "Nažalost, dali ste neispravan odgovor!",
+	"quizgame-lightbox-incorrect": "Nažalost, dali ste netačan odgovor.",
 	"quizgame-lightbox-incorrect-correct": "Ispravni odgovor je: $1",
 	"quizgame-skip": "Preskoči",
 	"quizgame-next": "Sljedeće pitanje",
@@ -113,7 +114,7 @@
 	"quizgame-pause-create-question": "Izradi pitanje",
 	"quizgame-last-question": "Posljednje pitanje",
 	"quizgame-create-threshold-title": "Učinjavanje pitanjâ u kvizu",
-	"quizgame-create-threshold-reason": "Nažalost, ne možete da izradite pitanje until nemate barem $1",
+	"quizgame-create-threshold-reason": "Ne možete da izradite pitanje dok nemate barem $1",
 	"quizgame-points": "$1 bodova",
 	"quizgame-time-ago": "prije $1",
 	"quizgame-time-days": "{{PLURAL:$1|jedan dan|$1 dana}}",
@@ -124,8 +125,8 @@
 	"quizgame-ajax-protected": "Pitanje je zaštićeno.",
 	"quizgame-ajax-unflagged": "Zastava pitanja je skinuta.",
 	"quizgame-ajax-flagged": "Pitanje je zastavljeno.",
-	"quizgame-ajax-deleted": "Pitanje je obrisano.",
-	"quizgame-ajax-invalid-option": "Nevalidna mogućnost za AJAX.",
+	"quizgame-ajax-deleted": "Pitanje je izbrisano.",
+	"quizgame-ajax-invalid-option": "Neispravna AJAX opcija.",
 	"quizgame-ajax-nonnumeric-answer": "Izbor odgovora nije brojčani.",
 	"quizgame-ajax-already-answered": "Već ste odgovorili ovo pitanje.",
 	"quizgame-ajax-invalid-id": "Nema pitanja s takom naznakom.",
