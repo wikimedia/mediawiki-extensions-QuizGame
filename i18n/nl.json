@@ -4,7 +4,8 @@
 			"Mainframe98",
 			"Mark van Alphen",
 			"McDutchie",
-			"Mitchel Corstjens"
+			"Mitchel Corstjens",
+			"Siebrand"
 		]
 	},
 	"quizgame-desc": "Voegt een interactief [[Special:QuizGameHome|vragenspel]] toe",
@@ -69,7 +70,7 @@
 	"quizgame-your-answer": "Uw antwoord",
 	"quizgame-correct-answer": "Juiste antwoord",
 	"quizgame-js-loading": "Aan het laden…",
-	"quizgame-js-reloading": "Aan het herladen…",
+	"quizgame-js-reloading": "Opnieuw laden...",
 	"quizgame-js-timesup": "De tijd is om! U krijgt geen punten meer, maar probeer toch te antwoorden!",
 	"quizgame-js-points": "{{PLURAL:$1|1 punt|$1 punten}}",
 	"quizgame-js-seconds": "seconden",
