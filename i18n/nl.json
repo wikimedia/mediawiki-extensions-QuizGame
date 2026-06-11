@@ -130,7 +130,7 @@
 	"quizgame-ajax-unflagged": "De vraag is niet meer gemarkeerd.",
 	"quizgame-ajax-flagged": "De vraag is gemarkeerd.",
 	"quizgame-ajax-deleted": "De vraag is verwijderd.",
-	"quizgame-ajax-invalid-option": "Ongeldige AJAX-optie.",
+	"quizgame-ajax-invalid-option": "Incorrecte AJAX-optie.",
 	"quizgame-ajax-nonnumeric-answer": "De antwoordkeuze is niet numeriek.",
 	"quizgame-ajax-already-answered": "U hebt deze vraag al beantwoord.",
 	"quizgame-ajax-invalid-id": "Er is geen vraag met deze ID.",
