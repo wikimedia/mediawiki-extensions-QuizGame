@@ -82,7 +82,7 @@
 	"quizgame-lightbox-correct-points": "لقد ربحت $1 نقطة",
 	"quizgame-lightbox-incorrect": "عذرا، لقد أجبت على السؤال بشكل خاطئ!",
 	"quizgame-lightbox-incorrect-correct": "الإجابة الصحيحة هي: $1",
-	"quizgame-skip": "تخطٍّ",
+	"quizgame-skip": "تجاوز",
 	"quizgame-next": "مسابقة السؤال المقبلة",
 	"quizgame-times-answered": "(تم الرد عليه {{PLURAL:$1|مرة واحدة|$1 مرة}})",
 	"quizgame-chose-correct": "لقد اخترت الإجابة الصحيحة للسؤال السابق! ($1 نقطة)",
