@@ -2,7 +2,6 @@
  * Main JavaScript file for the QuizGame extension.
  *
  * @file
- * @ingroup Extensions
  */
 
 window.QuizGame = {
@@ -113,7 +112,7 @@ window.QuizGame = {
 	 * Wrapping almost everything in existence checks feels wrong but at the same time
 	 * it appears to be necessary, unfortunately.
 	 *
-	 * @param message
+	 * @param {string} message MediaWiki message and/or HTML to display to the user
 	 */
 	uploadError: function( message ) {
 		document.getElementById( 'quiz-game-errors' ).innerHTML = message;
@@ -178,9 +177,7 @@ window.QuizGame = {
 	 */
 	detectMacXFF: function() {
 		const userAgent = navigator.userAgent.toLowerCase();
-		if ( userAgent.includes( 'mac' ) && userAgent.includes( 'firefox' ) ) {
-			return true;
-		}
+		return userAgent.includes( 'mac' ) && userAgent.includes( 'firefox' );
 	},
 
 	deleteQuestion: function() {
@@ -334,12 +331,15 @@ window.QuizGame = {
 		for ( let x = 0; x <= QuizGame.levels_array.length - 1; x++ ) {
 			if (
 				( QuizGame.timer === 0 && x == QuizGame.levels_array.length - 1 ) ||
-				( QuizGame.timer <= QuizGame.levels_array[x] && QuizGame.timer > QuizGame.levels_array[x + 1] )
+				( QuizGame.timer <= QuizGame.levels_array[x] &&
+					QuizGame.timer > QuizGame.levels_array[x + 1] )
 			)
 			{
 				QuizGame.points = QuizGame.points_array[x];
-				document.getElementById( 'quiz-points' ).innerText = mw.msg( 'quizgame-js-points', QuizGame.points );
-				QuizGame.next_level = ( ( QuizGame.levels_array[x + 1] ) ? QuizGame.levels_array[x + 1] : 0 );
+				document.getElementById( 'quiz-points' ).innerText = mw.msg(
+					'quizgame-js-points', QuizGame.points );
+				QuizGame.next_level = ( ( QuizGame.levels_array[x + 1] ) ?
+					QuizGame.levels_array[x + 1] : 0 );
 			}
 		}
 	},
@@ -441,6 +441,7 @@ window.QuizGame = {
 	 * Casts a vote and forwards the user to a new question
 	 *
 	 * @param {number} id Number (on a range from 1 to 8) of the answer option
+	 * @return {number|void} Escape clause only
 	 */
 	vote: function( id ) {
 		if ( QuizGame.count_second ) {
@@ -589,7 +590,7 @@ window.QuizGame = {
 			answers = 0,
 			right = 0;
 
-		for ( var x = 1; x <= 8; x++ ) {
+		for ( let x = 1; x <= 8; x++ ) {
 			if ( document.getElementById( 'quizgame-answer-' + x ).value ) {
 				answers++;
 			}
@@ -602,7 +603,7 @@ window.QuizGame = {
 			errorText += mw.message( 'quizgame-create-error-noquestion' ).escaped() + '<p>';
 		}
 
-		for ( x = 1; x <= 8; x++ ) {
+		for ( let x = 1; x <= 8; x++ ) {
 			if ( document.getElementById( 'quizgame-isright-' + x ).checked ) {
 				right++;
 			}

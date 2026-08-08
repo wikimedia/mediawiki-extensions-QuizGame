@@ -2,10 +2,11 @@
  * Allows users to search for existing media (images) and use them on Special:UserBoxes instead of
  * being forced to upload an image should they wish to use an image on a user box.
  *
- * Originally bastardized from CollaborationKit's ext.CollaborationKit.hubtheme.js by bawolff, hare & Isarra
+ * Originally bastardized from CollaborationKit's ext.CollaborationKit.hubtheme.js by bawolff,
+ * hare & Isarra
  * (for FanBoxes, from where I copied it to QuizGame). Kudos!
  *
- * @date 13 May 2022
+ * @version 13 May 2022
  */
 /**
  * @param $
@@ -16,15 +17,13 @@
 ( function ( $, mw, OO ) {
 	'use strict';
 
-	let getThumbnail, ImageProcessDialog, openImageBrowser, setupPage;
-
 	/**
 	 * Get an image thumbnail with 80px width
 	 *
 	 * @param {string} filename
 	 * @return {jQuery} promise
 	 */
-	getThumbnail = function ( filename ) {
+	const getThumbnail = function ( filename ) {
 		return new mw.Api().get( {
 			action: 'query',
 			titles: filename,
@@ -44,7 +43,7 @@
 	 * @constructor
 	 * @param {Object} config
 	 */
-	ImageProcessDialog = function ( config ) {
+	const ImageProcessDialog = function ( config ) {
 		ImageProcessDialog.super.call( this, config );
 	};
 	OO.inheritClass( ImageProcessDialog, OO.ui.ProcessDialog );
@@ -62,11 +61,9 @@
 	 * to initialize widgets, and to set up event handlers.
 	 */
 	ImageProcessDialog.prototype.initialize = function () {
-		let defaultSearchTerm;
-
 		ImageProcessDialog.super.prototype.initialize.apply( this, arguments );
 
-		defaultSearchTerm = '';
+		const defaultSearchTerm = '';
 
 		this.content = new mw.widgets.MediaSearchWidget();
 		this.content.getQuery().setValue( defaultSearchTerm );
@@ -76,19 +73,20 @@
 	/**
 	 * In the event "Select" is pressed
 	 *
-	 * @param action
+	 * @param {string} action Action name
+	 * @return {OO.ui.Process|ImageProcessDialog.super.prototype.getActionProcess.call}
 	 */
 	ImageProcessDialog.prototype.getActionProcess = function ( action ) {
-		let dialog, fileTitle;
+		let fileTitle;
 
-		dialog = this;
+		const dialog = this;
 		dialog.pushPending();
 
 		if ( action ) {
 			return new OO.ui.Process( () => {
-				let fileObj, fileUrl, fileTitleObj, hiddenValueFieldID, imageHeight, previewElementID;
+				let fileUrl, fileTitleObj, hiddenValueFieldID, imageHeight;
 
-				fileObj = dialog.content.getResults().findSelectedItem();
+				const fileObj = dialog.content.getResults().findSelectedItem();
 				if ( fileObj === null ) {
 					return dialog.close().closed;
 				}
@@ -137,6 +135,8 @@
 
 	/**
 	 * Get dialog height.
+	 *
+	 * @return {number} Height in pixels
 	 */
 	ImageProcessDialog.prototype.getBodyHeight = function () {
 		return 600;
@@ -145,14 +145,12 @@
 	/**
 	 * Create and append the window manager.
 	 */
-	openImageBrowser = function () {
-		let windowManager, processDialog;
-
-		windowManager = new OO.ui.WindowManager();
+	const openImageBrowser = function () {
+		const windowManager = new OO.ui.WindowManager();
 		$( 'body' ).append( windowManager.$element );
 
 		// Create a new dialog window.
-		processDialog = new ImageProcessDialog( {
+		const processDialog = new ImageProcessDialog( {
 			size: 'large'
 		} );
 
@@ -166,18 +164,16 @@
 	/**
 	 * Initial setup function run when DOM loaded.
 	 */
-	setupPage = function () {
-		let imageBrowserButton, $selectorWidget;
-
+	const setupPage = function () {
 		// Defining the button
-		imageBrowserButton = new OO.ui.ButtonWidget( {
+		const imageBrowserButton = new OO.ui.ButtonWidget( {
 			icon: 'imageAdd',
 			classes: [ 'mw-quizgame-image-picker-widget-inlinebutton' ],
 			label: mw.msg( 'quizgame-image-picker-launch-button' )
 		} );
 		imageBrowserButton.on( 'click', openImageBrowser );
 
-		$selectorWidget = $( '<div class="mw-quizgame-image-picker-widget"></div>' )
+		const $selectorWidget = $( '<div class="mw-quizgame-image-picker-widget"></div>' )
 			.append(
 				$( '<div>' ).append( imageBrowserButton.$element )
 			);
