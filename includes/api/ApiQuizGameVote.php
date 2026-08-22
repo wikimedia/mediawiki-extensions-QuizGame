@@ -1,8 +1,8 @@
 <?php
 
 use MediaWiki\Api\ApiResult;
-use MediaWiki\MediaWikiServices;
 use Wikimedia\ParamValidator\ParamValidator;
+use Wikimedia\Rdbms\IConnectionProvider;
 
 /**
  * QuizGame voting API
@@ -12,10 +12,11 @@ use Wikimedia\ParamValidator\ParamValidator;
  */
 class ApiQuizGameVote extends MediaWiki\Api\ApiBase {
 
-	/**
-	 * Constructor
-	 */
-	public function __construct( $query, $moduleName ) {
+	public function __construct(
+		$query,
+		$moduleName,
+		private readonly IConnectionProvider $dbProvider,
+	) {
 		parent::__construct( $query, $moduleName );
 	}
 
@@ -30,7 +31,7 @@ class ApiQuizGameVote extends MediaWiki\Api\ApiBase {
 		$id = $params['id']; // quiz ID number
 		$points = $params['points'];
 
-		$dbw = MediaWikiServices::getInstance()->getDBLoadBalancer()->getConnection( DB_PRIMARY );
+		$dbw = $this->dbProvider->getPrimaryDatabase();
 
 		// Check if they already answered
 		$s = $dbw->selectRow(

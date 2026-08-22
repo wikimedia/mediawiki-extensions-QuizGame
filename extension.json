@@ -32,8 +32,19 @@
 		]
 	},
 	"APIModules": {
-		"quizgame": "ApiQuizGame",
-		"quizgamevote": "ApiQuizGameVote"
+		"quizgame": {
+			"class": "ApiQuizGame",
+			"services": [
+				"ConnectionProvider",
+				"MainWANObjectCache"
+			]
+		},
+		"quizgamevote": {
+			"class": "ApiQuizGameVote",
+			"services": [
+				"ConnectionProvider"
+			]
+		}
 	},
 	"ExtensionMessagesFiles": {
 		"QuizGameAlias": "includes/QuizGame.alias.php"

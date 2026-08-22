@@ -7,16 +7,19 @@
  * @ingroup API
  */
 
-use MediaWiki\MediaWikiServices;
 use MediaWiki\SpecialPage\SpecialPage;
+use Wikimedia\ObjectCache\WANObjectCache;
 use Wikimedia\ParamValidator\ParamValidator;
+use Wikimedia\Rdbms\IConnectionProvider;
 
 class ApiQuizGame extends MediaWiki\Api\ApiBase {
 
-	/**
-	 * Constructor
-	 */
-	public function __construct( $query, $moduleName ) {
+	public function __construct(
+		$query,
+		$moduleName,
+		private readonly IConnectionProvider $dbProvider,
+		private readonly WANObjectCache $cache,
+	) {
 		parent::__construct( $query, $moduleName );
 	}
 
@@ -34,7 +37,7 @@ class ApiQuizGame extends MediaWiki\Api\ApiBase {
 		$id = $params['id']; // quiz ID number
 
 		// ApiBase's getDB() supports only slave connections, lame...
-		$dbw = MediaWikiServices::getInstance()->getDBLoadBalancer()->getConnection( DB_PRIMARY );
+		$dbw = $this->dbProvider->getPrimaryDatabase();
 
 		// Fail early if the user is sitewide blocked.
 		// (This snippet copied from MW core /includes/api/ApiTag.php)
@@ -164,8 +167,6 @@ class ApiQuizGame extends MediaWiki\Api\ApiBase {
 					'',
 					[ 'quizgame_choice' => [ 'LEFT JOIN', 'choice_id = a_choice_id' ] ]
 				);
-				$cache = MediaWikiServices::getInstance()->getMainWANObjectCache();
-
 				foreach ( $res as $row ) {
 					if ( $row->choice_is_correct == 1 ) {
 						$percentage = 'stats_quiz_questions_correct_percent = (stats_quiz_questions_correct - 1)/(stats_quiz_questions_answered - 1)';
@@ -201,8 +202,8 @@ class ApiQuizGame extends MediaWiki\Api\ApiBase {
 						);
 					}
 
-					$key = $cache->makeKey( 'user', 'stats', 'actor_id', $row->a_actor );
-					$cache->delete( $key );
+					$key = $this->cache->makeKey( 'user', 'stats', 'actor_id', $row->a_actor );
+					$this->cache->delete( $key );
 				}
 
 				$dbw->delete(
