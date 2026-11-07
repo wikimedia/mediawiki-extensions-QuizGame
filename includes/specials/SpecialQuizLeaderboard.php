@@ -3,6 +3,7 @@
 use MediaWiki\MediaWikiServices;
 use MediaWiki\SpecialPage\SpecialPage;
 use MediaWiki\SpecialPage\UnlistedSpecialPage;
+use MediaWiki\User\User;
 
 class QuizLeaderboard extends UnlistedSpecialPage {
 
@@ -148,7 +149,7 @@ class QuizLeaderboard extends UnlistedSpecialPage {
 		$output .= '<div class="top-users">';
 
 		foreach ( $res as $row ) {
-			$actor = User::newFromActorId( $row->stats_actor );
+			$actor = MediaWikiServices::getInstance()->getUserFactory()->newFromActorId( $row->stats_actor );
 			if ( !$actor || !$actor instanceof User ) {
 				continue;
 			}

@@ -165,7 +165,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 	 * Get the amount of points the given user has received for answering the
 	 * given quiz.
 	 *
-	 * @param MediaWiki\User\User $user
+	 * @param User $user
 	 * @param int $q_id Question identifier
 	 * @return bool|int Boolean false if they haven't gotten points, otherwise int (amount of points)
 	 */
@@ -617,7 +617,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 
 		$out->addModules( [ 'ext.quizGame.file-selector' ] );
 
-		$quizUser = User::newFromActorId( $question['actor'] );
+		$quizUser = MediaWikiServices::getInstance()->getUserFactory()->newFromActorId( $question['actor'] );
 		$avatar = new wAvatar( $quizUser->getId(), 'l' );
 		$stats = new UserStats( $quizUser->getId(), $quizUser->getName() );
 		$stats_data = $stats->getUserStats();
@@ -946,7 +946,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 			$imageTag = '';
 		}
 
-		$quizUser = User::newFromActorId( $question['actor'] );
+		$quizUser = MediaWikiServices::getInstance()->getUserFactory()->newFromActorId( $question['actor'] );
 		$avatar = new wAvatar( $quizUser->getId(), 'l' );
 		$stats = new UserStats( $quizUser->getId(), $quizUser->getName() );
 		$stats_data = $stats->getUserStats();

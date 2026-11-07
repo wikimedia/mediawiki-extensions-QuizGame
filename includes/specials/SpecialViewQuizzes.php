@@ -3,6 +3,7 @@
 use MediaWiki\MediaWikiServices;
 use MediaWiki\SpecialPage\SpecialPage;
 use MediaWiki\SpecialPage\UnlistedSpecialPage;
+use MediaWiki\User\User;
 
 class ViewQuizzes extends UnlistedSpecialPage {
 
@@ -79,8 +80,8 @@ class ViewQuizzes extends UnlistedSpecialPage {
 		$user = $request->getVal( 'user' );
 		$linkQueryParameters = [];
 		if ( $user ) {
-			$u = User::newFromName( $user );
-			if ( $u && $u instanceof User ) {
+			$u = MediaWikiServices::getInstance()->getUserFactory()->newFromName( $user );
+			if ( $u ) {
 				$where['q_actor'] = $u->getActorId();
 			}
 			$linkQueryParameters['user'] = $user;
@@ -141,7 +142,7 @@ class ViewQuizzes extends UnlistedSpecialPage {
 		$x = ( ( $page - 1 ) * $per_page ) + 1;
 
 		foreach ( $res as $row ) {
-			$creator = User::newFromActorId( $row->q_actor );
+			$creator = MediaWikiServices::getInstance()->getUserFactory()->newFromActorId( $row->q_actor );
 			if ( !$creator || !$creator instanceof User ) {
 				continue;
 			}
