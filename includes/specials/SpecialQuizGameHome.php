@@ -27,11 +27,6 @@ class QuizGameHome extends UnlistedSpecialPage {
 	public static $FLAG_PROTECT = 2;
 
 	/**
-	 * @var string
-	 */
-	private $SALT;
-
-	/**
 	 * Construct the MediaWiki special page
 	 */
 	public function __construct() {
@@ -82,9 +77,6 @@ class QuizGameHome extends UnlistedSpecialPage {
 		// Add CSS & JS
 		$out->addModuleStyles( 'ext.quizGame.css' );
 		$out->addModules( 'ext.quizGame' );
-
-		// salt at will
-		$this->SALT = 'SALT';
 
 		// What we should do depends on the given action parameter
 		$action = $request->getVal( 'questionGameAction' );
