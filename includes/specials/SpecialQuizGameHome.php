@@ -617,7 +617,8 @@ class QuizGameHome extends UnlistedSpecialPage {
 
 		$out->addModules( [ 'ext.quizGame.file-selector' ] );
 
-		$quizUser = MediaWikiServices::getInstance()->getUserFactory()->newFromActorId( $question['actor'] );
+		$services = MediaWikiServices::getInstance();
+		$quizUser = $services->getUserFactory()->newFromActorId( $question['actor'] );
 		$avatar = new wAvatar( $quizUser->getId(), 'l' );
 		$stats = new UserStats( $quizUser->getId(), $quizUser->getName() );
 		$stats_data = $stats->getUserStats();
@@ -625,7 +626,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 		$uploadPage = SpecialPage::getTitleFor( 'QuestionGameUpload' );
 
 		if ( strlen( $question['image'] ) > 0 ) {
-			$image = MediaWikiServices::getInstance()->getRepoGroup()->findFile( $question['image'] );
+			$image = $services->getRepoGroup()->findFile( $question['image'] );
 			$thumbtag = '';
 			// If a file that is still being used on a quiz game is
 			// independently deleted from the quiz game, poor users will
@@ -946,7 +947,7 @@ class QuizGameHome extends UnlistedSpecialPage {
 			$imageTag = '';
 		}
 
-		$quizUser = MediaWikiServices::getInstance()->getUserFactory()->newFromActorId( $question['actor'] );
+		$quizUser = $services->getUserFactory()->newFromActorId( $question['actor'] );
 		$avatar = new wAvatar( $quizUser->getId(), 'l' );
 		$stats = new UserStats( $quizUser->getId(), $quizUser->getName() );
 		$stats_data = $stats->getUserStats();

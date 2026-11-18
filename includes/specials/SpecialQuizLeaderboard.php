@@ -54,7 +54,8 @@ class QuizLeaderboard extends UnlistedSpecialPage {
 				$field = 'stats_quiz_points';
 		}
 
-		$dbr = MediaWikiServices::getInstance()->getDBLoadBalancer()->getConnection( DB_PRIMARY );
+		$services = MediaWikiServices::getInstance();
+		$dbr = $services->getDBLoadBalancer()->getConnection( DB_PRIMARY );
 		$whereConds[] = 'stats_actor IS NOT NULL'; // Exclude anonymous users
 		$res = $dbr->select(
 			'user_stats',
@@ -148,8 +149,9 @@ class QuizLeaderboard extends UnlistedSpecialPage {
 		$x = 1;
 		$output .= '<div class="top-users">';
 
+		$userFactory = $services->getUserFactory();
 		foreach ( $res as $row ) {
-			$actor = MediaWikiServices::getInstance()->getUserFactory()->newFromActorId( $row->stats_actor );
+			$actor = $userFactory->newFromActorId( $row->stats_actor );
 			if ( !$actor || !$actor instanceof User ) {
 				continue;
 			}

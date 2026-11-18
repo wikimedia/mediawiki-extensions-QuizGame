@@ -71,7 +71,9 @@ class ViewQuizzes extends UnlistedSpecialPage {
 		<div class="view-quizzes-navigation">
 			<h2>' . $this->msg( 'quizgame-leaderboard-order-menu' )->escaped() . '</h2>';
 
-		$dbr = MediaWikiServices::getInstance()->getDBLoadBalancer()->getConnection( DB_PRIMARY );
+		$services = MediaWikiServices::getInstance();
+		$dbr = $services->getDBLoadBalancer()->getConnection( DB_PRIMARY );
+		$userFactory = $services->getUserFactory();
 
 		$where = [];
 		$where[] = 'q_flag <> ' . QuizGameHome::$FLAG_FLAGGED;
@@ -80,7 +82,7 @@ class ViewQuizzes extends UnlistedSpecialPage {
 		$user = $request->getVal( 'user' );
 		$linkQueryParameters = [];
 		if ( $user ) {
-			$u = MediaWikiServices::getInstance()->getUserFactory()->newFromName( $user );
+			$u = $userFactory->newFromName( $user );
 			if ( $u ) {
 				$where['q_actor'] = $u->getActorId();
 			}
@@ -142,7 +144,7 @@ class ViewQuizzes extends UnlistedSpecialPage {
 		$x = ( ( $page - 1 ) * $per_page ) + 1;
 
 		foreach ( $res as $row ) {
-			$creator = MediaWikiServices::getInstance()->getUserFactory()->newFromActorId( $row->q_actor );
+			$creator = $userFactory->newFromActorId( $row->q_actor );
 			if ( !$creator || !$creator instanceof User ) {
 				continue;
 			}
